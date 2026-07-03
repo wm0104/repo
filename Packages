@@ -1,0 +1,17 @@
+Package: com.wkk.12306hook
+Version: 1.0-5
+Architecture: iphoneos-arm64
+Maintainer: wkk
+Installed-Size: 400
+Depends: mobilesubstrate (>= 0.9.5000)
+Filename: ./debs/铁路12306NoAds-1.0-5.deb
+Size: 4228
+MD5sum: 377f1719bc264b878adbc9e76ddb49f4
+SHA1: 5116ab770f8be97e3176573db53b2ca0cc76e9e9
+SHA256: ced68d0d8c3cec750e704f3a10997a2441ceb58eadc7f2e945262265a50b7210
+Section: 去广告
+Description: 去开屏/首页顶部横幅广告，测试版本：5.9.5，接大量冷门热门app定制去广告/去更新提示/精简app等业务。联系qq：1772773799（如果源内某些去广告插件下载deb安装不生效，请选择用TrollFools注入）
+Author: wkk
+Icon: https://s1.imagehub.cc/images/2025/02/06/c323dea01d48b9205f1853e43ba4722a.png
+Name: 铁路12306NoAds
+
