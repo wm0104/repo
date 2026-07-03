@@ -21,12 +21,13 @@ jobs:
         run: |
           sudo apt update 2>>/dev/null 1>>/dev/null
           sudo apt install dpkg-dev bzip2 xz-utils zstd -y
+          sudo chmod 777 ./debs -R
 
       - name: Refresh Packages
         if: success()
         run: |
           rm -rf ./Packages*
-          dpkg-scanpackages -m ./debs /dev/null >./Packages
+          dpkg-scanpackages -m ./debs /dev/null 2>/dev/null >./Packages
           bzip2 -v -k -9 Packages
           xz -v -k -9 --extreme Packages
           zstd --ultra -22 -k Packages -o Packages.zst
