@@ -473,6 +473,24 @@ Author: mikey820
 Icon: icon.png
 Name: PleaseDontStopTheMusic
 
+Package: com.miro92.swipeextenderx
+Version: 1.6.2
+Architecture: iphoneos-arm64e
+Maintainer: MiRO <tweaks_support@miro92.com>
+Installed-Size: 614
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: firmware (>=14.0), mobilesubstrate, org.thebigboss.libcolorpicker
+Filename: ./debs/com.miro92.swipeextenderx_1.6.2_iphoneos-arm64e.deb
+Size: 82076
+MD5sum: 215ada3abb48fef6c0b9aee639ba429a
+SHA1: 839def79047dec6cff774508e14dea25c61813e8
+SHA256: a88f939b1b213c9ed0996701d6812fcc98b9ec1e4ee00adb593405f62b33689a
+Section: 常用插件
+Description: 用这款传奇的插件重塑你的原生键盘
+Author: MiRO <tweaks_support@miro92.com>
+Icon: https://img.chariz.cloud/icon/swipeextenderx/icon@3x.png
+Name: SwipeExtenderX
+
 Package: com.netskao.wechatnotiavatars
 Version: 1.3-1
 Architecture: iphoneos-arm64e
@@ -563,24 +581,6 @@ Description: 解锁画中画限制，双指随意放大，无设置项。
 Author: Soh Satoh
 Icon: https://s1.imagehub.cc/images/2025/01/03/379617e90dc02b790c6c1daf8ffcb8ba.png
 Name: FreePIP
-
-Package: com.wkk.swipeextenderx
-Version: 1.6.2
-Architecture: iphoneos-arm64e
-Maintainer: MiRO <tweaks_support@miro92.com>
-Installed-Size: 614
-Pre-Depends: rootless-compat(>= 0.9)
-Depends: firmware (>=14.0), mobilesubstrate, org.thebigboss.libcolorpicker
-Filename: ./debs/SwipeExtenderX-1.6.2-iphoneos-arm64e.deb
-Size: 108076
-MD5sum: 40103b2cbc07d4368839c0391c080787
-SHA1: 939db6bc6fde13be35572785c6f5be1ec43caaac
-SHA256: c5fc988471c40bf6c9d299ca9f502e67ec8128237e77949495f96039a74fdc1e
-Section: 常用插件
-Description: 用这款传奇的插件重塑你的原生键盘，自带我的预设，在Presets中可以找到并恢复。无汉化。
-Author: MiRO <tweaks_support@miro92.com>
-Icon: https://img.chariz.cloud/icon/swipeextenderx/icon@3x.png
-Name: SwipeExtenderX
 
 Package: com.wkk.zetsu
 Version: 1.5
