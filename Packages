@@ -421,6 +421,23 @@ Architecture: iphoneos-arm64e
 Maintainer: mikey820 <mikey820@users.noreply.github.com>
 Installed-Size: 168
 Depends: mobilesubstrate (>= 0.9.5000), firmware (>= 14.0)
+Filename: ./debs/com.mikey820.pleasedontstopthemusic_2.3.1_iphoneos-arm64e.deb
+Size: 33740
+MD5sum: 5a9d194b08ecd93687e67d55e63191a8
+SHA1: be09deefad829ffb1e26b20e4c798510778b1373
+SHA256: 9498aa6cc3d39adef4ae88de9100b0834e6195a7ae6da63a6eb113b0b3234f9a
+Section: Tweaks
+Description: 实现两个音频App同时播放音乐
+Author: mikey820
+Icon: icon.png
+Name: 请别暂停音乐(RootHide)
+
+Package: com.mikey820.pleasedontstopthemusic
+Version: 2.3.1
+Architecture: iphoneos-arm64e
+Maintainer: mikey820 <mikey820@users.noreply.github.com>
+Installed-Size: 168
+Depends: mobilesubstrate (>= 0.9.5000), firmware (>= 14.0)
 Filename: ./debs/PleaseDontStopTheMusic-2.3.1.deb
 Size: 33550
 MD5sum: 64d069c7890ffc9caf545565581420d5
