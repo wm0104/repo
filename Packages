@@ -166,6 +166,54 @@ Description: 左滑返回上一页面
 Author: Mao
 Name: 左滑返回-Rootless
 
+Package: com.25mao.miyou.rootlesss
+Version: 3.9-5
+Architecture: iphoneos-arm64e
+Maintainer: admin@25mao.com
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: firmware (>= 5.0)
+Conflicts: com.25mao.miyou.rootless
+Filename: ./debs/微信助手 密友-3.9-5.deb
+Size: 5047936
+MD5sum: 52b0e1e6808c619e2598447228e66078
+SHA1: e48ec50fc9805336308a5a70fa44619fa9057a76
+SHA256: 197bf729b0d5aba5cce54d4333d570b7fc90abf74d6bad9241f626f6c03eb61b
+Section: 常用插件
+Priority: optional
+Description: 微信多功能插件（密友）
+Author: Mao
+Icon: https://TrollStoreX.Github.io/sileodepiction/mao/icon.png
+Name: 微信助手 密友
+Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/mao/js.json
+
+Package: com.25mao.wcplugins.rootlesss
+Version: 0.1-6
+Architecture: iphoneos-arm64e
+Maintainer: admin@25mao.com
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: firmware (>= 5.0)
+Conflicts: com.25mao.wcplugins.rootless
+Replaces: com.25mao.wcplugins.rootless
+Provides: com.25mao.wcplugins.rootless
+Filename: ./debs/微信插件管理-0.1-6.deb
+Size: 18470
+MD5sum: c08ca703358643de5444d1abdcf4d3d7
+SHA1: af616df2116aa8271f99b6b639f80364d37aea2c
+SHA256: 5c20b9f20485bdbd7d9825484a43e86f01cf07a732b3e8367d18865bef829ceb
+Section: 常用插件
+Priority: optional
+Description: 微信插件管理
+ * 收纳第三方微信插件
+ * 位于微信右下角“我”-“插件”
+ * 部分微信插件不支持收纳
+ * 0.1-6 修复热更新收纳失效问题
+ * 最后更新日期 2026.03.21
+Author: Mao
+Icon: https://TrollStoreX.Github.io/sileodepiction/wcplugins/icon.png
+Name: 微信插件管理
+Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/wcplugins/js.json
+Sponsor: admin@25mao.com
+
 Package: com.brend0n.nopassafterrespringsafe
 Version: 0.0.3
 Architecture: iphoneos-arm64
@@ -272,6 +320,32 @@ Author: Ivano Bilenchi
 Icon: https://TrollStoreX.Github.io/sileodepiction/iCleanerPro/icon.png
 Name: iCleaner Pro
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/iCleanerPro/js.json
+
+Package: com.hbwechathelper.ailuns
+Version: 2.0-9f
+Architecture: iphoneos-arm64e
+Maintainer: HuangBai
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate
+Conflicts: com.HBWechatHelper.ailun, byg.iosios.net.hbwechathelper.rootlless
+Filename: ./debs/黄白助手-2.0-9f.deb
+Size: 13902268
+MD5sum: d13b262ac42bfe04acb0cb4905f64be1
+SHA1: 67d7cbce6cbc1489dd17e847cafbd852ce9d02e2
+SHA256: e4733bfe687e78a87208feeb07cd1864487899bbd9630b963ab2d18956a603a1
+Section: 常用插件
+Description: 微信多功能插件
+ * 一个微信插件文本转语音
+ * 点歌朋友圈一键点赞等诸多功能
+ * 发送网络语录舔狗日记骂人等文案
+ * 4K 原图手绘壁纸等
+ * 抢私聊红包
+ * 自定义信息尾巴
+ * 自定义拍一拍 百变小尾巴 实时尾巴时间等功能
+Author: HuangBai
+Icon: https://TrollStoreX.Github.io/sileodepiction/HB/icon.png
+Name: 黄白助手
+Sileodepiction: https://TrollStoreX.Github.io/
 
 Package: com.iosdump.appdata
 Version: 2.5.1
