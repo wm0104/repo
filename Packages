@@ -1,0 +1,12 @@
+Package: com.wkk.swipeextenderx
+Version: 1.6.2
+Architecture: iphoneos-arm64
+Maintainer: MiRO <tweaks_support@miro92.com>
+Author: MiRO <tweaks_support@miro92.com>
+Installed-Size: 614
+Depends: firmware (>=14.0), mobilesubstrate, org.thebigboss.libcolorpicker
+Name: SwipeExtenderX
+Description: 用这款传奇的插件重塑你的原生键盘，自带我的预设，在Presets中可以找到并恢复。无汉化。
+Icon: https://img.chariz.cloud/icon/swipeextenderx/icon@3x.png
+Section: 键盘增强
+
