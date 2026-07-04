@@ -4,7 +4,7 @@ Architecture: iphoneos-arm64
 Maintainer: MiRO <tweaks_support@miro92.com>
 Installed-Size: 614
 Depends: firmware (>=14.0), mobilesubstrate, org.thebigboss.libcolorpicker
-Filename: ./debs/SwipeExtenderX-1.6.2.deb
+Filename: ./debs/SwipeExtenderX-1.6.2-1.deb
 Size: 79740
 MD5sum: 32e19748ff2c26f97cc340d1194938c9
 SHA1: c988e0a4f3535cce43f2cc004e92d6eb7aca0dc9
