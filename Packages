@@ -511,26 +511,22 @@ Icon: https://TrollStoreX.Github.io/sileodepiction/StoreSwitcher/icon.png
 Name: StoreSwitcher 账号切换
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/StoreSwitcher/js.json
 
-Package: com.tigisoftware.filza64bits
+Package: com.tigisoftware.filza64bit
 Version: 4.0.1-4~roothide
 Architecture: iphoneos-arm64e
 Maintainer: TIGI Software
 Pre-Depends: patches-com.tigisoftware.filza64bit(= 4.0.1-4~roothide)
 Recommends: zip, unzip, gzip, p7zip, unrar, xz-utils
-Conflicts: com.tigisoftware.filza, com.tigisoftware.filza39, com.tigisoftware.filza64bit
-Filename: ./debs/Filza 文件管理器-4.0.1-4~roothide.deb
-Size: 6970916
-MD5sum: 46bbea1723b62c27e10810562042539e
-SHA1: d2a6995632fee7c65f645e935ffd5cdfda8e5fd0
-SHA256: 4d86696f88752f031d455c6532041c01f6facec1e37a73eec15a3c0ec0f43f7b
+Conflicts: com.tigisoftware.filza, com.tigisoftware.filza39
+Filename: ./debs/Filza File Manager 64-bit-4.0.1-4~roothide.deb
+Size: 6972652
+MD5sum: 6391c39283f2cc45dcecf101228d4e28
+SHA1: 718d5c9bb34d0c749ca311e4917736804fe217ec
+SHA256: 35be3aa392b06cd7ed53dd3aa05bf5c3ddaa126ee692b33fba67321fc6cec28d
 Section: 常用插件
-Description: Filza 文件管理器 RootHide 专用
- * 支持 RootHide Dopamine、BootStrap 半越狱
- * 支持解压打包 deb 插件
+Description: File Manager for iPhone, iPad, iPod Touch. Supports iOS 11+. This version only supports 64-bit devices
 Author: TIGI Software
-Icon: https://TrollStoreX.Github.io/sileodepiction/Filza/icon.png
-Name: Filza 文件管理器
-Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/Filza/js.json
+Name: Filza File Manager 64-bit
 
 Package: com.wkk.filzaswipeselect
 Version: 0.0.2
