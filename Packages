@@ -476,6 +476,27 @@ Icon: https://TrollStoreX.Github.io/sileodepiction/StoreSwitcher/icon.png
 Name: StoreSwitcher 账号切换
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/StoreSwitcher/js.json
 
+Package: com.tigisoftware.filza64bits
+Version: 4.0.1-4~roothide
+Architecture: iphoneos-arm64e
+Maintainer: TIGI Software
+Pre-Depends: patches-com.tigisoftware.filza64bit(= 4.0.1-4~roothide)
+Recommends: zip, unzip, gzip, p7zip, unrar, xz-utils
+Conflicts: com.tigisoftware.filza, com.tigisoftware.filza39, com.tigisoftware.filza64bit
+Filename: ./debs/Filza 文件管理器-4.0.1-4~roothide.deb
+Size: 6970916
+MD5sum: 46bbea1723b62c27e10810562042539e
+SHA1: d2a6995632fee7c65f645e935ffd5cdfda8e5fd0
+SHA256: 4d86696f88752f031d455c6532041c01f6facec1e37a73eec15a3c0ec0f43f7b
+Section: 常用插件
+Description: Filza 文件管理器 RootHide 专用
+ * 支持 RootHide Dopamine、BootStrap 半越狱
+ * 支持解压打包 deb 插件
+Author: TIGI Software
+Icon: https://TrollStoreX.Github.io/sileodepiction/Filza/icon.png
+Name: Filza 文件管理器
+Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/Filza/js.json
+
 Package: com.wkk.filzaswipeselect
 Version: 0.0.2
 Architecture: iphoneos-arm64e
@@ -602,6 +623,25 @@ Description: Hello Charging (限制充电)
 Author: zqbb
 Name: Hello Charging
 Sileodepiction: https://rootless.002599.xyz/web/com.zqbb.limitcharging
+
+Package: llld.keyboard
+Version: 2.0
+Architecture: iphoneos-arm64e
+Maintainer: 搬运工
+Installed-Size: 168
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate
+Filename: ./debs/强制使用第三方键盘-RootHide.deb
+Size: 5730
+MD5sum: d56435385a3551f9c5c5065d92733f69
+SHA1: 127fbe94c68666469c841d82830b82e5e73ef328
+SHA256: 20a526b2e9c09749f9bc796f9eebd70c87c4d8b83267a2c353229e8902697471
+Section: 常用插件
+Priority: optional
+Description: 在很多时候输入，手机总默认自带键盘，且不能更换第三方，有了这插件，你想用啥键盘用啥键盘(第三方输入法都可以)
+Author: 来了老弟
+Name: 强制使用第三方键盘-Rootless
+Sponsor: 搬运工
 
 Package: me.tomt000.stageduo
 Version: 1.1
