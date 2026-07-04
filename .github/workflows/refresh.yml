@@ -32,6 +32,31 @@ jobs:
           
           sudo dpkg-scanpackages -m ./debs /dev/null >./Packages
           
+
+          awk '
+            BEGIN { in_section = 0; has_section = 0 }
+            /^Section:/ { 
+              print "Section: 常用插件"
+              in_section = 1
+              has_section = 1
+              next
+            }
+            /^[A-Za-z0-9-]+:/ { 
+              if (in_section) {
+                in_section = 0
+              }
+              print
+              next
+            }
+            { print }
+            END {
+              if (!has_section) {
+                print "Section: 常用插件"
+              }
+            }
+          ' ./Packages > ./Packages.tmp && mv ./Packages.tmp ./Packages
+        
+          
           bzip2 -v -k -9 Packages
           xz -v -k -9 --extreme Packages
           zstd --ultra -22 -k Packages -o Packages.zst
