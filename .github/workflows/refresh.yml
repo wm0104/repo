@@ -21,13 +21,14 @@ jobs:
           sudo apt update
           sudo apt install dpkg-dev bzip2 xz-utils zstd -y
 
-      - name: 动态读取描述生成自定义分类索引（不改动deb原文件）
+      - name: 自动读取插件描述生成分类索引
         run: |
           cd ./debs
-          > Packages
-          find . -maxdepth 1 -type f -name "*.deb" | sed 's|^\./||' | while read debfile
+          rm -f Packages
+          touch Packages
+          find . -maxdepth 1 -name "*.deb" | while read file
           do
-            info=$(dpkg -I "$debfile" control)
+            info=$(dpkg -I "$file" control)
             desc=$(echo "$info" | grep Description:)
             section="工具插件"
             if echo "$desc" | grep -q "键盘";then
@@ -37,9 +38,12 @@ jobs:
             elif echo "$desc" | grep -E -q "账号|切换|下载|文件|管理器|注入|屏蔽|广告|脚本|Safari|翻译|投屏|画中画|限制解除";then
               section="功能拓展"
             fi
-            echo "$info" | sed '/Section:/d' | sed '$a\'$'Section: $section'' >> Packages
+            echo "$info" | sed '/Section:/d' > temp.txt
+            echo "Section: $section" >> temp.txt
+            cat temp.txt >> Packages
             echo "" >> Packages
           done
+          rm -f temp.txt
           gzip -k -f Packages
           bzip2 -k -f Packages
           xz -k -f Packages
