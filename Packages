@@ -382,6 +382,24 @@ Author: iosdump
 Icon: file:///Library/PreferenceBundles/AppDataPrefs.bundle/AppData@3x.png
 Name: AppData
 
+Package: com.jontelang.snapper3
+Version: 1.2.1
+Architecture: iphoneos-arm64e
+Maintainer: Jonathan Winger-lang
+Installed-Size: 4148
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate, firmware(>=14.0), preferenceloader
+Conflicts: com.jontelang.snapper, com.jontelang.snapper2.packix, xyz.cypwn.snapperfr33
+Filename: ./debs/snapper3_1.2.1arm64e.deb
+Size: 2269752
+MD5sum: c401123cd04ca34a95dc4fec626668c0
+SHA1: c82089ec7b9acacabb337d54017ec65ccf66203d
+SHA256: a37477dc4cd9d04f71a004c5b1265193dc820e980fa2e51bb70f88475c858bb8
+Section: 常用插件
+Description: Pin screenshots on the screen.
+Author: Jonathan Winger-lang
+Name: Snapper 3
+
 Package: com.lclrc.controltab
 Version: 1.0
 Architecture: iphoneos-arm64e
