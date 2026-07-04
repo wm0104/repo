@@ -21,12 +21,14 @@ jobs:
           sudo apt update
           sudo apt install dpkg-dev bzip2 xz-utils zstd -y
 
-      - name: 自动读取插件描述生成分类索引
+      - name: 生成带自定义分类的Packages索引（兼容所有特殊文件名）
         run: |
           cd ./debs
           rm -f Packages
-          touch Packages
-          find . -maxdepth 1 -name "*.deb" | while read file
+          > Packages
+          # 正确遍历所有deb，支持括号、空格、特殊字符
+          shopt -s nullglob
+          for file in ./*.deb
           do
             info=$(dpkg -I "$file" control)
             desc=$(echo "$info" | grep Description:)
@@ -38,12 +40,10 @@ jobs:
             elif echo "$desc" | grep -E -q "账号|切换|下载|文件|管理器|注入|屏蔽|广告|脚本|Safari|翻译|投屏|画中画|限制解除";then
               section="功能拓展"
             fi
-            echo "$info" | sed '/Section:/d' > temp.txt
-            echo "Section: $section" >> temp.txt
-            cat temp.txt >> Packages
+            echo "$info" | sed '/Section:/d' >> Packages
+            echo "Section: $section" >> Packages
             echo "" >> Packages
           done
-          rm -f temp.txt
           gzip -k -f Packages
           bzip2 -k -f Packages
           xz -k -f Packages
