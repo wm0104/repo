@@ -450,24 +450,6 @@ Author: korboy <korboybeats@gmail.com>
 Icon: https://sini921.github.io/repo/sileodepiction/icon/filzaswipeselect.png
 Name: FilzaSwipeSelect
 
-Package: com.wkk.freepip
-Version: 0.0.3-1
-Architecture: iphoneos-arm64e
-Maintainer: Soh Satoh
-Installed-Size: 168
-Pre-Depends: rootless-compat(>= 0.9)
-Depends: mobilesubstrate (>= 0.9.5000)
-Filename: ./debs/FreePIP-0.0.3-1.deb
-Size: 8410
-MD5sum: 77a2e6abcfbed44d444a259a16d5ef52
-SHA1: e4032710a7121355b3394eebcd720e54d6bcd958
-SHA256: ebf1d3f3f4672d2c912da335c9b5d4ac8f91bd4fb130cc338a66009df0e0cde8
-Section: Tweaks
-Description: 解锁画中画限制，双指随意放大，无设置项。
-Author: Soh Satoh
-Icon: https://s1.imagehub.cc/images/2025/01/03/379617e90dc02b790c6c1daf8ffcb8ba.png
-Name: FreePIP
-
 Package: com.xybp888.callassist16.dopamine.roothide
 Version: 2.3.5
 Architecture: iphoneos-arm64e
@@ -523,6 +505,23 @@ Description: Hello Charging (限制充电)
 Author: zqbb
 Name: Hello Charging
 Sileodepiction: https://rootless.002599.xyz/web/com.zqbb.limitcharging
+
+Package: jp.soh.freepip
+Version: 0.0.3-1
+Architecture: iphoneos-arm64e
+Maintainer: Soh Satoh
+Installed-Size: 168
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate (>= 0.9.5000)
+Filename: ./debs/jp.soh.freepip_0.0.3-1_iphoneos-arm64e.deb
+Size: 8692
+MD5sum: b62b0ef176f00de01eb1f92998e2735e
+SHA1: 57e8bbf3a9946af9a4352a23dfd6b3edd204dae0
+SHA256: d36666be510263b44661a25cf4aef58626fa39a38f00a2510a7e14ce90016531
+Section: Tweaks
+Description: FreePIP is a tweak to un-snap and scale the view of Picture-in-Picture on iOS unlimitedly. Long Press PIP window to enable freepip mode. 解锁画中画的限制，可以放在任意位置和调整到任意大小。长按画中画窗口进入 FreePIP 模式进行调整。v0.0.3-1更新：改为默认是正常模式，略微美化FreePIP模式。
+Author: Soh Satoh
+Name: FreePIP
 
 Package: netskao.BlockAppsCreateAlbum
 Version: 1.1.2
