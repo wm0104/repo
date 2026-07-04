@@ -17,43 +17,71 @@ jobs:
           submodules: recursive
 
       - name: install depend
+        if: success()
         run: |
-          sudo apt update
+          sudo apt update 2>>/dev/null 1>>/dev/null
           sudo apt install dpkg-dev bzip2 xz-utils zstd -y
 
-      - name: 原生扫描索引（保证所有插件正常显示）
+      - name: Refresh Packages
+        if: success()
         run: |
-          cd ./debs
-          dpkg-scanpackages . /dev/null > Packages_raw
+          rm -rf ./Packages*
+          
+          sudo chmod -R 0755 ./debs
+          sudo chown -R runner:runner ./debs
+          
+          sudo dpkg-scanpackages -m ./debs /dev/null >./Packages
+          
 
-      - name: 批量自动替换分类（读取每个插件的Description自动分配栏目）
-        run: |
-          cd ./debs
           awk '
-          BEGIN{FS="\n";RS="\n\n";OFS="\n"}
-          {
-            desc="";sec="工具插件";
-            for(i=1;i<=NF;i++){
-              if($i~/^Description: /) desc=$i;
+            BEGIN { in_section = 0; has_section = 0 }
+            /^Section:/ { 
+              print "Section: Tweaks"
+              in_section = 1
+              has_section = 1
+              next
             }
-            if(desc~/键盘/) sec="键盘增强";
-            else if(desc~/系统|状态栏|锁屏|通知|手势|后台|动画|音量|电量|桌面|壁纸|音频|媒体|充电|弹窗|屏幕/) sec="系统增强";
-            else if(desc~/账号|切换|下载|文件|管理器|注入|屏蔽|广告|脚本|Safari|翻译|投屏|画中画|限制解除/) sec="功能拓展";
-            for(i=1;i<=NF;i++){
-              if($i!~/^Section: /) print $i;
+            /^[A-Za-z0-9-]+:/ { 
+              if (in_section) {
+                in_section = 0
+              }
+              print
+              next
             }
-            print "Section: "sec;
-            print "";
-          }
-          ' Packages_raw > Packages
-          rm -f Packages_raw
-          gzip -k -f Packages
-          bzip2 -k -f Packages
-          xz -k -f Packages
-          zstd -k -f Packages
+            { print }
+            END {
+              if (!has_section) {
+                print "Section: Tweaks"
+              }
+            }
+          ' ./Packages > ./Packages.tmp && mv ./Packages.tmp ./Packages
+        
+          
+          bzip2 -v -k -9 Packages
+          xz -v -k -9 --extreme Packages
+          zstd --ultra -22 -k Packages -o Packages.zst
 
-      - name: deploy pages（稳定推送，不会部署失败）
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./debs
+      - name: save change if local change
+        if: success()
+        run: |
+          git config --global user.email 'action@github.com'
+          git config --global user.name 'GitHub Action'
+          git add .
+          if ! git diff --staged --exit-code 1>>/dev/null; then
+            git commit -m 'Refresh Packages'
+            git push
+          fi
+          
+      - name: download remove_all_actions
+        if: success()
+        run: |
+          sudo curl -L -o '/usr/bin/remove_all_actions' 'https://raw.githubusercontent.com/invalidunit/action/main/remove_all_actions'
+          sudo chmod -R 0755 '/usr/bin/remove_all_actions'
+
+      - name: remove all old actions
+        if: success()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          remove_all_actions
