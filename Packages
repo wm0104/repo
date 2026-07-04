@@ -1,3 +1,20 @@
+Package: com.charlieleung.trollopenjb
+Version: 1.3.7
+Architecture: iphoneos-arm64e
+Maintainer: Charlie Leung
+Installed-Size: 4460
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate (>= 0.9.5000), preferenceloader, com.opa334.altlist
+Filename: ./debs/com.charlieleung.trollopenjb_1.3.7_iphoneos-arm64e.deb
+Size: 1129276
+MD5sum: 94b2fb8070e4c892f2b5f6e6c6b06357
+SHA1: 9b971f94947a30e6f3837f3bd3403b13fcb72c71
+SHA256: 1ed306ebb528dc5624907fd908f2a5a954bbb04a48b3c179c06df665890f60a6
+Section: 分屏
+Description: TrollOpen 的越狱版本，支持 ios16 及以上，免费公开版，无后续更新，不需要反馈 bug。QQ 群：1094778353，后续付费更新联系群主或群管理。小黑子闭嘴吧，看看什么是最强分屏！
+Author: Charlie Leung
+Name: TrollOpen
+
 Package: com.miro92.swipeextenderx
 Version: 1.6.2
 Architecture: iphoneos-arm64e
