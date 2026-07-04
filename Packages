@@ -33,6 +33,24 @@ Author: MilkyWay Reborn
 Name: MilkyWayReborn(RootHide)
 Sileodepiction: https://xiangfeidexiaohuo.github.io/sileodepiction/milkyway/js.json
 
+Package: com.iosdump.appdata
+Version: 2.5.1
+Architecture: iphoneos-arm64e
+Maintainer: iosdump
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: firmware (>= 11.0), mobilesubstrate, preferenceloader
+Conflicts: com.netskao.appdatas, com.netskao.appdata, cn.zqbb.appdata, com.fouadraheb.appdata
+Filename: ./debs/AppData-2.5.1-iphoneos-arm64e.deb
+Size: 3487962
+MD5sum: 3874cddea4f922db17aab41d6ea22c01
+SHA1: 500267e2b64ec3749200a71f7aa19eab9c265c96
+SHA256: 72c5f75a2c482c429020bdd9e4605218f3e739455eefe06ae3a6631045e53788
+Section: 常用插件
+Description: 从主屏幕查看和管理应用数据
+Author: iosdump
+Icon: file:///Library/PreferenceBundles/AppDataPrefs.bundle/AppData@3x.png
+Name: AppData
+
 Package: com.lclrc.squidgesture
 Version: 1.3.7
 Architecture: iphoneos-arm64e
@@ -66,4 +84,21 @@ Description: 一个很舒服的分屏版本，已汉化。
 Author: Dcsyhi
 Icon: https://sini921.github.io/repo/sileodepiction/icon/zetsu.png
 Name: Zetsu
+
+Package: me.tomt000.stageduo
+Version: 1.1
+Architecture: iphoneos-arm64e
+Maintainer: tomt000
+Installed-Size: 8348
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate (>= 0.9.5000), com.opa334.altlist, preferenceloader
+Filename: ./debs/Dynamic Stage-1.1.deb
+Size: 10739206
+MD5sum: 169c7a8545beb6055fe7094b089b0533
+SHA1: 2e323014c6a8332d135688ea96870ebfd7c52785
+SHA256: a2fde8027db30a4eec155117a88cbf672c37477a6c812d9519e2a2432d97600c
+Section: 常用插件
+Description: Stage Manager Reimagined for iPhone
+Author: tomt000
+Name: Dynamic Stage
 
