@@ -280,6 +280,23 @@ Author: Lessica
 Name: Kayoko(RootHide)
 Sileodepiction: https://xiangfeidexiaohuo.github.io/sileodepiction/kayoko/js.json
 
+Package: com.dao.kayoko
+Version: 4.0.6
+Architecture: iphoneos-arm64e
+Maintainer: Lessica
+Depends: firmware (>= 14.0), mobilesubstrate, preferenceloader
+Conflicts: dev.traurige.kayoko, codes.aurora.kayoko, com.daodao.kayoko, com.82flex.kayoko
+Filename: ./debs/Kayoko(RootHide)-4.0.6.deb
+Size: 316288
+MD5sum: 4e4a8d78b6bc24da226add3262dbc199
+SHA1: 50981444472ca548d379dc9a2c3ca632eea4a13f
+SHA256: a1048837dba3a1e98d2e01e082cb9ecb9d6eb79f137ba3e794b4fb6b1bc2e867
+Section: Tweaks
+Description: 乌龙工作室版Kayoko，更多优化增强，添加支持iOS16/17。
+Author: Lessica
+Name: Kayoko(RootHide)
+Sileodepiction: https://xiangfeidexiaohuo.github.io/sileodepiction/kayoko/js.json
+
 Package: com.dao.milkywayreborn
 Version: 1.2
 Architecture: iphoneos-arm64e
