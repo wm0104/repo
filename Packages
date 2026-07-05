@@ -298,6 +298,24 @@ Author: MilkyWay Reborn
 Name: MilkyWayReborn(RootHide)
 Sileodepiction: https://xiangfeidexiaohuo.github.io/sileodepiction/milkyway/js.json
 
+Package: com.dao.picobanner
+Version: 1.0
+Architecture: iphoneos-arm64e
+Maintainer: daodao
+Installed-Size: 796
+Depends: firmware (>= 14.0), mobilesubstrate, preferenceloader
+Conflicts: love.litten.liddell, dev.traurige.liddell
+Filename: ./debs/com.dao.picobanner_1.0_iphoneos-arm64e.deb
+Size: 116400
+MD5sum: 1a878c9862802ce6cbaf50852372997c
+SHA1: 62b3667f889377421f27766b38146ed1e7209f93
+SHA256: b04aa15c5719dac87e04867e1ba0365715f2c1399ac69e4f2d447c8452affa50
+Section: Tweaks
+Description: 样式丰富多彩的小巧通知横幅。
+Author: daodao
+Name: PicoBanner(RootHide)
+Sileodepiction: https://xiangfeidexiaohuo.github.io/sileodepiction/picobanner/js.json
+
 Package: com.exile90.icleanerpros
 Version: 7.10.0
 Architecture: iphoneos-arm64e
