@@ -263,6 +263,23 @@ Author: Lessica
 Name: Kayoko(RootHide)
 Sileodepiction: https://xiangfeidexiaohuo.github.io/sileodepiction/kayoko/js.json
 
+Package: com.dao.kayoko
+Version: 4.1.2
+Architecture: iphoneos-arm64e
+Maintainer: 82Flex
+Depends: firmware (>= 14.0), mobilesubstrate, preferenceloader
+Conflicts: dev.traurige.kayoko, codes.aurora.kayoko, com.daodao.kayoko, com.82flex.kayoko
+Filename: ./debs/Kayoko(RootHide)-4.1.2.deb
+Size: 366284
+MD5sum: 60d72b494a742620bab9811098ececb3
+SHA1: 92e8ff09b8af09125bb239ae095017a77c9dc4c0
+SHA256: 12488dff08371eeb0f724cf9d32b090b351371ed7e58d02fb56aed559a7a6806
+Section: Tweaks
+Description: 乌龙工作室版Kayoko，更多优化增强，添加支持iOS16/17。
+Author: 82Flex
+Name: Kayoko(RootHide)
+Sileodepiction: https://xiangfeidexiaohuo.github.io/sileodepiction/kayoko/js.json
+
 Package: com.dao.milkywayreborn
 Version: 1.2
 Architecture: iphoneos-arm64e
@@ -547,6 +564,24 @@ Author: xybp888
 Depiction: https://apt.htv123.com/view/622
 Name: 电话助手iOS16-正式版(Roothide)
 Sileodepiction: https://apt.htv123.com/sileo/622
+
+Package: com.xybp888.callassist16.dopamine.roothide
+Version: 2.3.6
+Architecture: iphoneos-arm64e
+Maintainer: xybp888
+Depends: firmware (>= 16.0), preferenceloader, com.opa334.libsandy
+Filename: ./debs/电话助手iOS16-正式版(Roothide)-2.3.6.deb
+Size: 2753644
+MD5sum: b1d5a85b5532f7b75cd1dc2e4e6c2031
+SHA1: 62cb05a9954b08c07c90c220153042135675d1ac
+SHA256: 1e8dd59c6c98b830bb1ddc4ce07106132f69be1ea52a490c055881a214a9f59f
+Section: Tweaks
+Priority: optional
+Description: 电话助手授权版本,通话录音,通话记录合并,T9双卡选卡拨号键盘,短信双卡选卡,来去电归属地,黑名单,骚扰拦截,状态栏图标替换,时间格式修改,常用小功能等强大插件
+Author: xybp888
+Depiction: https://apt.htv123.com/view/628
+Name: 电话助手iOS16-正式版(Roothide)
+Sileodepiction: https://apt.htv123.com/sileo/628
 
 Package: com.xybp888.perfectdynamiclsland.roothide
 Version: 1.2-31
