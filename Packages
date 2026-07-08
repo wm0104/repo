@@ -194,6 +194,23 @@ Description: 黄白助手-微信插件，点歌朋友圈一键点赞，禁用控
 Author: HuangBai <QQ:1343309363@qq.com>
 Name: 黄白助手(微信插件)-iphoneos-arm64e
 
+Package: com.brend0n.nopassafterrespringsafe
+Version: 0.0.3
+Architecture: iphoneos-arm64e
+Maintainer: Brend0n <brendonjkding@126.com>
+Installed-Size: 168
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate
+Filename: ./debs/nopassafterrespringsafe_0.0.3_arm64e .deb
+Size: 4544
+MD5sum: 17bf7057f1c159ab91424394c0d82019
+SHA1: b5ce057dbeb38181038bb5756a0685fdd34cf586
+SHA256: 1e209f7eab639c0887d39132bd241498e841ab9bde6675c55f314d63948b831d
+Section: Tweaks
+Description: Disables passcode after a respring. This version does NOT modify system file. It's safe to use. 在注销前是解锁状态的情况下，注销后自动跳过人脸或指纹识别到桌面。
+Author: Brend0n <brendonjkding@126.com>
+Name: NoPassAfterRespring(RootHide)
+
 Package: com.dao.ccless
 Version: 2.1.0.1
 Architecture: iphoneos-arm64e
