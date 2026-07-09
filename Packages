@@ -529,6 +529,42 @@ Icon: https://TrollStoreX.Github.io/sileodepiction/FuckWeChatAds/icon.png
 Name: 微信去广告 FuckWeChatAds
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/FuckWeChatAds/js.json
 
+Package: com.wkk.ccsim
+Version: 1.1-9
+Architecture: iphoneos-arm64e
+Installed-Size: 188
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: firmware (>= 15.0), mobilesubstrate, com.opa334.ccsupport
+Filename: ./debs/CCSIM-1.1-9.deb
+Size: 28908
+MD5sum: d79c2b21e577ea36decf96c50bc624f4
+SHA1: c2cd70c5b2d685ee17ec809d3015b56eb9e54048
+SHA256: dae3c1a33ce59d81887be36de8483bf51ef28395cab091db63244331f0490fd6
+Section: Tweaks
+Description: 控制中心快速启用或禁用其中一张SIM卡。
+Author: Netskao
+Icon: https://s1.imagehub.cc/images/2025/12/29/f806534d4e4696c52413ed07e629a1be.png
+Name: CCSIM
+
+Package: com.wkk.ccswitchdata
+Version: 1.1-4
+Architecture: iphoneos-arm64e
+Maintainer: wkk
+Installed-Size: 132
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: firmware (>= 15.0), mobilesubstrate, com.opa334.ccsupport
+Filename: ./debs/CCswitchdata-1.1-4.deb
+Size: 26502
+MD5sum: b069398a9f132dee554c45d70fb11919
+SHA1: a0ffb19cbb6a5250e4a6cbb81d325c308fd9466e
+SHA256: ce9a62c2877753c7636967728f26c17bb8ef78a186e614544209dd56d27e3043
+Section: Tweaks
+Description: 控制中心切换双卡流量。
+Author: Netskao
+Icon: https://s1.imagehub.cc/images/2025/12/29/79018e0c97a38b0c2da262e3bf40edb1.png
+Name: CCswitchdata
+Sponsor: wkk
+
 Package: com.wkk.filzaswipeselect
 Version: 0.0.2
 Architecture: iphoneos-arm64e
