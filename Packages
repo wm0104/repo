@@ -691,6 +691,23 @@ Description: FreePIP is a tweak to un-snap and scale the view of Picture-in-Pict
 Author: Soh Satoh
 Name: FreePIP
 
+Package: llld.keyboard
+Version: 2.0
+Architecture: iphoneos-arm64e
+Installed-Size: 168
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate
+Filename: ./debs/llld.keyboard_2.0_iphoneos-arm64e.deb
+Size: 5196
+MD5sum: 4856878f8bd155862e7ea58c7108ada5
+SHA1: 92a73db91c7a30e5eeccb3dad95d82a32aae1ab4
+SHA256: d859805a15039b9b2656d1296c3d154049db6b49b85e4fb7b74dd7685f73bdd1
+Section: Tweaks
+Priority: optional
+Description: 在很多时候输入，手机总默认自带键盘，且不能更换第三方，有了这插件，你想用啥键盘用啥键盘(第三方输入法都可以)
+Author: 来了老弟
+Name: 强制使用第三方键盘(RootHide)
+
 Package: me.tomt000.stageduo
 Version: 1.2
 Architecture: iphoneos-arm64e
