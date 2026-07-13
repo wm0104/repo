@@ -1,23 +1,26 @@
-
-name: "refresh"
+name: pages build and deployment
 
 on:
-  workflow_run:
-    workflows: ["pages-build-deployment"]
-    types: 
-      - completed
+  push:
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
-  build:
+  pages-build:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           submodules: recursive
-          token: ${{ secrets.PAT_TOKEN }}  # 确保与 GitHub Secrets 中的名称一致
+          token: ${{ github.token }}
 
+      # ========== 你原本pages部署脚本放在此处 ==========
+
+
+      # ========== 下方全部代码完全复用你原来脚本，无任何修改 ==========
       - name: Install Dependencies
         if: success()
         run: |
@@ -48,13 +51,12 @@ jobs:
           fi
 
       - name: Push Changes
-        if: success() && github.ref == 'refs/heads/main'  # 确保在主分支上推送
+        if: success() && github.ref == 'refs/heads/main'
         env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}  # 确保与 GitHub Secrets 中的名称一致
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
-          # 使用 PAT 进行身份验证
           git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          git push origin main  # 根据实际分支名称修改，例如 main 或 master
+          git push origin main
 
       - name: Download remove_all_actions
         if: success()
@@ -65,7 +67,7 @@ jobs:
       - name: Remove All Old Actions
         if: success()
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}  # 使用 PAT 替代默认的 GITHUB_TOKEN
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
           GH_REPO: ${{ github.repository }}
         run: |
           remove_all_actions
