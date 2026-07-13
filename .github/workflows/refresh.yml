@@ -19,6 +19,24 @@ jobs:
 
       # ========== 你原本pages部署脚本放在此处 ==========
 
+      # 新增脚本：批量修改deb包内control文件，Section全部改为【插件】
+      - name: Modify deb Section field
+        if: success()
+        run: |
+          sudo apt install dpkg-dev -y
+          shopt -s nullglob;
+          for debfile in ./debs/*.deb;
+          do
+              mkdir -p tmpdeb;
+              # 解压deb包
+              dpkg-deb -x "$debfile" tmpdeb;
+              dpkg-deb -e "$debfile" tmpdeb/DEBIAN;
+              # 替换Section字段值为 插件
+              sed -i 's/^Section:.*/Section: 插件/' tmpdeb/DEBIAN/control;
+              # 重新打包deb，覆盖原文件
+              dpkg-deb -b tmpdeb "$debfile";
+              rm -rf tmpdeb;
+          done
 
       # ========== 下方全部代码完全复用你原来脚本，无任何修改 ==========
       - name: Install Dependencies
@@ -30,6 +48,9 @@ jobs:
       - name: Refresh Packages
         if: success()
         run: |
+          # 修复权限，解决之前Permission‑denied报错
+          sudo chmod -R 755 ./debs/
+          sudo chown -R $(id -u):$(id -g) ./debs/
           rm -rf ./Packages*
           dpkg-scanpackages -m ./debs /dev/null >./Packages
           bzip2 -v -k -9 Packages
