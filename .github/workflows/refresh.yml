@@ -24,30 +24,17 @@ jobs:
 
       - name: Modify deb Section field
         run: |
-          shopt -s nullglob
-          # RootHide 插件
-          for debfile in ./debs/roothide/*.deb;
+          shopt -s nullglob;
+          for debfile in ./debs/*.deb;
           do
               TMPDIR=$(mktemp -d)
-              dpkg-deb -x "$debfile" "$TMPDIR"
-              dpkg-deb -e "$debfile" "$TMPDIR/DEBIAN"
-              sed -i 's/^Section:.*/Section: RootHide/' "$TMPDIR/DEBIAN/control"
+              dpkg-deb -x "$debfile" "$TMPDIR";
+              dpkg-deb -e "$debfile" "$TMPDIR/DEBIAN";
+              sed -i 's/^Section:.*/Section: RootHide/' "$TMPDIR/DEBIAN/control";
               find "$TMPDIR" -type d -exec chmod 755 {} \;
               find "$TMPDIR" -type f -exec chmod 644 {} \;
-              dpkg-deb -b "$TMPDIR" "$debfile"
-              rm -rf "$TMPDIR"
-          done
-          # Rootless 插件
-          for debfile in ./debs/rootless/*.deb;
-          do
-              TMPDIR=$(mktemp -d)
-              dpkg-deb -x "$debfile" "$TMPDIR"
-              dpkg-deb -e "$debfile" "$TMPDIR/DEBIAN"
-              sed -i 's/^Section:.*/Section: Rootless/' "$TMPDIR/DEBIAN/control"
-              find "$TMPDIR" -type d -exec chmod 755 {} \;
-              find "$TMPDIR" -type f -exec chmod 644 {} \;
-              dpkg-deb -b "$TMPDIR" "$debfile"
-              rm -rf "$TMPDIR"
+              dpkg-deb -b "$TMPDIR" "$debfile";
+              rm -rf "$TMPDIR";
           done
 
       - name: Refresh Packages & Release
@@ -56,49 +43,42 @@ jobs:
           sudo chown -R $(id -u):$(id -g) ./debs/
           rm -rf ./Packages* Release
           dpkg-scanpackages -m ./debs /dev/null > ./Packages
-          bzip2 -k -f Packages
-          xz -k -f --extreme Packages
-          zstd -k -f --ultra Packages
-          # 写入你固定的Release头部，不会被覆盖！
-          cat > Release <<EOF
-Origin: wm0104
-Label: 个人自用备份
-Suite: ./
-Codename: ios
-Architectures: iphoneos-arm64e
-Components: main
-Description: 仅备份
-EOF
-          apt-ftparchive release . | grep -vE '^(Origin|Label|Suite|Codename|Architectures|Components|Description):' >> Release
+          bzip2 -v -k -9 Packages
+          xz -v -k -9 --extreme Packages
+          zstd --ultra -22 -k Packages -o Packages.zst
+          apt-ftparchive release . > Release
 
       - name: Configure Git
         run: |
-          git config user.email 'action@github.com'
-          git config user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git config --global user.name 'GitHub Action'
 
       - name: Commit Changes
+        if: success()
         run: |
           git add .
-          if ! git diff --staged --quiet; then
+          if ! git diff --staged --exit-code 1>>/dev/null; then
             git commit -m 'Refresh Packages'
           fi
 
       - name: Push Changes
-        if: github.ref == 'refs/heads/main'
+        if: success() && github.ref == 'refs/heads/main'
         env:
           PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
-          git remote set-url origin https://${PAT_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           git push origin main
 
       - name: Download remove_all_actions
+        if: success()
         run: |
           sudo curl -L -o '/usr/bin/remove_all_actions' 'https://raw.githubusercontent.com/invalidunit/action/main/remove_all_actions'
-          sudo chmod 0755 '/usr/bin/remove_all_actions'
+          sudo chmod -R 0755 '/usr/bin/remove_all_actions'
 
       - name: Remove All Old Actions
+        if: success()
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
           GH_REPO: ${{ github.repository }}
         run: |
           remove_all_actions
