@@ -1,25 +1,7 @@
-Date: Sat, 25 Jul 2026 07:03:44 +0000
-MD5Sum:
- ba7dbbc0dcda1d7c920e81e3f04f9646            23102 Packages
- b6445bb6f10892d729f1607f291cf0f9             8074 Packages.bz2
- af30d9fa504fbb9b0baa2379fd1dff8d             7912 Packages.xz
- ff744deff716df9d8610f6a0596c13c5             8426 Packages.zst
- b307bf0ba75b3893a46e4623cc377db7               38 Release
-SHA1:
- e2cdbb82d522392eb65ccb710285d06719685239            23102 Packages
- 402529683e9f79afdbe811ae8f97db92e62c9aab             8074 Packages.bz2
- 4e96c6c6d1a3380b1dd3cf3b6203672aae48f0d0             7912 Packages.xz
- 0a13f3ad2606b943b1038badb1b6beb7d60bdb5c             8426 Packages.zst
- 0b5a05ea6da548fa756c5f01fb5e77ca7e95402e               38 Release
-SHA256:
- f6f56d22574fef16ba737a38e785693506e37b976f421b928071c897e49d653b            23102 Packages
- bcc8931de1c9435a244cf8910e664770b899371f75ac956dcfa65195d4c3a658             8074 Packages.bz2
- bb8ea93fa660735b4ca21514c940878ae6c0af6d1a6d54914e5e987b65a750bd             7912 Packages.xz
- 6c64d9a2a3a605e039ed45e9f82479fa4947d66358fcdd19dc3b369aa51704a4             8426 Packages.zst
- 2619ab7a582cea43bb1d6cf09c37dbad684dcdd599e3b895e62733ffb22f1e2c               38 Release
-SHA512:
- 4615e2e29b82c8ec043a3f978e1e1fe10c3bf68f4942e4fcbd63808287cec4198f580ebe11c165ad9cffdca8ec64c269f13fb4feeb96a14e8925bbdce539dde0            23102 Packages
- 1ba1d430ddaa80ee9ccc156876d96e7796c0b4ff414e03ae2b6c3c4f10ccc723375e6a28dfca1ca82365b7dd1e77af2f5b5b675d38cd3c7f95973b9ad862511c             8074 Packages.bz2
- 204348b10936c73bd1dea55078f7d67f7d8741c100e075088cd69461017553dcf99c220ee38c7706ecaaf88dc0559c1cf7df49decd84c44fc147970d471d9fe8             7912 Packages.xz
- 814fe4356d46c827ccdd13482fa45490f6d140184d850408b8ade31e376897d37ab776d6249219ab31e1b3120b27d4f937da6a3e55fe17a8dedd7f95c01ca2cd             8426 Packages.zst
- 8162ae1514322dcd86fc552d4b2d9c2cdd4ab42e8236e91851b5e68dfa6a38bdf3ee9407628ca8371fcea38bea4f9bf23df6c0746c17f02f5d682464866ef8aa               38 Release
+Origin: wm0104
+Label: 个人自用备份
+Suite: ./
+Codename: ios
+Architectures: iphoneos-arm64e
+Components: main
+Description: 仅备份
