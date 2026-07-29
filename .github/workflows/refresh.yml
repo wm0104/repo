@@ -22,46 +22,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y dpkg-dev bzip2 xz-utils zstd
 
-      - name: Fix deb packages and Refresh Packages
+      - name: Refresh Packages
         run: |
           rm -f Packages Packages.bz2 Packages.xz Packages.zst
-
-          echo "Checking and fixing deb packages..."
-
-          mkdir -p /tmp/deb_fix
-
-          for deb in ./debs/*.deb; do
-            echo "Processing: $deb"
-
-            rm -rf /tmp/deb_fix/*
-
-            if ! dpkg-deb -R "$deb" /tmp/deb_fix; then
-              echo "Failed to extract: $deb"
-              exit 1
-            fi
-
-            if [ -d /tmp/deb_fix/DEBIAN ]; then
-
-              echo "Fix DEBIAN permissions..."
-
-              chmod 755 /tmp/deb_fix/DEBIAN
-
-              [ -f /tmp/deb_fix/DEBIAN/control ] && \
-                chmod 644 /tmp/deb_fix/DEBIAN/control
-
-              [ -f /tmp/deb_fix/DEBIAN/postinst ] && \
-                chmod 755 /tmp/deb_fix/DEBIAN/postinst
-
-              [ -f /tmp/deb_fix/DEBIAN/prerm ] && \
-                chmod 755 /tmp/deb_fix/DEBIAN/prerm
-
-              echo "Rebuild: $deb"
-
-              dpkg-deb -b /tmp/deb_fix "$deb"
-
-            fi
-          done
-
 
           echo "Generate Packages..."
 
@@ -85,7 +48,7 @@ jobs:
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
 
-          git add Packages Packages.bz2 Packages.xz Packages.zst debs
+          git add Packages Packages.bz2 Packages.xz Packages.zst
 
           if ! git diff --cached --quiet; then
             git commit -m "Refresh Packages"
