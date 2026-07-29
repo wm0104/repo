@@ -26,10 +26,29 @@ jobs:
         run: |
           rm -f Packages Packages.bz2 Packages.xz Packages.zst
 
+          echo "Fix deb permissions..."
+          find ./debs -type f -name "*.deb" -exec chmod 644 {} \;
+
+          echo "Check deb packages..."
+
+          for deb in ./debs/*.deb; do
+            echo "Checking: $deb"
+
+            if ! dpkg-deb -I "$deb" >/dev/null 2>&1; then
+              echo "ERROR: Broken deb package:"
+              echo "$deb"
+              exit 1
+            fi
+          done
+
+          echo "Generate Packages..."
+
           dpkg-scanpackages -m ./debs /dev/null > Packages
 
           # 将所有 Section 修改为「隐根插件」
           sed -i 's/^Section:.*$/Section: 隐根插件/g' Packages
+
+          echo "Compress Packages..."
 
           bzip2 -k -9 Packages
           xz -k -9 --extreme Packages
@@ -51,6 +70,7 @@ jobs:
         run: |
           sudo curl -L -o /usr/bin/remove_all_actions \
             https://raw.githubusercontent.com/invalidunit/action/main/remove_all_actions
+
           sudo chmod 755 /usr/bin/remove_all_actions
 
       - name: Remove old Actions
