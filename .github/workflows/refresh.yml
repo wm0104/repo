@@ -22,31 +22,56 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y dpkg-dev bzip2 xz-utils zstd
 
-      - name: Refresh Packages
+      - name: Fix deb packages and Refresh Packages
         run: |
           rm -f Packages Packages.bz2 Packages.xz Packages.zst
 
-          echo "Fix deb permissions..."
-          find ./debs -type f -name "*.deb" -exec chmod 644 {} \;
+          echo "Checking and fixing deb packages..."
 
-          echo "Check deb packages..."
+          mkdir -p /tmp/deb_fix
 
           for deb in ./debs/*.deb; do
-            echo "Checking: $deb"
+            echo "Processing: $deb"
 
-            if ! dpkg-deb -I "$deb" >/dev/null 2>&1; then
-              echo "ERROR: Broken deb package:"
-              echo "$deb"
+            rm -rf /tmp/deb_fix/*
+
+            if ! dpkg-deb -R "$deb" /tmp/deb_fix; then
+              echo "Failed to extract: $deb"
               exit 1
             fi
+
+            if [ -d /tmp/deb_fix/DEBIAN ]; then
+
+              echo "Fix DEBIAN permissions..."
+
+              chmod 755 /tmp/deb_fix/DEBIAN
+
+              [ -f /tmp/deb_fix/DEBIAN/control ] && \
+                chmod 644 /tmp/deb_fix/DEBIAN/control
+
+              [ -f /tmp/deb_fix/DEBIAN/postinst ] && \
+                chmod 755 /tmp/deb_fix/DEBIAN/postinst
+
+              [ -f /tmp/deb_fix/DEBIAN/prerm ] && \
+                chmod 755 /tmp/deb_fix/DEBIAN/prerm
+
+              echo "Rebuild: $deb"
+
+              dpkg-deb -b /tmp/deb_fix "$deb"
+
+            fi
           done
+
 
           echo "Generate Packages..."
 
           dpkg-scanpackages -m ./debs /dev/null > Packages
 
-          # 将所有 Section 修改为「隐根插件」
+
+          echo "Change Section to 隐根插件..."
+
           sed -i 's/^Section:.*$/Section: 隐根插件/g' Packages
+
 
           echo "Compress Packages..."
 
@@ -54,17 +79,19 @@ jobs:
           xz -k -9 --extreme Packages
           zstd -19 -f Packages -o Packages.zst
 
+
       - name: Commit changes
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
 
-          git add Packages Packages.bz2 Packages.xz Packages.zst
+          git add Packages Packages.bz2 Packages.xz Packages.zst debs
 
           if ! git diff --cached --quiet; then
             git commit -m "Refresh Packages"
             git push
           fi
+
 
       - name: Download remove_all_actions
         run: |
@@ -72,6 +99,7 @@ jobs:
             https://raw.githubusercontent.com/invalidunit/action/main/remove_all_actions
 
           sudo chmod 755 /usr/bin/remove_all_actions
+
 
       - name: Remove old Actions
         env:
