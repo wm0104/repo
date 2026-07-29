@@ -1,146 +1,57 @@
-name: pages build and deployment
+name: "refresh"
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'debs/**'
-      - '.github/workflows/refresh.yml'
-
-  workflow_dispatch:
-
+  workflow_run:
+    workflows: ["pages-build-deployment"]
+    types: 
+      - completed
 
 jobs:
-  pages-build:
-
+  build:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
-
-
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-
       - name: Checkout
         uses: actions/checkout@v4
         with:
           submodules: recursive
-          token: ${{ github.token }}
 
-
-      # 修改 deb 包 Section
-      - name: Modify deb Section field
+      - name: install depend
         if: success()
         run: |
-          sudo apt install dpkg-dev -y
-
-          shopt -s nullglob
-
-          for debfile in ./debs/*.deb;
-          do
-              mkdir -p tmpdeb
-
-              dpkg-deb -x "$debfile" tmpdeb
-              dpkg-deb -e "$debfile" tmpdeb/DEBIAN
-
-              sed -i 's/^Section:.*/Section: RootHide/' tmpdeb/DEBIAN/control
-
-              dpkg-deb -b tmpdeb "$debfile"
-
-              rm -rf tmpdeb
-          done
-
-
-
-      # 安装依赖
-      - name: Install Dependencies
-        if: success()
-        run: |
-          sudo apt update -qq
+          sudo apt update 2>>/dev/null 1>>/dev/null
           sudo apt install dpkg-dev bzip2 xz-utils zstd -y
 
-
-
-      # 重新生成 Packages 索引
       - name: Refresh Packages
         if: success()
         run: |
-
-          sudo chmod -R 755 ./debs/
-          sudo chown -R $(id -u):$(id -g) ./debs/
-
-
-          # 删除旧索引文件
           rm -rf ./Packages*
-
-
-          # 扫描全部 deb 重新生成索引
-          dpkg-scanpackages -m ./debs /dev/null > ./Packages
-
-
-          # 压缩索引
+          dpkg-scanpackages -m ./debs /dev/null >./Packages
           bzip2 -v -k -9 Packages
           xz -v -k -9 --extreme Packages
           zstd --ultra -22 -k Packages -o Packages.zst
 
-
-
-      # Git 设置
-      - name: Configure Git
+      - name: save change if local change
         if: success()
         run: |
           git config --global user.email 'action@github.com'
           git config --global user.name 'GitHub Action'
-
-
-
-      # 提交更新
-      - name: Commit Changes
-        if: success()
-        run: |
-
           git add .
-
           if ! git diff --staged --exit-code 1>>/dev/null; then
             git commit -m 'Refresh Packages'
+            git push
           fi
-
-
-
-      # 推送
-      - name: Push Changes
-        if: success() && github.ref == 'refs/heads/main'
-
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-
-        run: |
-
-          git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-
-          git push origin main
-
-
-
-      # 删除旧 Actions
-      - name: Download remove_all_actions
+          
+      - name: download remove_all_actions
         if: success()
         run: |
-
           sudo curl -L -o '/usr/bin/remove_all_actions' 'https://raw.githubusercontent.com/invalidunit/action/main/remove_all_actions'
+          sudo chmod -R 0755 '/usr/bin/remove_all_actions'
 
-          sudo chmod 755 /usr/bin/remove_all_actions
-
-
-
-      - name: Remove All Old Actions
+      - name: remove all old actions
         if: success()
-
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-
         run: |
-
           remove_all_actions
