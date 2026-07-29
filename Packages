@@ -260,24 +260,6 @@ Name: iCleaner Pro
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/iCleanerPro/js.json
 
 Package: com.iosdump.appdata
-Version: 2.5.1
-Architecture: iphoneos-arm64e
-Maintainer: iosdump
-Pre-Depends: rootless-compat(>= 0.9)
-Depends: firmware (>= 11.0), mobilesubstrate, preferenceloader
-Conflicts: com.netskao.appdatas, com.netskao.appdata, cn.zqbb.appdata, com.fouadraheb.appdata
-Filename: ./debs/AppData-2.5.1.deb
-Size: 1618222
-MD5sum: 467bd9b5357f4dd3208de266b35d3165
-SHA1: c02d5f07e17a6bb950d76438e367b76b16a76257
-SHA256: 0310a63295e6d4cabff22c99f7d359785001f1bdb20c7af2f36cb1e40bb90207
-Section: RootHide
-Description: 从主屏幕查看和管理应用数据
-Author: iosdump
-Icon: file:///Library/PreferenceBundles/AppDataPrefs.bundle/AppData@3x.png
-Name: AppData
-
-Package: com.iosdump.appdata
 Version: 2.6.1
 Architecture: iphoneos-arm64e
 Maintainer: iosdump
@@ -459,27 +441,6 @@ Author: subdiox & iosdump
 Icon: https://TrollStoreX.Github.io/sileodepiction/StoreSwitcher/icon.png
 Name: StoreSwitcher 账号切换
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/StoreSwitcher/js.json
-
-Package: com.susu.fuckwechatadss
-Version: 1.0.2
-Architecture: iphoneos-arm64e
-Maintainer: susu
-Installed-Size: 104
-Pre-Depends: rootless-compat(>= 0.9)
-Depends: mobilesubstrate (>= 0.9.5000)
-Conflicts: com.susu.fuckwechatads
-Filename: ./debs/微信去广告 FuckWeChatAds-1.0.2.deb
-Size: 19774
-MD5sum: ce525adb2fef04ca822f70171b231fd3
-SHA1: 9c6cb00a261ba9c7986c4e4db915b18c0a931d51
-SHA256: 16c88abbc616f9a8fe8fe7c6802b711966b47ecdd5a95f5410bf5dd66b6b83b8
-Section: RootHide
-Description: 移除微信广告
- * 在微信 8.0.56 进行测试有效
-Author: susu
-Icon: https://TrollStoreX.Github.io/sileodepiction/FuckWeChatAds/icon.png
-Name: 微信去广告 FuckWeChatAds
-Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/FuckWeChatAds/js.json
 
 Package: com.ttt.cccurrentmodule
 Version: 1.4
