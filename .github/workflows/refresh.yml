@@ -2,7 +2,11 @@ name: pages build and deployment
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+    paths:
+      - 'debs/**'
+      - '.github/workflows/refresh.yml'
   workflow_dispatch:
 
 jobs:
@@ -10,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -17,45 +22,48 @@ jobs:
           submodules: recursive
           token: ${{ github.token }}
 
-      # ========== 你原本pages部署脚本放在此处 ==========
-
-      # 新增脚本：批量修改deb包内control文件，Section全部改为【插件】
+      # 修改deb包 Section
       - name: Modify deb Section field
         if: success()
         run: |
           sudo apt install dpkg-dev -y
-          shopt -s nullglob;
+          shopt -s nullglob
+
           for debfile in ./debs/*.deb;
           do
-              mkdir -p tmpdeb;
-              # 解压deb包
-              dpkg-deb -x "$debfile" tmpdeb;
-              dpkg-deb -e "$debfile" tmpdeb/DEBIAN;
-              # 替换Section字段值为 RootHide
-              sed -i 's/^Section:.*/Section: RootHide/' tmpdeb/DEBIAN/control;
-              # 重新打包deb，覆盖原文件
-              dpkg-deb -b tmpdeb "$debfile";
-              rm -rf tmpdeb;
+              mkdir -p tmpdeb
+
+              dpkg-deb -x "$debfile" tmpdeb
+              dpkg-deb -e "$debfile" tmpdeb/DEBIAN
+
+              sed -i 's/^Section:.*/Section: RootHide/' tmpdeb/DEBIAN/control
+
+              dpkg-deb -b tmpdeb "$debfile"
+
+              rm -rf tmpdeb
           done
 
-      # ========== 下方全部代码完全复用你原来脚本，无任何修改 ==========
+
       - name: Install Dependencies
         if: success()
         run: |
           sudo apt update -qq
           sudo apt install dpkg-dev bzip2 xz-utils zstd -y
 
+
       - name: Refresh Packages
         if: success()
         run: |
-          # 修复权限，解决之前Permission‑denied报错
           sudo chmod -R 755 ./debs/
           sudo chown -R $(id -u):$(id -g) ./debs/
-          rm -rf ./Packages*
-          dpkg-scanpackages -m ./debs /dev/null >./Packages
+
+          # 直接重新生成，不再删除旧索引
+          dpkg-scanpackages -m ./debs /dev/null > ./Packages
+
           bzip2 -v -k -9 Packages
           xz -v -k -9 --extreme Packages
           zstd --ultra -22 -k Packages -o Packages.zst
+
 
       - name: Configure Git
         if: success()
@@ -63,13 +71,16 @@ jobs:
           git config --global user.email 'action@github.com'
           git config --global user.name 'GitHub Action'
 
+
       - name: Commit Changes
         if: success()
         run: |
           git add .
+
           if ! git diff --staged --exit-code 1>>/dev/null; then
             git commit -m 'Refresh Packages'
           fi
+
 
       - name: Push Changes
         if: success() && github.ref == 'refs/heads/main'
@@ -79,11 +90,13 @@ jobs:
           git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           git push origin main
 
+
       - name: Download remove_all_actions
         if: success()
         run: |
           sudo curl -L -o '/usr/bin/remove_all_actions' 'https://raw.githubusercontent.com/invalidunit/action/main/remove_all_actions'
           sudo chmod -R 0755 '/usr/bin/remove_all_actions'
+
 
       - name: Remove All Old Actions
         if: success()
