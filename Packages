@@ -1,20 +1,3 @@
-Package: cn.fkj233.watchfix
-Section: 隐根插件
-Version: 2.0.1
-Architecture: iphoneos-arm64e
-Maintainer: 577FKJ
-Installed-Size: 4632
-Depends: firmware (>= 15.0), mobilesubstrate, preferenceloader
-Filename: ./debs/WatchFix-2.0.1.deb
-Size: 684788
-MD5sum: bdf46f2ef4a54e52704d1b54a4a56b96
-SHA1: 1accb278469a3ae30a837b6150bf7fd73e4a3808
-SHA256: 300314b4f4ad2a071d438480540f8bf120858d28de9aff427d96add659b715be
-Section: RootHide
-Description: Fix Apple watch connection issues
-Author: 577FKJ
-Name: WatchFix
-
 Package: cn.octoforce.copyvault
 Section: 隐根插件
 Version: 1.9.0
