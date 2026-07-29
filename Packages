@@ -259,6 +259,21 @@ Icon: https://TrollStoreX.Github.io/sileodepiction/iCleanerPro/icon.png
 Name: iCleaner Pro
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/iCleanerPro/js.json
 
+Package: com.hk.dynamicstage.cn.rl
+Version: 1.1
+Architecture: iphoneos-arm64e
+Maintainer: 妖刀
+Depends: mobilesubstrate
+Filename: ./debs/DynamicStage 简体中文包(RootHide)-1.1.deb
+Size: 6400
+MD5sum: 1af58eb947039dd5bbba9a54851d2857
+SHA1: 4f521c5d2b20459dab4f790869da5a1977e5feee
+SHA256: 491a409cf663fcdf00556d919e24e9866df11b5f02a5826d34d52f98a12c54f5
+Section: 嗨-汉化
+Description: DynamicStage 简体中文包(RootHide)。
+Author: 妖刀
+Name: DynamicStage 简体中文包(RootHide)
+
 Package: com.iosdump.appdata
 Version: 2.6.1
 Architecture: iphoneos-arm64e
