@@ -9,10 +9,10 @@ Conflicts: MisakaHelper
 Replaces: MisakaHelper
 Provides: MisakaHelper
 Filename: ./debs/MisakaHelper-2.1-0.deb
-Size: 15326514
-MD5sum: 5501db9c01ab4bc4221321653a07ff41
-SHA1: a5186c7f21b7464993a5ecc5c9f8163f5513380e
-SHA256: da94fa4989aec4946ecda57293898d7732b7fdcf21d7fda640980e47bf744df4
+Size: 15326560
+MD5sum: 0416a4b8e1f55726301b85baebbacc2f
+SHA1: 3312f06b8994dbe096218843dbc7fe2e055ac251
+SHA256: 82f4e6bb783fef521093b2c1d5c4daa80e2d3727ed1d22a82cfbbb6e82bc75e9
 Section: 隐根插件
 Priority: optional
 Description: 微信多功能插件
@@ -30,10 +30,10 @@ Installed-Size: 6380
 Depends: mobilesubstrate, preferenceloader, com.opa334.altlist
 Conflicts: com.squidforce.copyvault
 Filename: ./debs/CopyVault(激活码版)-1.9.0.deb
-Size: 1973596
-MD5sum: 0646fa538d8483bda63f9bf614272a00
-SHA1: 94d89590766024bd53e4701a12b36dde9248a28b
-SHA256: 367124d75779a66d8513edcd39955e76d649f74bbf37dbe5673f63e1fdee8123
+Size: 1973582
+MD5sum: 4ae64d69c72b96118fd3bf10808f2cbe
+SHA1: d3201930864200bdc400ebdbbcd89945cc3cafa1
+SHA256: a626e273e230ac7238d6864707f95be985f4df626f27f661d6fb42acfa5d95d4
 Section: 隐根插件
 Description: 激活码用户或需要激活码的用户安装这个，非激活码用户不要安装！！Do not install if you do not have an activation code!!! Your Copy Vault, Your Pasteboard
 Author: SquidForce, Backup
@@ -47,10 +47,10 @@ Maintainer: zqbb
 Installed-Size: 720
 Depends: mobilesubstrate (>= 0.9.5000), preferenceloader, com.opa334.altlist
 Filename: ./debs/Hello App-2.0.0-6.deb
-Size: 146118
-MD5sum: 3558380f79b2c12cd5e20747e5e9491a
-SHA1: 8d34d3ad0fba3a53c45e22c69fb11dc84a3d8a14
-SHA256: 891701489d16095135b1fc1717eee615108a1a9c87d821b9dfaa2b324816f788
+Size: 146116
+MD5sum: 94ac50089df62dfc018643df56f6423f
+SHA1: f02e76d7b809a161e000c1f07a074b2d85195950
+SHA256: 4972e216e7319dfdd655646ecfc00a384a6e2bd06b58ce448389706dfb7abfd4
 Section: 隐根插件
 Description: 屏蔽App Store更新提示(Block App Store Updates)!
 Author: zqbb
@@ -66,9 +66,9 @@ Installed-Size: 324
 Depends: com.opa334.ccsupport
 Filename: ./debs/Hello Pay-1.0.2.deb
 Size: 113092
-MD5sum: dcc8f9cc9361b25f26a8a0823fa1f6b6
-SHA1: 097fc6f927457a56dde89a8fe98528c94f52fb3e
-SHA256: a8dfff61baa5b8cc39ec921de94a447cae2d41041ca3d161d3e27d963f96b914
+MD5sum: 51bc2b7bfa13ffcba39ae3c283ffda66
+SHA1: 3dc5ecd5ea1e7f353fa7d842cd4e88ed4a9ac5c7
+SHA256: c464eea49cba538b3a2f01b817e7665afc168371c4565d213c662ea0058ea09c
 Section: 隐根插件
 Description: 微信+支付宝 控制中心添加 扫一扫,付款码.
  - 默认支付宝扫一扫, 长按出菜单!
@@ -84,10 +84,10 @@ Installed-Size: 3664
 Depends: mobilesubstrate (>= 0.9.5000) , firmware (>= 15.0), preferenceloader, com.opa334.ccsupport
 Conflicts: com.yourepo.0xash.powercuff, byg.iosios.net.powercuff, com.dao.powercuff, com.rpetrich.powercuff, com.yourepo.0xash.devicemonitor, com.yourepo.0xash.fuckthermal, com.shadow.fuckthermal, com.dao.fuckthermal, byg.iosios.net.monitor, byg.iosios.net.disablethermalmonitord, com.nan.disablethermalmonitord
 Filename: ./debs/Hello CPU-2.3.5-3.deb
-Size: 1457430
-MD5sum: 639c2a38f22537639f148fde8a622bbd
-SHA1: f77997d3a514b1525d4a382a0017a3c6b946fb4d
-SHA256: 59d829c5637e60000dcf16ca2c6740d164bfed2e276274124a285352eb152ae3
+Size: 1457398
+MD5sum: 3fbf66f7910c9d1fc9e71edecfe202d8
+SHA1: 331c0a82a16f226f16a666f261a64bb85223bf1b
+SHA256: 7952c8907a5cecb3d49f87f612265711616e88eb3754ec2f72c30f031a0b896e
 Section: 隐根插件
 Description: (解除温控) (锁定低电量CPU频率)
 Author: zqbb
@@ -103,10 +103,10 @@ Installed-Size: 232
 Depends: mobilesubstrate (>= 0.9.5000) , firmware (>= 15.0)
 Conflicts: zp.stopautolaunchapps
 Filename: ./debs/Hello 3Q-1.1.deb
-Size: 30346
-MD5sum: e64ac085423f44d872dcb5343821e492
-SHA1: d6e773f5e2c8fdc42c3211d141fef8ea8c90edad
-SHA256: da6317740393bc4ab150f104a0765aa3cbe7c54429a5334c701b2665a0356153
+Size: 30342
+MD5sum: 3eee0381d1a2b8cea958c993d9dab34d
+SHA1: 0c8d6d9bbb8aa4d03638c1428eb8fb9cc38e2fee
+SHA256: cc6c01e744694c77fb3090ad66a4c3377710a5f063ba7d1999d37502af45709c
 Section: 隐根插件
 Description: 禁用ios热启动神经网络引擎,别在后台热加载app咯!
  - 优点:节约内存,少杀后台.
@@ -122,10 +122,10 @@ Maintainer: admin@25mao.com
 Pre-Depends: rootless-compat(>= 0.9)
 Depends: mobilesubstrate, preferenceloader, com.opa334.altlist (>=1.0.4)
 Filename: ./debs/com.25mao.leftpan.rootless_1.0-6_iphoneos-arm64e.deb
-Size: 49764
-MD5sum: fe9d0c515c9b36daf293bd6069e378f0
-SHA1: b7a8293ad8785d069cf6686df8c29ca74ab9e4ec
-SHA256: 552ecb81cb02902f7212dc58ad9c19d897a2dd8e86f098a4f96ba5f9cb9181e9
+Size: 49746
+MD5sum: 74e69afe1a7455edd2f0afebf32852fc
+SHA1: a878fa252eaa1d5eded865a711180a9d9ed4de8d
+SHA256: 789bbde737003a64b5e4f9f184c2de40c10bf1806bd0f81fc9d0301cceaaef6b
 Section: 隐根插件
 Priority: optional
 Description: 左滑返回上一页面
@@ -142,10 +142,10 @@ Conflicts: com.25mao.wcplugins.rootless
 Replaces: com.25mao.wcplugins.rootless
 Provides: com.25mao.wcplugins.rootless
 Filename: ./debs/微信插件管理-0.1-6.deb
-Size: 15876
-MD5sum: edb2da42b0b508bce4992bc16daebb7c
-SHA1: fffef8534757ef5fcc2ce72ffeb965ac15d873fb
-SHA256: 63a75849d6a83852add35351a9a516faf4ddd7893ac3c85017e3689261b03874
+Size: 15850
+MD5sum: 829b89ed47840002a34e65b938868921
+SHA1: 496f7277f835d2786c982b5d68cd55bab26ffe97
+SHA256: 6fee3835cc42ae0ec89ae8b65e6c7f92fa43d0f1891ce8759281354f90dd91d4
 Section: 隐根插件
 Priority: optional
 Description: 微信插件管理
@@ -168,10 +168,10 @@ Installed-Size: 168
 Pre-Depends: rootless-compat(>= 0.9)
 Depends: mobilesubstrate
 Filename: ./debs/nopassafterrespringsafe_0.0.3_arm64e .deb
-Size: 4580
-MD5sum: 84d42082a01387b2c819fccd04e76c2c
-SHA1: d446b5c47461803a1386be88c02fed88dfb1a14a
-SHA256: 4757ad6c749beb8f2012c92e15379a1e5bd9311a0a90edf354ec41fdf1e55d77
+Size: 4582
+MD5sum: a2c9e64082fd9a5feb55225f3adfc177
+SHA1: 64f081ca2ca454ab06ec24e387071ef6ff59df22
+SHA256: bb2e4fc0cfeb7963febe908c622f2cad0c738f3ef51d12ed43f3f7ccb4888855
 Section: 隐根插件
 Description: Disables passcode after a respring. This version does NOT modify system file. It's safe to use. 在注销前是解锁状态的情况下，注销后自动跳过人脸或指纹识别到桌面。
 Author: Brend0n <brendonjkding@126.com>
@@ -185,10 +185,10 @@ Pre-Depends: rootless-compat(>= 0.9)
 Depends: firmware (>= 15.0), mobilesubstrate, com.opa334.ccsupport
 Conflicts: com.skypain.cclocation, com.skypain.ccsettrings, com.skypain.ccrespring, com.sop.cpumagicrootless, netskao.ccbadgeclear-rootless, com.mtac.uptime, netskao.alipayscan-rootless, netskao.wechatscan-rootless, com.skypain.ccvpn, netskao.ccswitchdata-rootless, netskao.ccsim-rootless, netskao.tinyccmodules-rootless, netskao.cccellularrate-rootless, netskao.quantumultxlauncher-rootless, com.p2kdev.snapper2cc, com.skypain.ccautobrightness, com.skypain.ccscreenshot, com.skypain.cclockscreen, xyz.cypwn.safeccmodules, com.zqbb.ccpay, com.zqbb.qszqb, com.netskao.ccbadgeclear, com.kingpuffdaddi.control-center.ccvpn, com.netskao.cclifttowake, com.kdt.caperfhudmodule, com.kingpuffdaddi.control-center.ccvibration, com.hk.roothide.cc, com.hk.rootless.cc
 Filename: ./debs/CCLess++(RootHide)-2.1.0.1.deb
-Size: 520298
-MD5sum: 14ef036600126b421a81e42409548997
-SHA1: 56ddb65ac65a24e4f2abb92d371d35208101ad42
-SHA256: 9f9cc8820c133efe91387344bdf89568c0db78610c29a7245fb8256e5d142e5e
+Size: 520290
+MD5sum: a636ce1fc23961d40c8a144fe07562a7
+SHA1: b3ee92a439abe1b915fa4bacb82c2ea1fb42a11b
+SHA256: 363e94c28f4f6cb0b0c8df8ea1d7c6463cb94da7dfb9cded73f30f48adbeb2fa
 Section: 隐根插件
 Description: 超级控制中心模块集合！
 Author: 妖刀
@@ -203,10 +203,10 @@ Pre-Depends: rootless-compat(>= 0.9)
 Depends: firmware (>= 15.0), mobilesubstrate
 Conflicts: com.netskao.filzacrack, netskao.filzacrack-rootless
 Filename: ./debs/Filza Crack(RootHide)-1.1-9.deb
-Size: 32852
-MD5sum: 792d567d1d4662a3e38fbeb8ba3b0f28
-SHA1: 017cd4ee852e74b06fae9877697cac2b345fc944
-SHA256: a0ac32c4c1c0472ba18028708f1d7c236564fe2371da435cc99576c1b53bcc96
+Size: 32850
+MD5sum: de3663c65b110235bff491ce162e19d5
+SHA1: 82487eac6521f38181909f1113eec19522fe9130
+SHA256: 49df6015b02907bc2ee23491a39f30acad2c3b3c32b709b79b3fe239e5eb60df
 Section: 隐根插件
 Description: Filza解锁全部功能，请在官方源安装Filza。Netskao新更的版本，上架备份；转换支持 roothide。
 Author: Netskao
@@ -219,10 +219,10 @@ Maintainer: 82Flex
 Depends: firmware (>= 14.0), mobilesubstrate, preferenceloader
 Conflicts: dev.traurige.kayoko, codes.aurora.kayoko, com.daodao.kayoko, com.82flex.kayoko
 Filename: ./debs/Kayoko(RootHide)-4.1.2.deb
-Size: 415724
-MD5sum: 0e6b798d2c56b5e7aa416d8842cb5f53
-SHA1: 873b08aae6746087b60fd4cab9b0d3d7b9f3e84e
-SHA256: 4e0a80dbd7b4c2502a951e660d3ed1d46d2a0627319f8bc9adee088f3ef72bd3
+Size: 415716
+MD5sum: e1dc17f3e3db3265f754100b1799ee56
+SHA1: 24cee470bcad735bb65fd62d53bb6a551ac3a6ae
+SHA256: c08f646794e5b67ec3a66c56ea0fd1f5137bdd29c850a548d0cfbe1e8c8ae948
 Section: 隐根插件
 Description: 乌龙工作室版Kayoko，更多优化增强，添加支持iOS16/17。
 Author: 82Flex
@@ -236,10 +236,10 @@ Maintainer: doimty
 Installed-Size: 236
 Depends: mobilesubstrate
 Filename: ./debs/ProMotion 120Hz-1.0.8.deb
-Size: 29538
-MD5sum: 68f8dd7fdf765d32a03399df908db47c
-SHA1: d61cccc591907390fe3d326a222cd95a547f2c1c
-SHA256: 901baf3bc8078b4a0383564fb403e6b5a4a645adfe72f4cbbdd0ba043e28a1ea
+Size: 29548
+MD5sum: f6a8aa1df6057d133c09e14f4bf64e1b
+SHA1: c667eb1b20dcfa511b7fed8a0fc20fcc8f9d036d
+SHA256: 302b363e3d9fa6a16cc7073bacaa5d1b7305a2ad8ced7e324ce5681fd50f45cd
 Section: 隐根插件
 Description: Force global 120Hz ProMotion, bypass the 80Hz system cap. iPhone 13 Pro and above only.
 Tag: supports::roothide
@@ -254,10 +254,10 @@ Pre-Depends: rootless-compat(>= 0.9)
 Depends: firmware (>= 4.0), findutils, apt | apt7
 Conflicts: com.exile90.icleanerpro, org.altervista.exilecom.icleaner
 Filename: ./debs/iCleaner Pro-7.10.0.deb
-Size: 1090108
-MD5sum: 5583bd3171dc4b9f8305d2febbe45014
-SHA1: fadd304cd4181e5733bd31f7942db1d390feb846
-SHA256: b0a1adefef837a81c606e08d79c2b19fcf7fbfb3b04fadd450289a2b0feb71ee
+Size: 1090042
+MD5sum: 5a011ffd0262d8b77924ce3c1095f342
+SHA1: 77ba0c06f3044eb8231fdcd2bb2337b0c5cd0795
+SHA256: 0aaf6f539d6d6110fbd6c670195d1fb7421242f7569dc4679bc5d3335c24db14
 Section: 隐根插件
 Description: iCleaner Pro
  * 垃圾清理工具，启动项管理等
@@ -273,10 +273,10 @@ Architecture: iphoneos-arm64e
 Maintainer: 妖刀
 Depends: mobilesubstrate
 Filename: ./debs/DynamicStage 简体中文包(RootHide)-1.1.deb
-Size: 6550
-MD5sum: 4182f36c670d0eec3f3298f366a0f21a
-SHA1: 936bd56ab4c8143dcb452a53e538456e4c952581
-SHA256: e3f6bbaac7a00bd3ca0e677e390d66645b62e22877c6568454161769c539f993
+Size: 6552
+MD5sum: e02361cf746523a4894b1abf56e52ae0
+SHA1: 45f505865f90886a38a8c4aa783b643d949efbb8
+SHA256: f6d09ee48cbd6f9a399ec60dce7477e4045330f7a5fa4763893e6b25479a0479
 Section: 隐根插件
 Description: DynamicStage 简体中文包(RootHide)。
 Author: 妖刀
@@ -290,10 +290,10 @@ Pre-Depends: rootless-compat(>= 0.9)
 Depends: firmware (>= 11.0), mobilesubstrate, preferenceloader
 Conflicts: com.netskao.appdatas, com.netskao.appdata, cn.zqbb.appdata, com.fouadraheb.appdata
 Filename: ./debs/AppData-2.6.1.deb
-Size: 1674812
-MD5sum: 31fcb06822b876cc8889a7a6689aca74
-SHA1: 20ac105b94427dcc106ff4988962702e13c7d85d
-SHA256: 32f8dbd0010d367dc8f919ba0a0401cab3cd3d69b00ac7c34b13a78786de7691
+Size: 1674860
+MD5sum: bb16c0fa5920829a06fb01cd8f8289fd
+SHA1: 75d3c3a3d7f53b2d505138dd4932ef0cf688aa58
+SHA256: 6d6077ed5f043b20c9a40907581ffd458772e11ca81b11ef44ed66adb5e4871b
 Section: 隐根插件
 Description: 从主屏幕查看和管理应用数据
 Author: iosdump
@@ -307,10 +307,10 @@ Maintainer: iosdump
 Installed-Size: 708
 Depends: mobilesubstrate, preferenceloader
 Filename: ./debs/com.iosdump.memorycontrol_0.8.8_iphoneos-arm64e.deb
-Size: 84648
-MD5sum: 9abb4db9a7f08a877035f1f5e96eaf48
-SHA1: 5665e3344a9aba6ca902f4bec3120497dfa593b3
-SHA256: 67d721396d9c032c2d8bb3f3e33f6f044d2863149765b5bd0b2d16f572293944
+Size: 84596
+MD5sum: 97708bcd78646e3eb73196cae3b972ec
+SHA1: 6a3f1f7adf2448f41a0926ccb0789504a055298e
+SHA256: 0c1138782ce4b15df439f7143cc4e05fad4e4a2d3e7635ee2beb710d4ebf79d6
 Section: 隐根插件
 Description: iOS 14-17 进程内存与优先级调整
 Author: iosdump
@@ -325,10 +325,10 @@ Pre-Depends: rootless-compat(>= 0.9)
 Depends: mobilesubstrate, firmware(>=14.0), preferenceloader
 Conflicts: com.jontelang.snapper, com.jontelang.snapper2.packix, xyz.cypwn.snapperfr33
 Filename: ./debs/Snapper 3-1.2.1.deb
-Size: 1074744
-MD5sum: 290f010085b36f85052fc5b1052be265
-SHA1: 4c78ba287e637e829cc0a21d4294e9db7eadf1e5
-SHA256: db06f7e65da07daa29dedb97633331ebdda68015a63558449dc1cbdc384702b9
+Size: 1074726
+MD5sum: efc997effeccc71f87957eb37a308974
+SHA1: 527856841cf2cdc8a587b646da491d42ba916176
+SHA256: fcd8949f4e447cdc86ca5b08bf1571853534163136f8684053a50b081da46555
 Section: 隐根插件
 Description: Pin screenshots on the screen.
 Author: Jonathan Winger-lang
@@ -341,10 +341,10 @@ Maintainer: SquidForce
 Installed-Size: 168
 Depends: mobilesubstrate (>= 0.9.5000)
 Filename: ./debs/ControlTab - 控制Safari标签页-1.0.deb
-Size: 6484
-MD5sum: b74ee198dd13f10857d82dbee878eb74
-SHA1: dcca2b5e961de6fdd43a51afe4ce584ecc2cb111
-SHA256: fcab92e300357e72dd990dd967f4679ba46b30ff8278219f929506e037b891c8
+Size: 6486
+MD5sum: e6008d72201377e663d401189bc66c82
+SHA1: 665d0576754042ce313df202407c1a3e080829b1
+SHA256: 79cf333410e95234cfc3e728d70aabcde820b1f9025007cd6ce14b7feb5a9195
 Section: 隐根插件
 Description: tweak for Safari
 Author: SquidForce
@@ -360,10 +360,10 @@ Pre-Depends: rootless-compat(>= 0.9)
 Depends: mobilesubstrate, preferenceloader, com.opa334.altlist, com.opa334.ccsupport, com.opa334.libsandy, firmware (>= 14.0)
 Conflicts: com.lclrc.hammerit
 Filename: ./debs/Hammer It 翻译-1.7.0.deb
-Size: 1130996
-MD5sum: 54abdb43101591df2bf7feae7ad8b6a6
-SHA1: d48ab855094119510ca89b531e058be20527cd78
-SHA256: b9f99f36fd823dcfcbdbd84dff0d92539946a8d17036f8cc9cb0c6575a5e7612
+Size: 1131018
+MD5sum: 9c202afda4439e10596a090f3f61ab5d
+SHA1: 909296567e7bb6e6ff5afdcab68f02bdb7e66799
+SHA256: 099c5edb5bff7d28d16573d366bf1d5d99755e905225ae4da7230d274f3d1c8b
 Section: 隐根插件
 Description: 控制您的文本或根据您的意愿进行翻译。
  * 支持Twitter Telegram Discord Sileo 等快捷翻译
@@ -380,10 +380,10 @@ Maintainer: lclrc(SquidForce)
 Installed-Size: 1512
 Depends: mobilesubstrate, preferenceloader, firmware (>= 14.0), com.opa334.altlist
 Filename: ./debs/SquidGesture-1.3.7.deb
-Size: 428922
-MD5sum: 8e9776c8a74702a684677f1955ec875b
-SHA1: d31c24381079b76370d4be50b6fa40c4fde1aee7
-SHA256: 2b0fd5b7062c1470c3d52de82deef5a14b34bcda2afb8d7ba47630f31fae6e75
+Size: 428914
+MD5sum: b8c129b632a7862bb3eb690b62d57ccb
+SHA1: 60e80f318f401cd3b406fc2a2787c3b43bd0e2c5
+SHA256: 9ac6dd2a38c29b4ee68924e254539fa319e4f7578eaaa7a0c198856c7985ce52
 Section: 隐根插件
 Description: Gestures
 Author: lclrc(SquidForce)
@@ -398,9 +398,9 @@ Installed-Size: 168
 Depends: mobilesubstrate (>= 0.9.5000), firmware (>= 14.0)
 Filename: ./debs/com.mikey820.pleasedontstopthemusic_2.3.1_iphoneos-arm64e.deb
 Size: 33622
-MD5sum: 7d138a96ad48b29cd46e4fad2d7d27fd
-SHA1: 52d476950c34cab7c5356f8abace077dd2350ce7
-SHA256: 742b5044fe4e76e1a91cb8ad4ddabc9a84d28ccb160a70cac873ad33676abe27
+MD5sum: 85539f85d7fa3dffc6dd86fdcb5ce848
+SHA1: 641a52d67aadfe63d82b49d4de100a164a6ba92b
+SHA256: 432de73f4ab230c12e65c7bafcd1e67c7819c86511a04b4c4049e8abb97e9dd3
 Section: 隐根插件
 Description: 实现两个音频App同时播放音乐
 Author: mikey820
@@ -415,10 +415,10 @@ Installed-Size: 2336
 Pre-Depends: rootless-compat(>= 0.9)
 Depends: firmware (>= 15.0), firmware (<< 17.0), mobilesubstrate
 Filename: ./debs/WeChatNotiAvatar 微信头像-1.3-1.deb
-Size: 282698
-MD5sum: 9c2cd8710a8a553d29ad50a04e6686c7
-SHA1: bc2d52d2e18ca38ea4f5aaac8311cb5743f2a8a7
-SHA256: 361301848a9e0b09442dff29482c699b042a68623e6de6b9433020a0b2272797
+Size: 282716
+MD5sum: e8217874f3fb46a9aa84c846b0f09cae
+SHA1: 7917853b3fb1a89b03bf2073a53107c76a8b83af
+SHA256: 5af64395edb212505d714e1ac3727290c739a926e79cbe4e3343821ecda309fd
 Section: 隐根插件
 Description: 让微信消息通知显示微信好友头像
 Author: Netskao
@@ -434,10 +434,10 @@ Installed-Size: 614
 Pre-Depends: rootless-compat(>= 0.9)
 Depends: firmware (>=14.0), mobilesubstrate, org.thebigboss.libcolorpicker
 Filename: ./debs/com.qiop1379.swipeextenderx_1.6.1~2_iphoneos-arm64e.deb
-Size: 101758
-MD5sum: f3d1b9d2197d2f080c2a2164a79d748d
-SHA1: 67dae3767e29ab9f5c21f3659e5814c9875b014f
-SHA256: cdb652980df1866f1b24418bb3b22d28eec811ba5e3fc4917f1a462c04e9f76e
+Size: 101728
+MD5sum: 32176df7e8afbcafb5fd4e6b87134fc2
+SHA1: 1e12806a69edb68bd319a5a70c6b0d19f61d7219
+SHA256: 2c6cca7db61b89fd0189110d059d298dc0f5436fdabe5dfc1cefed8ac9e3a14d
 Section: 隐根插件
 Description: Reinvent your keyboard with this full remake of the legendary SwipeExpander tweak, designed to work on modern iOS!
 Tag: compatible_min::ios14.0
@@ -453,10 +453,10 @@ Maintainer: 0xkuj
 Depends: firmware (>= 11)
 Conflicts: com.yourepo.0xkuj.storeswitcher2rootless
 Filename: ./debs/StoreSwitcher 账号切换-1.0.6.deb
-Size: 27494
-MD5sum: 0c86b28735bae9017615f051751e214e
-SHA1: 8f3e8b458e0018308aca50903763df2f6659841a
-SHA256: 3495a1595c6a6248f84f657170ed69b2a02bc6dc3286f4c70da8f4ad58785e0c
+Size: 27498
+MD5sum: 7590c83ef86f64f19fa051a57735d2f9
+SHA1: c903cce0841231ff0943071e3c0e94694e672bd3
+SHA256: 97a06f97e65c4bbb98c98984a5cd72c1c0dd8358658f3941850d912e04866d56
 Section: 隐根插件
 Description: 桌面长按 App Store 进行切换账号
  * Long press the App Store on the desktop to switch accounts
@@ -471,10 +471,10 @@ Architecture: iphoneos-arm64e
 Maintainer: ttt & daodao
 Depends: firmware (>= 15.0), com.opa334.ccsupport
 Filename: ./debs/CCBatt(RootHide)-1.4.deb
-Size: 28984
-MD5sum: fb05f346243535dbb2bb2651ed8e4c8d
-SHA1: aef2ed00c79aa98a733208671ea83c6514618d0d
-SHA256: da723934d760fc60821856c7208c270ea8315eef138928a6a375c0add3dc647e
+Size: 29004
+MD5sum: 3151e262a3d96eb092c17ce422444f08
+SHA1: 589f510184f1c732eafeff6c3d0ccac8cc436112
+SHA256: 0b907c0b1f635ba9bb396022f6802a19ef76b1a14eac8523d248f122d1d92ef0
 Section: 隐根插件
 Description: 控制中心电池状态模块，双行内容，可自定义设置；长按模块可展示更多电池信息。
 Author: ttt & daodao
@@ -488,10 +488,10 @@ Installed-Size: 184
 Pre-Depends: rootless-compat(>= 0.9)
 Depends: mobilesubstrate (>= 0.9.5000)
 Filename: ./debs/FilzaSwipeSelect-0.0.2.deb
-Size: 10142
-MD5sum: e5743792fc133442cca501d0267b8522
-SHA1: 788f034ece0db98083e86d2bca7e15729ccb4b97
-SHA256: f43d2273e1c0cfa05e1d5309b169109249bf76883eeb41ca6789490be36c95f6
+Size: 10138
+MD5sum: b63b741ecdf08d1ab020c89ad7114a88
+SHA1: f2c391b4cbf27cdbcc1d61c4e0d4cfaf8fb54c04
+SHA256: 98d6550d03f7b5adb7c5d3bf1962151f548ce2ba619b86c6c7b958be67c66a30
 Section: 隐根插件
 Description: Filza的滑动多选功能。
 Author: korboy <korboybeats@gmail.com>
@@ -504,10 +504,10 @@ Architecture: iphoneos-arm64e
 Maintainer: xybp888
 Depends: firmware (>= 16.0), preferenceloader, com.opa334.libsandy
 Filename: ./debs/电话助手iOS16-正式版(Roothide)-2.3.7.deb
-Size: 3210720
-MD5sum: 7c825988f2aef7085eab3167a5f84273
-SHA1: 08c11e1c12e5d78218bf67a5b3d7cf648579aafb
-SHA256: 92e56ea84bc2b312beb06e6d77f49950083ec60412635de761f3f8a19d2e42f3
+Size: 3210888
+MD5sum: e2f5d0f7e9a156cb9be995eb2801c102
+SHA1: 2d9107815a5b409064f66c60cca77c541c29d938
+SHA256: 5477a10db5d65acd956e19e03c8581708bfac45206fe4f55b036f3cf3e1120bd
 Section: 隐根插件
 Priority: optional
 Description: 电话助手授权版本,通话录音,通话记录合并,T9双卡选卡拨号键盘,短信双卡选卡,来去电归属地,黑名单,骚扰拦截,状态栏图标替换,时间格式修改,常用小功能等强大插件
@@ -522,10 +522,10 @@ Architecture: iphoneos-arm64e
 Maintainer: xybp888
 Depends: firmware (>= 16.0), mobilesubstrate
 Filename: ./debs/灵动通知iOS16-正式版(RootHide)-1.2-31.deb
-Size: 618544
-MD5sum: 63fd31e3e337fc56fd2aa36cabd058f1
-SHA1: e6e5428ca26ba077dd5ed184964414220d183be6
-SHA256: bd28dcb2de9369f95e273930eccbc9dac7ef861f47695e8b2cfa516afc6192c0
+Size: 618576
+MD5sum: cf5f5c2b29e0481d0813c656e30984c2
+SHA1: 58f66f4537af7cf9b641d80617978bf9e0359a0a
+SHA256: daf4ceb4b2996a1ea6303b8e622d7b1b68deaed1980c5607325d2117f8ecd0f0
 Section: 隐根插件
 Priority: optional
 Description: 完美的使用原生灵动岛展示系统通知等...
@@ -542,10 +542,10 @@ Installed-Size: 244
 Depends: mobilesubstrate (>= 0.9.5000) , firmware (>= 15.0)
 Conflicts: zp.limitcharging.rootless
 Filename: ./debs/Hello Charging-1.0.8.deb
-Size: 18770
-MD5sum: c51e700709c31ff5714f796a094f2200
-SHA1: 5cfa2046d1e92885611a112943966df7dc74bb3f
-SHA256: 35603de3474f4e29f4fc7a11dc04abb8cf17db1d4f1a08a8193d072c90189dfe
+Size: 18768
+MD5sum: 7e9ce5449f51227e90729718d4a057f5
+SHA1: 0c60045b918d20884091e55177941a9f5a6b60cb
+SHA256: 2f452866f6e7950c2ecf29c608383109957b05bf541e3b0262865d9074b7d134
 Section: 隐根插件
 Description: Hello Charging (限制充电)
  - Wi-Fi Not Disconnected on Lock Screen (Standby consumes 5% more power)
@@ -562,10 +562,10 @@ Installed-Size: 168
 Pre-Depends: rootless-compat(>= 0.9)
 Depends: mobilesubstrate (>= 0.9.5000)
 Filename: ./debs/jp.soh.freepip_0.0.3-1_iphoneos-arm64e.deb
-Size: 7892
-MD5sum: ddf865603ae3fbd1dc022549ec2044a3
-SHA1: 8597274b0ad354138f0290bf520aabea79129de9
-SHA256: 05bade59599483550442fe8ed83a3d31af08e36cdddede8d3f483f045655dd2f
+Size: 7894
+MD5sum: a3c7921339b98e09063ecd47a55bbd27
+SHA1: 7b26b628d7ab441e459d532f26e53ace16be8dc5
+SHA256: 8e59eaa511792f9efb217652812556e8b4042817ecc3ac4ee4dd8028d90759b2
 Section: 隐根插件
 Description: FreePIP is a tweak to un-snap and scale the view of Picture-in-Picture on iOS unlimitedly. Long Press PIP window to enable freepip mode. 解锁画中画的限制，可以放在任意位置和调整到任意大小。长按画中画窗口进入 FreePIP 模式进行调整。v0.0.3-1更新：改为默认是正常模式，略微美化FreePIP模式。
 Author: Soh Satoh
@@ -578,10 +578,10 @@ Installed-Size: 168
 Pre-Depends: rootless-compat(>= 0.9)
 Depends: mobilesubstrate
 Filename: ./debs/llld.keyboard_2.0_iphoneos-arm64e.deb
-Size: 5218
-MD5sum: e54c89af4c39cbfa5afb4ad240807967
-SHA1: 0ab2864f8cb2dc1c170fb8d6bb039cdbc618fc45
-SHA256: ba411dee06ff886402a3f4150162c5e1b2095a2caf6282060dca7552367201c2
+Size: 5220
+MD5sum: 1fcbb43570be6ac404d73ee88cd25ba5
+SHA1: 06003608118af67c155664a6de316879f792eb5d
+SHA256: b0e9c283a1aba7cc1388124d3862d93172e3b30c09cf31b09737513d91cc33ed
 Section: 隐根插件
 Priority: optional
 Description: 在很多时候输入，手机总默认自带键盘，且不能更换第三方，有了这插件，你想用啥键盘用啥键盘(第三方输入法都可以)
@@ -596,10 +596,10 @@ Installed-Size: 4900
 Pre-Depends: rootless-compat(>= 0.9)
 Depends: mobilesubstrate (>= 0.9.5000), com.opa334.altlist, preferenceloader
 Filename: ./debs/me.tomt000.stageduo_1.2_iphoneos-arm64e.deb
-Size: 3156780
-MD5sum: ad75fc7d72565a79a1ecd189cb5d52b8
-SHA1: 4debd3deed6b37ee301fb0ceb6cb71ed3b068ee9
-SHA256: 770680e78bd6ccc0b5a98a5ec58522ae5c4fecf06b7f86db48b1aa46d8b074e9
+Size: 3156760
+MD5sum: 74bed5c8cd979bccbc988ae630f2edbb
+SHA1: fccc05f587ed1c12241f2dab568e1bb754906930
+SHA256: 6962d3ac5cab2e50d521a5207b663df21a0df0b86971894b60ae5a80b7564965
 Section: 隐根插件
 Description: Stage Manager Reimagined for iPhone
 Author: tomt000
@@ -614,9 +614,9 @@ Pre-Depends: rootless-compat(>= 0.9)
 Depends: mobilesubstrate, firmware (>= 15.0)
 Filename: ./debs/禁止应用自动创建相册BlockAppsCreateAlbum-1.1.2.deb
 Size: 5610
-MD5sum: b4736efa730b234da036e843589fa37e
-SHA1: 6ecbe1e19bfd53803bf904852c62f982f7d041ae
-SHA256: 902af1dbb0ff866049eeae69abfecbbf532f0ecdc74c7687ac288be551474b37
+MD5sum: 3c658ad8f6b5ba8179cc2f967d6c3975
+SHA1: 96839c0493e658b3cecbb7a8bd90866f8c96255e
+SHA256: 362488c7b2470a07456e0b556b5a30f87b10b01a1ada964de9f23cd446b4f2ec
 Section: 隐根插件
 Description: 阻止应用创建自己的相册
 Author: Netskao
@@ -633,10 +633,10 @@ Conflicts: preferenceloader, preferenceloader.rootless, preferenceloader.rootles
 Replaces: preferenceloader, preferenceloader.rootless, preferenceloader.rootless.top
 Provides: preferenceloader (= 2.2.6)
 Filename: ./debs/PreferenceLoader (Top)-2.2.7.deb
-Size: 13200
-MD5sum: cfc2b2ff10b79595a495953b403f012c
-SHA1: 489c2f4361bde10871739920fba099962d091ecf
-SHA256: 1a83895dc0e887c5401b8fa046cfe9d44a16a037f1019dda429f8234043e09ec
+Size: 13198
+MD5sum: 5af6242c82bb416f6630ff25bfb88600
+SHA1: 4c38826476b3e4b4c48732534dc84debc1b1dbb6
+SHA256: 8176bb0c1bbb75446937ed68880dfdd4d4615667dbc91ba86856046da3f6412f
 Section: 隐根插件
 Description: load preferences in style
 Author: Dhinak G <dhinak@dhinak.net>
