@@ -1,4 +1,5 @@
 Package: cn.fkj233.watchfix
+Section: 隐根插件
 Version: 2.0.1
 Architecture: iphoneos-arm64e
 Maintainer: 577FKJ
@@ -15,6 +16,7 @@ Author: 577FKJ
 Name: WatchFix
 
 Package: cn.octoforce.copyvault
+Section: 隐根插件
 Version: 1.9.0
 Architecture: iphoneos-arm64e
 Maintainer: SquidForce, Backup
@@ -33,6 +35,7 @@ Name: CopyVault(激活码版)
 Sileodepiction: https://lclrc.github.io/repo/depictions/native/cn.octoforce.copyvault/depiction.json
 
 Package: cn.zqbb.disupdateapp
+Section: 隐根插件
 Version: 2.0.0-6
 Architecture: iphoneos-arm64e
 Maintainer: zqbb
@@ -51,6 +54,7 @@ Name: Hello App
 Sileodepiction: https://rootless.002599.xyz/web/cn.zqbb.disupdateapp
 
 Package: cn.zqbb.hellopay
+Section: 隐根插件
 Version: 1.0.2
 Architecture: iphoneos-arm64e
 Maintainer: zqbb
@@ -69,6 +73,7 @@ Name: Hello Pay
 Sileodepiction: https://rootless.002599.xyz/web/cn.zqbb.hellopay
 
 Package: cn.zqbb.holdcpu
+Section: 隐根插件
 Version: 2.3.5-3
 Architecture: iphoneos-arm64e
 Maintainer: zqbb
@@ -88,6 +93,7 @@ Name: Hello CPU
 Sileodepiction: https://rootless.002599.xyz/web/cn.zqbb.holdcpu
 
 Package: cn.zqbb.stopautolaunchapps
+Section: 隐根插件
 Version: 1.1
 Architecture: iphoneos-arm64e
 Maintainer: zqbb
@@ -108,6 +114,7 @@ Name: Hello 3Q
 Sileodepiction: https://rootless.002599.xyz/web/cn.zqbb.stopautolaunchapps
 
 Package: com.25mao.leftpan.rootless
+Section: 隐根插件
 Version: 1.0-6
 Architecture: iphoneos-arm64e
 Maintainer: admin@25mao.com
@@ -125,6 +132,7 @@ Author: Mao
 Name: 左滑返回(RootHide)
 
 Package: com.25mao.wcplugins.rootlesss
+Section: 隐根插件
 Version: 0.1-6
 Architecture: iphoneos-arm64e
 Maintainer: admin@25mao.com
@@ -153,6 +161,7 @@ Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/wcplugins/js.json
 Sponsor: admin@25mao.com
 
 Package: com.brend0n.nopassafterrespringsafe
+Section: 隐根插件
 Version: 0.0.3
 Architecture: iphoneos-arm64e
 Maintainer: Brend0n <brendonjkding@126.com>
@@ -170,6 +179,7 @@ Author: Brend0n <brendonjkding@126.com>
 Name: NoPassAfterRespring(RootHide)
 
 Package: com.dao.ccless
+Section: 隐根插件
 Version: 2.1.0.1
 Architecture: iphoneos-arm64e
 Maintainer: 妖刀
@@ -188,6 +198,7 @@ Name: CCLess++(RootHide)
 Sileodepiction: https://xiangfeidexiaohuo.github.io/sileodepiction/ccless/js.json
 
 Package: com.dao.filzacrack
+Section: 隐根插件
 Version: 1.1-9
 Architecture: iphoneos-arm64e
 Maintainer: Nets
@@ -205,6 +216,7 @@ Author: Netskao
 Name: Filza Crack(RootHide)
 
 Package: com.dao.kayoko
+Section: 隐根插件
 Version: 4.1.2
 Architecture: iphoneos-arm64e
 Maintainer: 82Flex
@@ -222,6 +234,7 @@ Name: Kayoko(RootHide)
 Sileodepiction: https://xiangfeidexiaohuo.github.io/sileodepiction/kayoko/js.json
 
 Package: com.doimty.promotion
+Section: 隐根插件
 Version: 1.0.8
 Architecture: iphoneos-arm64e
 Maintainer: doimty
@@ -239,6 +252,7 @@ Author: doimty
 Name: ProMotion 120Hz
 
 Package: com.exile90.icleanerpros
+Section: 隐根插件
 Version: 7.10.0
 Architecture: iphoneos-arm64e
 Maintainer: Ivano Bilenchi
@@ -260,6 +274,7 @@ Name: iCleaner Pro
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/iCleanerPro/js.json
 
 Package: com.hk.dynamicstage.cn.rl
+Section: 隐根插件
 Version: 1.1
 Architecture: iphoneos-arm64e
 Maintainer: 妖刀
@@ -275,6 +290,7 @@ Author: 妖刀
 Name: DynamicStage 简体中文包(RootHide)
 
 Package: com.iosdump.appdata
+Section: 隐根插件
 Version: 2.6.1
 Architecture: iphoneos-arm64e
 Maintainer: iosdump
@@ -293,6 +309,7 @@ Icon: file:///Library/PreferenceBundles/AppDataPrefs.bundle/AppData@3x.png
 Name: AppData
 
 Package: com.iosdump.memorycontrol
+Section: 隐根插件
 Version: 0.8.8
 Architecture: iphoneos-arm64e
 Maintainer: iosdump
@@ -309,6 +326,7 @@ Author: iosdump
 Name: MemoryControlX
 
 Package: com.jontelang.snapper3
+Section: 隐根插件
 Version: 1.2.1
 Architecture: iphoneos-arm64e
 Maintainer: Jonathan Winger-lang
@@ -327,6 +345,7 @@ Author: Jonathan Winger-lang
 Name: Snapper 3
 
 Package: com.lclrc.controltab
+Section: 隐根插件
 Version: 1.0
 Architecture: iphoneos-arm64e
 Maintainer: SquidForce
@@ -344,6 +363,7 @@ Name: ControlTab - 控制Safari标签页
 Sileodepiction: https://lclrc.github.io/repo/depictions/native/com.lclrc.controltab/depiction.json
 
 Package: com.lclrc.hammerits
+Section: 隐根插件
 Version: 1.7.0
 Architecture: iphoneos-arm64e
 Maintainer: lclrc(SquidForce)
@@ -366,6 +386,7 @@ Name: Hammer It 翻译
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/Hammerit/js.json
 
 Package: com.lclrc.squidgesture
+Section: 隐根插件
 Version: 1.3.7
 Architecture: iphoneos-arm64e
 Maintainer: lclrc(SquidForce)
@@ -383,6 +404,7 @@ Icon: file:///Library/PreferenceBundles/SquidGesturePrefs.bundle/SquidGesture_ic
 Name: SquidGesture
 
 Package: com.mikey820.pleasedontstopthemusic
+Section: 隐根插件
 Version: 2.3.1
 Architecture: iphoneos-arm64e
 Maintainer: mikey820 <mikey820@users.noreply.github.com>
@@ -400,6 +422,7 @@ Icon: icon.png
 Name: 请别暂停音乐(RootHide)
 
 Package: com.netskao.wechatnotiavatars
+Section: 隐根插件
 Version: 1.3-1
 Architecture: iphoneos-arm64e
 Maintainer: Nets
@@ -419,6 +442,7 @@ Name: WeChatNotiAvatar 微信头像
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/WeChatNotiAvatar/js.json
 
 Package: com.qiop1379.swipeextenderx
+Section: 隐根插件
 Version: 1.6.1~2
 Architecture: iphoneos-arm64e
 Maintainer: MiRO <tweaks_support@miro92.com>
@@ -439,6 +463,7 @@ Icon: https://img.chariz.cloud/icon/swipeextenderx/icon@3x.png
 Name: SwipeExtenderX
 
 Package: com.storeswitcher.appstore
+Section: 隐根插件
 Version: 1.0.6
 Architecture: iphoneos-arm64e
 Maintainer: 0xkuj
@@ -458,6 +483,7 @@ Name: StoreSwitcher 账号切换
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/StoreSwitcher/js.json
 
 Package: com.ttt.cccurrentmodule
+Section: 隐根插件
 Version: 1.4
 Architecture: iphoneos-arm64e
 Maintainer: ttt & daodao
@@ -473,6 +499,7 @@ Author: ttt & daodao
 Name: CCBatt(RootHide)
 
 Package: com.wkk.filzaswipeselect
+Section: 隐根插件
 Version: 0.0.2
 Architecture: iphoneos-arm64e
 Maintainer: korboy <korboybeats@gmail.com>
@@ -491,6 +518,7 @@ Icon: https://sini921.github.io/repo/sileodepiction/icon/filzaswipeselect.png
 Name: FilzaSwipeSelect
 
 Package: com.zqbb.limitcharging
+Section: 隐根插件
 Version: 1.0.8
 Architecture: iphoneos-arm64e
 Maintainer: zqbb
@@ -511,6 +539,7 @@ Name: Hello Charging
 Sileodepiction: https://rootless.002599.xyz/web/com.zqbb.limitcharging
 
 Package: jp.soh.freepip
+Section: 隐根插件
 Version: 0.0.3-1
 Architecture: iphoneos-arm64e
 Maintainer: Soh Satoh
@@ -528,6 +557,7 @@ Author: Soh Satoh
 Name: FreePIP
 
 Package: llld.keyboard
+Section: 隐根插件
 Version: 2.0
 Architecture: iphoneos-arm64e
 Installed-Size: 168
@@ -545,6 +575,7 @@ Author: 来了老弟
 Name: 强制使用第三方键盘(RootHide)
 
 Package: me.tomt000.stageduo
+Section: 隐根插件
 Version: 1.2
 Architecture: iphoneos-arm64e
 Maintainer: tomt000
@@ -562,6 +593,7 @@ Author: tomt000
 Name: Dynamic Stage(已汉化)
 
 Package: netskao.BlockAppsCreateAlbum
+Section: 隐根插件
 Version: 1.1.2
 Architecture: iphoneos-arm64e
 Maintainer: Nets
@@ -580,6 +612,7 @@ Icon: https://TrollStoreX.Github.io/sileodepiction/repo_pic/photo.png
 Name: 禁止应用自动创建相册BlockAppsCreateAlbum
 
 Package: preferenceloader.top
+Section: 隐根插件
 Version: 2.2.7
 Architecture: iphoneos-arm64e
 Maintainer: ProcursusTeam <support@procurs.us>
