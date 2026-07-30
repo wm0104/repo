@@ -7,15 +7,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>添加源</title>
+<title>选择越狱管理器</title>
 
 
 <style>
-
-html {
-    -webkit-text-size-adjust:100%;
-}
-
 
 * {
     box-sizing:border-box;
@@ -48,7 +43,7 @@ body {
 
 
 
-/* 卡片 */
+/* 主卡片 */
 
 .card {
 
@@ -57,20 +52,20 @@ body {
     padding:35px 30px;
 
 
-    background:rgba(255,255,255,0.75);
-
-
-    backdrop-filter:blur(20px);
+    background:#ffffff;
 
 
     border-radius:30px;
 
 
-    text-align:center;
+    border:2px solid rgba(0,0,0,0.18);
 
 
     box-shadow:
-    0 20px 50px rgba(0,0,0,0.15);
+    0 15px 40px rgba(0,0,0,0.15);
+
+
+    text-align:center;
 
 }
 
@@ -80,7 +75,7 @@ body {
 
 .title {
 
-    font-size:28px;
+    font-size:30px;
 
     font-weight:700;
 
@@ -101,13 +96,13 @@ body {
 
     width:300px;
 
-    height:55px;
+    height:58px;
 
 
-    line-height:55px;
+    line-height:58px;
 
 
-    margin:15px auto;
+    margin:16px auto;
 
 
     display:block;
@@ -119,16 +114,23 @@ body {
     background:#ffffff;
 
 
+    border:1.5px solid rgba(0,0,0,0.18);
+
+
     color:#007aff;
 
 
-    font-size:22px;
+    font-size:23px;
 
 
     font-weight:600;
 
 
     text-decoration:none;
+
+
+    box-shadow:
+    0 5px 12px rgba(0,0,0,0.08);
 
 
     transition:.2s;
@@ -149,11 +151,11 @@ body {
 
 .footer {
 
-    margin-top:25px;
+    margin-top:28px;
 
-    color:#666;
+    color:#777;
 
-    font-size:14px;
+    font-size:15px;
 
 }
 
@@ -161,7 +163,7 @@ body {
 
 /* 深色模式 */
 
-@media (prefers-color-scheme: dark) {
+@media(prefers-color-scheme:dark){
 
 
 body {
@@ -174,10 +176,15 @@ body {
 
 .card {
 
-    background:rgba(30,30,30,0.75);
+
+    background:#1c1c1e;
+
+
+    border:2px solid rgba(255,255,255,0.45);
+
 
     box-shadow:
-    0 20px 50px rgba(0,0,0,0.5);
+    0 15px 40px rgba(0,0,0,0.7);
 
 }
 
@@ -185,7 +192,7 @@ body {
 
 .title {
 
-    color:white;
+    color:#ffffff;
 
 }
 
@@ -193,9 +200,16 @@ body {
 
 .button {
 
-    background:#1c1c1e;
+
+    background:#2c2c2e;
+
+
+    border:
+    1.5px solid rgba(255,255,255,0.35);
+
 
     color:#0a84ff;
+
 
 }
 
@@ -203,7 +217,7 @@ body {
 
 .footer {
 
-    color:#999;
+    color:#aaaaaa;
 
 }
 
@@ -213,7 +227,6 @@ body {
 
 
 </style>
-
 
 </head>
 
@@ -226,7 +239,7 @@ body {
 
 
 <div class="title">
-选择添加源
+选择越狱管理器
 </div>
 
 
