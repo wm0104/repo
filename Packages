@@ -1,5 +1,28 @@
 Package: MisakaHelpers
 Version: 2.1-0
+Architecture: iphoneos-arm64
+Essential: no
+Maintainer: Misaka
+Depends: mobilesubstrate
+Conflicts: MisakaHelper
+Replaces: MisakaHelper
+Provides: MisakaHelper
+Filename: ./debs/MisakaHelper-2.1-0 (1).deb
+Size: 13127104
+MD5sum: 8df9c714d9919eefd75cb983b3234e7d
+SHA1: b724e0f62df5f40ec38bcbb5911796374762b9dd
+SHA256: f212341e862e63480218d3e17a06e262b2dc4502b5e963fa62d814c40a95efe1
+Section: 无根插件
+Priority: optional
+Description: 微信多功能插件
+ * END最终版本
+  * 作者已停止更新。
+Author: Misaka
+Icon: https://TrollStoreX.Github.io/sileodepiction/Wechat/misaka.png
+Name: MisakaHelper
+
+Package: MisakaHelpers
+Version: 2.1-0
 Architecture: iphoneos-arm64e
 Essential: no
 Maintainer: Misaka
