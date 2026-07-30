@@ -1,50 +1,3 @@
-Package: MisakaHelpers
-Version: 2.1-0
-Architecture: iphoneos-arm64
-Essential: no
-Maintainer: Misaka
-Depends: mobilesubstrate
-Conflicts: MisakaHelper
-Replaces: MisakaHelper
-Provides: MisakaHelper
-Filename: ./debs/MisakaHelper-2.1-0 (1).deb
-Size: 13127104
-MD5sum: 8df9c714d9919eefd75cb983b3234e7d
-SHA1: b724e0f62df5f40ec38bcbb5911796374762b9dd
-SHA256: f212341e862e63480218d3e17a06e262b2dc4502b5e963fa62d814c40a95efe1
-Section: 无根插件
-Priority: optional
-Description: 微信多功能插件
- * END最终版本
-  * 作者已停止更新。
-Author: Misaka
-Icon: https://TrollStoreX.Github.io/sileodepiction/Wechat/misaka.png
-Name: MisakaHelper
-
-Package: MisakaHelpers
-Version: 2.1-0
-Architecture: iphoneos-arm64e
-Essential: no
-Maintainer: Misaka
-Pre-Depends: rootless-compat(>= 0.9)
-Depends: mobilesubstrate
-Conflicts: MisakaHelper
-Replaces: MisakaHelper
-Provides: MisakaHelper
-Filename: ./debs/MisakaHelper-2.1-0.deb
-Size: 13149628
-MD5sum: 239f239a967bb1db4edccb5d9bfcf870
-SHA1: 842b872348c275888309e6d9f1b9006a45e9a9f7
-SHA256: d3f4a4b65448e1b4df269ff6c9cd6c26fa93e8ea8b9b3f4d3da70231614fda5f
-Section: 隐根插件
-Priority: optional
-Description: 微信多功能插件
- * END最终版本
-  * 作者已停止更新
-Author: Misaka
-Icon: https://TrollStoreX.Github.io/sileodepiction/Wechat/misaka.png
-Name: MisakaHelper
-
 Package: cn.octoforce.copyvault
 Version: 1.9.0
 Architecture: iphoneos-arm64e
@@ -57,7 +10,7 @@ Size: 1973582
 MD5sum: 4ae64d69c72b96118fd3bf10808f2cbe
 SHA1: d3201930864200bdc400ebdbbcd89945cc3cafa1
 SHA256: a626e273e230ac7238d6864707f95be985f4df626f27f661d6fb42acfa5d95d4
-Section: 隐根插件
+Section: RootHide
 Description: 激活码用户或需要激活码的用户安装这个，非激活码用户不要安装！！Do not install if you do not have an activation code!!! Your Copy Vault, Your Pasteboard
 Author: SquidForce, Backup
 Name: CopyVault(激活码版)
@@ -74,7 +27,7 @@ Size: 146116
 MD5sum: 94ac50089df62dfc018643df56f6423f
 SHA1: f02e76d7b809a161e000c1f07a074b2d85195950
 SHA256: 4972e216e7319dfdd655646ecfc00a384a6e2bd06b58ce448389706dfb7abfd4
-Section: 隐根插件
+Section: RootHide
 Description: 屏蔽App Store更新提示(Block App Store Updates)!
 Author: zqbb
 Icon: https://rootless.002599.xyz/web/icon/cn.zqbb.disupdateapp
@@ -92,7 +45,7 @@ Size: 113092
 MD5sum: 51bc2b7bfa13ffcba39ae3c283ffda66
 SHA1: 3dc5ecd5ea1e7f353fa7d842cd4e88ed4a9ac5c7
 SHA256: c464eea49cba538b3a2f01b817e7665afc168371c4565d213c662ea0058ea09c
-Section: 隐根插件
+Section: RootHide
 Description: 微信+支付宝 控制中心添加 扫一扫,付款码.
  - 默认支付宝扫一扫, 长按出菜单!
 Author: zqbb
@@ -111,7 +64,7 @@ Size: 1457398
 MD5sum: 3fbf66f7910c9d1fc9e71edecfe202d8
 SHA1: 331c0a82a16f226f16a666f261a64bb85223bf1b
 SHA256: 7952c8907a5cecb3d49f87f612265711616e88eb3754ec2f72c30f031a0b896e
-Section: 隐根插件
+Section: RootHide
 Description: (解除温控) (锁定低电量CPU频率)
 Author: zqbb
 Icon: https://rootless.002599.xyz/web/icon/cn.zqbb.holdcpu
@@ -130,7 +83,7 @@ Size: 30342
 MD5sum: 3eee0381d1a2b8cea958c993d9dab34d
 SHA1: 0c8d6d9bbb8aa4d03638c1428eb8fb9cc38e2fee
 SHA256: cc6c01e744694c77fb3090ad66a4c3377710a5f063ba7d1999d37502af45709c
-Section: 隐根插件
+Section: RootHide
 Description: 禁用ios热启动神经网络引擎,别在后台热加载app咯!
  - 优点:节约内存,少杀后台.
  - 玄学:减少重启概率
@@ -149,7 +102,7 @@ Size: 49746
 MD5sum: 74e69afe1a7455edd2f0afebf32852fc
 SHA1: a878fa252eaa1d5eded865a711180a9d9ed4de8d
 SHA256: 789bbde737003a64b5e4f9f184c2de40c10bf1806bd0f81fc9d0301cceaaef6b
-Section: 隐根插件
+Section: RootHide
 Priority: optional
 Description: 左滑返回上一页面
 Author: Mao
@@ -169,7 +122,7 @@ Size: 15850
 MD5sum: 829b89ed47840002a34e65b938868921
 SHA1: 496f7277f835d2786c982b5d68cd55bab26ffe97
 SHA256: 6fee3835cc42ae0ec89ae8b65e6c7f92fa43d0f1891ce8759281354f90dd91d4
-Section: 隐根插件
+Section: RootHide
 Priority: optional
 Description: 微信插件管理
  * 收纳第三方微信插件
@@ -195,7 +148,7 @@ Size: 4582
 MD5sum: a2c9e64082fd9a5feb55225f3adfc177
 SHA1: 64f081ca2ca454ab06ec24e387071ef6ff59df22
 SHA256: bb2e4fc0cfeb7963febe908c622f2cad0c738f3ef51d12ed43f3f7ccb4888855
-Section: 隐根插件
+Section: RootHide
 Description: Disables passcode after a respring. This version does NOT modify system file. It's safe to use. 在注销前是解锁状态的情况下，注销后自动跳过人脸或指纹识别到桌面。
 Author: Brend0n <brendonjkding@126.com>
 Name: NoPassAfterRespring(RootHide)
@@ -212,7 +165,7 @@ Size: 520290
 MD5sum: a636ce1fc23961d40c8a144fe07562a7
 SHA1: b3ee92a439abe1b915fa4bacb82c2ea1fb42a11b
 SHA256: 363e94c28f4f6cb0b0c8df8ea1d7c6463cb94da7dfb9cded73f30f48adbeb2fa
-Section: 隐根插件
+Section: RootHide
 Description: 超级控制中心模块集合！
 Author: 妖刀
 Name: CCLess++(RootHide)
@@ -230,7 +183,7 @@ Size: 32850
 MD5sum: de3663c65b110235bff491ce162e19d5
 SHA1: 82487eac6521f38181909f1113eec19522fe9130
 SHA256: 49df6015b02907bc2ee23491a39f30acad2c3b3c32b709b79b3fe239e5eb60df
-Section: 隐根插件
+Section: RootHide
 Description: Filza解锁全部功能，请在官方源安装Filza。Netskao新更的版本，上架备份；转换支持 roothide。
 Author: Netskao
 Name: Filza Crack(RootHide)
@@ -246,7 +199,7 @@ Size: 415716
 MD5sum: e1dc17f3e3db3265f754100b1799ee56
 SHA1: 24cee470bcad735bb65fd62d53bb6a551ac3a6ae
 SHA256: c08f646794e5b67ec3a66c56ea0fd1f5137bdd29c850a548d0cfbe1e8c8ae948
-Section: 隐根插件
+Section: RootHide
 Description: 乌龙工作室版Kayoko，更多优化增强，添加支持iOS16/17。
 Author: 82Flex
 Name: Kayoko(RootHide)
@@ -263,7 +216,7 @@ Size: 29548
 MD5sum: f6a8aa1df6057d133c09e14f4bf64e1b
 SHA1: c667eb1b20dcfa511b7fed8a0fc20fcc8f9d036d
 SHA256: 302b363e3d9fa6a16cc7073bacaa5d1b7305a2ad8ced7e324ce5681fd50f45cd
-Section: 隐根插件
+Section: RootHide
 Description: Force global 120Hz ProMotion, bypass the 80Hz system cap. iPhone 13 Pro and above only.
 Tag: supports::roothide
 Author: doimty
@@ -281,7 +234,7 @@ Size: 1090042
 MD5sum: 5a011ffd0262d8b77924ce3c1095f342
 SHA1: 77ba0c06f3044eb8231fdcd2bb2337b0c5cd0795
 SHA256: 0aaf6f539d6d6110fbd6c670195d1fb7421242f7569dc4679bc5d3335c24db14
-Section: 隐根插件
+Section: RootHide
 Description: iCleaner Pro
  * 垃圾清理工具，启动项管理等
  * The first real iOS system cleanup and management utility
@@ -300,7 +253,7 @@ Size: 6552
 MD5sum: e02361cf746523a4894b1abf56e52ae0
 SHA1: 45f505865f90886a38a8c4aa783b643d949efbb8
 SHA256: f6d09ee48cbd6f9a399ec60dce7477e4045330f7a5fa4763893e6b25479a0479
-Section: 隐根插件
+Section: RootHide
 Description: DynamicStage 简体中文包(RootHide)。
 Author: 妖刀
 Name: DynamicStage 简体中文包(RootHide)
@@ -317,7 +270,7 @@ Size: 1674860
 MD5sum: bb16c0fa5920829a06fb01cd8f8289fd
 SHA1: 75d3c3a3d7f53b2d505138dd4932ef0cf688aa58
 SHA256: 6d6077ed5f043b20c9a40907581ffd458772e11ca81b11ef44ed66adb5e4871b
-Section: 隐根插件
+Section: RootHide
 Description: 从主屏幕查看和管理应用数据
 Author: iosdump
 Icon: file:///Library/PreferenceBundles/AppDataPrefs.bundle/AppData@3x.png
@@ -334,7 +287,7 @@ Size: 84596
 MD5sum: 97708bcd78646e3eb73196cae3b972ec
 SHA1: 6a3f1f7adf2448f41a0926ccb0789504a055298e
 SHA256: 0c1138782ce4b15df439f7143cc4e05fad4e4a2d3e7635ee2beb710d4ebf79d6
-Section: 隐根插件
+Section: RootHide
 Description: iOS 14-17 进程内存与优先级调整
 Author: iosdump
 Name: MemoryControlX
@@ -352,7 +305,7 @@ Size: 1074726
 MD5sum: efc997effeccc71f87957eb37a308974
 SHA1: 527856841cf2cdc8a587b646da491d42ba916176
 SHA256: fcd8949f4e447cdc86ca5b08bf1571853534163136f8684053a50b081da46555
-Section: 隐根插件
+Section: RootHide
 Description: Pin screenshots on the screen.
 Author: Jonathan Winger-lang
 Name: Snapper 3
@@ -368,7 +321,7 @@ Size: 6486
 MD5sum: e6008d72201377e663d401189bc66c82
 SHA1: 665d0576754042ce313df202407c1a3e080829b1
 SHA256: 79cf333410e95234cfc3e728d70aabcde820b1f9025007cd6ce14b7feb5a9195
-Section: 隐根插件
+Section: RootHide
 Description: tweak for Safari
 Author: SquidForce
 Name: ControlTab - 控制Safari标签页
@@ -387,7 +340,7 @@ Size: 1131018
 MD5sum: 9c202afda4439e10596a090f3f61ab5d
 SHA1: 909296567e7bb6e6ff5afdcab68f02bdb7e66799
 SHA256: 099c5edb5bff7d28d16573d366bf1d5d99755e905225ae4da7230d274f3d1c8b
-Section: 隐根插件
+Section: RootHide
 Description: 控制您的文本或根据您的意愿进行翻译。
  * 支持Twitter Telegram Discord Sileo 等快捷翻译
  * Control your text or translate as you wish.
@@ -407,7 +360,7 @@ Size: 428914
 MD5sum: b8c129b632a7862bb3eb690b62d57ccb
 SHA1: 60e80f318f401cd3b406fc2a2787c3b43bd0e2c5
 SHA256: 9ac6dd2a38c29b4ee68924e254539fa319e4f7578eaaa7a0c198856c7985ce52
-Section: 隐根插件
+Section: RootHide
 Description: Gestures
 Author: lclrc(SquidForce)
 Icon: file:///Library/PreferenceBundles/SquidGesturePrefs.bundle/SquidGesture_icon@3x.png
@@ -424,7 +377,7 @@ Size: 33622
 MD5sum: 85539f85d7fa3dffc6dd86fdcb5ce848
 SHA1: 641a52d67aadfe63d82b49d4de100a164a6ba92b
 SHA256: 432de73f4ab230c12e65c7bafcd1e67c7819c86511a04b4c4049e8abb97e9dd3
-Section: 隐根插件
+Section: RootHide
 Description: 实现两个音频App同时播放音乐
 Author: mikey820
 Icon: icon.png
@@ -442,7 +395,7 @@ Size: 282716
 MD5sum: e8217874f3fb46a9aa84c846b0f09cae
 SHA1: 7917853b3fb1a89b03bf2073a53107c76a8b83af
 SHA256: 5af64395edb212505d714e1ac3727290c739a926e79cbe4e3343821ecda309fd
-Section: 隐根插件
+Section: RootHide
 Description: 让微信消息通知显示微信好友头像
 Author: Netskao
 Icon: https://TrollStoreX.Github.io/sileodepiction/WeChatNotiAvatar/icon.png
@@ -461,7 +414,7 @@ Size: 101728
 MD5sum: 32176df7e8afbcafb5fd4e6b87134fc2
 SHA1: 1e12806a69edb68bd319a5a70c6b0d19f61d7219
 SHA256: 2c6cca7db61b89fd0189110d059d298dc0f5436fdabe5dfc1cefed8ac9e3a14d
-Section: 隐根插件
+Section: RootHide
 Description: Reinvent your keyboard with this full remake of the legendary SwipeExpander tweak, designed to work on modern iOS!
 Tag: compatible_min::ios14.0
 Author: MiRO <tweaks_support@miro92.com>
@@ -480,7 +433,7 @@ Size: 27498
 MD5sum: 7590c83ef86f64f19fa051a57735d2f9
 SHA1: c903cce0841231ff0943071e3c0e94694e672bd3
 SHA256: 97a06f97e65c4bbb98c98984a5cd72c1c0dd8358658f3941850d912e04866d56
-Section: 隐根插件
+Section: RootHide
 Description: 桌面长按 App Store 进行切换账号
  * Long press the App Store on the desktop to switch accounts
 Author: subdiox & iosdump
@@ -498,7 +451,7 @@ Size: 29004
 MD5sum: 3151e262a3d96eb092c17ce422444f08
 SHA1: 589f510184f1c732eafeff6c3d0ccac8cc436112
 SHA256: 0b907c0b1f635ba9bb396022f6802a19ef76b1a14eac8523d248f122d1d92ef0
-Section: 隐根插件
+Section: RootHide
 Description: 控制中心电池状态模块，双行内容，可自定义设置；长按模块可展示更多电池信息。
 Author: ttt & daodao
 Name: CCBatt(RootHide)
@@ -515,7 +468,7 @@ Size: 10138
 MD5sum: b63b741ecdf08d1ab020c89ad7114a88
 SHA1: f2c391b4cbf27cdbcc1d61c4e0d4cfaf8fb54c04
 SHA256: 98d6550d03f7b5adb7c5d3bf1962151f548ce2ba619b86c6c7b958be67c66a30
-Section: 隐根插件
+Section: RootHide
 Description: Filza的滑动多选功能。
 Author: korboy <korboybeats@gmail.com>
 Icon: https://sini921.github.io/repo/sileodepiction/icon/filzaswipeselect.png
@@ -531,7 +484,7 @@ Size: 3210888
 MD5sum: e2f5d0f7e9a156cb9be995eb2801c102
 SHA1: 2d9107815a5b409064f66c60cca77c541c29d938
 SHA256: 5477a10db5d65acd956e19e03c8581708bfac45206fe4f55b036f3cf3e1120bd
-Section: 隐根插件
+Section: RootHide
 Priority: optional
 Description: 电话助手授权版本,通话录音,通话记录合并,T9双卡选卡拨号键盘,短信双卡选卡,来去电归属地,黑名单,骚扰拦截,状态栏图标替换,时间格式修改,常用小功能等强大插件
 Author: xybp888
@@ -549,7 +502,7 @@ Size: 618576
 MD5sum: cf5f5c2b29e0481d0813c656e30984c2
 SHA1: 58f66f4537af7cf9b641d80617978bf9e0359a0a
 SHA256: daf4ceb4b2996a1ea6303b8e622d7b1b68deaed1980c5607325d2117f8ecd0f0
-Section: 隐根插件
+Section: RootHide
 Priority: optional
 Description: 完美的使用原生灵动岛展示系统通知等...
 Author: xybp888
@@ -569,7 +522,7 @@ Size: 18768
 MD5sum: 7e9ce5449f51227e90729718d4a057f5
 SHA1: 0c60045b918d20884091e55177941a9f5a6b60cb
 SHA256: 2f452866f6e7950c2ecf29c608383109957b05bf541e3b0262865d9074b7d134
-Section: 隐根插件
+Section: RootHide
 Description: Hello Charging (限制充电)
  - Wi-Fi Not Disconnected on Lock Screen (Standby consumes 5% more power)
  - 锁屏不断Wi-Fi(待机多费电5%)
@@ -589,7 +542,7 @@ Size: 7894
 MD5sum: a3c7921339b98e09063ecd47a55bbd27
 SHA1: 7b26b628d7ab441e459d532f26e53ace16be8dc5
 SHA256: 8e59eaa511792f9efb217652812556e8b4042817ecc3ac4ee4dd8028d90759b2
-Section: 隐根插件
+Section: RootHide
 Description: FreePIP is a tweak to un-snap and scale the view of Picture-in-Picture on iOS unlimitedly. Long Press PIP window to enable freepip mode. 解锁画中画的限制，可以放在任意位置和调整到任意大小。长按画中画窗口进入 FreePIP 模式进行调整。v0.0.3-1更新：改为默认是正常模式，略微美化FreePIP模式。
 Author: Soh Satoh
 Name: FreePIP
@@ -605,7 +558,7 @@ Size: 5220
 MD5sum: 1fcbb43570be6ac404d73ee88cd25ba5
 SHA1: 06003608118af67c155664a6de316879f792eb5d
 SHA256: b0e9c283a1aba7cc1388124d3862d93172e3b30c09cf31b09737513d91cc33ed
-Section: 隐根插件
+Section: RootHide
 Priority: optional
 Description: 在很多时候输入，手机总默认自带键盘，且不能更换第三方，有了这插件，你想用啥键盘用啥键盘(第三方输入法都可以)
 Author: 来了老弟
@@ -623,7 +576,7 @@ Size: 3156760
 MD5sum: 74bed5c8cd979bccbc988ae630f2edbb
 SHA1: fccc05f587ed1c12241f2dab568e1bb754906930
 SHA256: 6962d3ac5cab2e50d521a5207b663df21a0df0b86971894b60ae5a80b7564965
-Section: 隐根插件
+Section: RootHide
 Description: Stage Manager Reimagined for iPhone
 Author: tomt000
 Name: Dynamic Stage(已汉化)
@@ -640,7 +593,7 @@ Size: 5610
 MD5sum: 3c658ad8f6b5ba8179cc2f967d6c3975
 SHA1: 96839c0493e658b3cecbb7a8bd90866f8c96255e
 SHA256: 362488c7b2470a07456e0b556b5a30f87b10b01a1ada964de9f23cd446b4f2ec
-Section: 隐根插件
+Section: RootHide
 Description: 阻止应用创建自己的相册
 Author: Netskao
 Icon: https://TrollStoreX.Github.io/sileodepiction/repo_pic/photo.png
@@ -660,7 +613,7 @@ Size: 13198
 MD5sum: 5af6242c82bb416f6630ff25bfb88600
 SHA1: 4c38826476b3e4b4c48732534dc84debc1b1dbb6
 SHA256: 8176bb0c1bbb75446937ed68880dfdd4d4615667dbc91ba86856046da3f6412f
-Section: 隐根插件
+Section: RootHide
 Description: load preferences in style
 Author: Dhinak G <dhinak@dhinak.net>
 Name: PreferenceLoader (Top)
