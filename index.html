@@ -4,47 +4,153 @@
 <meta charset="UTF-8">
 <title>添加源</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    background: linear-gradient(180deg,#40b86c,#2196f3);
-    text-align:center;
-    font-family:sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(
+        135deg,
+        #43cea2,
+        #185a9d
+    );
+
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
 }
 
-.box {
-    margin-top:300px;
-    background:#ffffff55;
-    padding:40px;
-    border-radius:20px;
+
+.card {
+
+    width: 85%;
+    max-width: 400px;
+
+    padding: 35px 25px;
+
+    text-align: center;
+
+    background: rgba(255,255,255,0.25);
+
+    backdrop-filter: blur(20px);
+
+    border-radius: 30px;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,0.2);
+
 }
 
-button {
-    width:80%;
-    padding:18px;
-    margin:15px;
-    border-radius:10px;
-    border:0;
+
+.title {
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    color:white;
+
+    margin-bottom:30px;
+
+}
+
+
+.button {
+
+    display:block;
+
+    width:100%;
+
+    margin:18px auto;
+
+    padding:16px;
+
+    border-radius:18px;
+
+    background:
+    rgba(255,255,255,0.85);
+
+    color:#2980ff;
+
     font-size:20px;
+
+    font-weight:600;
+
+    text-decoration:none;
+
+    transition:.2s;
+
 }
+
+
+.button:active {
+
+    transform:scale(0.95);
+
+}
+
+
+.footer {
+
+    margin-top:20px;
+
+    color:white;
+
+    font-size:14px;
+
+    opacity:.8;
+
+}
+
 </style>
 
 </head>
 
+
 <body>
 
-<div class="box">
 
-<h1>选择添加源</h1>
+<div class="card">
 
-<a href="sileo://source/https://wm0104.github.io/repo/">
-<button>Sileo</button>
+
+<div class="title">
+选择添加源
+</div>
+
+
+<a class="button"
+href="sileo://source/https://wm0104.github.io/repo/">
+Sileo
 </a>
 
-<a href="saily://source/https://wm0104.github.io/repo/">
-<button>Saily</button>
+
+<a class="button"
+href="saily://source/https://wm0104.github.io/repo/">
+Saily
 </a>
+
+
+<a class="button"
+href="zbra://sources/add/https://wm0104.github.io/repo/">
+Zebra
+</a>
+
+
+<div class="footer">
+wm0104 repo
+</div>
+
 
 </div>
+
 
 </body>
 </html>
