@@ -6,9 +6,13 @@ on:
     types:
       - completed
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
@@ -31,9 +35,50 @@ jobs:
           dpkg-scanpackages -m ./debs /dev/null > Packages
 
 
-          echo "Change Section to 隐根插件..."
+          echo "Classify by Architecture..."
 
-          sed -i 's/^Section:.*$/Section: 隐根插件/g' Packages
+          python3 <<'EOF'
+          from pathlib import Path
+
+          path = Path("Packages")
+          content = path.read_text()
+
+          packages = content.split("\n\n")
+
+          output = []
+
+          for package in packages:
+              if "Architecture: iphoneos-arm64e" in package:
+                  lines = package.splitlines()
+
+                  lines = [
+                      "Section: 隐根插件"
+                      if line.startswith("Section:")
+                      else line
+                      for line in lines
+                  ]
+
+                  package = "\n".join(lines)
+
+
+              elif "Architecture: iphoneos-arm64" in package:
+                  lines = package.splitlines()
+
+                  lines = [
+                      "Section: 无根插件"
+                      if line.startswith("Section:")
+                      else line
+                      for line in lines
+                  ]
+
+                  package = "\n".join(lines)
+
+
+              output.append(package)
+
+
+          path.write_text("\n\n".join(output))
+          EOF
 
 
           echo "Compress Packages..."
