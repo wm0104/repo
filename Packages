@@ -471,20 +471,18 @@ Maintainer: Netskao
 Installed-Size: 3772
 Depends: firmware (>= 15.0), mobilesubstrate, preferenceloader
 Conflicts: com.netskao.appdata, byg.iosios.net.appdata-rootless, com.dao.appdata, com.netskao.appdatas
-Filename: ./debs/arm64/AppData iosdump-2.6.1.deb
-Size: 1611968
-MD5sum: 267a3371b6c5812397a5547a2251d49d
-SHA1: 15750989c53adb09c4de57b0715218608bf08ca3
-SHA256: 0173d51b875a39f5df4966c18f78c0478b0ff52d1fce8aafedbc29d4abe9da28
+Filename: ./debs/arm64/com.iosdump.appdatas_2.6.1_iphoneos-arm64.deb
+Size: 1612708
+MD5sum: a9463200797603a8fe6aad628d96c94b
+SHA1: ff841cfc7c792720650a1b79e04d05594a3773f8
+SHA256: 83712da97109edc0f4ff014aa6d3fcf0a7a1d3ea52efacfba858d542584e022d
 Section: 无根插件
 Description: 桌面图标增强插件
  * 由 iosdump 汉化修改
  * 桌面图标向上滑动或长按激活
  * View & Manage Applications Data from your Home Screen
 Author: Fouad Raheb & iosdump
-Icon: https://TrollStoreX.Github.io/sileodepiction/Appdata/icon.png
 Name: AppData iosdump
-Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/Appdata/iosdump.json
 
 Package: com.iosdump.memorycontrol
 Version: 1.3
