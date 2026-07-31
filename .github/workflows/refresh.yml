@@ -30,35 +30,41 @@ jobs:
         if: success()
         run: |
           rm -rf ./Packages*
-          rm -rf ./debs_temp
-          mkdir -p ./debs_temp
 
-          for deb in ./debs/*.deb; do
+          dpkg-scanpackages -m ./debs /dev/null > ./Packages
 
-            arch=$(dpkg-deb -f "$deb" Architecture 2>/dev/null)
+          python3 <<'PY'
+          import re
 
-            if [ "$arch" = "iphoneos-arm64e" ]; then
-              section="RootHide"
+          with open("Packages", "r") as f:
+              data = f.read()
 
-            elif [ "$arch" = "iphoneos-arm64" ]; then
-              section="Rootless"
+          blocks = data.split("\n\n")
 
-            else
-              continue
-            fi
+          new_blocks = []
 
-            rm -rf ./control_temp
-            mkdir -p ./control_temp
+          for block in blocks:
+              if "Architecture: iphoneos-arm64e" in block:
+                  block = re.sub(
+                      r"^Section:.*$",
+                      "Section: RootHide",
+                      block,
+                      flags=re.MULTILINE
+                  )
 
-            dpkg-deb -R "$deb" ./control_temp
+              elif "Architecture: iphoneos-arm64" in block:
+                  block = re.sub(
+                      r"^Section:.*$",
+                      "Section: Rootless",
+                      block,
+                      flags=re.MULTILINE
+                  )
 
-            sed -i "s/^Section:.*/Section: $section/" ./control_temp/DEBIAN/control
+              new_blocks.append(block)
 
-            dpkg-deb -b ./control_temp "./debs_temp/$(basename "$deb")"
-
-          done
-
-          dpkg-scanpackages -m ./debs_temp /dev/null > ./Packages
+          with open("Packages", "w") as f:
+              f.write("\n\n".join(new_blocks))
+          PY
 
           bzip2 -v -k -9 Packages
           xz -v -k -9 --extreme Packages
@@ -69,6 +75,7 @@ jobs:
         run: |
           git config --global user.email 'action@github.com'
           git config --global user.name 'GitHub Action'
+
           git add .
 
           if ! git diff --staged --exit-code 1>>/dev/null; then
