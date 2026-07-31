@@ -1,0 +1,40 @@
+Package: MisakaHelpers
+Version: 2.1-0
+Architecture: iphoneos-arm64e
+Essential: no
+Maintainer: Misaka
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate
+Conflicts: MisakaHelper
+Replaces: MisakaHelper
+Provides: MisakaHelper
+Filename: ./debs/arm64e/MisakaHelper-2.1-0 (1).deb
+Size: 13149628
+MD5sum: 239f239a967bb1db4edccb5d9bfcf870
+SHA1: 842b872348c275888309e6d9f1b9006a45e9a9f7
+SHA256: d3f4a4b65448e1b4df269ff6c9cd6c26fa93e8ea8b9b3f4d3da70231614fda5f
+Section: 微信插件
+Priority: optional
+Description: 微信多功能插件
+ * END最终版本
+  * 作者已停止更新
+Author: Misaka
+Icon: https://TrollStoreX.Github.io/sileodepiction/Wechat/misaka.png
+Name: MisakaHelper
+
+Package: com.25mao.leftpan.rootless
+Version: 1.0-6
+Architecture: iphoneos-arm64
+Maintainer: admin@25mao.com
+Depends: mobilesubstrate, preferenceloader, com.opa334.altlist (>=1.0.4)
+Filename: ./debs/arm64/左滑返回-Rootless-1.0-6.deb
+Size: 44208
+MD5sum: ce18ea8996972d73fbf89f054959cf28
+SHA1: 3314b425db3d4af58b3debe59402b912b21c2ebb
+SHA256: 48e8bfd9b476a44c0e21878a100c299727a97a60077c79dbcb35683fba3cb34f
+Section: Rootless
+Priority: optional
+Description: 左滑返回上一页面
+Author: Mao
+Name: 左滑返回-Rootless
+
