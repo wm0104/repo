@@ -3,148 +3,89 @@ name: "refresh"
 on:
   workflow_run:
     workflows: ["pages-build-deployment"]
-    types:
+    types: 
       - completed
 
+permissions:
+  contents: write
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
-    permissions:
-      contents: write
-
-
     steps:
-
-
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.event.workflow_run.repository.full_name }}
-          ref: ${{ github.event.workflow_run.head_branch }}
-          token: ${{ secrets.GITHUB_TOKEN }}
           submodules: recursive
-          fetch-depth: 0
-
-
 
       - name: install depend
         if: success()
         run: |
-          sudo apt update 2>/dev/null 1>/dev/null
+          sudo apt update 2>>/dev/null 1>>/dev/null
           sudo apt install dpkg-dev bzip2 xz-utils zstd -y
-
-
-
-      - name: Check deb Section
-        if: success()
-        run: |
-
-          for deb in ./debs/*.deb
-          do
-
-            if [ -f "$deb" ]; then
-
-              echo "===================="
-
-              echo "$deb"
-
-              dpkg-deb -f "$deb" Package
-
-              dpkg-deb -f "$deb" Section
-
-              dpkg-deb -f "$deb" Architecture
-
-              echo "===================="
-
-            fi
-
-          done
-
-
-
 
       - name: Refresh Packages
         if: success()
         run: |
-
           rm -rf ./Packages*
+          rm -rf ./debs_temp
+          mkdir -p ./debs_temp
 
-          dpkg-scanpackages -m ./debs /dev/null > ./Packages
+          for deb in ./debs/*.deb; do
 
+            arch=$(dpkg-deb -f "$deb" Architecture 2>/dev/null)
+
+            if [ "$arch" = "iphoneos-arm64e" ]; then
+              section="RootHide"
+
+            elif [ "$arch" = "iphoneos-arm64" ]; then
+              section="Rootless"
+
+            else
+              continue
+            fi
+
+            rm -rf ./control_temp
+            mkdir -p ./control_temp
+
+            dpkg-deb -R "$deb" ./control_temp
+
+            sed -i "s/^Section:.*/Section: $section/" ./control_temp/DEBIAN/control
+
+            dpkg-deb -b ./control_temp "./debs_temp/$(basename "$deb")"
+
+          done
+
+          dpkg-scanpackages -m ./debs_temp /dev/null > ./Packages
 
           bzip2 -v -k -9 Packages
-
           xz -v -k -9 --extreme Packages
-
           zstd --ultra -22 -k Packages -o Packages.zst
-
-
-
-      - name: Debug Packages
-        if: success()
-        run: |
-
-          echo "===== Packages ====="
-
-          head -80 Packages
-
-
-
 
       - name: save change if local change
         if: success()
         run: |
-
           git config --global user.email 'action@github.com'
-
           git config --global user.name 'GitHub Action'
-
-
           git add .
 
-
-          if ! git diff --staged --exit-code 1>/dev/null; then
-
+          if ! git diff --staged --exit-code 1>>/dev/null; then
             git commit -m 'Refresh Packages'
-
-            git push origin HEAD:${{ github.event.workflow_run.head_branch }}
-
-          else
-
-            echo "No Packages changes"
-
+            git push
           fi
-
-
-
-
+          
       - name: download remove_all_actions
         if: success()
         run: |
-
-          sudo curl -L \
-          -o '/usr/bin/remove_all_actions' \
-          'https://raw.githubusercontent.com/invalidunit/action/main/remove_all_actions'
-
-
-          sudo chmod 0755 /usr/bin/remove_all_actions
-
-
-
+          sudo curl -L -o '/usr/bin/remove_all_actions' 'https://raw.githubusercontent.com/invalidunit/action/main/remove_all_actions'
+          sudo chmod -R 0755 '/usr/bin/remove_all_actions'
 
       - name: remove all old actions
         if: success()
         env:
-
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
           GH_REPO: ${{ github.repository }}
-
         run: |
-
           remove_all_actions
