@@ -13,7 +13,7 @@ Size: 13149628
 MD5sum: 239f239a967bb1db4edccb5d9bfcf870
 SHA1: 842b872348c275888309e6d9f1b9006a45e9a9f7
 SHA256: d3f4a4b65448e1b4df269ff6c9cd6c26fa93e8ea8b9b3f4d3da70231614fda5f
-Section: 微信插件
+Section: RootHide
 Priority: optional
 Description: 微信多功能插件
  * END最终版本
