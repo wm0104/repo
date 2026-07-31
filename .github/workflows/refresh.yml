@@ -20,38 +20,42 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: main
-          fetch-depth: 0
+          submodules: recursive
 
 
 
       - name: install depend
+        if: success()
         run: |
-          sudo apt update
+          sudo apt update 2>/dev/null 1>/dev/null
           sudo apt install dpkg-dev bzip2 xz-utils zstd -y
 
 
 
+      # 读取deb control里的Section
       - name: Check deb Section
+        if: success()
         run: |
 
-          for deb in ./debs/*.deb; do
+          for deb in ./debs/*.deb
+          do
 
             if [ -f "$deb" ]; then
 
-              echo "===================="
+              echo "======================"
 
               echo "$deb"
 
+              echo "Package:"
               dpkg-deb -f "$deb" Package
 
-              dpkg-deb -f "$deb" Version
-
-              dpkg-deb -f "$deb" Architecture
-
+              echo "Section:"
               dpkg-deb -f "$deb" Section
 
-              echo "===================="
+              echo "Architecture:"
+              dpkg-deb -f "$deb" Architecture
+
+              echo "======================"
 
             fi
 
@@ -61,83 +65,63 @@ jobs:
 
 
       - name: Refresh Packages
+        if: success()
         run: |
 
-          rm -f Packages
-          rm -f Packages.bz2
-          rm -f Packages.xz
-          rm -f Packages.zst
+          rm -rf ./Packages*
+
+          dpkg-scanpackages -m ./debs /dev/null >./Packages
 
 
-          dpkg-scanpackages -m ./debs /dev/null > Packages
+          bzip2 -v -k -9 Packages
 
-
-
-          bzip2 -9k Packages
-
-
-          xz -9k --extreme Packages
-
+          xz -v -k -9 --extreme Packages
 
           zstd --ultra -22 -k Packages -o Packages.zst
 
 
 
 
-      - name: Debug Packages
-        run: |
-
-          echo "===== Packages Preview ====="
-
-          head -80 Packages
-
-
-
-
       - name: save change if local change
+        if: success()
         run: |
 
-          git config --global user.email "action@github.com"
+          git config --global user.email 'action@github.com'
 
-          git config --global user.name "GitHub Action"
+          git config --global user.name 'GitHub Action'
 
 
           git add .
 
 
-          if ! git diff --staged --exit-code 1>/dev/null; then
+          if ! git diff --staged --exit-code 1>>/dev/null; then
 
-            git commit -m "Refresh Packages"
+            git commit -m 'Refresh Packages'
 
             git push
-
-          else
-
-            echo "No changes"
 
           fi
 
 
 
-
       - name: download remove_all_actions
+        if: success()
         run: |
 
           sudo curl -L \
-          -o /usr/bin/remove_all_actions \
-          https://raw.githubusercontent.com/invalidunit/action/main/remove_all_actions
+          -o '/usr/bin/remove_all_actions' \
+          'https://raw.githubusercontent.com/invalidunit/action/main/remove_all_actions'
 
 
-          sudo chmod 0755 /usr/bin/remove_all_actions
+          sudo chmod -R 0755 '/usr/bin/remove_all_actions'
 
 
 
 
       - name: remove all old actions
+        if: success()
         env:
-
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
           GH_REPO: ${{ github.repository }}
 
         run: |
