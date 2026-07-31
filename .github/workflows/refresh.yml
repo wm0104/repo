@@ -3,55 +3,146 @@ name: "refresh"
 on:
   workflow_run:
     workflows: ["pages-build-deployment"]
-    types: 
+    types:
       - completed
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
     steps:
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
           submodules: recursive
 
+
       - name: install depend
         if: success()
         run: |
-          sudo apt update 2>>/dev/null 1>>/dev/null
+          sudo apt update 2>/dev/null 1>/dev/null
           sudo apt install dpkg-dev bzip2 xz-utils zstd -y
+
+
+
+      # 自动读取control里的Section
+      - name: Fix deb Section
+        if: success()
+        run: |
+
+          mkdir -p tmp_deb
+
+          for deb in ./debs/*.deb; do
+
+            if [ ! -f "$deb" ]; then
+              continue
+            fi
+
+            echo "Checking $deb"
+
+
+            mkdir -p tmp_deb/work
+
+
+            dpkg-deb -R "$deb" tmp_deb/work
+
+
+
+            if grep -q "^Section: Rootless" tmp_deb/work/DEBIAN/control; then
+
+              sed -i 's/^Section:.*/Section: Rootless/' tmp_deb/work/DEBIAN/control
+
+              echo "Rootless package"
+
+
+            elif grep -q "^Section: RootHide" tmp_deb/work/DEBIAN/control; then
+
+              sed -i 's/^Section:.*/Section: RootHide/' tmp_deb/work/DEBIAN/control
+
+              echo "RootHide package"
+
+
+            fi
+
+
+
+            dpkg-deb -b tmp_deb/work "$deb"
+
+
+            rm -rf tmp_deb/work
+
+          done
+
+
+          rm -rf tmp_deb
+
+
+
 
       - name: Refresh Packages
         if: success()
         run: |
+
           rm -rf ./Packages*
-          dpkg-scanpackages -m ./debs /dev/null >./Packages
+
+          dpkg-scanpackages -m ./debs /dev/null > ./Packages
+
+
           bzip2 -v -k -9 Packages
+
           xz -v -k -9 --extreme Packages
+
           zstd --ultra -22 -k Packages -o Packages.zst
+
+
+
 
       - name: save change if local change
         if: success()
         run: |
+
           git config --global user.email 'action@github.com'
+
           git config --global user.name 'GitHub Action'
+
+
           git add .
+
+
           if ! git diff --staged --exit-code 1>>/dev/null; then
+
             git commit -m 'Refresh Packages'
+
             git push
+
           fi
-          
+
+
+
+
       - name: download remove_all_actions
         if: success()
         run: |
-          sudo curl -L -o '/usr/bin/remove_all_actions' 'https://raw.githubusercontent.com/invalidunit/action/main/remove_all_actions'
+
+          sudo curl -L \
+          -o '/usr/bin/remove_all_actions' \
+          'https://raw.githubusercontent.com/invalidunit/action/main/remove_all_actions'
+
+
           sudo chmod -R 0755 '/usr/bin/remove_all_actions'
+
+
+
 
       - name: remove all old actions
         if: success()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
+
         run: |
+
           remove_all_actions
