@@ -38,3 +38,20 @@ Description: 左滑返回上一页面
 Author: Mao
 Name: 左滑返回-Rootless
 
+Package: com.25mao.leftpan.rootless
+Version: 1.0-6
+Architecture: iphoneos-arm64e
+Maintainer: admin@25mao.com
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate, preferenceloader, com.opa334.altlist (>=1.0.4)
+Filename: ./debs/arm64e/com.25mao.leftpan.rootless_1.0-6_iphoneos-arm64e.deb
+Size: 49746
+MD5sum: 74e69afe1a7455edd2f0afebf32852fc
+SHA1: a878fa252eaa1d5eded865a711180a9d9ed4de8d
+SHA256: 789bbde737003a64b5e4f9f184c2de40c10bf1806bd0f81fc9d0301cceaaef6b
+Section: RootHide
+Priority: optional
+Description: 左滑返回上一页面
+Author: Mao
+Name: 左滑返回(RootHide)
+
