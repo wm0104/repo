@@ -332,11 +332,11 @@ Architecture: iphoneos-arm64
 Maintainer: Ivano Bilenchi
 Depends: firmware (>= 4.0), findutils, apt | apt7
 Conflicts: org.altervista.exilecom.icleaner, xyz.cypwn.icleanerprocrackrootless, com.exile90.icleanerpro
-Filename: ./debs/arm64/iCleaner Pro-7.10.0.deb
-Size: 1101536
-MD5sum: 9097b093b64eebc4f621ed536fedbf0a
-SHA1: b0e83d8aeee7e87995802c066977904ea697a20f
-SHA256: a037b0494178f45e82970682f3869c28fecd06e305d0bb2ce88b744272374f9a
+Filename: ./debs/arm64/com.dao.icleanerpro_7.10.0_iphoneos-arm64.deb
+Size: 1100448
+MD5sum: e80f9690e0d32f6ff6233d355894ea0e
+SHA1: 2e263222ceb87153943d6723afa112e5a56b2f5c
+SHA256: dfb2e754fdca48747847785f6b4543e402228778407e4551ec2716c750e3b811
 Section: 无根插件
 Description: 真正的iOS系统清理和管理实用程序，默认简体中文，破解版。
 Author: Ivano Bilenchi
