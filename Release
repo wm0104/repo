@@ -2,6 +2,6 @@ Origin: wm0104
 Label: 个人自用备份
 Suite: ./
 Codename: ios
-Architectures: iphoneos-arm64e
+Architectures: iphoneos-arm64 iphoneos-arm64e
 Components: main
 Description: 仅备份
