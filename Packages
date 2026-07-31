@@ -253,7 +253,7 @@ Size: 6552
 MD5sum: e02361cf746523a4894b1abf56e52ae0
 SHA1: 45f505865f90886a38a8c4aa783b643d949efbb8
 SHA256: f6d09ee48cbd6f9a399ec60dce7477e4045330f7a5fa4763893e6b25479a0479
-Section: RootHide
+Section: 嗨-汉化
 Description: DynamicStage 简体中文包(RootHide)。
 Author: 妖刀
 Name: DynamicStage 简体中文包(RootHide)
@@ -484,7 +484,7 @@ Size: 3210888
 MD5sum: e2f5d0f7e9a156cb9be995eb2801c102
 SHA1: 2d9107815a5b409064f66c60cca77c541c29d938
 SHA256: 5477a10db5d65acd956e19e03c8581708bfac45206fe4f55b036f3cf3e1120bd
-Section: RootHide
+Section: Tweaks
 Priority: optional
 Description: 电话助手授权版本,通话录音,通话记录合并,T9双卡选卡拨号键盘,短信双卡选卡,来去电归属地,黑名单,骚扰拦截,状态栏图标替换,时间格式修改,常用小功能等强大插件
 Author: xybp888
@@ -502,7 +502,7 @@ Size: 618576
 MD5sum: cf5f5c2b29e0481d0813c656e30984c2
 SHA1: 58f66f4537af7cf9b641d80617978bf9e0359a0a
 SHA256: daf4ceb4b2996a1ea6303b8e622d7b1b68deaed1980c5607325d2117f8ecd0f0
-Section: RootHide
+Section: System
 Priority: optional
 Description: 完美的使用原生灵动岛展示系统通知等...
 Author: xybp888
