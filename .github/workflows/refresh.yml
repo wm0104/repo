@@ -47,7 +47,7 @@ jobs:
               if "Architecture: iphoneos-arm64e" in block:
                   block = re.sub(
                       r"^Section:.*$",
-                      "Section: RootHide",
+                      "Section: 隐根插件",
                       block,
                       flags=re.MULTILINE
                   )
@@ -55,7 +55,7 @@ jobs:
               elif "Architecture: iphoneos-arm64" in block:
                   block = re.sub(
                       r"^Section:.*$",
-                      "Section: Rootless",
+                      "Section: 无根插件",
                       block,
                       flags=re.MULTILINE
                   )
