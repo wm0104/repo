@@ -899,6 +899,23 @@ Name: FreePIP
 
 Package: llld.keyboard
 Version: 2.0
+Architecture: iphoneos-arm64e
+Installed-Size: 168
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate
+Filename: ./debs/llld.keyboard_2.0_iphoneos-arm64e.deb
+Size: 5504
+MD5sum: f8b6881037802d06b1236c3e701e654c
+SHA1: 22394248a8b0e9a1f98bb46463ae6e1a6f321fee
+SHA256: 9bab4be0fb49fb228c75b0241c89166857cac0f3a488186ab6ac77ca14dc64b1
+Section: 隐根插件
+Priority: optional
+Description: 在很多时候输入，手机总默认自带键盘，且不能更换第三方，有了这插件，你想用啥键盘用啥键盘(第三方输入法都可以)
+Author: 来了老弟
+Name: 强制使用第三方键盘(RootHide)
+
+Package: llld.keyboard
+Version: 2.0
 Architecture: iphoneos-arm64
 Maintainer: 搬运工
 Installed-Size: 168
