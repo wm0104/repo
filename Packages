@@ -930,25 +930,6 @@ Description: 在很多时候输入，手机总默认自带键盘，且不能更�
 Author: 来了老弟
 Name: 强制使用第三方键盘(RootHide)
 
-Package: llld.keyboard
-Version: 2.0
-Architecture: iphoneos-arm64
-Maintainer: 搬运工
-Installed-Size: 168
-Depends: mobilesubstrate
-Filename: ./debs/arm64/强制使用第三方键盘-Rootless-2.0.deb
-Size: 4168
-MD5sum: 838e1132d27b0abc68e451d960a459fd
-SHA1: edb1c222d759872e8e336f8bf3443216c4d9ef1a
-SHA256: e9831881534209557508b0528fd0add5bdf1741ebf1ef28aeebb224e9672ac87
-Section: 无根插件
-Priority: optional
-Description: 在很多时候输入，手机总默认自带键盘，且不能更换第三方，有了这插件，你想用啥键盘用啥键盘(第三方输入法都可以)
-Author: 来了老弟
-Icon: https://chinesebuilding.club/pic/cydia.png
-Name: 强制使用第三方键盘-Rootless
-Sponsor: 搬运工
-
 Package: me.tomt000.stageduo
 Version: 1.2
 Architecture: iphoneos-arm64
