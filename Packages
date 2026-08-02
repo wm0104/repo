@@ -261,6 +261,30 @@ Icon: https://TrollStoreX.Github.io/sileodepiction/iCleanerPro/icon.png
 Name: iCleaner Pro
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/iCleanerPro/js.json
 
+Package: com.huami.dyyy.vita
+Version: 2.2-9-bulid1653
+Architecture: iphoneos-arm64e
+Maintainer: vita
+Installed-Size: 2184
+Depends: firmware (>= 5.0), mobilesubstrate
+Conflicts: com.huami.dyyy, com.huami.dyyys
+Filename: ./debs/com.huami.dyyy.vita_2.2-9-bulid1653_iphoneos-arm64e.deb
+Size: 1044826
+MD5sum: 029f1d10f8da1d3ca0169d261d59d071
+SHA1: 56cfd8150134bd20a08d1378b51b9053d7220bba
+SHA256: 89182cf9e59df182b71e34c1e04adbe9895544467c7808b556c8db22b88246a3
+Section: 抖音插件
+Priority: optional
+Description: 基于 DYYY 的抖音插件
+ * 用于调整抖音 UI 的插件
+ * 仅在抖音 36.5.0 版本中测试
+ * 仅供学习交流，禁止用于商业用途
+ * 通过“双指长按”或“抖音设置”进入插件
+Author: huami & vita
+Icon: https://TrollStoreX.Github.io/sileodepiction/DYYYVita/icon.png
+Name: 抖音DYYY(旧版)
+Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/DYYYVita/js.json
+
 Package: com.huami.wcpush2chats
 Version: 1.0-2
 Architecture: iphoneos-arm64e
