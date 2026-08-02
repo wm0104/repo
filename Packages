@@ -261,6 +261,32 @@ Icon: https://TrollStoreX.Github.io/sileodepiction/iCleanerPro/icon.png
 Name: iCleaner Pro
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/iCleanerPro/js.json
 
+Package: com.hbwechathelper.ailuns
+Version: 2.1-4
+Architecture: iphoneos-arm64e
+Maintainer: HuangBai
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate
+Conflicts: com.HBWechatHelper.ailun, byg.iosios.net.hbwechathelper.rootlless
+Filename: ./debs/com.hbwechathelper.ailuns_2.1-4_iphoneos-arm64e.deb
+Size: 22095330
+MD5sum: 3145ab5fe6879feda58bf8d7d4d42e9e
+SHA1: 1abd0dfefe9ebd64327c9bebd30bb74a925b27af
+SHA256: 06269d010ea51681627871001d3f0b14f830f8d0a061dd5f7a8fd27efb0c21d0
+Section: 微信插件
+Description: 微信多功能插件
+ * 一个微信插件文本转语音
+ * 点歌朋友圈一键点赞等诸多功能
+ * 发送网络语录舔狗日记骂人等文案
+ * 4K 原图手绘壁纸等
+ * 抢私聊红包
+ * 自定义信息尾巴
+ * 自定义拍一拍 百变小尾巴 实时尾巴时间等功能
+Author: HuangBai
+Icon: https://TrollStoreX.Github.io/sileodepiction/HB/icon.png
+Name: 黄白助手
+Sileodepiction: https://TrollStoreX.Github.io/
+
 Package: com.huami.dyyy.vita
 Version: 2.2-9-bulid1653
 Architecture: iphoneos-arm64e
@@ -508,6 +534,41 @@ Author: subdiox & iosdump
 Icon: https://TrollStoreX.Github.io/sileodepiction/StoreSwitcher/icon.png
 Name: StoreSwitcher 账号切换
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/StoreSwitcher/js.json
+
+Package: com.wkk.filzadirprobe
+Version: 1.7.3
+Architecture: iphoneos-arm64e
+Maintainer: 0xkuj
+Installed-Size: 240
+Pre-Depends: rootless-compat(>= 0.9)
+Filename: ./debs/com.wkk.filzadirprobe_1.7.3_iphoneos-arm64e.deb
+Size: 47858
+MD5sum: 5a615d56e5c725c6bf0c58a7095f0c7d
+SHA1: e09b7c4ecb8f9fdb75111f8916f93b6e4480626f
+SHA256: 14408e592960de73c76caf434f4406265d95abb0e5e548c597b60128abe31fef
+Section: Filza
+Description: 计算Filza里文件夹大小。
+Author: 0xkuj
+Icon: https://s1.imagehub.cc/images/2025/04/02/754b2bb601bad95dca5cb982e7d926af.jpeg
+Name: FilzaDirProbe
+
+Package: com.wkk.filzaswipeselect
+Version: 0.0.2
+Architecture: iphoneos-arm64e
+Maintainer: korboy <korboybeats@gmail.com>
+Installed-Size: 184
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate (>= 0.9.5000)
+Filename: ./debs/com.wkk.filzaswipeselect_0.0.2_iphoneos-arm64e.deb
+Size: 11482
+MD5sum: 829904d704067f13b4483802b548ba37
+SHA1: ee0d5e3e48ef9c7f9cf546e5aa13c85c99470349
+SHA256: 97490a134fd821e240312e210d6eff114e14d1cf9b4ce425c20a926685538cb6
+Section: Filza
+Description: Filza的滑动多选功能。
+Author: korboy <korboybeats@gmail.com>
+Icon: https://sini921.github.io/repo/sileodepiction/icon/filzaswipeselect.png
+Name: FilzaSwipeSelect
 
 Package: com.xybp888.callassist16.dopamine.roothide
 Version: 2.3.7
