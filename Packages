@@ -23,11 +23,11 @@ Maintainer: zqbb
 Installed-Size: 720
 Depends: mobilesubstrate (>= 0.9.5000), preferenceloader, com.opa334.altlist
 Filename: ./debs/cn.zqbb.disupdateapp_2.0.0-6_iphoneos-arm64e.deb
-Size: 168428
-MD5sum: 36b05dc0c90484a545acfe00db4fe560
-SHA1: b0c08aa24758fcc6a61c8b40f3bfe7708c3cf27b
-SHA256: d5b88c112f29fc862b01186f140c0f2806b27c74d8f0ecdbad756e5d91b55893
-Section: 系统增强
+Size: 168412
+MD5sum: a2582d5a84e343ebfa05b4bed5abb3a1
+SHA1: cda4771627c10ae8fb78a97a9ecced7a44a4f8cc
+SHA256: d562c539f93dce7e30b9a5a34a11a11ac159d2504565b8450f7b7fbd25beaeaf
+Section: zqbb
 Description: 屏蔽App Store更新提示(Block App Store Updates)!
 Author: zqbb
 Icon: https://rootless.002599.xyz/web/icon/cn.zqbb.disupdateapp
@@ -41,11 +41,11 @@ Maintainer: zqbb
 Installed-Size: 12328
 Depends: mobilesubstrate (>= 0.9.5000) , firmware (>= 14.0), preferenceloader, launchctl
 Filename: ./debs/cn.zqbb.hello.memorystatus_3.9.0-5_iphoneos-arm64e.deb
-Size: 6111706
-MD5sum: 3050c2323b6b6b9e27fd096225af7fea
-SHA1: 9c1e8d4753924b5f9eadf6e3a813ec541b10913e
-SHA256: 361c21249299f55799acbc4a382c29735a9bd1491c7b9af83f04865ffd3d1529
-Section: 系统增强
+Size: 6111682
+MD5sum: 91917dddcd75ec1c63d2f0255dcf07dc
+SHA1: e3028c4899f4e763191e2b1fa7ae5060bef15bef
+SHA256: 73296eb9654bae7aef326f434f269d7284fcbb89101cc800c12c7115c987e259
+Section: zqbb
 Description: Set memorystatus to avoid being killed by the system
 Author: zqbb
 Icon: https://rootless.002599.xyz/web/icon/cn.zqbb.hello.memorystatus.png
@@ -59,11 +59,11 @@ Maintainer: zqbb
 Installed-Size: 324
 Depends: com.opa334.ccsupport
 Filename: ./debs/cn.zqbb.hellopay_1.0.2_iphoneos-arm64e.deb
-Size: 126082
-MD5sum: 0f40a6d9363b14a38fea454ff6cb30b7
-SHA1: 50cb77e91c2fa08e0d9148921dbf1d08020eb3a4
-SHA256: 15d121e85fd9789cc13f27172cd9a5bf78920912ef01329db3464490d7814840
-Section: 控制中心
+Size: 126080
+MD5sum: e5be41d3502a4b2f90ba28fcf8bb5a3b
+SHA1: 956cc1c19966b9bee349f74eae11eac0c78215af
+SHA256: 068c6ec42b1387cf045f5a552a2c920aa3ee5bfff58eccf8e6087c0919890724
+Section: zqbb
 Description: 微信+支付宝 控制中心添加 扫一扫,付款码.
  - 默认支付宝扫一扫, 长按出菜单!
 Author: zqbb
@@ -78,11 +78,11 @@ Installed-Size: 3664
 Depends: mobilesubstrate (>= 0.9.5000) , firmware (>= 15.0), preferenceloader, com.opa334.ccsupport
 Conflicts: com.yourepo.0xash.powercuff, byg.iosios.net.powercuff, com.dao.powercuff, com.rpetrich.powercuff, com.yourepo.0xash.devicemonitor, com.yourepo.0xash.fuckthermal, com.shadow.fuckthermal, com.dao.fuckthermal, byg.iosios.net.monitor, byg.iosios.net.disablethermalmonitord, com.nan.disablethermalmonitord
 Filename: ./debs/cn.zqbb.holdcpu_2.3.5-3_iphoneos-arm64e.deb
-Size: 1653484
-MD5sum: d8931a60330061cc642248f32ff28929
-SHA1: 4bbbd2c1867ade8c61df7528b0343b8a60c5f7a9
-SHA256: 354b7e7247bf2a7ca7554279b2744dd28e0b46b9b5b50e1e292d2fcb94985e01
-Section: 系统增强
+Size: 1653474
+MD5sum: 859e0c0b78f9eb471ae36339b0e990cb
+SHA1: fd4bc19f6c4fa649999b1937537b604aea0dc042
+SHA256: 45519d0b971c7670674d8f4a9e206b80cd87495ebf21beee92cd2fa9f8f0a39a
+Section: zqbb
 Description: (解除温控) (锁定低电量CPU频率)
 Author: zqbb
 Icon: https://rootless.002599.xyz/web/icon/cn.zqbb.holdcpu
@@ -153,6 +153,22 @@ Icon: https://TrollStoreX.Github.io/sileodepiction/wcplugins/icon.png
 Name: 微信插件管理
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/wcplugins/js.json
 Sponsor: admin@25mao.com
+
+Package: com.HBWechatHelper.ailun
+Version: 2.1.4
+Architecture: iphoneos-arm64e
+Maintainer: HuangBai <QQ:1343309363@qq.com>
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate
+Filename: ./debs/com.HBWechatHelper.ailun_2.1.4_iphoneos-arm64e.deb
+Size: 32925468
+MD5sum: 729ff78c697fadf0353c2bd0967e6bf1
+SHA1: 92165ff36811fe5f6131791db922868ed8fc404a
+SHA256: 62967ab17f7e1c7a2d65c5096bd5cae1fddb958990db10a3119d3fb11427dd10
+Section: 微信插件
+Description: 黄白助手-微信插件，点歌朋友圈一键点赞，禁用控件，设置布局大小，私聊发抢自己的红包，文本转语音，文案语录，群聊管理，朋友圈保存实况 Live 图，消息防撤回，艾特所有人，朋友圈自定义选取位置，消息双击复读，修改气泡，修改按钮图标，修改显示微信号，自动呼出键盘，微信运动一键点赞，头像转发好友，强制下载 dylib 文件，设置全局圆头像，百变消息小尾巴，朋友圈小尾巴，等诸多功能
+Author: HuangBai <QQ:1343309363@qq.com>
+Name: 黄白助手
 
 Package: com.brend0n.nopassafterrespringsafe
 Version: 0.0.3
@@ -576,26 +592,6 @@ Author: xybp888
 Depiction: https://apt.htv123.com/view/621
 Name: 灵动通知iOS16-正式版(RootHide)
 Sileodepiction: https://apt.htv123.com/sileo/621
-
-Package: com.zqbb.limitcharging
-Version: 1.0.8
-Architecture: iphoneos-arm64e
-Maintainer: zqbb
-Installed-Size: 244
-Depends: mobilesubstrate (>= 0.9.5000) , firmware (>= 15.0)
-Conflicts: zp.limitcharging.rootless
-Filename: ./debs/com.zqbb.limitcharging_1.0.8_iphoneos-arm64e.deb
-Size: 20308
-MD5sum: 120569d0cf6afe77e0bf65c35260f831
-SHA1: 8c2108783806f1da90e024186504dbfdc2c4fab9
-SHA256: 96993057c58729f89d93ae42b9ebf2f38a6caa50af9255f26101207deeb20fbe
-Section: 系统增强
-Description: Hello Charging (限制充电)
- - Wi-Fi Not Disconnected on Lock Screen (Standby consumes 5% more power)
- - 锁屏不断Wi-Fi(待机多费电5%)
-Author: zqbb
-Name: Hello Charging
-Sileodepiction: https://rootless.002599.xyz/web/com.zqbb.limitcharging
 
 Package: ellekit
 Version: 1.2
