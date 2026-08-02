@@ -593,6 +593,26 @@ Depiction: https://apt.htv123.com/view/621
 Name: 灵动通知iOS16-正式版(RootHide)
 Sileodepiction: https://apt.htv123.com/sileo/621
 
+Package: com.zqbb.limitcharging
+Version: 1.0.8
+Architecture: iphoneos-arm64e
+Maintainer: zqbb
+Installed-Size: 244
+Depends: mobilesubstrate (>= 0.9.5000) , firmware (>= 15.0)
+Conflicts: zp.limitcharging.rootless
+Filename: ./debs/com.zqbb.limitcharging_1.0.8_iphoneos-arm64e.deb
+Size: 20300
+MD5sum: 1d7642cf04a2ed78e38b94a983ff92cc
+SHA1: 58d944fcfa48b25096e061e312d71012202d7dc6
+SHA256: 4476df8c06c9a22e47ff2fbc6b5864299a3874765b490ff0ac7c47b74f75cd45
+Section: zqbb
+Description: Hello Charging (限制充电)
+ - Wi-Fi Not Disconnected on Lock Screen (Standby consumes 5% more power)
+ - 锁屏不断Wi-Fi(待机多费电5%)
+Author: zqbb
+Name: Hello Charging
+Sileodepiction: https://rootless.002599.xyz/web/com.zqbb.limitcharging
+
 Package: ellekit
 Version: 1.2
 Architecture: iphoneos-arm64e
