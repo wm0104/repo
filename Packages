@@ -261,32 +261,6 @@ Icon: https://TrollStoreX.Github.io/sileodepiction/iCleanerPro/icon.png
 Name: iCleaner Pro
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/iCleanerPro/js.json
 
-Package: com.hbwechathelper.ailuns
-Version: 2.1-4
-Architecture: iphoneos-arm64e
-Maintainer: HuangBai
-Pre-Depends: rootless-compat(>= 0.9)
-Depends: mobilesubstrate
-Conflicts: com.HBWechatHelper.ailun, byg.iosios.net.hbwechathelper.rootlless
-Filename: ./debs/com.hbwechathelper.ailuns_2.1-4_iphoneos-arm64e.deb
-Size: 22095330
-MD5sum: 3145ab5fe6879feda58bf8d7d4d42e9e
-SHA1: 1abd0dfefe9ebd64327c9bebd30bb74a925b27af
-SHA256: 06269d010ea51681627871001d3f0b14f830f8d0a061dd5f7a8fd27efb0c21d0
-Section: 微信插件
-Description: 微信多功能插件
- * 一个微信插件文本转语音
- * 点歌朋友圈一键点赞等诸多功能
- * 发送网络语录舔狗日记骂人等文案
- * 4K 原图手绘壁纸等
- * 抢私聊红包
- * 自定义信息尾巴
- * 自定义拍一拍 百变小尾巴 实时尾巴时间等功能
-Author: HuangBai
-Icon: https://TrollStoreX.Github.io/sileodepiction/HB/icon.png
-Name: 黄白助手
-Sileodepiction: https://TrollStoreX.Github.io/
-
 Package: com.huami.dyyy.vita
 Version: 2.2-9-bulid1653
 Architecture: iphoneos-arm64e
