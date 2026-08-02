@@ -899,6 +899,22 @@ Name: FreePIP
 
 Package: llld.keyboard
 Version: 2.0
+Architecture: iphoneos-arm64
+Installed-Size: 168
+Depends: mobilesubstrate
+Filename: ./debs/llld.keyboard_2.0_iphoneos-arm64.deb
+Size: 8404
+MD5sum: 3b3016d70ec81815558d93bca37d7b7d
+SHA1: 1e10c802e5e0b3fa992403881110b70896c89599
+SHA256: f6ced673e4be2f1d67704f56bde791e5b410f66c49d81a88705701c2af3b8c55
+Section: 无根插件
+Priority: optional
+Description: 在很多时候输入，手机总默认自带键盘，且不能更换第三方，有了这插件，你想用啥键盘用啥键盘(第三方输入法都可以)
+Author: 来了老弟
+Name: 强制使用第三方键盘-Rootless
+
+Package: llld.keyboard
+Version: 2.0
 Architecture: iphoneos-arm64e
 Installed-Size: 168
 Pre-Depends: rootless-compat(>= 0.9)
@@ -932,23 +948,6 @@ Author: 来了老弟
 Icon: https://chinesebuilding.club/pic/cydia.png
 Name: 强制使用第三方键盘-Rootless
 Sponsor: 搬运工
-
-Package: llld.keyboard
-Version: 2.0
-Architecture: iphoneos-arm64e
-Installed-Size: 168
-Pre-Depends: rootless-compat(>= 0.9)
-Depends: mobilesubstrate
-Filename: ./debs/arm64e/llld.keyboard_2.0_iphoneos-arm64e.deb
-Size: 5220
-MD5sum: 1fcbb43570be6ac404d73ee88cd25ba5
-SHA1: 06003608118af67c155664a6de316879f792eb5d
-SHA256: b0e9c283a1aba7cc1388124d3862d93172e3b30c09cf31b09737513d91cc33ed
-Section: 隐根插件
-Priority: optional
-Description: 在很多时候输入，手机总默认自带键盘，且不能更换第三方，有了这插件，你想用啥键盘用啥键盘(第三方输入法都可以)
-Author: 来了老弟
-Name: 强制使用第三方键盘(RootHide)
 
 Package: me.tomt000.stageduo
 Version: 1.2
