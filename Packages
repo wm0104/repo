@@ -123,6 +123,23 @@ Description: Filza解锁全部功能，请在官方源安装Filza。Netskao新�
 Author: Netskao
 Name: Filza Crack(RootHide)
 
+Package: com.dao.kayoko
+Version: 4.1.2
+Architecture: iphoneos-arm64e
+Maintainer: 82Flex
+Depends: firmware (>= 14.0), mobilesubstrate, preferenceloader
+Conflicts: dev.traurige.kayoko, codes.aurora.kayoko, com.daodao.kayoko, com.82flex.kayoko
+Filename: ./debs/com.dao.kayoko_4.1.2_iphoneos-arm64e.deb
+Size: 484020
+MD5sum: a3506fe2af468fd62c6230788ebedec0
+SHA1: ab319145049011e860d5c38b1752d1761a6fe0c9
+SHA256: d64d268346a78f2a725254095c7791aff38c450864e3db018156aa8130c748bf
+Section: 粘贴板
+Description: 乌龙工作室版Kayoko，更多优化增强，添加支持iOS16/17。
+Author: 82Flex
+Name: Kayoko(RootHide)
+Sileodepiction: https://xiangfeidexiaohuo.github.io/sileodepiction/kayoko/js.json
+
 Package: com.exile90.icleanerpros
 Version: 7.10.0
 Architecture: iphoneos-arm64e
@@ -161,6 +178,22 @@ Description: 从主屏幕查看和管理应用数据
 Author: iosdump
 Icon: file:///Library/PreferenceBundles/AppDataPrefs.bundle/AppData@3x.png
 Name: AppData
+
+Package: com.iosdump.memorycontrol
+Version: 1.3
+Architecture: iphoneos-arm64e
+Maintainer: iosdump
+Installed-Size: 764
+Depends: mobilesubstrate, preferenceloader
+Filename: ./debs/com.iosdump.memorycontrol_1.3_iphoneos-arm64e.deb
+Size: 193938
+MD5sum: 2535d26cb8b43e3a0ca929bfa95a6cac
+SHA1: 49be3a0fd64ccedd2326d17a2e178f4095c6d0f6
+SHA256: 0331d6cf50e609fadf6d0b5e4080793fa9253cac5461469e94b53b00c8e21b99
+Section: 系统增强
+Description: iOS 14-17 进程内存与优先级调整
+Author: iosdump
+Name: MemoryControlX
 
 Package: com.lclrc.controltab
 Version: 1.0
