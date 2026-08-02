@@ -6,14 +6,10 @@ on:
     types: 
       - completed
 
-permissions:
-  contents: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,42 +26,7 @@ jobs:
         if: success()
         run: |
           rm -rf ./Packages*
-
-          dpkg-scanpackages -m ./debs /dev/null > ./Packages
-
-          python3 <<'PY'
-          import re
-
-          with open("Packages", "r") as f:
-              data = f.read()
-
-          blocks = data.split("\n\n")
-
-          new_blocks = []
-
-          for block in blocks:
-              if "Architecture: iphoneos-arm64e" in block:
-                  block = re.sub(
-                      r"^Section:.*$",
-                      "Section: 隐根插件",
-                      block,
-                      flags=re.MULTILINE
-                  )
-
-              elif "Architecture: iphoneos-arm64" in block:
-                  block = re.sub(
-                      r"^Section:.*$",
-                      "Section: 无根插件",
-                      block,
-                      flags=re.MULTILINE
-                  )
-
-              new_blocks.append(block)
-
-          with open("Packages", "w") as f:
-              f.write("\n\n".join(new_blocks))
-          PY
-
+          dpkg-scanpackages -m ./debs /dev/null >./Packages
           bzip2 -v -k -9 Packages
           xz -v -k -9 --extreme Packages
           zstd --ultra -22 -k Packages -o Packages.zst
@@ -75,9 +36,7 @@ jobs:
         run: |
           git config --global user.email 'action@github.com'
           git config --global user.name 'GitHub Action'
-
           git add .
-
           if ! git diff --staged --exit-code 1>>/dev/null; then
             git commit -m 'Refresh Packages'
             git push
