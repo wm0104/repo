@@ -535,6 +535,27 @@ Icon: https://TrollStoreX.Github.io/sileodepiction/StoreSwitcher/icon.png
 Name: StoreSwitcher 账号切换
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/StoreSwitcher/js.json
 
+Package: com.tigisoftware.filza64bits
+Version: 4.0.1-4~roothide
+Architecture: iphoneos-arm64e
+Maintainer: TIGI Software
+Pre-Depends: patches-com.tigisoftware.filza64bit(= 4.0.1-4~roothide)
+Recommends: zip, unzip, gzip, p7zip, unrar, xz-utils
+Conflicts: com.tigisoftware.filza, com.tigisoftware.filza39, com.tigisoftware.filza64bit
+Filename: ./debs/com.tigisoftware.filza64bits_4.0.1-4~roothide_iphoneos-arm64e.deb
+Size: 11012352
+MD5sum: 362695539701d7267d4142c3c8d270e1
+SHA1: 6720a91b4b205fb9f3359df0193324bcfb49140a
+SHA256: cd987482b9e4183800d02a71e99000a3747b94b53b2216b2a25ae815d3888d54
+Section: Filza
+Description: Filza 文件管理器 RootHide 专用
+ * 支持 RootHide Dopamine、BootStrap 半越狱
+ * 支持解压打包 deb 插件
+Author: TIGI Software
+Icon: https://TrollStoreX.Github.io/sileodepiction/Filza/icon.png
+Name: Filza 文件管理器
+Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/Filza/js.json
+
 Package: com.wkk.filzadirprobe
 Version: 1.7.3
 Architecture: iphoneos-arm64e
