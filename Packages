@@ -1,3 +1,38 @@
+Package: com.25mao.leftpan.rootless
+Version: 1.0-6
+Architecture: iphoneos-arm64e
+Maintainer: admin@25mao.com
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate, preferenceloader, com.opa334.altlist (>=1.0.4)
+Filename: ./debs/com.25mao.leftpan.rootless_1.0-6_iphoneos-arm64e.deb
+Size: 56056
+MD5sum: cef385f70729b2ec9bb65201ecd37141
+SHA1: 49e1a069979f19af00718582720bb038c6a18db5
+SHA256: ac4c32039945ea1ee7f3c82f0502440f4e05daf7bfd1b8f72aa806e3ea92a8dc
+Section: 系统增强
+Priority: optional
+Description: 左滑返回上一页面
+Author: Mao
+Name: 左滑返回(RootHide)
+
+Package: com.iosdump.appdata
+Version: 2.6.1
+Architecture: iphoneos-arm64e
+Maintainer: iosdump
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: firmware (>= 11.0), mobilesubstrate, preferenceloader
+Conflicts: com.netskao.appdatas, com.netskao.appdata, cn.zqbb.appdata, com.fouadraheb.appdata
+Filename: ./debs/com.iosdump.appdata_2.6.1_iphoneos-arm64e.deb
+Size: 3608642
+MD5sum: 81091e93fae54a6d6672b526d3a952a8
+SHA1: bd1491d784d7ef5ae57070500cd355e75c3d04a3
+SHA256: 73316c8151450ec40d60cf0d2b9344de0f90a99370bde24dee98659b3a663214
+Section: 系统增强
+Description: 从主屏幕查看和管理应用数据
+Author: iosdump
+Icon: file:///Library/PreferenceBundles/AppDataPrefs.bundle/AppData@3x.png
+Name: AppData
+
 Package: com.qiop1379.swipeextenderx
 Version: 1.6.1~2
 Architecture: iphoneos-arm64e
@@ -17,4 +52,75 @@ Author: MiRO <tweaks_support@miro92.com>
 Depiction: https://chariz.com/get/swipeextenderx
 Icon: https://img.chariz.cloud/icon/swipeextenderx/icon@3x.png
 Name: SwipeExtenderX
+
+Package: com.xybp888.callassist16.dopamine.roothide
+Version: 2.3.7
+Architecture: iphoneos-arm64e
+Maintainer: xybp888
+Depends: firmware (>= 16.0), preferenceloader, com.opa334.libsandy
+Filename: ./debs/com.xybp888.callassist16.dopamine.roothide_2.3.7_iphoneos-arm64e.deb
+Size: 4340344
+MD5sum: e08af93ab4444647ef2961da3883410d
+SHA1: bffa9f86fed445a5f7e41d822608043282a8e42f
+SHA256: bebf506d10efde4acaeaecbf7ed3167c104648d3c3c210d42169f123655cf6b4
+Section: 系统增强
+Priority: optional
+Description: 电话助手授权版本,通话录音,通话记录合并,T9双卡选卡拨号键盘,短信双卡选卡,来去电归属地,黑名单,骚扰拦截,状态栏图标替换,时间格式修改,常用小功能等强大插件
+Author: xybp888
+Depiction: https://apt.htv123.com/view/632
+Name: 电话助手iOS16-正式版(Roothide)
+Sileodepiction: https://apt.htv123.com/sileo/632
+
+Package: com.xybp888.perfectdynamiclsland.roothide
+Version: 1.2-31
+Architecture: iphoneos-arm64e
+Maintainer: xybp888
+Depends: firmware (>= 16.0), mobilesubstrate
+Filename: ./debs/com.xybp888.perfectdynamiclsland.roothide_1.2-31_iphoneos-arm64e.deb
+Size: 730300
+MD5sum: edd46644bb8a6af686d9a0086e46893a
+SHA1: 0c53e7a19561981ad9dd9953c6389094487fc23c
+SHA256: cab6862f306ba314d39eff669d8eea0b9d443c960ef5a93013712b7c2361cde8
+Section: 系统增强
+Priority: optional
+Description: 完美的使用原生灵动岛展示系统通知等...
+Author: xybp888
+Depiction: https://apt.htv123.com/view/621
+Name: 灵动通知iOS16-正式版(RootHide)
+Sileodepiction: https://apt.htv123.com/sileo/621
+
+Package: llld.keyboard
+Version: 2.0
+Architecture: iphoneos-arm64e
+Installed-Size: 168
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate
+Filename: ./debs/llld.keyboard_2.0_iphoneos-arm64e.deb
+Size: 5504
+MD5sum: be9d5191cef0f428867652e81adf31c5
+SHA1: acb5c1a02dfd407d5d85784173621b343ad363e7
+SHA256: 0d614f4c81bcbb62b9357cddddaf560c91308857b0696868cb14f1a1808b0ffa
+Section: 键盘增强
+Priority: optional
+Description: 在很多时候输入，手机总默认自带键盘，且不能更换第三方，有了这插件，你想用啥键盘用啥键盘(第三方输入法都可以)
+Author: 来了老弟
+Name: 强制使用第三方键盘(RootHide)
+
+Package: netskao.BlockAppsCreateAlbum
+Version: 1.1.2
+Architecture: iphoneos-arm64e
+Maintainer: Nets
+Installed-Size: 19660
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate, firmware (>= 15.0)
+Filename: ./debs/netskao.BlockAppsCreateAlbum_1.1.2_iphoneos-arm64e.deb
+Size: 6078
+MD5sum: 0be597bf26e3e99559d26f805e7805f6
+SHA1: f754d4c515c07b1fd6820732a15ed74e667f1e43
+SHA256: b1e3686e98128b907ffdc5a4155c7f230b811b235be384f1af61ee13227bb0be
+Section: 系统增强
+Description: 阻止应用创建自己的相册
+Author: Netskao
+Icon: https://TrollStoreX.Github.io/sileodepiction/repo_pic/photo.png
+Name: 禁止应用自动创建相册BlockAppsCreateAlbum
 
