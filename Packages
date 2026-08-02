@@ -1,3 +1,76 @@
+Package: cn.octoforce.copyvault
+Version: 1.9.0
+Architecture: iphoneos-arm64e
+Maintainer: SquidForce, Backup
+Installed-Size: 6380
+Depends: mobilesubstrate, preferenceloader, com.opa334.altlist
+Conflicts: com.squidforce.copyvault
+Filename: ./debs/cn.octoforce.copyvault_1.9.0_iphoneos-arm64e.deb
+Size: 2418184
+MD5sum: 3487a731797c523f6bacd3927e7e0f44
+SHA1: c04da50084e7ddf314ab52ed0b03e28c2ad510eb
+SHA256: 6548ae3378a330c436a0ca8f4d630dc26846b5ff963a224494730424bcf39f82
+Section: 粘贴板
+Description: 激活码用户或需要激活码的用户安装这个，非激活码用户不要安装！！Do not install if you do not have an activation code!!! Your Copy Vault, Your Pasteboard
+Author: SquidForce, Backup
+Name: CopyVault(激活码版)
+Sileodepiction: https://lclrc.github.io/repo/depictions/native/cn.octoforce.copyvault/depiction.json
+
+Package: cn.zqbb.disupdateapp
+Version: 2.0.0-6
+Architecture: iphoneos-arm64e
+Maintainer: zqbb
+Installed-Size: 720
+Depends: mobilesubstrate (>= 0.9.5000), preferenceloader, com.opa334.altlist
+Filename: ./debs/cn.zqbb.disupdateapp_2.0.0-6_iphoneos-arm64e.deb
+Size: 168428
+MD5sum: 36b05dc0c90484a545acfe00db4fe560
+SHA1: b0c08aa24758fcc6a61c8b40f3bfe7708c3cf27b
+SHA256: d5b88c112f29fc862b01186f140c0f2806b27c74d8f0ecdbad756e5d91b55893
+Section: 系统增强
+Description: 屏蔽App Store更新提示(Block App Store Updates)!
+Author: zqbb
+Icon: https://rootless.002599.xyz/web/icon/cn.zqbb.disupdateapp
+Name: Hello App
+Sileodepiction: https://rootless.002599.xyz/web/cn.zqbb.disupdateapp
+
+Package: cn.zqbb.hellopay
+Version: 1.0.2
+Architecture: iphoneos-arm64e
+Maintainer: zqbb
+Installed-Size: 324
+Depends: com.opa334.ccsupport
+Filename: ./debs/cn.zqbb.hellopay_1.0.2_iphoneos-arm64e.deb
+Size: 126082
+MD5sum: 0f40a6d9363b14a38fea454ff6cb30b7
+SHA1: 50cb77e91c2fa08e0d9148921dbf1d08020eb3a4
+SHA256: 15d121e85fd9789cc13f27172cd9a5bf78920912ef01329db3464490d7814840
+Section: 控制中心
+Description: 微信+支付宝 控制中心添加 扫一扫,付款码.
+ - 默认支付宝扫一扫, 长按出菜单!
+Author: zqbb
+Name: Hello Pay
+Sileodepiction: https://rootless.002599.xyz/web/cn.zqbb.hellopay
+
+Package: cn.zqbb.holdcpu
+Version: 2.3.5-3
+Architecture: iphoneos-arm64e
+Maintainer: zqbb
+Installed-Size: 3664
+Depends: mobilesubstrate (>= 0.9.5000) , firmware (>= 15.0), preferenceloader, com.opa334.ccsupport
+Conflicts: com.yourepo.0xash.powercuff, byg.iosios.net.powercuff, com.dao.powercuff, com.rpetrich.powercuff, com.yourepo.0xash.devicemonitor, com.yourepo.0xash.fuckthermal, com.shadow.fuckthermal, com.dao.fuckthermal, byg.iosios.net.monitor, byg.iosios.net.disablethermalmonitord, com.nan.disablethermalmonitord
+Filename: ./debs/cn.zqbb.holdcpu_2.3.5-3_iphoneos-arm64e.deb
+Size: 1653484
+MD5sum: d8931a60330061cc642248f32ff28929
+SHA1: 4bbbd2c1867ade8c61df7528b0343b8a60c5f7a9
+SHA256: 354b7e7247bf2a7ca7554279b2744dd28e0b46b9b5b50e1e292d2fcb94985e01
+Section: 系统增强
+Description: (解除温控) (锁定低电量CPU频率)
+Author: zqbb
+Icon: https://rootless.002599.xyz/web/icon/cn.zqbb.holdcpu
+Name: Hello CPU
+Sileodepiction: https://rootless.002599.xyz/web/cn.zqbb.holdcpu
+
 Package: com.25mao.leftpan.rootless
 Version: 1.0-6
 Architecture: iphoneos-arm64e
@@ -14,6 +87,62 @@ Priority: optional
 Description: 左滑返回上一页面
 Author: Mao
 Name: 左滑返回(RootHide)
+
+Package: com.dao.ccless
+Version: 2.1.0.1
+Architecture: iphoneos-arm64e
+Maintainer: 妖刀
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: firmware (>= 15.0), mobilesubstrate, com.opa334.ccsupport
+Conflicts: com.skypain.cclocation, com.skypain.ccsettrings, com.skypain.ccrespring, com.sop.cpumagicrootless, netskao.ccbadgeclear-rootless, com.mtac.uptime, netskao.alipayscan-rootless, netskao.wechatscan-rootless, com.skypain.ccvpn, netskao.ccswitchdata-rootless, netskao.ccsim-rootless, netskao.tinyccmodules-rootless, netskao.cccellularrate-rootless, netskao.quantumultxlauncher-rootless, com.p2kdev.snapper2cc, com.skypain.ccautobrightness, com.skypain.ccscreenshot, com.skypain.cclockscreen, xyz.cypwn.safeccmodules, com.zqbb.ccpay, com.zqbb.qszqb, com.netskao.ccbadgeclear, com.kingpuffdaddi.control-center.ccvpn, com.netskao.cclifttowake, com.kdt.caperfhudmodule, com.kingpuffdaddi.control-center.ccvibration, com.hk.roothide.cc, com.hk.rootless.cc
+Filename: ./debs/com.dao.ccless_2.1.0.1_iphoneos-arm64e.deb
+Size: 566632
+MD5sum: 66d1c99b667f44f3877f7e004816a688
+SHA1: 2221a745c0c3ac8ce3196401e14ba1b2e2535419
+SHA256: 124b4c6193b9501583aa2279a84608a5baac983c02ea5ed0810e80c1d1bd77da
+Section: 控制中心
+Description: 超级控制中心模块集合！
+Author: 妖刀
+Name: CCLess++(RootHide)
+Sileodepiction: https://xiangfeidexiaohuo.github.io/sileodepiction/ccless/js.json
+
+Package: com.dao.filzacrack
+Version: 1.1-9
+Architecture: iphoneos-arm64e
+Maintainer: Nets
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: firmware (>= 15.0), mobilesubstrate
+Conflicts: com.netskao.filzacrack, netskao.filzacrack-rootless
+Filename: ./debs/com.dao.filzacrack_1.1-9_iphoneos-arm64e.deb
+Size: 39068
+MD5sum: 0f9dd1175d6e1d4d7775b2a3a4304c55
+SHA1: 26a4a4647c20b9d0135f642bcfc18b7ad5139874
+SHA256: 2ec5bfd8d8bf1115e505fe3181c0f4f1978fb52819aae3c53d192fc88d5e5d0b
+Section: Filza
+Description: Filza解锁全部功能，请在官方源安装Filza。Netskao新更的版本，上架备份；转换支持 roothide。
+Author: Netskao
+Name: Filza Crack(RootHide)
+
+Package: com.exile90.icleanerpros
+Version: 7.10.0
+Architecture: iphoneos-arm64e
+Maintainer: Ivano Bilenchi
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: firmware (>= 4.0), findutils, apt | apt7
+Conflicts: com.exile90.icleanerpro, org.altervista.exilecom.icleaner
+Filename: ./debs/com.exile90.icleanerpros_7.10.0_iphoneos-arm64e.deb
+Size: 2474088
+MD5sum: 3f232a0c408e392309fcd05844b56895
+SHA1: 57bdb89b23ee1882fe9770dba4e6663e03b14100
+SHA256: ac63e84a50dae08a1f63e02bfa8d8e64272d9f34559ba4293afcbf5971d8eeda
+Section: 系统增强
+Description: iCleaner Pro
+ * 垃圾清理工具，启动项管理等
+ * The first real iOS system cleanup and management utility
+Author: Ivano Bilenchi
+Icon: https://TrollStoreX.Github.io/sileodepiction/iCleanerPro/icon.png
+Name: iCleaner Pro
+Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/iCleanerPro/js.json
 
 Package: com.iosdump.appdata
 Version: 2.6.1
@@ -32,6 +161,45 @@ Description: 从主屏幕查看和管理应用数据
 Author: iosdump
 Icon: file:///Library/PreferenceBundles/AppDataPrefs.bundle/AppData@3x.png
 Name: AppData
+
+Package: com.lclrc.controltab
+Version: 1.0
+Architecture: iphoneos-arm64e
+Maintainer: SquidForce
+Installed-Size: 168
+Depends: mobilesubstrate (>= 0.9.5000)
+Filename: ./debs/com.lclrc.controltab_1.0_iphoneos-arm64e.deb
+Size: 7006
+MD5sum: 275e88df398bcad507c800693f8ac75d
+SHA1: f771901d3a0f106327d77255aab47e8f91358f9c
+SHA256: a8036efaa441ed5d79bc9bc3319a9116fe2198ac9ed156aa48690fa51d03ab95
+Section: 系统增强
+Description: tweak for Safari
+Author: SquidForce
+Name: ControlTab - 控制Safari标签页
+Sileodepiction: https://lclrc.github.io/repo/depictions/native/com.lclrc.controltab/depiction.json
+
+Package: com.lclrc.hammerits
+Version: 1.7.0
+Architecture: iphoneos-arm64e
+Maintainer: lclrc(SquidForce)
+Installed-Size: 3808
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate, preferenceloader, com.opa334.altlist, com.opa334.ccsupport, com.opa334.libsandy, firmware (>= 14.0)
+Conflicts: com.lclrc.hammerit
+Filename: ./debs/com.lclrc.hammerits_1.7.0_iphoneos-arm64e.deb
+Size: 2716260
+MD5sum: 96caf589ff2f7156531e209139fbddaf
+SHA1: da26c76195f5b95d9c815eee5847e5deb6e0aa2d
+SHA256: 4222750a39a22e68e64efa96280f74becaa3538ce3d249ccdb2b1e0646e7a865
+Section: 系统增强
+Description: 控制您的文本或根据您的意愿进行翻译。
+ * 支持Twitter Telegram Discord Sileo 等快捷翻译
+ * Control your text or translate as you wish.
+Author: lclrc(SquidForce)
+Icon: https://TrollStoreX.Github.io/sileodepiction/Hammerit/icon.png
+Name: Hammer It 翻译
+Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/Hammerit/js.json
 
 Package: com.qiop1379.swipeextenderx
 Version: 1.6.1~2
@@ -89,6 +257,43 @@ Depiction: https://apt.htv123.com/view/621
 Name: 灵动通知iOS16-正式版(RootHide)
 Sileodepiction: https://apt.htv123.com/sileo/621
 
+Package: com.zqbb.limitcharging
+Version: 1.0.8
+Architecture: iphoneos-arm64e
+Maintainer: zqbb
+Installed-Size: 244
+Depends: mobilesubstrate (>= 0.9.5000) , firmware (>= 15.0)
+Conflicts: zp.limitcharging.rootless
+Filename: ./debs/com.zqbb.limitcharging_1.0.8_iphoneos-arm64e.deb
+Size: 20308
+MD5sum: 120569d0cf6afe77e0bf65c35260f831
+SHA1: 8c2108783806f1da90e024186504dbfdc2c4fab9
+SHA256: 96993057c58729f89d93ae42b9ebf2f38a6caa50af9255f26101207deeb20fbe
+Section: 系统增强
+Description: Hello Charging (限制充电)
+ - Wi-Fi Not Disconnected on Lock Screen (Standby consumes 5% more power)
+ - 锁屏不断Wi-Fi(待机多费电5%)
+Author: zqbb
+Name: Hello Charging
+Sileodepiction: https://rootless.002599.xyz/web/com.zqbb.limitcharging
+
+Package: jp.soh.freepip
+Version: 0.0.3-1
+Architecture: iphoneos-arm64e
+Maintainer: Soh Satoh
+Installed-Size: 168
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate (>= 0.9.5000)
+Filename: ./debs/jp.soh.freepip_0.0.3-1_iphoneos-arm64e.deb
+Size: 8588
+MD5sum: e0a2587a6d8c2ad296cd51d2f336e4c4
+SHA1: 4735d612b5103719bab2ee6c6779dcc5bd6c0080
+SHA256: 2aa43a71330d00e095dabafc08c3e18896e8e0923edf27fab9ebe2c562abaf93
+Section: 系统增强
+Description: FreePIP is a tweak to un-snap and scale the view of Picture-in-Picture on iOS unlimitedly. Long Press PIP window to enable freepip mode. 解锁画中画的限制，可以放在任意位置和调整到任意大小。长按画中画窗口进入 FreePIP 模式进行调整。v0.0.3-1更新：改为默认是正常模式，略微美化FreePIP模式。
+Author: Soh Satoh
+Name: FreePIP
+
 Package: llld.keyboard
 Version: 2.0
 Architecture: iphoneos-arm64e
@@ -105,6 +310,23 @@ Priority: optional
 Description: 在很多时候输入，手机总默认自带键盘，且不能更换第三方，有了这插件，你想用啥键盘用啥键盘(第三方输入法都可以)
 Author: 来了老弟
 Name: 强制使用第三方键盘(RootHide)
+
+Package: me.tomt000.stageduo
+Version: 1.2
+Architecture: iphoneos-arm64e
+Maintainer: tomt000
+Installed-Size: 4900
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate (>= 0.9.5000), com.opa334.altlist, preferenceloader
+Filename: ./debs/me.tomt000.stageduo_1.2_iphoneos-arm64e.deb
+Size: 6635274
+MD5sum: 9d4c743e35fb5a0df87abdbd51d80118
+SHA1: ecc620a21d0113c6b87e41b2b75543636fc47162
+SHA256: a18adfb0e77d70b4a15f2e018ce8f2c9360694cadcfa66ade71bf1a76bb53fe4
+Section: 分屏
+Description: Stage Manager Reimagined for iPhone
+Author: tomt000
+Name: Dynamic Stage(已汉化)
 
 Package: netskao.BlockAppsCreateAlbum
 Version: 1.1.2
