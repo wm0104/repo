@@ -642,25 +642,6 @@ Author: mikey820
 Icon: icon.png
 Name: 请别暂停音乐(RootHide)
 
-Package: com.netskao.wechatnotiavatars
-Version: 1.3-1
-Architecture: iphoneos-arm64e
-Maintainer: Nets
-Installed-Size: 2336
-Pre-Depends: rootless-compat(>= 0.9)
-Depends: firmware (>= 15.0), firmware (<< 17.0), mobilesubstrate
-Filename: ./debs/arm64e/WeChatNotiAvatar 微信头像-1.3-1.deb
-Size: 282716
-MD5sum: e8217874f3fb46a9aa84c846b0f09cae
-SHA1: 7917853b3fb1a89b03bf2073a53107c76a8b83af
-SHA256: 5af64395edb212505d714e1ac3727290c739a926e79cbe4e3343821ecda309fd
-Section: 隐根插件
-Description: 让微信消息通知显示微信好友头像
-Author: Netskao
-Icon: https://TrollStoreX.Github.io/sileodepiction/WeChatNotiAvatar/icon.png
-Name: WeChatNotiAvatar 微信头像
-Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/WeChatNotiAvatar/js.json
-
 Package: com.qiop1379.swipeextenderx
 Version: 1.6.1~2
 Architecture: iphoneos-arm64
