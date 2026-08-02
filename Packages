@@ -654,6 +654,22 @@ Author: Netskao
 Icon: https://TrollStoreX.Github.io/sileodepiction/repo_pic/photo.png
 Name: 禁止应用自动创建相册BlockAppsCreateAlbum
 
+Package: preferenceloader
+Version: 2.2.6-11+debug
+Architecture: iphoneos-arm64e
+Maintainer: ProcursusTeam <support@procurs.us>
+Installed-Size: 456
+Depends: mobilesubstrate
+Filename: ./debs/preferenceloader_2.2.6-11+debug_iphoneos-arm64e.deb
+Size: 65228
+MD5sum: af78605cd8c4dc4931dc7de67090fe37
+SHA1: 63688ee3a2117e4f7fd050757884a1269af6d016
+SHA256: 4850695ba518f6cd82cd65b68c3418321ec0701357960b6510791107509efa08
+Section: 依赖
+Description: load preferences in style
+Author: Dhinak G <dhinak@dhinak.net>
+Name: PreferenceLoader
+
 Package: preferenceloader.top
 Version: 2.2.7
 Architecture: iphoneos-arm64e
