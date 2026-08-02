@@ -40,12 +40,12 @@ Maintainer: MiRO <tweaks_support@miro92.com>
 Installed-Size: 614
 Pre-Depends: rootless-compat(>= 0.9)
 Depends: firmware (>=14.0), mobilesubstrate, org.thebigboss.libcolorpicker
-Filename: ./debs/SwipeExtenderX-1.6.1~2-iphoneos-arm64e.deb
-Size: 101728
-MD5sum: 32176df7e8afbcafb5fd4e6b87134fc2
-SHA1: 1e12806a69edb68bd319a5a70c6b0d19f61d7219
-SHA256: 2c6cca7db61b89fd0189110d059d298dc0f5436fdabe5dfc1cefed8ac9e3a14d
-Section: RootHide
+Filename: ./debs/com.qiop1379.swipeextenderx_1.6.1~2_iphoneos-arm64e.deb
+Size: 116470
+MD5sum: b6c234f65345e209480adfe77ef00ae6
+SHA1: 4ee5063236dc3232e1c0aef0661382c53a0e65f0
+SHA256: 31da1abec61ce313ef9199bfa20844f68f1c25c96c60e87b68f6e109fbde863e
+Section: 键盘增强
 Description: Reinvent your keyboard with this full remake of the legendary SwipeExpander tweak, designed to work on modern iOS!
 Tag: compatible_min::ios14.0
 Author: MiRO <tweaks_support@miro92.com>
