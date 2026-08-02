@@ -34,6 +34,24 @@ Icon: https://rootless.002599.xyz/web/icon/cn.zqbb.disupdateapp
 Name: Hello App
 Sileodepiction: https://rootless.002599.xyz/web/cn.zqbb.disupdateapp
 
+Package: cn.zqbb.hello.memorystatus
+Version: 3.9.0-5
+Architecture: iphoneos-arm64e
+Maintainer: zqbb
+Installed-Size: 12328
+Depends: mobilesubstrate (>= 0.9.5000) , firmware (>= 14.0), preferenceloader, launchctl
+Filename: ./debs/cn.zqbb.hello.memorystatus_3.9.0-5_iphoneos-arm64e.deb
+Size: 6111706
+MD5sum: 3050c2323b6b6b9e27fd096225af7fea
+SHA1: 9c1e8d4753924b5f9eadf6e3a813ec541b10913e
+SHA256: 361c21249299f55799acbc4a382c29735a9bd1491c7b9af83f04865ffd3d1529
+Section: 系统增强
+Description: Set memorystatus to avoid being killed by the system
+Author: zqbb
+Icon: https://rootless.002599.xyz/web/icon/cn.zqbb.hello.memorystatus.png
+Name: Hello Memory Status
+Sileodepiction: https://rootless.002599.xyz/web/cn.zqbb.hello.memorystatus
+
 Package: cn.zqbb.hellopay
 Version: 1.0.2
 Architecture: iphoneos-arm64e
