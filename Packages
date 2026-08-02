@@ -415,6 +415,61 @@ Author: lclrc(SquidForce)
 Icon: file:///Library/PreferenceBundles/SquidGesturePrefs.bundle/SquidGesture_icon@3x.png
 Name: SquidGesture
 
+Package: com.opa334.altlist
+Version: 1.0.11
+Architecture: iphoneos-arm64e
+Maintainer: opa334
+Installed-Size: 340
+Depends: firmware (>=7.0)
+Filename: ./debs/com.opa334.altlist_1.0.11_iphoneos-arm64e.deb
+Size: 59876
+MD5sum: 559c7056442da1f687f6c68bcc1548f5
+SHA1: 28da74d881c6927e17754b25ad91e02db0e63330
+SHA256: 6f1767d7147671bc121083c9ffaea7896263b8939fa1cc63f6dd3cba9f685486
+Section: 依赖
+Description: A modern AppList alternative
+Tag: role::developer
+Author: opa334
+Depiction: https://moreinfo.thebigboss.org/moreinfo/depiction.php?file=altlistDp
+Name: AltList
+
+Package: com.opa334.ccsupport
+Version: 1.3.13-2-15+debug
+Architecture: iphoneos-arm64e
+Maintainer: opa334
+Installed-Size: 716
+Depends: mobilesubstrate, firmware (>=11.0)
+Conflicts: com.ioscreatix.silo
+Replaces: com.ioscreatix.silo
+Provides: com.ioscreatix.silo
+Filename: ./debs/com.opa334.ccsupport_1.3.13-2-15+debug_iphoneos-arm64e.deb
+Size: 169780
+MD5sum: 0ff0ec3c81d1bbc1238475f9b11ca74b
+SHA1: f1987e9ea9af884a5c43bbcf93c3175c235862e7
+SHA256: ffb0da96b22a49a04c2a2bc0961c13a54e5c69c9b3549d079fb69be62e387d76
+Section: 依赖
+Description: Support tweak for CC modules!
+Author: opa334
+Depiction: http://moreinfo.thebigboss.org/moreinfo/depiction.php?file=ccsupportDp
+Name: CCSupport
+
+Package: com.opa334.libsandy
+Version: 1.1.6-4
+Architecture: iphoneos-arm64e
+Maintainer: opa334
+Installed-Size: 468
+Filename: ./debs/com.opa334.libsandy_1.1.6-4_iphoneos-arm64e.deb
+Size: 45534
+MD5sum: 5cd4020f4a5c157eb4609f784d136c2f
+SHA1: ad2b67a2130a5cbe24a806a6c0bf0edb1fad38d1
+SHA256: 31ff182b9f0545de408569c7ccee20c4394770a625757f6c44a1c27e3cb16fa7
+Section: 依赖
+Description: Securely extend the sandbox of system processes and user applications
+Tag: role::developer
+Author: opa334
+Depiction: https://moreinfo.thebigboss.org/moreinfo/depiction.php?file=libsandyDp
+Name: libSandy
+
 Package: com.qiop1379.swipeextenderx
 Version: 1.6.1~2
 Architecture: iphoneos-arm64e
@@ -509,6 +564,26 @@ Description: Hello Charging (限制充电)
 Author: zqbb
 Name: Hello Charging
 Sileodepiction: https://rootless.002599.xyz/web/com.zqbb.limitcharging
+
+Package: ellekit
+Version: 1.2
+Architecture: iphoneos-arm64e
+Maintainer: Dhinak G <dhinak@dhinak.net>
+Conflicts: com.ex.substitute, org.coolstar.libhooker, science.xnu.substitute, mobilesubstrate, com.saurik.substrate.safemode
+Breaks: com.opa334.libsandy (<= 1.1.6-3)
+Replaces: com.ex.libsubstitute, org.coolstar.libhooker, mobilesubstrate
+Provides: mobilesubstrate (= 99), org.coolstar.libhooker (= 1.6.9)
+Filename: ./debs/ellekit_1.2_iphoneos-arm64e.deb
+Size: 390948
+MD5sum: 20f59bda81e054b1032dd4562fb2042a
+SHA1: e6a0e65a1cf3f67b44c80b346e4699b1a236366e
+SHA256: ea201e52a2d1df7f395d64e1ee67ce3ef095ad63bd70fe02f58b2335d50f7a4c
+Section: 依赖
+Priority: optional
+Description: ElleKit tweak injection libraries and loader
+Author: Evelyn
+Icon: https://ellekit.space/logos/logo.png
+Name: ElleKit
 
 Package: jp.soh.freepip
 Version: 0.0.3-1
