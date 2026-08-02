@@ -88,6 +88,23 @@ Description: 左滑返回上一页面
 Author: Mao
 Name: 左滑返回(RootHide)
 
+Package: com.brend0n.nopassafterrespringsafe
+Version: 0.0.3
+Architecture: iphoneos-arm64e
+Maintainer: Brend0n <brendonjkding@126.com>
+Installed-Size: 168
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate
+Filename: ./debs/com.brend0n.nopassafterrespringsafe_0.0.3_iphoneos-arm64e.deb
+Size: 4742
+MD5sum: 1d03d4f887b95be0c3035c0eb673088e
+SHA1: ed4a8a5f357bb3c1fcbc4b666f080182fa6e8f17
+SHA256: 7acc351d280b1c291483661efbb30e7f15ef053ba9f6fad40dda439fade78a2d
+Section: 系统增强
+Description: Disables passcode after a respring. This version does NOT modify system file. It's safe to use. 在注销前是解锁状态的情况下，注销后自动跳过人脸或指纹识别到桌面。
+Author: Brend0n <brendonjkding@126.com>
+Name: NoPassAfterRespring(RootHide)
+
 Package: com.dao.ccless
 Version: 2.1.0.1
 Architecture: iphoneos-arm64e
@@ -139,6 +156,23 @@ Description: 乌龙工作室版Kayoko，更多优化增强，添加支持iOS16/1
 Author: 82Flex
 Name: Kayoko(RootHide)
 Sileodepiction: https://xiangfeidexiaohuo.github.io/sileodepiction/kayoko/js.json
+
+Package: com.doimty.promotion
+Version: 1.0.8
+Architecture: iphoneos-arm64e
+Maintainer: doimty
+Installed-Size: 236
+Depends: mobilesubstrate
+Filename: ./debs/com.doimty.promotion_1.0.8_iphoneos-arm64e.deb
+Size: 33262
+MD5sum: dc7a6e36ab165cc7b16e6e19c3d0e0a1
+SHA1: 25e059acbb8b6861c11745ca602d86fb4b1e2f43
+SHA256: 4151d9973aa2f6a6515755b7cc5a1f10e33743643db7d621a28543ec2348a67b
+Section: 系统增强
+Description: Force global 120Hz ProMotion, bypass the 80Hz system cap. iPhone 13 Pro and above only.
+Tag: supports::roothide
+Author: doimty
+Name: ProMotion 120Hz
 
 Package: com.exile90.icleanerpros
 Version: 7.10.0
@@ -195,6 +229,24 @@ Description: iOS 14-17 进程内存与优先级调整
 Author: iosdump
 Name: MemoryControlX
 
+Package: com.jontelang.snapper3
+Version: 1.2.1
+Architecture: iphoneos-arm64e
+Maintainer: Jonathan Winger-lang
+Installed-Size: 4148
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate, firmware(>=14.0), preferenceloader
+Conflicts: com.jontelang.snapper, com.jontelang.snapper2.packix, xyz.cypwn.snapperfr33
+Filename: ./debs/com.jontelang.snapper3_1.2.1_iphoneos-arm64e.deb
+Size: 2258942
+MD5sum: dccc38c52f5f865336809874f2795c50
+SHA1: cd8c33a1798c3a9415e55926c1939361e0aa55d7
+SHA256: 9a0c8f519adf2e3895b03616b482d59cddcecc79b8f03e6c1b04716f8c20b3f7
+Section: 系统增强
+Description: Pin screenshots on the screen.
+Author: Jonathan Winger-lang
+Name: Snapper 3
+
 Package: com.lclrc.controltab
 Version: 1.0
 Architecture: iphoneos-arm64e
@@ -234,6 +286,23 @@ Icon: https://TrollStoreX.Github.io/sileodepiction/Hammerit/icon.png
 Name: Hammer It 翻译
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/Hammerit/js.json
 
+Package: com.lclrc.squidgesture
+Version: 1.3.7
+Architecture: iphoneos-arm64e
+Maintainer: lclrc(SquidForce)
+Installed-Size: 1512
+Depends: mobilesubstrate, preferenceloader, firmware (>= 14.0), com.opa334.altlist
+Filename: ./debs/com.lclrc.squidgesture_1.3.7_iphoneos-arm64e.deb
+Size: 763246
+MD5sum: 4ad6303e06f7245dae984179130dcdd7
+SHA1: 048b2b43b1ec0bf9c58a5dfa0eca035d4753cbab
+SHA256: e7c0c4a39ab3c66f814835af29d1b821df5a50081d50727ccc358a6ffd99c672
+Section: 系统增强
+Description: Gestures
+Author: lclrc(SquidForce)
+Icon: file:///Library/PreferenceBundles/SquidGesturePrefs.bundle/SquidGesture_icon@3x.png
+Name: SquidGesture
+
 Package: com.qiop1379.swipeextenderx
 Version: 1.6.1~2
 Architecture: iphoneos-arm64e
@@ -253,6 +322,25 @@ Author: MiRO <tweaks_support@miro92.com>
 Depiction: https://chariz.com/get/swipeextenderx
 Icon: https://img.chariz.cloud/icon/swipeextenderx/icon@3x.png
 Name: SwipeExtenderX
+
+Package: com.storeswitcher.appstore
+Version: 1.0.6
+Architecture: iphoneos-arm64e
+Maintainer: 0xkuj
+Depends: firmware (>= 11)
+Conflicts: com.yourepo.0xkuj.storeswitcher2rootless
+Filename: ./debs/com.storeswitcher.appstore_1.0.6_iphoneos-arm64e.deb
+Size: 31852
+MD5sum: 83f94b9f86b75cf209052381515a98a3
+SHA1: 32fdaca7e532375cf8c0494665af62a958049c23
+SHA256: 2e16ddb81d9353ec561c5fe2cc8781a5a22b312ab38822a6cd95c52669013d82
+Section: 系统增强
+Description: 桌面长按 App Store 进行切换账号
+ * Long press the App Store on the desktop to switch accounts
+Author: subdiox & iosdump
+Icon: https://TrollStoreX.Github.io/sileodepiction/StoreSwitcher/icon.png
+Name: StoreSwitcher 账号切换
+Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/StoreSwitcher/js.json
 
 Package: com.xybp888.callassist16.dopamine.roothide
 Version: 2.3.7
@@ -378,4 +466,23 @@ Description: 阻止应用创建自己的相册
 Author: Netskao
 Icon: https://TrollStoreX.Github.io/sileodepiction/repo_pic/photo.png
 Name: 禁止应用自动创建相册BlockAppsCreateAlbum
+
+Package: preferenceloader.top
+Version: 2.2.7
+Architecture: iphoneos-arm64e
+Maintainer: ProcursusTeam <support@procurs.us>
+Installed-Size: 148
+Depends: mobilesubstrate
+Conflicts: preferenceloader, preferenceloader.rootless, preferenceloader.rootless.top
+Replaces: preferenceloader, preferenceloader.rootless, preferenceloader.rootless.top
+Provides: preferenceloader (= 2.2.6)
+Filename: ./debs/preferenceloader.top_2.2.7_iphoneos-arm64e.deb
+Size: 14782
+MD5sum: 4484722964445939cc648c9a45d9a383
+SHA1: c2c38ee8f50984a3514002b618191e0d0b75dee9
+SHA256: 9e7e49f57e6462049b7058539b2b094126889d41a5a4807ad59e8b60c264a2c8
+Section: 依赖
+Description: load preferences in style
+Author: Dhinak G <dhinak@dhinak.net>
+Name: PreferenceLoader (Top)
 
