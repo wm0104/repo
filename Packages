@@ -106,6 +106,54 @@ Description: 左滑返回上一页面
 Author: Mao
 Name: 左滑返回(RootHide)
 
+Package: com.25mao.miyou.rootlesss
+Version: 3.9-5
+Architecture: iphoneos-arm64e
+Maintainer: admin@25mao.com
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: firmware (>= 5.0)
+Conflicts: com.25mao.miyou.rootless
+Filename: ./debs/com.25mao.miyou.rootlesss_3.9-5_iphoneos-arm64e.deb
+Size: 8419916
+MD5sum: 36cd29f709937576b8cbd0b5bc7f7572
+SHA1: f5513204c3a1e666988a9ac769513772c86015a9
+SHA256: f75cea8be606b124bc3c770a8d64cb66c3ebf3899923a7233c55106a65651a20
+Section: 微信插件
+Priority: optional
+Description: 微信多功能插件（密友）
+Author: Mao
+Icon: https://TrollStoreX.Github.io/sileodepiction/mao/icon.png
+Name: 微信助手 密友
+Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/mao/js.json
+
+Package: com.25mao.wcplugins.rootlesss
+Version: 0.1-6
+Architecture: iphoneos-arm64e
+Maintainer: admin@25mao.com
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: firmware (>= 5.0)
+Conflicts: com.25mao.wcplugins.rootless
+Replaces: com.25mao.wcplugins.rootless
+Provides: com.25mao.wcplugins.rootless
+Filename: ./debs/com.25mao.wcplugins.rootlesss_0.1-6_iphoneos-arm64e.deb
+Size: 18002
+MD5sum: 0878f57bb3ea65ae66ea349705fcd2da
+SHA1: a1a75c5862e4f5177580f1c0b0e91c845542b8be
+SHA256: 4ef053aabf78873b40ee53f00d85ac0806a6ede5ff9839d5184dab9ecc236b34
+Section: 微信插件
+Priority: optional
+Description: 微信插件管理
+ * 收纳第三方微信插件
+ * 位于微信右下角“我”-“插件”
+ * 部分微信插件不支持收纳
+ * 0.1-6 修复热更新收纳失效问题
+ * 最后更新日期 2026.03.21
+Author: Mao
+Icon: https://TrollStoreX.Github.io/sileodepiction/wcplugins/icon.png
+Name: 微信插件管理
+Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/wcplugins/js.json
+Sponsor: admin@25mao.com
+
 Package: com.brend0n.nopassafterrespringsafe
 Version: 0.0.3
 Architecture: iphoneos-arm64e
@@ -212,6 +260,28 @@ Author: Ivano Bilenchi
 Icon: https://TrollStoreX.Github.io/sileodepiction/iCleanerPro/icon.png
 Name: iCleaner Pro
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/iCleanerPro/js.json
+
+Package: com.huami.wcpush2chats
+Version: 1.0-2
+Architecture: iphoneos-arm64e
+Maintainer: huami
+Installed-Size: 272
+Depends: mobilesubstrate (>= 0.9.5000)
+Conflicts: com.huami.WCPush2Chat
+Filename: ./debs/com.huami.wcpush2chats_1.0-2_iphoneos-arm64e.deb
+Size: 80326
+MD5sum: d6f8ae0ea892f2d0c513a27b877e0d53
+SHA1: 8bfe68cf489b136f32f2fa89f5254064b5104a2e
+SHA256: fed8d2f10838e0e32be4cbd828827b7202dbacb79b4ddde49139e31b6df98f33
+Section: 微信插件
+Description: 微信推送信息直达聊天窗口
+ * 无后台/后台直达通知对应的消息界面
+ * 无需 Orion Swift 依赖
+ * 仅在微信 8.0.61 测试，理论上支持  8.0.31+
+Author: huami
+Icon: https://TrollStoreX.Github.io/sileodepiction/WCPush2Chat/icon.png
+Name: 微信消息直达 WCPush2Chat
+Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/WCPush2Chat/js.json
 
 Package: com.iosdump.appdata
 Version: 2.6.1
