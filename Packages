@@ -212,11 +212,11 @@ Pre-Depends: rootless-compat(>= 0.9)
 Depends: firmware (>= 15.0), mobilesubstrate, com.opa334.ccsupport
 Conflicts: com.skypain.cclocation, com.skypain.ccsettrings, com.skypain.ccrespring, com.sop.cpumagicrootless, netskao.ccbadgeclear-rootless, com.mtac.uptime, netskao.alipayscan-rootless, netskao.wechatscan-rootless, com.skypain.ccvpn, netskao.ccswitchdata-rootless, netskao.ccsim-rootless, netskao.tinyccmodules-rootless, netskao.cccellularrate-rootless, netskao.quantumultxlauncher-rootless, com.p2kdev.snapper2cc, com.skypain.ccautobrightness, com.skypain.ccscreenshot, com.skypain.cclockscreen, xyz.cypwn.safeccmodules, com.zqbb.ccpay, com.zqbb.qszqb, com.netskao.ccbadgeclear, com.kingpuffdaddi.control-center.ccvpn, com.netskao.cclifttowake, com.kdt.caperfhudmodule, com.kingpuffdaddi.control-center.ccvibration, com.hk.roothide.cc, com.hk.rootless.cc
 Filename: ./debs/com.dao.ccless_2.1.0.1_iphoneos-arm64e.deb
-Size: 566632
-MD5sum: 66d1c99b667f44f3877f7e004816a688
-SHA1: 2221a745c0c3ac8ce3196401e14ba1b2e2535419
-SHA256: 124b4c6193b9501583aa2279a84608a5baac983c02ea5ed0810e80c1d1bd77da
-Section: 控制中心
+Size: 566668
+MD5sum: 2c374625009b046efd14110d9a7acb27
+SHA1: 5768d2835f0eab5bcc4cdbfcca70351e1371f202
+SHA256: 060879e298a140990a74a47088428f48dafc5ec4b6a1a1982b41d4bd98479dad
+Section: 工具
 Description: 超级控制中心模块集合！
 Author: 妖刀
 Name: CCLess++(RootHide)
