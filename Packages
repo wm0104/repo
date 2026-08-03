@@ -463,11 +463,11 @@ Maintainer: lclrc(SquidForce)
 Installed-Size: 1512
 Depends: mobilesubstrate, preferenceloader, firmware (>= 14.0), com.opa334.altlist
 Filename: ./debs/com.lclrc.squidgesture_1.3.7_iphoneos-arm64e.deb
-Size: 763246
-MD5sum: 4ad6303e06f7245dae984179130dcdd7
-SHA1: 048b2b43b1ec0bf9c58a5dfa0eca035d4753cbab
-SHA256: e7c0c4a39ab3c66f814835af29d1b821df5a50081d50727ccc358a6ffd99c672
-Section: 系统增强
+Size: 763242
+MD5sum: 911ec19ee69432b8eab006d56c0efa35
+SHA1: 8d4d0caff4c8181481cfe98c562cd2691fab7708
+SHA256: cf13977ad300fe5fe1cf8d6b3d2317754e615c61db7b7da41bc086741be6c754
+Section: 工具
 Description: Gestures
 Author: lclrc(SquidForce)
 Icon: file:///Library/PreferenceBundles/SquidGesturePrefs.bundle/SquidGesture_icon@3x.png
