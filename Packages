@@ -6,11 +6,11 @@ Installed-Size: 6380
 Depends: mobilesubstrate, preferenceloader, com.opa334.altlist
 Conflicts: com.squidforce.copyvault
 Filename: ./debs/cn.octoforce.copyvault_1.9.0_iphoneos-arm64e.deb
-Size: 2418184
-MD5sum: 3487a731797c523f6bacd3927e7e0f44
-SHA1: c04da50084e7ddf314ab52ed0b03e28c2ad510eb
-SHA256: 6548ae3378a330c436a0ca8f4d630dc26846b5ff963a224494730424bcf39f82
-Section: 粘贴板
+Size: 2418180
+MD5sum: 362c61ee0978e880ea7e2a53a3e8aa2f
+SHA1: fd7226c01ab7059baf72449fa57c0cf58876307e
+SHA256: a388d225c7dd1f1e04d3ecfda767acaaa42e065962d52fdcbdaf33ab6c6dbd8d
+Section: 工具
 Description: 激活码用户或需要激活码的用户安装这个，非激活码用户不要安装！！Do not install if you do not have an activation code!!! Your Copy Vault, Your Pasteboard
 Author: SquidForce, Backup
 Name: CopyVault(激活码版)
@@ -246,11 +246,11 @@ Maintainer: 82Flex
 Depends: firmware (>= 14.0), mobilesubstrate, preferenceloader
 Conflicts: dev.traurige.kayoko, codes.aurora.kayoko, com.daodao.kayoko, com.82flex.kayoko
 Filename: ./debs/com.dao.kayoko_4.1.2_iphoneos-arm64e.deb
-Size: 484020
-MD5sum: a3506fe2af468fd62c6230788ebedec0
-SHA1: ab319145049011e860d5c38b1752d1761a6fe0c9
-SHA256: d64d268346a78f2a725254095c7791aff38c450864e3db018156aa8130c748bf
-Section: 粘贴板
+Size: 484014
+MD5sum: 8888fa84a5b575e5efb1bda63dc4a85f
+SHA1: a747b274e0edb84d6085ef376b599263800e21f8
+SHA256: f8073de96c7a5e09970adf16aeba36bc789c934d502b6d45ddc454cc7d844e2e
+Section: 工具
 Description: 乌龙工作室版Kayoko，更多优化增强，添加支持iOS16/17。
 Author: 82Flex
 Name: Kayoko(RootHide)
@@ -315,11 +315,11 @@ Pre-Depends: rootless-compat(>= 0.9)
 Depends: firmware (>= 4.0), findutils, apt | apt7
 Conflicts: com.exile90.icleanerpro, org.altervista.exilecom.icleaner
 Filename: ./debs/com.exile90.icleanerpros_7.10.0_iphoneos-arm64e.deb
-Size: 2474088
-MD5sum: 3f232a0c408e392309fcd05844b56895
-SHA1: 57bdb89b23ee1882fe9770dba4e6663e03b14100
-SHA256: ac63e84a50dae08a1f63e02bfa8d8e64272d9f34559ba4293afcbf5971d8eeda
-Section: 系统增强
+Size: 2474060
+MD5sum: 61792bb14bd6c2e70c6409e25d4aad79
+SHA1: 27f11da5eb6e17f56d277a8a55d9dc1e5054b20b
+SHA256: a78e983592a3b26a5b2c7576ee6fa0dd95343099854918ecf64362b83f9fdb25
+Section: 工具
 Description: iCleaner Pro
  * 垃圾清理工具，启动项管理等
  * The first real iOS system cleanup and management utility
@@ -373,11 +373,11 @@ Pre-Depends: rootless-compat(>= 0.9)
 Depends: firmware (>= 11.0), mobilesubstrate, preferenceloader
 Conflicts: com.netskao.appdatas, com.netskao.appdata, cn.zqbb.appdata, com.fouadraheb.appdata
 Filename: ./debs/com.iosdump.appdata_2.6.1_iphoneos-arm64e.deb
-Size: 3608642
-MD5sum: 81091e93fae54a6d6672b526d3a952a8
-SHA1: bd1491d784d7ef5ae57070500cd355e75c3d04a3
-SHA256: 73316c8151450ec40d60cf0d2b9344de0f90a99370bde24dee98659b3a663214
-Section: 系统增强
+Size: 3608710
+MD5sum: 148bb74f411b3fb5e32aceae80a556ae
+SHA1: a6bcb9959493ebcc5a5430929aa19873189848de
+SHA256: 97044ab6e8102ed82e8ca53b88c2ee4a1d9a29e11f4945a292fba03609a65b00
+Section: 工具
 Description: 从主屏幕查看和管理应用数据
 Author: iosdump
 Icon: file:///Library/PreferenceBundles/AppDataPrefs.bundle/AppData@3x.png
@@ -408,11 +408,11 @@ Pre-Depends: rootless-compat(>= 0.9)
 Depends: mobilesubstrate, firmware(>=14.0), preferenceloader
 Conflicts: com.jontelang.snapper, com.jontelang.snapper2.packix, xyz.cypwn.snapperfr33
 Filename: ./debs/com.jontelang.snapper3_1.2.1_iphoneos-arm64e.deb
-Size: 2258942
-MD5sum: dccc38c52f5f865336809874f2795c50
-SHA1: cd8c33a1798c3a9415e55926c1939361e0aa55d7
-SHA256: 9a0c8f519adf2e3895b03616b482d59cddcecc79b8f03e6c1b04716f8c20b3f7
-Section: 系统增强
+Size: 2258928
+MD5sum: 17413f30d58cd9df72b03f4aa4da2c79
+SHA1: 84afc50c2b30087457b47b96fe7fce2b3975be6a
+SHA256: e8bf2b517b572da4faeeabefe330e8259e7d59f47646a44f550914eacebf5614
+Section: 工具
 Description: Pin screenshots on the screen.
 Author: Jonathan Winger-lang
 Name: Snapper 3
@@ -443,11 +443,11 @@ Pre-Depends: rootless-compat(>= 0.9)
 Depends: mobilesubstrate, preferenceloader, com.opa334.altlist, com.opa334.ccsupport, com.opa334.libsandy, firmware (>= 14.0)
 Conflicts: com.lclrc.hammerit
 Filename: ./debs/com.lclrc.hammerits_1.7.0_iphoneos-arm64e.deb
-Size: 2716260
-MD5sum: 96caf589ff2f7156531e209139fbddaf
-SHA1: da26c76195f5b95d9c815eee5847e5deb6e0aa2d
-SHA256: 4222750a39a22e68e64efa96280f74becaa3538ce3d249ccdb2b1e0646e7a865
-Section: 系统增强
+Size: 2716262
+MD5sum: f18e197d70dd9c9275a29862e8c61930
+SHA1: 6d5ff29ba7a8b8379f2a119d2494dee4338c1e70
+SHA256: a980506a620076e448c7e1b5e62d8a2937393fb1f3f07fb0abfdab02e1d131ee
+Section: 工具
 Description: 控制您的文本或根据您的意愿进行翻译。
  * 支持Twitter Telegram Discord Sileo 等快捷翻译
  * Control your text or translate as you wish.
@@ -573,11 +573,11 @@ Maintainer: 0xkuj
 Depends: firmware (>= 11)
 Conflicts: com.yourepo.0xkuj.storeswitcher2rootless
 Filename: ./debs/com.storeswitcher.appstore_1.0.6_iphoneos-arm64e.deb
-Size: 31852
-MD5sum: 83f94b9f86b75cf209052381515a98a3
-SHA1: 32fdaca7e532375cf8c0494665af62a958049c23
-SHA256: 2e16ddb81d9353ec561c5fe2cc8781a5a22b312ab38822a6cd95c52669013d82
-Section: 系统增强
+Size: 31844
+MD5sum: a022d8b0f380b4990cd6f96a62f39506
+SHA1: f7e99fcfea9e6f82fa08f0fc40de04738b06a1f1
+SHA256: 2012d1a2b8706d1b02fff75ad73b975e7953a7ef9516497ea0b40598d1d4b50d
+Section: 工具
 Description: 桌面长按 App Store 进行切换账号
  * Long press the App Store on the desktop to switch accounts
 Author: subdiox & iosdump
