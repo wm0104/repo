@@ -1,5 +1,5 @@
-Origin:  wm0104
-Label: wm0104备份源
+Origin:  wm0104(roothide)
+Label: 个人备份源
 Suite: stable
 Version: 1.0
 Codename: ios
