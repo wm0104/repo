@@ -1,7 +1,8 @@
-Origin: wm0104(roothide)
-Label: 个人自用备份
-Suite: ./
+Origin:  wm0104
+Label: wm0104备份源
+Suite: stable
+Version: 1.0
 Codename: ios
 Architectures: iphoneos-arm64e
 Components: main
-Description: 仅备份
+description:wm0104
