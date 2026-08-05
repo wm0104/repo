@@ -71,18 +71,18 @@ Name: Hello Pay
 Sileodepiction: https://rootless.002599.xyz/web/cn.zqbb.hellopay
 
 Package: cn.zqbb.holdcpu
-Version: 2.3.5-3
+Version: 2.3.5-5
 Architecture: iphoneos-arm64e
 Maintainer: zqbb
-Installed-Size: 3664
+Installed-Size: 3672
 Depends: mobilesubstrate (>= 0.9.5000) , firmware (>= 15.0), preferenceloader, com.opa334.ccsupport
 Conflicts: com.yourepo.0xash.powercuff, byg.iosios.net.powercuff, com.dao.powercuff, com.rpetrich.powercuff, com.yourepo.0xash.devicemonitor, com.yourepo.0xash.fuckthermal, com.shadow.fuckthermal, com.dao.fuckthermal, byg.iosios.net.monitor, byg.iosios.net.disablethermalmonitord, com.nan.disablethermalmonitord
-Filename: ./debs/cn.zqbb.holdcpu_2.3.5-3_iphoneos-arm64e.deb
-Size: 1653474
-MD5sum: 859e0c0b78f9eb471ae36339b0e990cb
-SHA1: fd4bc19f6c4fa649999b1937537b604aea0dc042
-SHA256: 45519d0b971c7670674d8f4a9e206b80cd87495ebf21beee92cd2fa9f8f0a39a
-Section: zqbb
+Filename: ./debs/cn.zqbb.holdcpu_2.3.5-5_iphoneos-arm64e.deb
+Size: 2034480
+MD5sum: df0d5318d7e2caeb66e4946755c9a7f2
+SHA1: be3ba5b711100f23c8c6318edab2d3f21e178524
+SHA256: 1e755b081eb668105d4a5dc4d3eae3f4122fd407a4fd8ab423164caab136f736
+Section: 工具
 Description: (解除温控) (锁定低电量CPU频率)
 Author: zqbb
 Icon: https://rootless.002599.xyz/web/icon/cn.zqbb.holdcpu
