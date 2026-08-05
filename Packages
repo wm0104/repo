@@ -89,6 +89,27 @@ Icon: https://rootless.002599.xyz/web/icon/cn.zqbb.holdcpu
 Name: Hello CPU
 Sileodepiction: https://rootless.002599.xyz/web/cn.zqbb.holdcpu
 
+Package: codes.aurora.kayokos
+Version: 4.7.2
+Architecture: iphoneos-arm64e
+Maintainer: mlgm
+Installed-Size: 3156
+Depends: firmware (>= 14.0), mobilesubstrate, preferenceloader, com.opa334.libsandy
+Conflicts: codes.aurora.kayoko, com.dao.kayoko, byg.iosios.net.kayoko, xyz.cypwn.kayoko,com.mlgm.kayoko
+Filename: ./debs/codes.aurora.kayokos_4.7.2_iphoneos-arm64e.deb
+Size: 1399242
+MD5sum: 0599c482e026b664ec003709af491ba6
+SHA1: 17348ec7f60d62dd45cd75b44eea13a712d4525b
+SHA256: 6752e03a1a5904f3597af054c1f9c202f4988c5db03dae512fa0bbe6138f8a15
+Section: 工具
+Description: iOS 剪切板插件
+ * Clipboard manager for iOS
+ * 基于「乌龙工作室」版本进行修改
+Author: mlgm
+Icon: https://TrollStoreX.Github.io/sileodepiction/Kayoko/icon.png
+Name: Kayoko 剪切板
+Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/Kayoko/js.json
+
 Package: com.25mao.leftpan.rootless
 Version: 1.0-6
 Architecture: iphoneos-arm64e
@@ -238,39 +259,6 @@ Description: Filza解锁全部功能，请在官方源安装Filza。Netskao新�
 Author: Netskao
 Name: Filza Crack(RootHide)
 
-Package: com.dao.kayoko
-Version: 4.1.2
-Architecture: iphoneos-arm64e
-Maintainer: 82Flex
-Depends: firmware (>= 14.0), mobilesubstrate, preferenceloader
-Conflicts: dev.traurige.kayoko, codes.aurora.kayoko, com.daodao.kayoko, com.82flex.kayoko
-Filename: ./debs/com.dao.kayoko_4.1.2_iphoneos-arm64e.deb
-Size: 484014
-MD5sum: 8888fa84a5b575e5efb1bda63dc4a85f
-SHA1: a747b274e0edb84d6085ef376b599263800e21f8
-SHA256: f8073de96c7a5e09970adf16aeba36bc789c934d502b6d45ddc454cc7d844e2e
-Section: 工具
-Description: 乌龙工作室版Kayoko，更多优化增强，添加支持iOS16/17。
-Author: 82Flex
-Name: Kayoko(RootHide)
-Sileodepiction: https://xiangfeidexiaohuo.github.io/sileodepiction/kayoko/js.json
-
-Package: com.dao.settingsrevamp
-Version: 3.0.1.1
-Architecture: iphoneos-arm64e
-Maintainer: SOPPPra
-Depends: mobilesubstrate, preferenceloader, com.mrgcgamer.libgcuniversal, firmware (>= 14), com.hk.settingsrevamp.cn.rl
-Conflicts: com.creaturecoding.shuffle, com.trappledestek.ikset, pro.ikghd.iksettings, xyz.cypwn.settingswidgets, org.mr.settingswidgets, com.trappledestek.settingswidgets, com.shepgoba.settingswidgets, com.sop.settingsrevamp
-Filename: ./debs/com.dao.settingsrevamp_3.0.1.1_iphoneos-arm64e.deb
-Size: 560886
-MD5sum: c07c425fa75f410505d6960c256c54b7
-SHA1: 897b3c670372be56d9e54e95dbf880f473e88df0
-SHA256: 42a7df424b5d3ef7835fda2b91fad56d58fd6b326088db5b5a9270b998779a4c
-Section: 工具
-Description: 设置自定义、归类插件，源内有汉化包；v3.0.x版本，功能大体和之前v2.1.1差不多，就改了个插件首页。
-Author: SOPPPra
-Name: SettingsRevamp(RootHide)
-
 Package: com.doimty.promotion
 Version: 1.0.8
 Architecture: iphoneos-arm64e
@@ -308,21 +296,6 @@ Author: Ivano Bilenchi
 Icon: https://TrollStoreX.Github.io/sileodepiction/iCleanerPro/icon.png
 Name: iCleaner Pro
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/iCleanerPro/js.json
-
-Package: com.hk.settingsrevamp.cn.rl
-Version: 3.0.1
-Architecture: iphoneos-arm64e
-Maintainer: 妖刀
-Depends: mobilesubstrate
-Filename: ./debs/com.hk.settingsrevamp.cn.rl_3.0.1_iphoneos-arm64e.deb
-Size: 15030
-MD5sum: 8bf9a6ce7744e7393176489bba8b5696
-SHA1: cd76693888927959f71d3ba3fd3acca3a4d52239
-SHA256: 72461a100df76db795d6fff795275d2fcb9eac79a62ba65bb6e7cbfd087d57ab
-Section: 工具
-Description: SettingsRevamp 简体中文包(RootHide)。
-Author: 妖刀
-Name: SettingsRevamp 简体中文包(RootHide)
 
 Package: com.huami.wcpush2chats
 Version: 1.0-2
@@ -453,24 +426,6 @@ Description: Gestures
 Author: lclrc(SquidForce)
 Icon: file:///Library/PreferenceBundles/SquidGesturePrefs.bundle/SquidGesture_icon@3x.png
 Name: SquidGesture
-
-Package: com.mrgcgamer.libgcuniversal
-Version: 1.7.0
-Architecture: iphoneos-arm64e
-Maintainer: MrGcGamer
-Pre-Depends: rootless-compat(>= 0.9)
-Depends: firmware (>= 14.0) | ws.hbang.alderis, firmware (>= 12.0)
-Provides: com.mrgcgamer.libgcimagepicker, com.mrgcgamer.libgccolorpicker
-Filename: ./debs/com.mrgcgamer.libgcuniversal_1.7.0_iphoneos-arm64e.deb
-Size: 121178
-MD5sum: 72c321e0a39d3701499ee3561fb0439c
-SHA1: dfb3ef9c9694c21c425ac71c30b528d957f6d6d3
-SHA256: 47ad2fde31865b150121ed4e48843f73dad6075a3e0fc2b3194c4bebed42b935
-Section: 依赖
-Description: 开发通用库，例如SettingsRevamp就需要依赖此；转换支持roothide。
-Tag: role::developer
-Author: MrGcGamer
-Name: LibGcUniversal(RootHide)
 
 Package: com.opa334.altlist
 Version: 1.0.11
@@ -740,11 +695,11 @@ Installed-Size: 4900
 Pre-Depends: rootless-compat(>= 0.9)
 Depends: mobilesubstrate (>= 0.9.5000), com.opa334.altlist, preferenceloader
 Filename: ./debs/me.tomt000.stageduo_1.2_iphoneos-arm64e.deb
-Size: 6635274
-MD5sum: 9d4c743e35fb5a0df87abdbd51d80118
-SHA1: ecc620a21d0113c6b87e41b2b75543636fc47162
-SHA256: a18adfb0e77d70b4a15f2e018ce8f2c9360694cadcfa66ade71bf1a76bb53fe4
-Section: 分屏
+Size: 6635258
+MD5sum: 247d16b9cda5946034ea22a5c91bad75
+SHA1: 3118436000d44078c1a2684f89d6e9932fc2473a
+SHA256: 9cbdf66373e2d1c271b7e5c0d502166e8350115070c108206caf0d34769d8c9b
+Section: 工具
 Description: Stage Manager Reimagined for iPhone
 Author: tomt000
 Name: Dynamic Stage(已汉化)
