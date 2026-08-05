@@ -187,23 +187,6 @@ Description: Disables passcode after a respring. This version does NOT modify sy
 Author: Brend0n <brendonjkding@126.com>
 Name: NoPassAfterRespring(RootHide)
 
-Package: com.charlieleung.trollopenjb
-Version: 1.3.7
-Architecture: iphoneos-arm64e
-Maintainer: Charlie Leung
-Installed-Size: 4460
-Pre-Depends: rootless-compat(>= 0.9)
-Depends: mobilesubstrate (>= 0.9.5000), preferenceloader, com.opa334.altlist
-Filename: ./debs/com.charlieleung.trollopenjb_1.3.7_iphoneos-arm64e.deb
-Size: 3257806
-MD5sum: f33d65de5ba30598a978570d4cee15ce
-SHA1: 6aced88898bf0dbdb8199e728c1a47c3eeac5b02
-SHA256: ee203208d1fb03e29fdc00d4f936e83cb7d254da7f8f973957bb6faf092ba3de
-Section: 分屏
-Description: TrollOpen 的越狱版本，支持 ios16 及以上，免费公开版，无后续更新，不需要反馈 bug。QQ 群：1094778353，后续付费更新联系群主或群管理。小黑子闭嘴吧，看看什么是最强分屏！
-Author: Charlie Leung
-Name: TrollOpen
-
 Package: com.dao.ccless
 Version: 2.1.0.1
 Architecture: iphoneos-arm64e
@@ -271,24 +254,6 @@ Description: 乌龙工作室版Kayoko，更多优化增强，添加支持iOS16/1
 Author: 82Flex
 Name: Kayoko(RootHide)
 Sileodepiction: https://xiangfeidexiaohuo.github.io/sileodepiction/kayoko/js.json
-
-Package: com.dao.milkywayreborn
-Version: 1.4
-Architecture: iphoneos-arm64e
-Maintainer: MilkyWay Reborn
-Installed-Size: 308
-Depends: mobilesubstrate (>= 0.9.5000)
-Conflicts: com.milkyway.reborn
-Filename: ./debs/com.dao.milkywayreborn_1.4_iphoneos-arm64e.deb
-Size: 104556
-MD5sum: 88aa486b4030f3df5860466e7d659a29
-SHA1: f113a2f3ade7c6cd7511e961e77593de3764a521
-SHA256: fe773916bfa58a896223974b43ef5f3ea815643a6de0e69b2df8535d455087df
-Section: 分屏
-Description: 窗口化分屏，长按APP图标菜单—>窗口分屏；或者后台界面，按住程序卡片1.5秒，即可将此程序分屏；点击红按钮—>关闭窗口(长按彻底杀死)、黄按钮—>最小化(长按胶囊彻底杀死)、绿按钮—>最大化。
-Author: MilkyWay Reborn
-Name: MilkyWayReborn(RootHide)
-Sileodepiction: https://xiangfeidexiaohuo.github.io/sileodepiction/milkyway/js.json
 
 Package: com.dao.settingsrevamp
 Version: 3.0.1.1
