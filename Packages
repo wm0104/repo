@@ -474,11 +474,11 @@ Installed-Size: 614
 Pre-Depends: rootless-compat(>= 0.9)
 Depends: firmware (>=14.0), mobilesubstrate, org.thebigboss.libcolorpicker
 Filename: ./debs/com.qiop1379.swipeextenderx_1.6.1~2_iphoneos-arm64e.deb
-Size: 116470
-MD5sum: b6c234f65345e209480adfe77ef00ae6
-SHA1: 4ee5063236dc3232e1c0aef0661382c53a0e65f0
-SHA256: 31da1abec61ce313ef9199bfa20844f68f1c25c96c60e87b68f6e109fbde863e
-Section: 键盘增强
+Size: 116480
+MD5sum: 9ae952c0711dc4f7f7abcedb0362144e
+SHA1: 1e9a913b7e390efcdec4b08c0ce53a008c068b3a
+SHA256: 77a206f8cc27f20cda8c49d9ac6f401bcc95f258e0de80bea00b9026a33781fe
+Section: 工具
 Description: Reinvent your keyboard with this full remake of the legendary SwipeExpander tweak, designed to work on modern iOS!
 Tag: compatible_min::ios14.0
 Author: MiRO <tweaks_support@miro92.com>
@@ -661,15 +661,15 @@ Installed-Size: 168
 Pre-Depends: rootless-compat(>= 0.9)
 Depends: mobilesubstrate
 Filename: ./debs/llld.keyboard_2.0_iphoneos-arm64e.deb
-Size: 5504
-MD5sum: be9d5191cef0f428867652e81adf31c5
-SHA1: acb5c1a02dfd407d5d85784173621b343ad363e7
-SHA256: 0d614f4c81bcbb62b9357cddddaf560c91308857b0696868cb14f1a1808b0ffa
-Section: 键盘增强
+Size: 5496
+MD5sum: 139b1327c496f3db08d10004f487162c
+SHA1: a71433154b52bdf8dd03b88caa2f9fc299ec5e7c
+SHA256: 63f1a071d3596438ab96600828ddc81a886c1b5c43cffdbb55c75d76a6be6595
+Section: 工具
 Priority: optional
 Description: 在很多时候输入，手机总默认自带键盘，且不能更换第三方，有了这插件，你想用啥键盘用啥键盘(第三方输入法都可以)
 Author: 来了老弟
-Name: 强制使用第三方键盘(RootHide)
+Name: 强制使用第三方输入法
 
 Package: me.tomt000.stageduo
 Version: 1.2
