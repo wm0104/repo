@@ -226,22 +226,6 @@ Author: 妖刀
 Name: CCLess++(RootHide)
 Sileodepiction: https://xiangfeidexiaohuo.github.io/sileodepiction/ccless/js.json
 
-Package: com.dao.classickeyboardxs
-Version: 1.1-9
-Architecture: iphoneos-arm64e
-Maintainer: Nets
-Depends: firmware (>= 15.0), mobilesubstrate, preferenceloader
-Conflicts: com.netskao.classickeyboardxs, netskao.classickeyboardxs-rootless
-Filename: ./debs/com.dao.classickeyboardxs_1.1-9_iphoneos-arm64e.deb
-Size: 501702
-MD5sum: a6c6e8ebb0409e53ee19f794787d197d
-SHA1: 060c069017f642155b43fa219764793d5e160efd
-SHA256: 40e12230ecb79b1a648cfe849733be686f602f4f91abb5b51501246b1b007133
-Section: 键盘增强
-Description: 自定义X键盘底部高度，地球底部高度等；Netskao新版本，上架备份。
-Author: Netskao
-Name: ClassicKeyboardXS(RootHide)
-
 Package: com.dao.filzacrack
 Version: 1.1-9
 Architecture: iphoneos-arm64e
