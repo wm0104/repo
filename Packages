@@ -562,15 +562,15 @@ Icon: https://sini921.github.io/repo/sileodepiction/icon/filzaswipeselect.png
 Name: FilzaSwipeSelect
 
 Package: com.xybp888.callassist16.dopamine.roothide
-Version: 2.3.7
+Version: 2.3.9
 Architecture: iphoneos-arm64e
 Maintainer: xybp888
 Depends: firmware (>= 16.0), preferenceloader, com.opa334.libsandy
-Filename: ./debs/com.xybp888.callassist16.dopamine.roothide_2.3.7_iphoneos-arm64e.deb
-Size: 4340344
-MD5sum: e08af93ab4444647ef2961da3883410d
-SHA1: bffa9f86fed445a5f7e41d822608043282a8e42f
-SHA256: bebf506d10efde4acaeaecbf7ed3167c104648d3c3c210d42169f123655cf6b4
+Filename: ./debs/com.xybp888.callassist16.dopamine.roothide_2.3.9_iphoneos-arm64e.deb
+Size: 3119364
+MD5sum: b2dba4ff35819f736e1a476fbe6c3b6b
+SHA1: 62741650da369fea3677752eb27c57d2b729cb69
+SHA256: 8d1752946429c50f31b90247ff6679927a22653630ad4921de2cfd090373187f
 Section: 系统增强
 Priority: optional
 Description: 电话助手授权版本,通话录音,通话记录合并,T9双卡选卡拨号键盘,短信双卡选卡,来去电归属地,黑名单,骚扰拦截,状态栏图标替换,时间格式修改,常用小功能等强大插件
