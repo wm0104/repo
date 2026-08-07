@@ -110,22 +110,21 @@ Icon: https://TrollStoreX.Github.io/sileodepiction/Kayoko/icon.png
 Name: Kayoko 剪切板
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/Kayoko/js.json
 
-Package: com.25mao.leftpan.rootless
-Version: 1.0-6
+Package: com.25mao.leftpan
+Version: 2.0-1
 Architecture: iphoneos-arm64e
-Maintainer: admin@25mao.com
-Pre-Depends: rootless-compat(>= 0.9)
-Depends: mobilesubstrate, preferenceloader, com.opa334.altlist (>=1.0.4)
-Filename: ./debs/com.25mao.leftpan.rootless_1.0-6_iphoneos-arm64e.deb
-Size: 56056
-MD5sum: cef385f70729b2ec9bb65201ecd37141
-SHA1: 49e1a069979f19af00718582720bb038c6a18db5
-SHA256: ac4c32039945ea1ee7f3c82f0502440f4e05daf7bfd1b8f72aa806e3ea92a8dc
-Section: 系统增强
-Priority: optional
+Maintainer: Mao
+Installed-Size: 376
+Depends: mobilesubstrate (>= 0.9.5000), preferenceloader, com.opa334.altlist (>=1.0.4)
+Filename: ./debs/com.25mao.leftpan_2.0-1_iphoneos-arm64e.deb
+Size: 61150
+MD5sum: a4dbbb4a75ace0216c756331aa12b263
+SHA1: c5bc553e4c14599b11a449983a64a34cb418d92d
+SHA256: a4c05bb86bed741e4280cca810d29a2cc207aa3da93fa6d38f6fa85e89d02058
+Section: 工具
 Description: 左滑返回上一页面
 Author: Mao
-Name: 左滑返回(RootHide)
+Name: 左滑返回
 
 Package: com.25mao.miyou.rootlesss
 Version: 3.9-5
