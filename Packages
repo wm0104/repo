@@ -303,19 +303,19 @@ Name: 微信消息直达 WCPush2Chat
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/WCPush2Chat/js.json
 
 Package: com.iosdump.appdata
-Version: 2.6.1
+Version: 2.6.7
 Architecture: iphoneos-arm64e
 Maintainer: iosdump
 Pre-Depends: rootless-compat(>= 0.9)
 Depends: firmware (>= 11.0), mobilesubstrate, preferenceloader
 Conflicts: com.netskao.appdatas, com.netskao.appdata, cn.zqbb.appdata, com.fouadraheb.appdata
-Filename: ./debs/com.iosdump.appdata_2.6.1_iphoneos-arm64e.deb
-Size: 3608710
-MD5sum: 148bb74f411b3fb5e32aceae80a556ae
-SHA1: a6bcb9959493ebcc5a5430929aa19873189848de
-SHA256: 97044ab6e8102ed82e8ca53b88c2ee4a1d9a29e11f4945a292fba03609a65b00
+Filename: ./debs/com.iosdump.appdata_2.6.7_iphoneos-arm64e.deb
+Size: 3864948
+MD5sum: b30e9cdf406e93be1ed16c5eda0e256c
+SHA1: 82b61c5811cb4761cf43ae09954ad89b92cfc6a8
+SHA256: 6e24d89e112ad40089f809446dbaa7a5e4421b3518b0f06bb4e07a9bc9e6439b
 Section: 工具
-Description: 从主屏幕查看和管理应用数据
+Description: 在主屏幕查看应用数据与管理应用
 Author: iosdump
 Icon: file:///Library/PreferenceBundles/AppDataPrefs.bundle/AppData@3x.png
 Name: AppData
