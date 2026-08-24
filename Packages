@@ -576,42 +576,6 @@ Author: korboy <korboybeats@gmail.com>
 Icon: https://sini921.github.io/repo/sileodepiction/icon/filzaswipeselect.png
 Name: FilzaSwipeSelect
 
-Package: com.xybp888.callassist16.dopamine.roothide
-Version: 2.3.9
-Architecture: iphoneos-arm64e
-Maintainer: xybp888
-Depends: firmware (>= 16.0), preferenceloader, com.opa334.libsandy
-Filename: ./debs/com.xybp888.callassist16.dopamine.roothide_2.3.9_iphoneos-arm64e.deb
-Size: 3119364
-MD5sum: b2dba4ff35819f736e1a476fbe6c3b6b
-SHA1: 62741650da369fea3677752eb27c57d2b729cb69
-SHA256: 8d1752946429c50f31b90247ff6679927a22653630ad4921de2cfd090373187f
-Section: 系统增强
-Priority: optional
-Description: 电话助手授权版本,通话录音,通话记录合并,T9双卡选卡拨号键盘,短信双卡选卡,来去电归属地,黑名单,骚扰拦截,状态栏图标替换,时间格式修改,常用小功能等强大插件
-Author: xybp888
-Depiction: https://apt.htv123.com/view/632
-Name: 电话助手iOS16-正式版(Roothide)
-Sileodepiction: https://apt.htv123.com/sileo/632
-
-Package: com.xybp888.perfectdynamiclsland.roothide
-Version: 1.2-31
-Architecture: iphoneos-arm64e
-Maintainer: xybp888
-Depends: firmware (>= 16.0), mobilesubstrate
-Filename: ./debs/com.xybp888.perfectdynamiclsland.roothide_1.2-31_iphoneos-arm64e.deb
-Size: 730300
-MD5sum: edd46644bb8a6af686d9a0086e46893a
-SHA1: 0c53e7a19561981ad9dd9953c6389094487fc23c
-SHA256: cab6862f306ba314d39eff669d8eea0b9d443c960ef5a93013712b7c2361cde8
-Section: 系统增强
-Priority: optional
-Description: 完美的使用原生灵动岛展示系统通知等...
-Author: xybp888
-Depiction: https://apt.htv123.com/view/621
-Name: 灵动通知iOS16-正式版(RootHide)
-Sileodepiction: https://apt.htv123.com/sileo/621
-
 Package: com.zqbb.limitcharging
 Version: 1.0.8
 Architecture: iphoneos-arm64e
