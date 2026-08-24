@@ -326,11 +326,11 @@ Pre-Depends: rootless-compat(>= 0.9)
 Depends: firmware (>= 11.0), mobilesubstrate, preferenceloader
 Conflicts: com.netskao.appdatas, com.netskao.appdata, cn.zqbb.appdata, com.fouadraheb.appdata
 Filename: ./debs/com.iosdump.appdata_2.6.9_iphoneos-arm64e.deb
-Size: 3931882
-MD5sum: 6605d86eda61c917bdbf4e39c96db711
-SHA1: cb1193b5b65890a3d5bd638aac7f23a43ad30fd2
-SHA256: 0d073563e9c8e2f14cb4d520f69ed8cb55fbb4b6b8d7bdd0f71af756c8168d9a
-Section: Tweaks
+Size: 3892790
+MD5sum: 00791b79e7fb70af5169317825cdb2a1
+SHA1: 4793426828287c6d8dd03e2a8f3f004599f0d7ce
+SHA256: 11d2715576dd84d8498770d4aa3ec8781af2500289370f56d5961d553ec05dfd
+Section: 系统增强
 Description: 在主屏幕查看应用数据与管理应用
 Author: iosdump
 Icon: file:///Library/PreferenceBundles/AppDataPrefs.bundle/AppData@3x.png
