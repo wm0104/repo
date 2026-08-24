@@ -90,20 +90,20 @@ Name: Hello CPU
 Sileodepiction: https://rootless.002599.xyz/web/cn.zqbb.holdcpu
 
 Package: codes.aurora.kayokos
-Version: 4.7.2
+Version: 4.8.1
 Architecture: iphoneos-arm64e
 Maintainer: mlgm
 Installed-Size: 3156
 Depends: firmware (>= 14.0), mobilesubstrate, preferenceloader, com.opa334.libsandy
 Conflicts: codes.aurora.kayoko, com.dao.kayoko, byg.iosios.net.kayoko, xyz.cypwn.kayoko,com.mlgm.kayoko
-Filename: ./debs/codes.aurora.kayokos_4.7.2_iphoneos-arm64e.deb
-Size: 1399242
-MD5sum: 0599c482e026b664ec003709af491ba6
-SHA1: 17348ec7f60d62dd45cd75b44eea13a712d4525b
-SHA256: 6752e03a1a5904f3597af054c1f9c202f4988c5db03dae512fa0bbe6138f8a15
-Section: 工具
+Filename: ./debs/codes.aurora.kayokos_4.8.1_iphoneos-arm64e.deb
+Size: 1436976
+MD5sum: 6554b9a2acad063f4352843b73e891d9
+SHA1: f2012dc4c17062d26a93132ee8da350b9c66fceb
+SHA256: 666d445374595ecbab7eeaaff47dc638c74fd7da03e68c8273720290cda69592
+Section: 系统增强
 Description: iOS 剪切板插件
- * Clipboard manager for iOS
+ * 功能丰富的剪切板管理器
  * 基于「乌龙工作室」版本进行修改
 Author: mlgm
 Icon: https://TrollStoreX.Github.io/sileodepiction/Kayoko/icon.png
@@ -317,24 +317,6 @@ Author: huami
 Icon: https://TrollStoreX.Github.io/sileodepiction/WCPush2Chat/icon.png
 Name: 微信消息直达 WCPush2Chat
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/WCPush2Chat/js.json
-
-Package: com.iosdump.appdata
-Version: 2.6.7
-Architecture: iphoneos-arm64e
-Maintainer: iosdump
-Pre-Depends: rootless-compat(>= 0.9)
-Depends: firmware (>= 11.0), mobilesubstrate, preferenceloader
-Conflicts: com.netskao.appdatas, com.netskao.appdata, cn.zqbb.appdata, com.fouadraheb.appdata
-Filename: ./debs/com.iosdump.appdata_2.6.7_iphoneos-arm64e.deb
-Size: 3864948
-MD5sum: b30e9cdf406e93be1ed16c5eda0e256c
-SHA1: 82b61c5811cb4761cf43ae09954ad89b92cfc6a8
-SHA256: 6e24d89e112ad40089f809446dbaa7a5e4421b3518b0f06bb4e07a9bc9e6439b
-Section: 工具
-Description: 在主屏幕查看应用数据与管理应用
-Author: iosdump
-Icon: file:///Library/PreferenceBundles/AppDataPrefs.bundle/AppData@3x.png
-Name: AppData
 
 Package: com.iosdump.appdata
 Version: 2.6.9
