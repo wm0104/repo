@@ -16,6 +16,23 @@ Author: SquidForce, Backup
 Name: CopyVault(激活码版)
 Sileodepiction: https://lclrc.github.io/repo/depictions/native/cn.octoforce.copyvault/depiction.json
 
+Package: cn.wkk.swipeextenderx
+Version: 0.0.2
+Architecture: iphoneos-arm64e
+Maintainer: 来了老弟
+Installed-Size: 168
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate (>= 0.9.5000)
+Filename: ./debs/cn.wkk.swipeextenderx_0.0.2_iphoneos-arm64e.deb
+Size: 13628
+MD5sum: f64710f30521cedfcb68a4c25213f1ca
+SHA1: a2b69248e45806407e0b70e4474103279964e0d7
+SHA256: 92bdedfd40501a60a94de93c3d120a55fa4aad8afefd7d28d2e544fba025a140
+Section: 工具
+Author: 来了老弟
+Icon: https://img.chariz.cloud/icon/swipeextenderx/icon@3x.png
+Name: SwipeExtenderX汉化
+
 Package: cn.zqbb.disupdateapp
 Version: 2.0.0-6
 Architecture: iphoneos-arm64e
