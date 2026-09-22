@@ -1,3 +1,8 @@
+好的，完全明白。不要 IPA 列表了，也不要图标了，回到你最初那个只有一个“添加越狱源”按钮的干净页面。
+
+请打开 wm0104/repo 仓库的 index.html，全选删除，把下面这段完整代码粘贴进去，保存即可：
+
+```html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -5,109 +10,82 @@
     <title>wm0104's Repo</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { box-sizing: border-box; }
         body {
-            background-color: #f5f5f7;
-            color: #1d1d1f;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            min-height: 100vh;
+            margin: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            background: #f2f2f7;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
         }
-        .bg-fluid {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
-            background-color: #f5f5f7;
-            background-image:
-                radial-gradient(at 0% 0%, #d2e3fc 0px, transparent 60%),
-                radial-gradient(at 50% 0%, #f3e8ff 0px, transparent 60%),
-                radial-gradient(at 100% 0%, #e3f2fd 0px, transparent 60%);
+        .card {
+            width: 360px;
+            padding: 35px 30px;
+            background: #ffffff;
+            border-radius: 30px;
+            border: 2px solid rgba(0,0,0,0.18);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            text-align: center;
         }
-        .main-container {
-            position: relative; padding: 40px 24px; border-radius: 35px; width: 100%; max-width: 420px;
-            background: rgba(255, 255, 255, 0.4); border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(30px) saturate(180%); -webkit-backdrop-filter: blur(30px) saturate(180%);
+        .title {
+            font-size: 30px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 30px;
         }
-        .header-box { display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
-        .avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255, 255, 255, 0.6); margin-right: 16px; }
-        .title-container { text-align: left; display: flex; flex-direction: column; }
-        .top-title { font-size: 28px; font-weight: 800; color: #1d1d1f; }
-        .repo-subtitle { font-size: 14px; font-weight: 600; color: #86868b; margin-top: 2px; }
-        .capsule-group { display: flex; justify-content: center; align-items: center; margin-bottom: 30px; }
-        .capsule-item { flex: 1; display: flex; align-items: center; justify-content: center; padding: 12px 8px; color: #1d1d1f; text-decoration: none; font-size: 14px; font-weight: 700; border-radius: 20px; background: transparent; }
-        .capsule-item:first-child { margin-right: 12px; }
-        .capsule-item:active { background: rgba(0, 0, 0, 0.08); }
-        .app-list-section { border-top: 1px solid rgba(0, 0, 0, 0.1); padding-top: 25px; text-align: left; }
-        .list-title { font-size: 15px; font-weight: 700; color: #86868b; margin-bottom: 20px; padding-left: 4px; text-transform: uppercase; }
-        .app-item { display: flex; align-items: center; justify-content: space-between; padding-bottom: 18px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); margin-bottom: 18px; }
-        .app-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .app-meta-box { display: flex; align-items: center; flex: 1; min-width: 0; margin-right: 12px; }
-        .app-icon-link { display: block; margin-right: 14px; }
-        .app-icon { width: 52px; height: 52px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
-        .app-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-        .app-name { font-size: 15px; font-weight: 700; color: #1d1d1f; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .app-version { font-size: 12px; color: #86868b; margin-bottom: 2px; }
-        .app-desc { font-size: 12px; color: #a1a1a6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .download-btn { background: rgba(0, 0, 0, 0.05); color: #0071e3; text-decoration: none; padding: 6px 18px; border-radius: 20px; font-size: 13px; font-weight: 700; transition: all 0.2s ease; white-space: nowrap; }
-        .download-btn:hover { background: #0071e3; color: #ffffff; }
-        .footer { margin-top: 28px; color: #777; font-size: 12px; text-align: center; }
+        .button {
+            width: 300px;
+            height: 58px;
+            line-height: 58px;
+            margin: 16px auto;
+            display: block;
+            border-radius: 18px;
+            background: #ffffff;
+            border: 1.5px solid rgba(0,0,0,0.18);
+            color: #007aff;
+            font-size: 23px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.08);
+            transition: .2s;
+        }
+        .button:active {
+            transform: scale(0.95);
+        }
+        .footer {
+            margin-top: 28px;
+            color: #777;
+            font-size: 15px;
+        }
+        @media(prefers-color-scheme:dark){
+            body { background: #000000; }
+            .card {
+                background: #1c1c1e;
+                border: 2px solid rgba(255,255,255,0.45);
+                box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+            }
+            .title { color: #ffffff; }
+            .button {
+                background: #2c2c2e;
+                border: 1.5px solid rgba(255,255,255,0.35);
+                color: #0a84ff;
+            }
+            .footer { color: #aaaaaa; }
+        }
     </style>
 </head>
 <body>
-    <div class="bg-fluid"></div>
-    <div class="main-container">
-        <div class="header-box">
-            <img src="https://raw.githubusercontent.com/wm0104/wm0104.icon/main/avatar.png" class="avatar" alt="Avatar">
-            <div class="title-container">
-                <h1 class="top-title">wm0104</h1>
-                <p class="repo-subtitle">越狱源及应用仓库</p>
-            </div>
-        </div>
-        <div class="capsule-group">
-            <a href="sileo://source/https://wm0104.github.io/repo/" class="capsule-item">
-                <i class="fa fa-download"></i>添加越狱源
-            </a>
-        </div>
-        <div class="app-list-section">
-            <h2 class="list-title">应用插件列表</h2>
-            
-            <!-- ⚠️ 以后加新 App，就复制下面这一整段，粘贴到这里 -->
-            <!-- 你的 Surge 应用开始 -->
-            <div class="app-item">
-                <div class="app-meta-box">
-                    <a href="https://raw.githubusercontent.com/wm0104/wm0104.ipa/main/icon/surge.png" target="_blank" class="app-icon-link">
-                        <img src="https://raw.githubusercontent.com/wm0104/wm0104.icon/main/APP/surge.png" class="app-icon" alt="Icon">
-                    </a>
-                    <div class="app-info">
-                        <div class="app-name">Surge</div>
-                        <div class="app-version">v5.20.0 · tipa</div>
-                        <div class="app-desc">网络调试工具</div>
-                    </div>
-                </div>
-                <a href="https://raw.githubusercontent.com/wm0104/wm0104.ipa/main/tipa/Surge-iOS-5.20.0%20%5BMacKed%5D.tipa" class="download-btn">下载</a>
-            </div>
-            <!-- 你的 Surge 应用结束 -->
-            
-            <div class="app-item">
-                <div class="app-meta-box">
-                    <a href="https://raw.githubusercontent.com/wm0104/wm0104.ipa/main/icon/surge.png" target="_blank" class="app-icon-link">
-                        <img src="https://raw.githubusercontent.com/wm0104/wm0104.icon/main/APP/surge.png" class="app-icon" alt="Icon">
-                    </a>
-                    <div class="app-info">
-                        <div class="app-nam">Loon</div>
-                        <div class="app-version">v3.5.1 · tipa</div>
-                        <div class="app-desc">网络调试工具</div>
-                    </div>
-                </div>
-                <a href="https://github.com/wm0104/wm0104.ipa/raw/refs/heads/main/tipa/Loon_3.5.1(TF980)_%E9%85%B7%E5%8D%A1.ipa">下载</a>
-            </div>
-      
-
-            
-        </div>
+    <div class="card">
+        <div class="title">选择越狱管理器</div>
+        <a class="button" href="sileo://source/https://wm0104.github.io/repo/">Sileo</a>
+        <a class="button" href="saily://source/https://wm0104.github.io/repo/">Saily</a>
+        <a class="button" href="zbra://sources/add/https://wm0104.github.io/repo/">Zebra</a>
         <div class="footer">wm0104 repo</div>
     </div>
 </body>
 </html>
+```
+
+保存后，等一分钟刷新网页，就恢复成你最初那个只有三个按钮的越狱源引导页了。
