@@ -31,7 +31,6 @@
             backdrop-filter: blur(30px) saturate(180%); -webkit-backdrop-filter: blur(30px) saturate(180%);
         }
         .header-box { display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
-        /* 顶部头像样式 */
         .avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255, 255, 255, 0.6); margin-right: 16px; }
         .title-container { text-align: left; display: flex; flex-direction: column; }
         .top-title { font-size: 28px; font-weight: 800; color: #1d1d1f; }
@@ -46,7 +45,6 @@
         .app-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
         .app-meta-box { display: flex; align-items: center; flex: 1; min-width: 0; margin-right: 12px; }
         .app-icon-link { display: block; margin-right: 14px; }
-        /* 列表小图标样式（强制正方形，不变形） */
         .app-icon { width: 52px; height: 52px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
         .app-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
         .app-name { font-size: 15px; font-weight: 700; color: #1d1d1f; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -61,7 +59,7 @@
     <div class="bg-fluid"></div>
     <div class="main-container">
         <div class="header-box">
-            <!-- 顶部头像：使用你上传的 avatar.png -->
+            <!-- 顶部头像 -->
             <img src="https://raw.githubusercontent.com/wm0104/wm0104.icon/main/avatar.png" class="avatar" alt="Avatar">
             <div class="title-container">
                 <h1 class="top-title">wm0104</h1>
@@ -75,26 +73,39 @@
         </div>
         <div class="app-list-section">
             <h2 class="list-title">应用插件列表</h2>
-            
-            <!-- 你的 Surge 应用开始 -->
-            <div class="app-item">
-                <div class="app-meta-box">
-                    <!-- 列表小图标：使用你上传的 surge.png -->
-                    <a href="https://raw.githubusercontent.com/wm0104/wm0104.icon/main/APP/surge.png" target="_blank" class="app-icon-link">
-                        <img src="https://raw.githubusercontent.com/wm0104/wm0104.icon/main/APP/surge.png" class="app-icon" alt="Icon">
-                    </a>
-                    <div class="app-info">
-                        <div class="app-name">Surge</div>
-                        <div class="app-version">v5.20.0 · tipa</div>
-                        <div class="app-desc">网络调试工具</div>
-                    </div>
-                </div>
-                <a href="https://raw.githubusercontent.com/wm0104/wm0104.ipa/main/surge/Surge-iOS-5.20.0%20%5BMacKed%5D.tipa" class="download-btn">下载</a>
-            </div>
-            <!-- 你的 Surge 应用结束 -->
-
+            <!-- 应用列表会自动生成在这里 -->
+            <div id="app-container"></div>
         </div>
         <div class="footer">wm0104 repo</div>
     </div>
+
+    <!-- 自动从 data.json 读取应用列表的 JavaScript -->
+    <script>
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('app-container');
+                let html = '';
+                data.forEach(app => {
+                    html += `
+                        <div class="app-item">
+                            <div class="app-meta-box">
+                                <a href="${app.icon}" target="_blank" class="app-icon-link">
+                                    <img src="${app.icon}" class="app-icon" alt="Icon">
+                                </a>
+                                <div class="app-info">
+                                    <div class="app-name">${app.name}</div>
+                                    <div class="app-version">${app.version} · ${app.type}</div>
+                                    <div class="app-desc">${app.description}</div>
+                                </div>
+                            </div>
+                            <a href="${app.download}" class="download-btn">下载</a>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+            })
+            .catch(error => console.error('加载应用列表失败:', error));
+    </script>
 </body>
 </html>
