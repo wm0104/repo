@@ -282,29 +282,12 @@ Maintainer: doimty
 Installed-Size: 108
 Depends: mobilesubstrate
 Filename: ./debs/com.doimty.promotion_1.0.13_iphoneos-arm64e.deb
-Size: 26382
-MD5sum: 153934f728ba5166f6520cb91b880a22
-SHA1: 83c74831da1b235c3a44e3dab3d2b7e9433aa314
-SHA256: c1d9aa2de4acfb5a2b0e613340c870310df9476f83ba1fe357d10cda0ebaa8a3
-Section: 插件
-Description: Force global 120Hz ProMotion on iPhone 13 Pro+. Bypasses the 80Hz system cap and maintains 120Hz in apps that block tweak injection via a persistent keepalive DisplayLink.
-Tag: supports::roothide
-Author: doimty
-Name: ProMotion 120Hz
-
-Package: com.doimty.promotion
-Version: 1.0.8
-Architecture: iphoneos-arm64e
-Maintainer: doimty
-Installed-Size: 236
-Depends: mobilesubstrate
-Filename: ./debs/com.doimty.promotion_1.0.8_iphoneos-arm64e.deb
-Size: 33262
-MD5sum: dc7a6e36ab165cc7b16e6e19c3d0e0a1
-SHA1: 25e059acbb8b6861c11745ca602d86fb4b1e2f43
-SHA256: 4151d9973aa2f6a6515755b7cc5a1f10e33743643db7d621a28543ec2348a67b
+Size: 26390
+MD5sum: 5d60dd405ecf08903a906cec9a82a191
+SHA1: 0e36c1664847a1ec103d781932018498e6a087dc
+SHA256: b026d56c2a955e77729aa45b0e30852d69ab452708024dd0afa3eed89aca57d7
 Section: 系统增强
-Description: Force global 120Hz ProMotion, bypass the 80Hz system cap. iPhone 13 Pro and above only.
+Description: Force global 120Hz ProMotion on iPhone 13 Pro+. Bypasses the 80Hz system cap and maintains 120Hz in apps that block tweak injection via a persistent keepalive DisplayLink.
 Tag: supports::roothide
 Author: doimty
 Name: ProMotion 120Hz
