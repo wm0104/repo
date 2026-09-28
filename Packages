@@ -276,6 +276,23 @@ Author: Netskao
 Name: Filza Crack(RootHide)
 
 Package: com.doimty.promotion
+Version: 1.0.13
+Architecture: iphoneos-arm64e
+Maintainer: doimty
+Installed-Size: 108
+Depends: mobilesubstrate
+Filename: ./debs/com.doimty.promotion_1.0.13_iphoneos-arm64e.deb
+Size: 26382
+MD5sum: 153934f728ba5166f6520cb91b880a22
+SHA1: 83c74831da1b235c3a44e3dab3d2b7e9433aa314
+SHA256: c1d9aa2de4acfb5a2b0e613340c870310df9476f83ba1fe357d10cda0ebaa8a3
+Section: 插件
+Description: Force global 120Hz ProMotion on iPhone 13 Pro+. Bypasses the 80Hz system cap and maintains 120Hz in apps that block tweak injection via a persistent keepalive DisplayLink.
+Tag: supports::roothide
+Author: doimty
+Name: ProMotion 120Hz
+
+Package: com.doimty.promotion
 Version: 1.0.8
 Architecture: iphoneos-arm64e
 Maintainer: doimty
