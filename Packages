@@ -353,17 +353,17 @@ Name: 微信消息直达 WCPush2Chat
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/WCPush2Chat/js.json
 
 Package: com.iosdump.appdata
-Version: 2.6.9
+Version: 2.7.5
 Architecture: iphoneos-arm64e
 Maintainer: iosdump
 Pre-Depends: rootless-compat(>= 0.9)
 Depends: firmware (>= 11.0), mobilesubstrate, preferenceloader
 Conflicts: com.netskao.appdatas, com.netskao.appdata, cn.zqbb.appdata, com.fouadraheb.appdata
-Filename: ./debs/com.iosdump.appdata_2.6.9_iphoneos-arm64e.deb
-Size: 3892790
-MD5sum: 00791b79e7fb70af5169317825cdb2a1
-SHA1: 4793426828287c6d8dd03e2a8f3f004599f0d7ce
-SHA256: 11d2715576dd84d8498770d4aa3ec8781af2500289370f56d5961d553ec05dfd
+Filename: ./debs/com.iosdump.appdata_2.7.5_iphoneos-arm64e.deb
+Size: 3914526
+MD5sum: 2c3d4806228383ff377dbde99eabdedf
+SHA1: ed44ba64a18cf01c0869846822c794a0155b8e72
+SHA256: 228533f1a924d7361efdb994e3e218f1f5a3d43391f4d0b5390d58854d7e1349
 Section: 系统增强
 Description: 在主屏幕查看应用数据与管理应用
 Author: iosdump
@@ -736,19 +736,19 @@ Author: Dhinak G <dhinak@dhinak.net>
 Name: PreferenceLoader
 
 Package: preferenceloader.top
-Version: 2.2.7
+Version: 2.2.8-2
 Architecture: iphoneos-arm64e
 Maintainer: ProcursusTeam <support@procurs.us>
-Installed-Size: 148
+Installed-Size: 340
 Depends: mobilesubstrate
 Conflicts: preferenceloader, preferenceloader.rootless, preferenceloader.rootless.top
 Replaces: preferenceloader, preferenceloader.rootless, preferenceloader.rootless.top
 Provides: preferenceloader (= 2.2.6)
-Filename: ./debs/preferenceloader.top_2.2.7_iphoneos-arm64e.deb
-Size: 14782
-MD5sum: 4484722964445939cc648c9a45d9a383
-SHA1: c2c38ee8f50984a3514002b618191e0d0b75dee9
-SHA256: 9e7e49f57e6462049b7058539b2b094126889d41a5a4807ad59e8b60c264a2c8
+Filename: ./debs/preferenceloader.top_2.2.8-2_iphoneos-arm64e.deb
+Size: 38948
+MD5sum: ca47e32d5bd07edec38de9ceffc75ec6
+SHA1: 7e3aa4f0467423695a5a9c1ba593de98139cffb2
+SHA256: fad198166d8c2117c6906e93e6828590568ab170c57e3a068fc9ad7d968b8d83
 Section: 依赖
 Description: load preferences in style
 Author: Dhinak G <dhinak@dhinak.net>
