@@ -338,12 +338,13 @@ Installed-Size: 572
 Pre-Depends: rootless-compat(>= 0.9)
 Depends: mobilesubstrate, preferenceloader, com.opa334.ccsupport
 Filename: ./debs/com.guacforlife.reynarddefault_1.5.0_iphoneos-arm64e.deb
-Size: 63258
-MD5sum: 850e91cbb0df0789c0e16561a650b123
-SHA1: 5d64b6ac65e7961ec82238a36da8dce779f4d081
-SHA256: 519485632267f9508f11c25c6fc8e5805a36f94e8c941fbeb800ae1d13188a93
+Size: 63252
+MD5sum: dc6a9d8bb25ba0d469df13732cb62df5
+SHA1: 4194b9304e3bed9fea979e14464ab5ed019e6b87
+SHA256: 8ff05b1dd637034b39ca969f762820e762c1ee600f92c4d66ee40753cead933c
 Section: 工具
 Homepage: https://github.com/guacforlife/ReynardDefault
+Description: Safari浏览器ULR重定向到Reynard
 Author: guacforlife
 Name: Reynard重定向
 
