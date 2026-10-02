@@ -330,6 +330,23 @@ Icon: https://TrollStoreX.Github.io/sileodepiction/iCleanerPro/icon.png
 Name: iCleaner Pro
 Sileodepiction: https://TrollStoreX.Github.io/sileodepiction/iCleanerPro/js.json
 
+Package: com.guacforlife.reynarddefault
+Version: 1.5.0
+Architecture: iphoneos-arm64e
+Maintainer: guacforlife
+Installed-Size: 572
+Pre-Depends: rootless-compat(>= 0.9)
+Depends: mobilesubstrate, preferenceloader, com.opa334.ccsupport
+Filename: ./debs/com.guacforlife.reynarddefault_1.5.0_iphoneos-arm64e.deb
+Size: 63258
+MD5sum: 850e91cbb0df0789c0e16561a650b123
+SHA1: 5d64b6ac65e7961ec82238a36da8dce779f4d081
+SHA256: 519485632267f9508f11c25c6fc8e5805a36f94e8c941fbeb800ae1d13188a93
+Section: 工具
+Homepage: https://github.com/guacforlife/ReynardDefault
+Author: guacforlife
+Name: Reynard重定向
+
 Package: com.huami.wcpush2chats
 Version: 1.0-2
 Architecture: iphoneos-arm64e
