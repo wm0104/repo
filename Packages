@@ -292,6 +292,22 @@ Description: Filza解锁全部功能，请在官方源安装Filza。Netskao新�
 Author: Netskao
 Name: Filza Crack(RootHide)
 
+Package: com.dao.prefnest
+Version: 1.2
+Architecture: iphoneos-arm64e
+Maintainer: mlgm
+Depends: mobilesubstrate, firmware (>= 15.0), preferenceloader
+Conflicts: com.mlgm.prefnest
+Filename: ./debs/com.dao.prefnest_1.2_iphoneos-arm64e.deb
+Size: 341426
+MD5sum: 2a04eaa3c61198d53f1c1be89beeb8c9
+SHA1: ed55f9e6483ba0af873e3acb14c9c984a82bba4c
+SHA256: 44345ed37f6cf5f9982367fcc2627cb7d543b68f357c1d46ce67cbfa5817d7ed
+Section: 系统增强
+Description: 整理设置首页，集中收纳越狱插件；支持iOS15-26.0.1，特别是iOS18+默认插件入口在设置的通用里，用这个可以归纳到设置顶部/底部。
+Author: mlgm
+Name: PrefNest(RootHide)
+
 Package: com.doimty.promotion
 Version: 1.0.13
 Architecture: iphoneos-arm64e
