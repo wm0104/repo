@@ -1,8 +1,0 @@
-Origin:  wm0104(roothide)
-Label: wm0104
-Suite: stable
-Version: 1.0
-Codename: ios
-Architectures: iphoneos-arm64e
-Components: main
-description:wm0104

@@ -1,57 +1,44 @@
-name: "refresh"
+name: Publish APT repository
 
 on:
-  workflow_run:
-    workflows: ["pages-build-deployment"]
-    types: 
-      - completed
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Install repository tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends dpkg-dev bzip2 xz-utils zstd
+      - name: Validate packages and build site
+        run: python3 scripts/build_repo.py --output _site
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
-          submodules: recursive
+          path: _site
 
-      - name: install depend
-        if: success()
-        run: |
-          sudo apt update 2>>/dev/null 1>>/dev/null
-          sudo apt install dpkg-dev bzip2 xz-utils zstd -y
-
-      - name: Refresh Packages
-        if: success()
-        run: |
-          rm -rf ./Packages*
-          dpkg-scanpackages -m ./debs /dev/null >./Packages
-          bzip2 -v -k -9 Packages
-          xz -v -k -9 --extreme Packages
-          zstd --ultra -22 -k Packages -o Packages.zst
-
-      - name: save change if local change
-        if: success()
-        run: |
-          git config --global user.email 'action@github.com'
-          git config --global user.name 'GitHub Action'
-          git add .
-          if ! git diff --staged --exit-code 1>>/dev/null; then
-            git commit -m 'Refresh Packages'
-            git push
-          fi
-          
-      - name: download remove_all_actions
-        if: success()
-        run: |
-          sudo curl -L -o '/usr/bin/remove_all_actions' 'https://raw.githubusercontent.com/invalidunit/action/main/remove_all_actions'
-          sudo chmod -R 0755 '/usr/bin/remove_all_actions'
-
-      - name: remove all old actions
-        if: success()
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-        run: |
-          remove_all_actions
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
