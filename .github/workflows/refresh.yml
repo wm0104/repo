@@ -15,6 +15,10 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      source_commit: ${{ steps.repairs.outputs.commit }}
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -22,8 +26,24 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends dpkg-dev bzip2 xz-utils zstd
-      - name: Validate packages and build site
+      - name: Test generic permission repair
+        run: python3 -m unittest discover -s testsuite -v
+      - name: Audit all packages and safely repair control permissions
+        run: python3 scripts/repair_deb_permissions.py
+      - name: Publish audit report
+        if: always()
+        run: |
+          if [ -f deb-repair-report.json ]; then
+            echo '### Deb audit (auto-fixed / warnings / blocking)' >> "$GITHUB_STEP_SUMMARY"
+            echo '```json' >> "$GITHUB_STEP_SUMMARY"
+            cat deb-repair-report.json >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Validate repaired packages and build site
         run: python3 scripts/build_repo.py --output _site
+      - name: Commit verified repairs without overwriting newer main
+        id: repairs
+        run: python3 scripts/commit_deb_repairs.py
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
@@ -33,12 +53,23 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       pages: write
       id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Refuse deployment if main advanced
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED: ${{ needs.build.outputs.source_commit }}
+        run: |
+          actual=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)
+          if [ "$actual" != "$EXPECTED" ]; then
+            echo 'Remote main advanced; refusing outdated Pages deployment' >&2
+            exit 1
+          fi
       - name: Deploy GitHub Pages
         id: deployment
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
