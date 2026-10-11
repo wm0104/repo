@@ -25,7 +25,8 @@ if paths:
     git('config', 'user.name', 'github-actions[bot]')
     git('config', 'user.email', '41898282+github-actions[bot]@users.noreply.github.com')
     git('add', '--', *paths)
-    if set(git('diff', '--cached', '--name-only').splitlines()) != set(paths):
+    staged = subprocess.check_output(['git', 'diff', '--cached', '--name-only', '-z']).decode('utf-8').split('\0')
+    if set(filter(None, staged)) != set(paths):
         raise SystemExit('Unexpected staged paths')
     git('commit', '-m', 'Repair unreadable deb control permissions (verified; data unchanged)')
     # Check again directly before non-force push; a concurrent push also rejects at Git.
