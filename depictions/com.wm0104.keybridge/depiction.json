@@ -1,0 +1,59 @@
+{
+  "minVersion": "0.4",
+  "class": "DepictionTabView",
+  "tabs": [
+    {
+      "class": "DepictionStackView",
+      "tabname": "详情",
+      "views": [
+        {
+          "class": "DepictionHeaderView",
+          "title": "词库桥接"
+        },
+        {
+          "class": "DepictionLabelView",
+          "text": "为苹果原生中文键盘接入本地 Rime 词库。"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "分类",
+          "text": "Ai插件"
+        },
+        {
+          "class": "DepictionSubheaderView",
+          "title": "兼容说明"
+        },
+        {
+          "class": "DepictionLabelView",
+          "text": "兼容测试范围：iOS 15.0–16.x，苹果中文键盘26键全拼与九宫格。"
+        },
+        {
+          "class": "DepictionLabelView",
+          "text": "目前仅在 iOS 16.3（roothide）真机验证，其他环境需测试。"
+        }
+      ]
+    },
+    {
+      "class": "DepictionStackView",
+      "tabname": "更新日志",
+      "views": [
+        {
+          "class": "DepictionHeaderView",
+          "title": "0.0.2"
+        },
+        {
+          "class": "DepictionLabelView",
+          "text": "- 新增苹果原生候选习惯学习。"
+        },
+        {
+          "class": "DepictionLabelView",
+          "text": "- 修复学习记录保存与恢复。"
+        },
+        {
+          "class": "DepictionLabelView",
+          "text": "- 优化词库编辑及设置界面。"
+        }
+      ]
+    }
+  ]
+}
