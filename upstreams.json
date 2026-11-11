@@ -1,0 +1,16 @@
+{
+  "sources": [
+    {
+      "repo": "owngoal-dev/Apelin",
+      "packages": {
+        "wiki.qaq.apelin": "乌龙",
+        "wiki.qaq.apelin.agent-tools.assembler": "乌龙",
+        "wiki.qaq.apelin.agent-tools.disassembler": "乌龙",
+        "wiki.qaq.apelin.dev.app": "乌龙",
+        "wiki.qaq.apelin.dev.cli": "乌龙",
+        "wiki.qaq.apelin.dev.preferences": "乌龙",
+        "wiki.qaq.apelin.dev.tweak": "乌龙"
+      }
+    }
+  ]
+}
