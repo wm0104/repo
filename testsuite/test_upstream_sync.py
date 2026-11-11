@@ -16,6 +16,11 @@ import build_repo
 import sync_upstream
 
 
+class Response(io.BytesIO):
+    def geturl(self):
+        return 'https://github.com/x/y/releases/download/v1/test.deb'
+
+
 class UpstreamSyncTest(unittest.TestCase):
     def setUp(self):
         directory = tempfile.TemporaryDirectory()
@@ -53,12 +58,13 @@ class UpstreamSyncTest(unittest.TestCase):
             'fixture': p,
         } for p in paths]}
 
-    def sync(self, source=None):
+    def sync(self):
         def download(asset, target):
             shutil.copyfile(asset['fixture'], target)
         with patch('sync_upstream.latest_release', side_effect=lambda repo: self.releases[repo]), \
                 patch('sync_upstream.download_asset', side_effect=download):
-            return sync_upstream.sync(self.root, source)
+            self.last_result = sync_upstream.sync(self.root)
+            return self.last_result['paths']
 
     def snapshot(self):
         return {p.name: p.read_bytes() for p in (self.root / 'debs').glob('*.deb')}
@@ -110,7 +116,7 @@ class UpstreamSyncTest(unittest.TestCase):
         output = io.StringIO()
         with patch('sys.stdout', output):
             self.assertEqual(self.sync(), [f'debs/{first.name}'])
-        self.assertIn('同版本异文件，保留仓库原包: org.example.second 2.0', output.getvalue())
+        self.assertIn('org.example.second 同版本异文件，保留仓库原包: 2.0', output.getvalue())
         self.assertEqual(self.snapshot(), {**before, first.name: first.read_bytes()})
 
     def test_only_same_version_different_bytes_keeps_all_original_packages(self):
@@ -130,14 +136,13 @@ class UpstreamSyncTest(unittest.TestCase):
         self.assertIn('没有需要入库的新版本', output.getvalue())
         self.assertEqual(self.snapshot(), before)
 
-    def test_missing_or_wrong_architecture_package_does_not_import_other_updates(self):
+    def test_missing_or_wrong_architecture_package_does_not_block_valid_update(self):
         first = self.package('org.example.first', '1.1', self.root / 'upstream')
         wrong = self.package('org.example.second', '2.0', self.root / 'upstream', arch='iphoneos-arm64')
         self.release('owner/first', [first])
         self.release('other/second', [wrong])
-        with self.assertRaisesRegex(ValueError, '缺少.*org.example.second'):
-            self.sync()
-        self.assertEqual(self.snapshot(), {})
+        self.assertEqual(self.sync(), [f'debs/{first.name}'])
+        self.assertTrue(any('org.example.second' in error and '缺少' in error for error in self.last_result['errors']))
 
     def test_existing_destination_is_never_overwritten(self):
         first = self.package('org.example.first', '1.1', self.root / 'upstream')
@@ -148,16 +153,16 @@ class UpstreamSyncTest(unittest.TestCase):
         self.release('owner/first', [first])
         self.release('other/second', [second])
         before = self.snapshot()
-        with self.assertRaisesRegex(ValueError, '文件名冲突'):
-            self.sync()
-        self.assertEqual(self.snapshot(), before)
+        self.assertEqual(self.sync(), [f'debs/{second.name}'])
+        self.assertTrue(any('文件名冲突' in error for error in self.last_result['errors']))
+        self.assertEqual(self.snapshot(), {**before, second.name: second.read_bytes()})
 
     def test_preflight_rejects_package_that_requires_permission_repair(self):
         first = self.package('org.example.first', '1.1', self.root / 'upstream')
         second = self.package('org.example.second', '2.0', self.root / 'upstream')
         self.release('owner/first', [first])
         self.release('other/second', [second])
-        with patch('sync_upstream.preflight', side_effect=ValueError('需要权限修复')):
+        with patch('sync_upstream.validate_candidate'), patch('sync_upstream.preflight', side_effect=ValueError('需要权限修复')):
             with self.assertRaisesRegex(ValueError, '需要权限修复'):
                 self.sync()
         self.assertEqual(self.snapshot(), {})
@@ -180,7 +185,7 @@ class UpstreamSyncTest(unittest.TestCase):
         asset = {'name': 'test.deb', 'size': len(data), 'digest': 'sha256:' + '0' * 64,
                  'browser_download_url': 'https://github.com/x/y/releases/download/v1/test.deb'}
         target = self.root / 'download.deb'
-        with patch('sync_upstream.urllib.request.urlopen', return_value=io.BytesIO(data)):
+        with patch('sync_upstream.urllib.request.urlopen', return_value=Response(data)):
             with self.assertRaisesRegex(ValueError, 'SHA256'):
                 sync_upstream.download_asset(asset, target)
 
@@ -190,22 +195,21 @@ class UpstreamSyncTest(unittest.TestCase):
                  'digest': 'sha256:' + hashlib.sha256(data).hexdigest(),
                  'browser_download_url': 'https://github.com/x/y/releases/download/v1/test.deb'}
         target = self.root / 'download.deb'
-        with patch('sync_upstream.urllib.request.urlopen', return_value=io.BytesIO(data)):
+        with patch('sync_upstream.urllib.request.urlopen', return_value=Response(data)):
             sync_upstream.download_asset(asset, target)
         self.assertEqual(target.read_bytes(), data)
-        with patch('sync_upstream.urllib.request.urlopen', return_value=io.BytesIO(data[:-1])):
+        with patch('sync_upstream.urllib.request.urlopen', return_value=Response(data[:-1])):
             with self.assertRaisesRegex(ValueError, 'SHA256'):
                 sync_upstream.download_asset(asset, target)
 
-    def test_corrupt_asset_does_not_partially_import_valid_update(self):
+    def test_corrupt_asset_is_reported_without_blocking_valid_update(self):
         first = self.package('org.example.first', '1.1', self.root / 'upstream')
         corrupt = self.root / 'upstream/broken.deb'
         corrupt.write_bytes(b'not a deb')
         self.release('owner/first', [first])
         self.release('other/second', [corrupt])
-        with self.assertRaises(ValueError):
-            self.sync()
-        self.assertEqual(self.snapshot(), {})
+        self.assertEqual(self.sync(), [f'debs/{first.name}'])
+        self.assertTrue(self.last_result['errors'])
 
     def test_repo_change_during_preflight_prevents_import(self):
         first = self.package('org.example.first', '1.1', self.root / 'upstream')
@@ -237,80 +241,6 @@ class UpstreamSyncTest(unittest.TestCase):
             with self.assertRaisesRegex(OSError, 'disk error'):
                 self.sync()
         self.assertEqual(self.snapshot(), {})
-
-    def test_single_source_imports_only_selected_package_and_persists_section(self):
-        wanted = self.package('org.example.single', '1.0', self.root / 'upstream')
-        other = self.package('org.example.other', '2.0', self.root / 'upstream')
-        self.release('third/single', [wanted, other])
-        source = {'repo': 'third/single', 'packages': {'org.example.single': '美化'}}
-        paths = self.sync(source)
-        self.assertEqual(set(paths), {f'debs/{wanted.name}', 'upstreams.json'})
-        self.assertEqual(self.snapshot(), {wanted.name: wanted.read_bytes()})
-        self.assertEqual(build_repo.load_upstreams(self.root), self.config['sources'])
-        data = json.loads((self.root / 'upstreams.json').read_text())
-        self.assertEqual(data['manual_sections'], {'org.example.single': '美化'})
-        with patch('build_repo.ROOT', self.root):
-            build_repo.build(self.root / '_site')
-        self.assertIn('\nSection: 美化\n', (self.root / '_site/Packages').read_text())
-
-    def test_single_selection_does_not_request_other_configured_packages(self):
-        first = self.package('org.example.first', '1.1', self.root / 'upstream')
-        self.release('owner/first', [first])
-        before = (self.root / 'upstreams.json').read_bytes()
-        paths = self.sync(self.config['sources'][0])
-        self.assertEqual(paths, [f'debs/{first.name}'])
-        self.assertEqual((self.root / 'upstreams.json').read_bytes(), before)
-
-    def test_single_same_version_can_save_section_without_replacing_deb(self):
-        old = self.package('org.example.single', '1.0', self.root / 'debs')
-        changed = self.package('org.example.single', '1.0', self.root / 'upstream', extra='Name: Changed')
-        self.release('third/single', [changed])
-        source = {'repo': 'third/single', 'packages': {'org.example.single': '工具'}}
-        before = old.read_bytes()
-        self.assertEqual(self.sync(source), ['upstreams.json'])
-        self.assertEqual(old.read_bytes(), before)
-        self.assertEqual(self.sync(source), [])
-        self.assertEqual(build_repo.load_sections(self.root)['org.example.single'], '工具')
-
-    def test_single_failed_preflight_or_missing_asset_does_not_save_section(self):
-        wanted = self.package('org.example.single', '1.0', self.root / 'upstream')
-        source = {'repo': 'third/single', 'packages': {'org.example.single': '工具'}}
-        before = (self.root / 'upstreams.json').read_bytes()
-        self.release('third/single', [wanted])
-        with patch('sync_upstream.preflight', side_effect=ValueError('预检失败')):
-            with self.assertRaisesRegex(ValueError, '预检失败'):
-                self.sync(source)
-        self.release('third/single', [])
-        with self.assertRaisesRegex(ValueError, '缺少'):
-            self.sync(source)
-        self.assertEqual((self.root / 'upstreams.json').read_bytes(), before)
-        self.assertEqual(self.snapshot(), {})
-
-    def test_single_invalid_input_and_batch_section_conflict_are_rejected_before_download(self):
-        before = (self.root / 'upstreams.json').read_bytes()
-        for source in [
-            {'repo': 'x/y;echo bad', 'packages': {'org.example.single': '工具'}},
-            {'repo': 'x/y', 'packages': {'../bad': '工具'}},
-            {'repo': 'x/y', 'packages': {'org.example.single': 'a\nPackage: bad'}},
-            {'repo': 'owner/first', 'packages': {'org.example.first': '其他'}},
-            self.config['sources'][0] | {'packages': {'org.example.first': '乌龙', 'org.example.x': '工具'}},
-        ]:
-            with self.subTest(source=source), patch('sync_upstream.latest_release') as release:
-                with self.assertRaises(ValueError):
-                    sync_upstream.sync(self.root, source)
-                release.assert_not_called()
-        self.assertEqual((self.root / 'upstreams.json').read_bytes(), before)
-
-    def test_single_config_promotion_failure_rolls_back_new_packages(self):
-        wanted = self.package('org.example.single', '1.0', self.root / 'upstream')
-        self.release('third/single', [wanted])
-        before = (self.root / 'upstreams.json').read_bytes()
-        source = {'repo': 'third/single', 'packages': {'org.example.single': '工具'}}
-        with patch('pathlib.Path.replace', side_effect=OSError('simulated config write failure')):
-            with self.assertRaisesRegex(OSError, 'config write failure'):
-                self.sync(source)
-        self.assertEqual(self.snapshot(), {})
-        self.assertEqual((self.root / 'upstreams.json').read_bytes(), before)
 
     def test_manual_sections_are_validated_and_never_override_batch_sections(self):
         for manual in [[], {'../bad': '工具'}, {'org.example.single': 'a\nPackage: bad'},
@@ -349,7 +279,7 @@ class PublishTest(unittest.TestCase):
     def git(self, *args):
         return self.command(['git', *args], cwd=self.root)
 
-    def publish(self, paths, captured=None, fail_dispatch=False, config_package=None):
+    def publish(self, paths, captured=None, fail_dispatch=False, config_update=None):
         checked = sync_upstream.checked
         calls = []
 
@@ -362,7 +292,7 @@ class PublishTest(unittest.TestCase):
             return checked(args, cwd=cwd)
 
         with patch('sync_upstream.checked', side_effect=command):
-            sync_upstream.publish(self.root, paths, captured or self.captured, 'owner/repo', config_package)
+            sync_upstream.publish(self.root, paths, captured or self.captured, 'owner/repo', config_update)
         return calls
 
     def test_only_new_debs_are_committed_with_chinese_message_then_publisher_is_requested(self):
@@ -411,75 +341,83 @@ class PublishTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, '不安全'):
             self.publish(['debs/../../other.deb'])
 
-    def test_single_publish_allows_only_selected_manual_section_and_new_debs(self):
+    def test_publish_allows_exact_prevalidated_config_and_rejects_later_changes(self):
         config = self.root / 'upstreams.json'
-        config.write_text(json.dumps({'sources': [], 'manual_sections': {'org.example.single': '工具'}}))
-        self.publish(['debs/new.deb', 'upstreams.json'], config_package='org.example.single')
+        data = json.dumps({'sources': [{'repo': 'x/y', 'packages': {'org.example.single': '工具'}}]}).encode()
+        config.write_bytes(data)
+        self.publish(['debs/new.deb', 'upstreams.json'], config_update=data)
         self.assertEqual(set(self.git('show', '--format=', '--name-only', 'HEAD').splitlines()),
                          {'debs/new.deb', 'upstreams.json'})
-        config.write_text(json.dumps({'sources': [], 'manual_sections': {'org.example.single': '美化'}}))
-        self.publish(['upstreams.json'], captured=self.git('rev-parse', 'HEAD'), config_package='org.example.single')
-        self.assertEqual(self.git('show', '--format=', '--name-only', 'HEAD'), 'upstreams.json')
+        committed = self.git('rev-parse', 'HEAD')
+        config.write_text(json.dumps({'sources': []}))
+        with self.assertRaisesRegex(ValueError, '配置'):
+            self.publish(['upstreams.json'], captured=committed, config_update=data)
+        self.assertEqual(self.git('rev-parse', 'HEAD'), committed)
 
-    def test_single_publish_rejects_batch_config_or_unselected_section_changes(self):
-        config = self.root / 'upstreams.json'
-        for data in [
-            {'sources': [{'repo': 'x/y', 'packages': {'org.example.other': 'a'}}],
-             'manual_sections': {'org.example.single': '工具'}},
-            {'sources': [], 'manual_sections': {'org.example.single': '工具', 'org.example.other': 'a'}},
-        ]:
-            with self.subTest(data=data):
-                config.write_text(json.dumps(data))
-                with self.assertRaisesRegex(ValueError, '配置'):
-                    self.publish(['upstreams.json'], config_package='org.example.single')
-        self.assertEqual(self.git('rev-parse', 'HEAD'), self.captured)
-
-    def test_batch_publish_rejects_config_in_manifest(self):
-        with self.assertRaisesRegex(ValueError, '不安全'):
+    def test_publish_rejects_config_without_prevalidated_content(self):
+        with self.assertRaisesRegex(ValueError, '配置'):
             self.publish(['upstreams.json'])
 
 
 class WorkflowTest(unittest.TestCase):
-    def test_single_cli_passes_only_form_selection_and_batch_cli_ignores_form_values(self):
-        env = {'GITHUB_ACTIONS': 'true', 'GITHUB_REF': 'refs/heads/main',
-               'GITHUB_REPOSITORY': 'owner/repo', 'UPSTREAM_REPO': 'third/single',
-               'UPSTREAM_PACKAGE': 'org.example.single', 'UPSTREAM_SECTION': '工具'}
-        source = {'repo': 'third/single', 'packages': {'org.example.single': '工具'}}
-        for arguments, expected_source, expected_package in [
-            (['--single'], source, 'org.example.single'), ([], None, None),
-        ]:
-            with self.subTest(arguments=arguments), patch.dict(os.environ, env, clear=True), \
-                    patch('sys.argv', ['sync_upstream.py', *arguments]), \
-                    patch('sync_upstream.checked', side_effect=['', 'captured-sha']), \
-                    patch('sync_upstream.sync', return_value=['debs/new.deb']) as sync, \
-                    patch('sync_upstream.publish') as publish:
-                sync_upstream.main()
-                sync.assert_called_once_with(ROOT, expected_source)
-                publish.assert_called_once_with(ROOT, ['debs/new.deb'], 'captured-sha', 'owner/repo', expected_package)
-
-    def test_single_workflow_uses_inputs_as_env_and_shares_sync_lock(self):
-        text = (ROOT / '.github/workflows/sync-single-upstream.yml').read_text(encoding='utf-8')
-        self.assertIn('name: 同步单个上游插件', text)
-        self.assertIn('workflow_dispatch:', text)
-        for field in ('repo', 'package', 'section'):
-            self.assertIn(f'{field}:', text)
-            self.assertIn('${{ inputs.' + field + ' }}', text)
-        self.assertIn('group: upstream-sync', text)
-        self.assertNotIn('schedule:', text)
-        self.assertNotIn('deploy-pages', text)
-        self.assertIn('run: python3 scripts/sync_upstream.py --single', text)
-        for line in text.splitlines():
-            if 'run:' in line:
-                self.assertNotIn('${{', line)
-
-    def test_new_workflow_is_manual_only_and_has_no_second_pages_deployer(self):
+    def test_only_one_manual_sync_entry_with_documented_env_inputs(self):
+        self.assertFalse((ROOT / '.github/workflows/sync-single-upstream.yml').exists())
         text = (ROOT / '.github/workflows/sync-upstream.yml').read_text(encoding='utf-8')
         self.assertIn('workflow_dispatch:', text)
+        for field in ('operation', 'scope', 'source_type', 'repo', 'packages', 'section'):
+            self.assertIn(f'{field}:', text)
+            self.assertIn(chr(36) + '{{ inputs.' + field + ' }}', text)
         self.assertNotIn('schedule:', text)
         self.assertNotIn('deploy-pages', text)
         self.assertIn('actions: write', text)
         self.assertIn('group: upstream-sync', text)
-        self.assertIn('python3 scripts/sync_upstream.py', text)
+        self.assertIn('run: python3 scripts/sync_upstream.py', text)
+        lines = text.splitlines()
+        for index, line in enumerate(lines):
+            if line.strip() and not line.lstrip().startswith('#'):
+                self.assertTrue(lines[index + 1].lstrip().startswith('#'), line)
+            if 'run:' in line:
+                self.assertNotIn(chr(36) + '{{', line)
+
+    def test_main_lists_without_publish_and_reports_partial_failure_after_publish(self):
+        base = {'GITHUB_ACTIONS': 'true', 'GITHUB_REF': 'refs/heads/main', 'GITHUB_REPOSITORY': 'owner/repo'}
+        for operation, errors in [('查看清单', []), ('更新插件', ['failed'])]:
+            result = {'paths': ['debs/new.deb'] if errors else [], 'config_update': None, 'errors': errors, 'rows': []}
+            with self.subTest(operation=operation), patch.dict(os.environ, {**base, 'UPSTREAM_OPERATION': operation}, clear=True), \
+                    patch('sync_upstream.checked', side_effect=['', 'captured-sha']), \
+                    patch('sync_upstream.sync', return_value=result), patch('sync_upstream.publish') as publish, \
+                    patch('sync_upstream.write_summary') as summary:
+                if errors:
+                    with self.assertRaisesRegex(ValueError, '失败项'):
+                        sync_upstream.main()
+                    publish.assert_called_once_with(ROOT, ['debs/new.deb'], 'captured-sha', 'owner/repo', None)
+                else:
+                    sync_upstream.main()
+                    publish.assert_not_called()
+                summary.assert_called_once_with(result, operation)
+
+    def test_main_global_failure_has_summary_without_requesting_publish(self):
+        env = {'GITHUB_ACTIONS': 'true', 'GITHUB_REF': 'refs/heads/main', 'GITHUB_REPOSITORY': 'owner/repo',
+               'UPSTREAM_OPERATION': '更新插件'}
+        with patch.dict(os.environ, env, clear=True), patch('sync_upstream.checked', side_effect=['', 'sha']), \
+                patch('sync_upstream.sync', side_effect=ValueError('整体预检失败')), \
+                patch('sync_upstream.publish') as publish, patch('sync_upstream.write_summary') as summary:
+            with self.assertRaisesRegex(ValueError, '整体预检失败'):
+                sync_upstream.main()
+            publish.assert_not_called()
+            self.assertEqual(summary.call_args.args[0]['rows'][0]['status'], '整体停止')
+
+    def test_main_publish_failure_never_labels_unconfirmed_changes_as_committed(self):
+        env = {'GITHUB_ACTIONS': 'true', 'GITHUB_REF': 'refs/heads/main', 'GITHUB_REPOSITORY': 'owner/repo',
+               'UPSTREAM_OPERATION': '更新插件'}
+        result = {'paths': ['debs/new.deb'], 'config_update': None, 'errors': [], 'rows': [
+            {'repo': 'owner/repo', 'package': 'org.example.x', 'section': '工具', 'status': '待提交', 'detail': '1.0'}]}
+        with patch.dict(os.environ, env, clear=True), patch('sync_upstream.checked', side_effect=['', 'sha']), \
+                patch('sync_upstream.sync', return_value=result), \
+                patch('sync_upstream.publish', side_effect=ValueError('远端冲突')), patch('sync_upstream.write_summary'):
+            with self.assertRaisesRegex(ValueError, '远端冲突'):
+                sync_upstream.main()
+            self.assertEqual(result['rows'][0]['status'], '待核对')
 
 
 if __name__ == '__main__':

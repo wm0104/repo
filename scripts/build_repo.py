@@ -12,6 +12,7 @@ import re
 import shutil
 import subprocess
 import sys
+import urllib.parse
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 # Existing upstream packages only. Never silently accept new incomplete packages.
@@ -59,10 +60,19 @@ def validate_sections(sections):
     if not isinstance(sections, dict):
         raise ValueError('upstreams.json: sections must map Package IDs to Sections')
     for package, section in sections.items():
-        if not isinstance(package, str) or not re.fullmatch(r'[a-z0-9][a-z0-9+.-]+', package):
+        if not isinstance(package, str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9+.-]+', package):
             raise ValueError(f'upstreams.json: invalid Package {package!r}')
         if not isinstance(section, str) or not section.strip() or any(ord(c) < 32 for c in section):
             raise ValueError(f'upstreams.json: invalid Section for {package}')
+
+
+def validate_apt_url(url):
+    parsed = urllib.parse.urlsplit(url)
+    if (parsed.scheme != 'https' or not parsed.hostname or parsed.username is not None
+            or parsed.password is not None or parsed.query or parsed.fragment
+            or any(c.isspace() or ord(c) < 32 for c in url)):
+        raise ValueError('APT 地址必须是公开 HTTPS 目录，不含账号、查询参数或片段')
+    return url.rstrip('/') + '/'
 
 
 def validate_sources(sources):
@@ -70,9 +80,13 @@ def validate_sources(sources):
         raise ValueError('upstreams.json: sources must be a list')
     seen = set()
     for source in sources:
-        if not isinstance(source, dict) or not isinstance(source.get('repo'), str) or not re.fullmatch(
+        if not isinstance(source, dict) or not isinstance(source.get('repo'), str):
+            raise ValueError('upstreams.json: invalid repository')
+        if source.get('type', 'github') == 'apt':
+            validate_apt_url(source['repo'])
+        elif source.get('type', 'github') != 'github' or not re.fullmatch(
                 r'[A-Za-z0-9-]+/[A-Za-z0-9_.-]+', source['repo']):
-            raise ValueError('upstreams.json: invalid GitHub repository')
+            raise ValueError('upstreams.json: invalid GitHub repository or source type')
         if not isinstance(source.get('packages'), dict) or not source['packages']:
             raise ValueError('upstreams.json: packages must map Package IDs to Sections')
         validate_sections(source['packages'])
