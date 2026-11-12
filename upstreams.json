@@ -18,6 +18,16 @@
         "com.susu.fuckwechatadss": "微信插件"
       },
       "type": "apt"
+    },
+    {
+      "repo": "https://apt.htv123.com/",
+      "packages": {
+        "com.xybp888.callassist16.dopamine.roothide": "系统增强"
+      },
+      "type": "apt"
     }
-  ]
+  ],
+  "names": {
+    "com.xybp888.callassist16.dopamine.roothide": "电话助手iOS16-正式版(Roothide)"
+  }
 }
