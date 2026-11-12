@@ -373,9 +373,13 @@ class WorkflowTest(unittest.TestCase):
         self.assertIn('group: upstream-sync', text)
         self.assertIn('run: python3 scripts/sync_upstream.py', text)
         lines = text.splitlines()
-        for index, line in enumerate(lines):
-            if line.strip() and not line.lstrip().startswith('#'):
-                self.assertTrue(lines[index + 1].lstrip().startswith('#'), line)
+        for field, comment in (
+                ('repo', '# 来源地址：'),
+                ('packages', '# 要下载的插件：'),
+                ('section', '# 插件分组：')):
+            index = lines.index(f'      {field}:')
+            self.assertTrue(lines[index - 1].strip().startswith(comment), field)
+        for line in lines:
             if 'run:' in line:
                 self.assertNotIn(chr(36) + '{{', line)
 

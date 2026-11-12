@@ -59,8 +59,9 @@ It is manual-only; do not create a workflow per repository or package. Keep
 single-package workflow has been removed; GitHub may retain its historical runs.
 
 The Run workflow form has operation, scope, source_type, repo, packages and
-section. Every YAML field has a Chinese comment directly below it explaining
-usage. Pass inputs through environment variables, never shell interpolation.
+section. Keep the three Chinese usage comments directly above the repo,
+packages and section inputs; do not require comments on every YAML line.
+Pass inputs through environment variables, never shell interpolation.
 The default operation is read-only list. Operations:
 - List: show saved repositories, Package IDs, Sections, and stopped entries in
   the run summary. Do not download, commit, or dispatch publication.
