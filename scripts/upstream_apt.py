@@ -50,7 +50,7 @@ def latest_assets(repo, packages, architecture):
             continue
         fields = parse(block)
         package = fields.get('Package')
-        if package not in packages or fields.get('Architecture') != architecture:
+        if (packages is not None and package not in packages) or fields.get('Architecture') != architecture:
             continue
         grouped.setdefault(package, []).append(fields)
     assets = []
@@ -67,7 +67,8 @@ def latest_assets(repo, packages, architecture):
                 raise ValueError('最高版本存在多条不一致索引')
             assets.append({'name': package + '.deb', 'record': latest})
         except (ValueError, subprocess.SubprocessError) as exc:
-            assets.append({'name': package + '.deb', 'error': str(exc)})
+            assets.append({'name': package + '.deb', 'package': package,
+                           'lookup_names': [entry.get('Name', '') for entry in entries], 'error': str(exc)})
     return {'tag_name': 'APT 最新索引', 'assets': assets}
 
 

@@ -18,6 +18,7 @@ import urllib.request
 
 from build_repo import compare_versions, load_sections, parse, validate_apt_url, validate_sections, validate_sources
 from upstream_apt import asset_metadata, latest_assets
+from plugin_lookup import ChoiceRequired, candidate, resolve, search, selectors
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 ARCHITECTURE = 'iphoneos-arm64e'
@@ -205,32 +206,126 @@ def validate_candidate(root, workspace, path):
         preflight(candidate, candidate, [])
 
 
+def saved_candidates(root, data):
+    known = registrations(data)
+    sections = {**data.get('manual_sections', {}), **{p: value[1] for p, value in known.items()}}
+    names = data.get('names', {})
+    if not isinstance(names, dict) or any(not isinstance(value, str) for value in names.values()):
+        raise ValueError('upstreams.json: names 必须是 Package 到显示名称的映射')
+    latest = {}
+    for path in sorted((root / 'debs').glob('*.deb')):
+        fields = package_info(path)
+        package = fields['Package']
+        if package not in sections or fields['Architecture'] != ARCHITECTURE:
+            continue
+        if package not in latest or compare_versions(fields['Version'], latest[package]['Version']) > 0:
+            latest[package] = fields
+    catalog = []
+    for package, section in sections.items():
+        repo = known[package][0] if package in known else '—'
+        source = next((item for item in data['sources'] if item['repo'] == repo), {})
+        fields = latest.get(package, {'Package': package, 'Version': '—', 'Architecture': ARCHITECTURE})
+        item = candidate(repo, source.get('type', 'github'), fields, names.get(package, ''))
+        item['section'] = section
+        catalog.append(item)
+    return catalog
+
+
+def discover(repo, source_type, workspace, query=''):
+    release = copy.deepcopy(latest_assets(repo, None, ARCHITECTURE) if source_type == 'apt' else latest_release(repo))
+    if not isinstance(release.get('assets'), list):
+        raise ValueError('来源资产列表无效')
+    catalog, errors = [], []
+    for index, asset in enumerate(release['assets']):
+        try:
+            name = asset.get('name', '')
+            if not isinstance(name, str) or not name.endswith('.deb'):
+                continue
+            if 'error' in asset:
+                if source_type == 'apt' and query:
+                    labels = [asset.get('package', name), *asset.get('lookup_names', [])]
+                    if not any(word.casefold() in label.casefold() for word in selectors(query) for label in labels):
+                        continue
+                raise ValueError(asset['error'])
+            if source_type == 'apt':
+                fields = asset['record']
+            else:
+                if pathlib.PurePosixPath(name).name != name or '\\' in name or any(ord(c) < 32 for c in name):
+                    raise ValueError('不安全的 Release 文件名')
+                path = workspace / f'lookup-{index}.deb'
+                print(f'临时读取插件名称: {repo} {name}', flush=True)
+                download_asset(asset, path)
+                fields = package_info(path)
+                asset['_lookup_path'] = path
+            if fields['Architecture'] == ARCHITECTURE:
+                catalog.append(candidate(repo, source_type, fields))
+        except (ValueError, OSError, urllib.error.URLError) as exc:
+            errors.append(f'{asset.get("name", "未知资产")}: {exc}')
+    return catalog, release, errors
+
+
 def sync(root, action='update', scope='all', repo='', packages='', section='', source_type='github'):
+    with tempfile.TemporaryDirectory(prefix='.plugin-lookup-', dir=root) as directory:
+        return sync_selected(root, pathlib.Path(directory), action, scope, repo, packages, section, source_type)
+
+
+def sync_selected(root, lookup_workspace, action='update', scope='all', repo='', packages='', section='', source_type='github'):
     load_sections(root)
     config_path = root / 'upstreams.json'
     original_config = config_path.read_bytes() if config_path.exists() else None
     data = json.loads(original_config) if original_config is not None else {'sources': []}
     if (source_type == 'apt' and repo) or repo.startswith('https://'):
         repo = validate_apt_url(repo)
+    prepared_release = None
+    prepared_errors = []
+    local_catalog = saved_candidates(root, data)
+    result = {'paths': [], 'config_update': None, 'errors': [], 'rows': []}
+    if action in ('add', 'modify', 'search'):
+        values = selectors(packages)
+        if action == 'search' and section:
+            raise ValueError('查找插件只填来源和关键词，分组留空')
+        validate_sources([{'repo': repo, 'type': source_type, 'packages': {'lookup.placeholder': section or '_'}}])
+        if action in ('add', 'modify'):
+            validate_sections({'lookup.placeholder': section})
+            if not values:
+                raise ValueError('请填写插件完整名称、Package 或候选码')
+            if all(value in registrations(data) for value in values):
+                select_operation(data, action, scope, repo, packages, section, source_type)
+        catalog, prepared_release, prepared_errors = discover(repo, source_type, lookup_workspace, packages)
+        if action == 'search':
+            result['rows'] = search(catalog, packages)
+            result['errors'] = prepared_errors
+            return result
+        try:
+            packages = resolve(catalog, packages)
+        except ChoiceRequired as exc:
+            result['rows'] = exc.candidates
+            result['errors'] = [str(exc), *prepared_errors]
+            return result
+    elif action == 'remove' or action == 'update' and scope == 'packages':
+        try:
+            packages = resolve(local_catalog, packages)
+        except ChoiceRequired as exc:
+            result['rows'] = exc.candidates
+            result['errors'] = [str(exc)]
+            return result
     sources = select_operation(data, action, scope, repo, packages, section, source_type)
     updated = copy.deepcopy(data)
-    result = {'paths': [], 'config_update': None, 'errors': [], 'rows': []}
+    result['errors'].extend(prepared_errors)
 
     def row(source, package, status, detail=''):
+        local = next((item for item in local_catalog if item['package'] == package), {})
         item = {'repo': source['repo'], 'package': package, 'section': source['packages'].get(package, ''),
-                'status': status, 'detail': detail}
+                'status': status, 'detail': detail, 'name': local.get('name', package)}
         result['rows'].append(item)
         print(f'{status}: {source["repo"]} {package} {detail}')
         if status == '失败':
             result['errors'].append(f'{source["repo"]} {package}: {detail}')
 
     if action == 'list':
-        for item in data['sources']:
-            for package in item['packages']:
-                row(item, package, '已登记')
-        for package, saved_section in data.get('manual_sections', {}).items():
-            if package not in registrations(data):
-                row({'repo': '—', 'packages': {package: saved_section}}, package, '已停止同步')
+        for item in local_catalog:
+            item['status'] = '已登记' if item['package'] in registrations(data) else '已停止同步'
+            result['rows'].append(item)
         return result
     if action == 'remove':
         known = registrations(data)
@@ -258,8 +353,8 @@ def sync(root, action='update', scope='all', repo='', packages='', section='', s
         for source_index, source in enumerate(sources):
             try:
                 is_apt = source.get('type', 'github') == 'apt'
-                release = (latest_assets(source['repo'], source['packages'], ARCHITECTURE) if is_apt
-                           else latest_release(source['repo']))
+                release = prepared_release if prepared_release is not None else (
+                    latest_assets(source['repo'], source['packages'], ARCHITECTURE) if is_apt else latest_release(source['repo']))
                 if not isinstance(release.get('assets'), list):
                     raise ValueError('Release 资产列表无效')
             except (ValueError, OSError, urllib.error.URLError) as exc:
@@ -273,6 +368,10 @@ def sync(root, action='update', scope='all', repo='', packages='', section='', s
                 if not isinstance(name, str) or not name.endswith('.deb'):
                     continue
                 try:
+                    if is_apt and prepared_release is not None:
+                        asset_package = asset.get('record', {}).get('Package', asset.get('package'))
+                        if asset_package not in source['packages']:
+                            continue
                     if 'error' in asset:
                         raise ValueError(asset['error'])
                     if pathlib.PurePosixPath(name).name != name or '\\' in name or any(ord(c) < 32 for c in name):
@@ -281,6 +380,8 @@ def sync(root, action='update', scope='all', repo='', packages='', section='', s
                     if is_apt:
                         url, name, size, digest = asset_metadata(source['repo'], asset['record'])
                         download_verified(url, candidate, size, digest, name)
+                    elif prepared_release is not None and '_lookup_path' in asset:
+                        candidate = asset['_lookup_path']
                     else:
                         download_asset(asset, candidate)
                     fields = package_info(candidate)
@@ -288,7 +389,7 @@ def sync(root, action='update', scope='all', repo='', packages='', section='', s
                         raise ValueError('下载包真实身份/版本/架构与 APT 索引不一致')
                     package = fields['Package']
                     if package in source['packages'] and fields['Architecture'] == ARCHITECTURE:
-                        found.setdefault(package, []).append((candidate, name, fields['Version']))
+                        found.setdefault(package, []).append((candidate, name, fields['Version'], fields.get('Name', '')))
                 except (ValueError, OSError, urllib.error.URLError) as exc:
                     row(source, name, '失败', '资产校验失败: ' + str(exc))
             for package, selected_section in source['packages'].items():
@@ -296,7 +397,7 @@ def sync(root, action='update', scope='all', repo='', packages='', section='', s
                 if len(matches) != 1:
                     row(source, package, '失败', f'缺少 {ARCHITECTURE} 包' if not matches else '多个资产匹配，拒绝选择')
                     continue
-                candidate, name, version = matches[0]
+                candidate, name, version, display_name = matches[0]
                 try:
                     history = existing.get(package, {})
                     comparison = 1
@@ -319,7 +420,11 @@ def sync(root, action='update', scope='all', repo='', packages='', section='', s
                         validate_candidate(root, workspace, candidate)
                     if action in ('add', 'modify'):
                         register(updated, source['repo'], package, selected_section, source.get('type', 'github'))
+                    if display_name and (comparison > 0 or action in ('add', 'modify')):
+                        updated.setdefault('names', {})[package] = display_name
                     row(source, package, '待入库' if comparison > 0 else '跳过', detail)
+                    if display_name:
+                        result['rows'][-1]['name'] = display_name
                 except (ValueError, OSError, subprocess.SubprocessError) as exc:
                     row(source, package, '失败', str(exc))
         config_update = None
@@ -363,11 +468,15 @@ def write_summary(result, operation):
 
     lines = [f'## 插件管理：{cell(operation)}', '',
              '有失败项，请查看下表；已成功提交的有效更新不因个别失败回退。' if result['errors'] else '本次处理完成。', '',
-             '| 上游仓库 | Package | 分组 | 结果 | 说明 |', '| --- | --- | --- | --- | --- |']
+             '| 上游仓库 | 插件名称 | Package | 版本 | 架构 | 候选码 | 分组 | 结果 | 说明 |', '| --- | --- | --- | --- | --- | --- | --- | --- | --- |']
     for item in result['rows']:
-        lines.append('| ' + ' | '.join(cell(item[key]) for key in ('repo', 'package', 'section', 'status', 'detail')) + ' |')
+        lines.append('| ' + ' | '.join(cell(item.get(key, '—')) for key in ('repo', 'name', 'package', 'version', 'architecture', 'code', 'section', 'status', 'detail')) + ' |')
     if not result['rows']:
-        lines.append('| — | — | — | 无记录 | 尚未登记插件 |')
+        lines.append('| — | — | — | — | — | — | — | 无记录 | 没有匹配记录 |')
+    if any(item.get('code') for item in result['rows']):
+        lines += ['', '添加时填写唯一完整名称或复制候选码（含 @），来源保持一致；候选码绑定版本，过期请重新查找。']
+    if result['errors']:
+        lines += ['', '### 需要处理', *['- ' + cell(error) for error in result['errors']]]
     if result.get('publication'):
         lines += ['', result['publication']]
     text = '\n'.join(lines) + '\n'
@@ -412,7 +521,7 @@ def publish(root, paths, captured, repository, config_update=None):
     print('已请求原有 Publish APT repository 工作流；请查看该工作流的发布结果')
 
 
-OPERATIONS = {'更新插件': 'update', '添加并同步': 'add', '修改登记': 'modify', '停止同步': 'remove', '查看清单': 'list'}
+OPERATIONS = {'更新插件': 'update', '添加并同步': 'add', '修改登记': 'modify', '停止同步': 'remove', '查看清单': 'list', '查找插件': 'search'}
 SCOPES = {'全部': 'all', '指定仓库': 'repo', '指定插件': 'packages'}
 SOURCE_TYPES = {'GitHub发行版': 'github', 'APT软件源': 'apt'}
 
@@ -439,7 +548,7 @@ def main():
             'publication': '整体检查未通过，没有请求提交或发布。'}, operation)
         raise
     try:
-        if operation != '查看清单' and (result['paths'] or not result['errors']):
+        if operation not in ('查看清单', '查找插件') and (result['paths'] or not result['errors']):
             publish(ROOT, result['paths'], captured, os.environ['GITHUB_REPOSITORY'], result['config_update'])
             for item in result['rows']:
                 if item['status'] == '待提交':

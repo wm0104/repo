@@ -4,18 +4,19 @@ on:
   workflow_dispatch:
     inputs:
       operation:
-        description: '操作：添加会记住来源；修改需已登记；停止不删包；查看不改仓库'
+        description: '操作：查找按名称列候选；添加会记住来源；修改需已登记；停止不删包'
         required: true
         type: choice
         default: 查看清单
         options:
           - 查看清单
+          - 查找插件
           - 更新插件
           - 添加并同步
           - 修改登记
           - 停止同步
       scope:
-        description: '更新范围：全部不填仓库/Package；指定仓库只填仓库；指定插件只填 Package'
+        description: '更新范围：全部留空仓库/插件；指定仓库只填地址；指定插件可填名称、旧Package或候选码'
         required: true
         type: choice
         default: 全部
@@ -24,21 +25,21 @@ on:
           - 指定仓库
           - 指定插件
       source_type:
-        description: '来源类型（添加/修改时填写）：GitHub 发行版或公开 HTTPS 平铺 APT 源'
+        description: '来源类型（查找/添加/修改时填写）：GitHub 发行版或公开 HTTPS 平铺 APT 源'
         required: true
         type: choice
         default: GitHub发行版
         options:
           - GitHub发行版
           - APT软件源
-      # 来源地址：GitHub 填 作者/仓库名（不填发行版或 deb 链接）；APT 填完整 HTTPS 源地址。
+      # 来源地址：查找/添加/修改时填；GitHub 填 作者/仓库名，APT 填完整 HTTPS 地址；不固定任何源。
       repo:
         description: '仓库：GitHub 填作者/仓库名；APT 填完整 HTTPS 源地址'
         required: false
         type: string
-      # 要下载的插件：填真实 Package 标识，多个用英文逗号分隔，不填插件名或 deb 文件名。
+      # 要下载的插件：填完整显示名称或候选码（含@），兼容旧Package；查找可用关键词，多个用英文逗号分隔。
       packages:
-        description: 'Package 列表：一个或英文逗号分隔多个，例如 wiki.qaq.apelin,wiki.qaq.apelin.dev.app'
+        description: '插件名称/候选码：添加用完整名称或@候选码；查找可用关键词或留空列出全部；兼容旧Package'
         required: false
         type: string
       # 插件分组：填写在自己源中显示的分类，例如 乌龙、工具、美化。

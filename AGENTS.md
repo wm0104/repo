@@ -63,9 +63,9 @@ section. Keep the three Chinese usage comments directly above the repo,
 packages and section inputs; do not require comments on every YAML line.
 Pass inputs through environment variables, never shell interpolation.
 The default operation is read-only list. Operations:
-- List: show saved repositories, Package IDs, Sections, and stopped entries in
+- List: show saved repositories, names, Package IDs, Sections, and stopped entries in
   the run summary. Do not download, commit, or dispatch publication.
-- Add and sync: provide one source and comma-separated Package IDs sharing a
+- Add and sync: provide one source and comma-separated names/codes/Package IDs sharing a
   Section. Save each successful registration automatically to `sources`.
   Repeating the same registration is idempotent; differing ownership/Section
   requires explicit modify, not silent replacement.
@@ -74,7 +74,7 @@ The default operation is read-only list. Operations:
   indexes as a substitute for this repository's own versions.
 - Modify: explicitly move registered Package IDs to another source or Section;
   validate the new upstream selection before saving each successful change.
-- Stop: require explicit Package IDs, remove their sync registrations but retain
+- Stop: resolve saved names/codes/Package IDs, remove their sync registrations but retain
   all debs and save their Sections in `manual_sections`; never delete packages.
 
 `upstreams.json.sources` supports multiple sources. Original entries without
@@ -83,6 +83,22 @@ Each actual Package ID has one owner, including case-sensitive legacy IDs.
 Keep existing mappings and unknown top-level metadata unchanged unless the
 selected operation requires changing that exact entry. Fila is not initially
 registered. `manual_sections` preserves classification without scheduling sync.
+
+"查找插件" is read-only and accepts source-local name keywords (blank lists all
+matching-architecture candidates). APT discovery reads only the index. GitHub
+discovery temporarily downloads and verifies assets to read control Name;
+do not infer Name from filenames. Cache those temporary downloads within the
+same run for add/modify, then clean them. Neither search nor list publishes.
+Complete names may resolve only uniquely; partial words only suggest choices.
+Duplicate names require a candidate code, never selecting the first result.
+Codes bind source type/address, real Package, Version and Architecture, not
+result order; expired/cross-source codes fail closed. Missing Name falls back
+to Package for display with the same code-selection path. Keep exact Package
+input compatibility and store `names` only as display metadata, never identity.
+Updates/stops resolve registered names from local debs/cache without contacting
+upstreams just to identify a selection. Updating all continues by Package even
+if the author changes the display name. Summary shows names, versions,
+architectures and confirmation codes; source addresses remain configurable.
 
 GitHub sources read the latest formal Release, parse real deb metadata, and
 require asset SHA256 and size. APT sources support public HTTPS flat indexes
