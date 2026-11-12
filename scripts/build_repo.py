@@ -2,6 +2,7 @@
 """Validate debs and build an atomic GitHub Pages/APT artifact."""
 import argparse
 import bz2
+import datetime
 import email.utils
 import functools
 import hashlib
@@ -29,7 +30,7 @@ def run(*args):
 def parse(text):
     fields = {}
     field = None
-    for line in text.splitlines():
+    for line in text.replace('\r\n', '\n').split('\n'):
         if line.startswith((' ', '\t')):
             if field == 'Description':
                 continuation = line[1:]
@@ -127,10 +128,10 @@ def build(output):
         raise ValueError('No deb packages found')
     sections = load_sections(ROOT)
     seen = set()
-    changelogs = {}
+    releases = {}
     for package in packages:
         fields = parse(run('dpkg-deb', '--field', str(package)))
-        missing = {f for f in ('Package', 'Version', 'Architecture', 'Maintainer', 'Description') if not fields.get(f)}
+        missing = {f for f in ('Package', 'Version', 'Architecture', 'Maintainer', 'Description') if not fields.get(f, '').strip()}
         allowed = LEGACY_MISSING.get((fields.get('Package'), fields.get('Version')), set())
         if missing - allowed:
             raise ValueError(f'{package.name}: missing {sorted(missing - allowed)}')
@@ -142,18 +143,30 @@ def build(output):
         if identity in seen:
             raise ValueError(f'Duplicate package/version/architecture: {identity}')
         seen.add(identity)
+        date_field = 'X-WM0104-Release-Date'
+        release_date = fields.get(date_field)
+        if release_date is not None:
+            try:
+                if not re.fullmatch(r'[0-9]{4}-[0-9]{2}-[0-9]{2}', release_date):
+                    raise ValueError
+                datetime.date.fromisoformat(release_date)
+            except ValueError:
+                raise ValueError(f'{package.name}: invalid {date_field}') from None
         field = 'X-WM0104-Changelog'
         if field not in fields and fields['Package'] == 'com.wm0104.repopocket':
             field = 'X-RepoPocket-Changelog'
-        if field in fields:
+        if release_date is not None or field in fields:
             if not re.fullmatch(r'[a-z0-9][a-z0-9+.-]+', fields['Package']):
                 raise ValueError(f'{package.name}: invalid Package')
-            entry = fields[field]
-            version, sep, rest = entry.partition(' | ')
-            date, sep2, changes = rest.partition(' | ')
-            if version != fields['Version'] or not sep or not sep2 or not date or not changes:
-                raise ValueError(f'{package.name}: invalid {field}')
-            changelogs.setdefault(fields['Package'], {})[version] = (date, changes, fields['Description'])
+            date, changes = release_date, ''
+            if field in fields:
+                entry = fields[field]
+                version, sep, rest = entry.partition(' | ')
+                date, sep2, changes = rest.partition(' | ')
+                if version != fields['Version'] or not sep or not sep2 or not date or not changes:
+                    raise ValueError(f'{package.name}: invalid {field}')
+            releases.setdefault(fields['Package'], {})[fields['Version']] = (
+                release_date or date, changes, fields['Description'])
         # Read the complete data archive to catch broken/truncated debs, not just control metadata.
         subprocess.run(['dpkg-deb', '--contents', str(package)], stdout=subprocess.DEVNULL, check=True)
 
@@ -168,13 +181,15 @@ def build(output):
         if (ROOT / name).is_dir():
             shutil.copytree(ROOT / name, output / name)
     (output / '.nojekyll').touch()
-    for package_id, history in changelogs.items():
+    for package_id, history in releases.items():
         depiction = output / 'depictions' / package_id / 'depiction.json'
         depiction.parent.mkdir(parents=True, exist_ok=True)
         versions = sorted(history, key=functools.cmp_to_key(compare_versions), reverse=True)
         views = []
         for version in versions:
             date, changes, _ = history[version]
+            if not changes:
+                continue
             views.append({'class': 'DepictionStackView', 'orientation': 'landscape', 'views': [
                 {'class': 'DepictionLabelView', 'text': version, 'fontSize': 17,
                  'fontWeight': 'bold', 'alignment': 0},
@@ -183,6 +198,8 @@ def build(output):
             ]})
             views.append({'class': 'DepictionMarkdownView', 'markdown':
                 '\n'.join(f'- {item.strip()}' for item in changes.split('；') if item.strip())})
+        if not views:
+            views.append({'class': 'DepictionLabelView', 'text': '无法查看此软件包的更新日志。'})
         depiction.write_text(json.dumps({
             'class': 'DepictionTabView', 'minVersion': '0.4', 'tabs': [
                 {'class': 'DepictionStackView', 'tabname': '插件详细', 'views': [
@@ -201,9 +218,10 @@ def build(output):
         content = file.read_bytes()
         if len(content) != int(record['Size']):
             raise ValueError(f'Index size mismatch: {file.name}')
-        lines = [line for line in block.splitlines() if not line.lower().startswith(
-            ('md5sum:', 'sha1:', 'sha256:', 'x-repopocket-changelog:', 'x-wm0104-changelog:'))]
-        if record['Version'] in changelogs.get(record['Package'], {}):
+        lines = [line for line in block.replace('\r\n', '\n').split('\n') if not line.lower().startswith(
+            ('md5sum:', 'sha1:', 'sha256:', 'x-repopocket-changelog:', 'x-wm0104-changelog:',
+             'x-wm0104-release-date:'))]
+        if record['Version'] in releases.get(record['Package'], {}):
             lines = [line for line in lines if not line.lower().startswith('sileodepiction:')]
             lines.append(f'SileoDepiction: https://wm0104.github.io/repo/depictions/{record["Package"]}/depiction.json')
         section = sections.get(record['Package'])
