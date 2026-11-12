@@ -25,9 +25,25 @@
         "com.xybp888.callassist16.dopamine.roothide": "系统增强"
       },
       "type": "apt"
+    },
+    {
+      "repo": "https://rootless.zq666.eu.org/",
+      "packages": {
+        "cn.zqbb.disupdateapp": "zqbb",
+        "cn.zqbb.hello.keyboardport": "zqbb",
+        "cn.zqbb.holdcpu": "zqbb",
+        "cn.zqbb.fix120hz": "zqbb",
+        "cn.zqbb.hello.jailport": "zqbb"
+      },
+      "type": "apt"
     }
   ],
   "names": {
-    "com.xybp888.callassist16.dopamine.roothide": "电话助手iOS16-正式版(Roothide)"
+    "com.xybp888.callassist16.dopamine.roothide": "电话助手iOS16-正式版(Roothide)",
+    "cn.zqbb.disupdateapp": "Hello App",
+    "cn.zqbb.hello.keyboardport": "HelloKeyboardPort",
+    "cn.zqbb.holdcpu": "Hello CPU",
+    "cn.zqbb.fix120hz": "Hello 120Hz",
+    "cn.zqbb.hello.jailport": "HelloJailPort"
   }
 }
