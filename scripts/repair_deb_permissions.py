@@ -60,7 +60,7 @@ def ar_members(blob):
     if not out or out[0][0] != 'debian-binary' or out[0][4] != b'2.0\n':
         fail('ar: missing/invalid debian-binary')
     controls = [x for x in out if x[0] in ('control.tar', 'control.tar.gz', 'control.tar.xz', 'control.tar.zst')]
-    datas = [x for x in out if x[0] in ('data.tar', 'data.tar.gz', 'data.tar.xz', 'data.tar.zst', 'data.tar.bz2')]
+    datas = [x for x in out if x[0] in ('data.tar', 'data.tar.gz', 'data.tar.xz', 'data.tar.zst', 'data.tar.bz2', 'data.tar.lzma')]
     if len(controls) != 1 or len(datas) != 1 or names.index(controls[0][0]) >= names.index(datas[0][0]):
         fail('ar: require one supported control and data member in order')
     if any(n.startswith(('control.tar', 'data.tar')) and n not in (controls[0][0], datas[0][0]) for n in names):
@@ -76,11 +76,12 @@ def unpack(name, payload, limit):
         raw = decoder.decompress(payload, limit + 1)
         if len(raw) > limit or decoder.unconsumed_tail or not decoder.eof or decoder.unused_data:
             fail(f'{name}: truncated, trailing or oversized gzip')
-    elif name.endswith('.xz'):
-        decoder = lzma.LZMADecompressor(memlimit=256 * 1024 * 1024)
+    elif name.endswith(('.xz', '.lzma')):
+        format = lzma.FORMAT_ALONE if name.endswith('.lzma') else lzma.FORMAT_XZ
+        decoder = lzma.LZMADecompressor(format=format, memlimit=256 * 1024 * 1024)
         raw = decoder.decompress(payload, max_length=limit + 1)
         if len(raw) > limit or not decoder.eof or decoder.unused_data:
-            fail(f'{name}: truncated, trailing or oversized xz')
+            fail(f'{name}: truncated, trailing or oversized lzma/xz')
     elif name.endswith('.bz2'):
         import bz2
         decoder = bz2.BZ2Decompressor()
