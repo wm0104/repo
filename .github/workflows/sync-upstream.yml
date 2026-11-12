@@ -1,150 +1,80 @@
 name: 同步插件
-# Actions 左侧只保留这一个插件管理入口；原索引发布工作流仍独立保留。
 
 on:
-# 仅手动触发，不定时检测，也不因推送自动下载上游插件。
   workflow_dispatch:
-  # 点击 Run workflow 后会出现下面六项输入。
     inputs:
-    # 一次添加同仓库多个包时，用英文逗号分隔；不同分组分次添加。
       operation:
-      # 选择本次要做的操作，而不是为每个插件新建工作流。
         description: '操作：添加会记住来源；修改需已登记；停止不删包；查看不改仓库'
-        # 新插件选“添加并同步”，以后直接选“更新插件”。
         required: true
-        # 必选项，避免脚本猜测操作。
         type: choice
-        # GitHub 原生下拉菜单，不需要编辑 JSON。
         default: 查看清单
-        # 默认只读，先查看当前已登记的仓库、Package 和分组。
         options:
-        # 下列操作共用同一套校验、版本比较和安全提交代码。
           - 查看清单
-          # 在本次运行的 Summary 摘要查看管理清单，不下载插件或提交。
           - 更新插件
-          # 按下面“同步范围”更新已登记的插件，不必重复登记。
           - 添加并同步
-          # 填来源类型、仓库、Package 和分组；校验成功后自动保存。
           - 修改登记
-          # 填已登记 Package、新仓库和分组；可明确更换来源或分组。
           - 停止同步
-          # 只填写 Package 列表；保留已有安装包及其分组。
       scope:
-      # 仅“更新插件”时生效，添加、修改、停止和查看时保持默认即可。
         description: '更新范围：全部不填仓库/Package；指定仓库只填仓库；指定插件只填 Package'
-        # 不符合范围的多余输入会报错，避免误更新全部。
         required: true
-        # 每次运行都明确同步范围。
         type: choice
-        # 使用下拉选择，不在输入框写操作指令。
         default: 全部
-        # 更新全部会检查所有已登记的 GitHub 和 APT 来源。
         options:
-        # 选择一个范围；指定插件可跨已登记仓库。
           - 全部
-          # repo 和 packages 两项都留空。
           - 指定仓库
-          # repo 填已登记仓库或 APT 地址，packages 留空。
           - 指定插件
-          # packages 填一个或多个已登记 Package，repo 留空。
       source_type:
-      # 只在添加/修改时选择；更新时使用清单里保存的来源类型。
         description: '来源类型（添加/修改时填写）：GitHub 发行版或公开 HTTPS 平铺 APT 源'
-        # 不支持需要登录、付费授权或设备绑定的专用下载接口。
         required: true
-        # 明确来源类型，不能把 APT 地址当 GitHub 仓库名。
         type: choice
-        # GitHub Release 附件和 APT Packages 使用不同读取方式。
         default: GitHub发行版
-        # 原有 Apelin 配置仍默认属于 GitHub 来源。
         options:
-        # 只导入实际 Architecture 为 iphoneos-arm64e 的包，不自动转换。
           - GitHub发行版
-          # repo 例如 owngoal-dev/Apelin；读取最新正式 Release 的 deb 附件。
           - APT软件源
-          # repo 例如 https://trollstorex.github.io/repo/；读取平铺 Packages 索引。
+      # 来源地址：GitHub 填 作者/仓库名（不填发行版或 deb 链接）；APT 填完整 HTTPS 源地址。
       repo:
-      # 添加/修改或更新指定仓库时填写，其他操作留空。
         description: '仓库：GitHub 填作者/仓库名；APT 填完整 HTTPS 源地址'
-        # GitHub 不带 /releases；APT 地址示例：https://trollstorex.github.io/repo/。
         required: false
-        # 更新全部、指定插件、停止同步和查看清单不需要这个值。
         type: string
-        # 这是数据，不会直接拼进 shell 命令执行。
+      # 要下载的插件：填真实 Package 标识，多个用英文逗号分隔，不填插件名或 deb 文件名。
       packages:
-      # 添加/修改/停止/更新指定插件时填写，填真实 Package，不是 Name。
         description: 'Package 列表：一个或英文逗号分隔多个，例如 wiki.qaq.apelin,wiki.qaq.apelin.dev.app'
-        # 以安装包 control 的 Package 字段或 Sileo 详情底部标识为准。
         required: false
-        # 添加同仓库的多个包共用下面的 section；没有配置时不会收录整源。
         type: string
-        # Package 大小写按原标识填写，不能填 deb 文件名或版本号。
+      # 插件分组：填写在自己源中显示的分类，例如 乌龙、工具、美化。
       section:
-      # 只在添加/修改时填写；更新和停止同步不会自行改变分组。
         description: '分组：添加/修改时填写，例如 乌龙、工具、美化'
-        # 这是你自己的 Sileo 软件源分组，不要求与上游 Section 一致。
         required: false
-        # 查看、更新、停止同步时留空，以免误以为本次会改分组。
         type: string
-        # 分组只在索引中映射，不修改或重新打包上游 deb。
 
 permissions:
-# 仅允许本仓库新增已验证包、保存本次登记变更、请求原发布流程。
   contents: write
-  # 用于安全提交；禁止覆盖旧包或强制推送。
   actions: write
-  # GITHUB_TOKEN 推送不会触发 push workflow，必须显式请求原发布流程。
 
 concurrency:
-# 同一时间只运行一个插件管理任务，避免两个任务同时修改清单。
   group: upstream-sync
-  # 不与原 Pages 发布锁混用，避免相互等待。
   cancel-in-progress: false
-  # 不取消正在运行的任务；手动连续点击不保证每个排队任务都执行。
 
 jobs:
-# 只有这一个管理任务；安装包入库后仍交给 refresh.yml 发布。
   sync:
-  # 任务名，日志和摘要都归到这里。
     runs-on: ubuntu-latest
-    # 使用 Linux 的 dpkg 工具读取安装包，不执行包内安装脚本。
     timeout-minutes: 90
-    # 多仓库/多插件需要下载与全量预检，超过此时间停止。
     steps:
-    # 按顺序检出、准备工具、测试，再执行管理操作。
       - name: Checkout current main
-        # 始终基于 main 最新提交核对仓库中实际 deb 版本。
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-        # 固定官方 checkout 版本，保持与原工作流一致。
         with:
-        # checkout 参数。
           ref: main
-          # 不以手机安装版本或 Sileo 缓存作为比较基准。
       - name: Install repository tools
-        # 仅安装索引和归档检查工具，不安装任何上游插件。
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends dpkg-dev bzip2 xz-utils zstd
-        # 不需要在这里填写插件名、Package 或下载地址。
       - name: Test synchronization and existing repository behavior
-        # 先执行回归测试，保护原索引、描述页和安全提交行为。
         run: python3 -m unittest discover -s testsuite -v
-        # 测试使用临时包和受控响应，不会因此自动导入真实上游包。
       - name: Manage selected upstream packages and request existing publisher
-        # 根据表单执行；某包失败继续其他有效包，最终摘要会明确列出失败。
         env:
-        # 输入只通过环境变量传入，不插入 shell 命令。
           GH_TOKEN: ${{ github.token }}
-          # 仅用于 GitHub API/本仓库提交与触发发布，不发送给 APT 源。
           UPSTREAM_OPERATION: ${{ inputs.operation }}
-          # 表单的操作选择。
           UPSTREAM_SCOPE: ${{ inputs.scope }}
-          # 表单的更新范围。
           UPSTREAM_TYPE: ${{ inputs.source_type }}
-          # 添加/修改所用来源类型；已有记录更新时自动识别。
           UPSTREAM_REPO: ${{ inputs.repo }}
-          # GitHub 作者/仓库，或 APT HTTPS 目录地址。
           UPSTREAM_PACKAGES: ${{ inputs.packages }}
-          # 原样传入 Package 列表，再由 Python 校验和拆分。
           UPSTREAM_SECTION: ${{ inputs.section }}
-          # 添加/修改的目标分组，由流程自动保存。
         run: python3 scripts/sync_upstream.py
-        # 真实下载/比较/预检/提交逻辑在 scripts/sync_upstream.py，APT 读取在 upstream_apt.py。
