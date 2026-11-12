@@ -486,7 +486,23 @@ def write_summary(result, operation):
             output.write(text)
 
 
-def publish(root, paths, captured, repository, config_update=None):
+def push_changes(root, token):
+    # Never persist a token in Git config, remote URLs or command-line arguments.
+    with tempfile.TemporaryDirectory(prefix='repo-push-') as directory:
+        askpass = pathlib.Path(directory) / 'askpass.sh'
+        askpass.write_text('#!/bin/sh\ncase "$1" in\n*Username*) echo x-access-token;;\n*) printf "%s\\n" "$WM0104_PUSH_TOKEN";;\nesac\n')
+        askpass.chmod(0o700)
+        env = {**os.environ, 'GIT_ASKPASS': str(askpass), 'GIT_TERMINAL_PROMPT': '0', 'WM0104_PUSH_TOKEN': token}
+        result = subprocess.run(['git', '-c', 'credential.helper=', '-c', 'http.https://github.com/.extraheader=',
+                                 'push', 'origin', 'HEAD:refs/heads/main'], cwd=root, env=env,
+                                capture_output=True, text=True)
+        if result.returncode:
+            raise ValueError((result.stderr or 'Git push failed').replace(token, '***').strip())
+
+
+def publish(root, paths, captured, repository, config_update=None, workflow_update=None):
+    from saved_packages import WORKFLOW, render, catalog
+
     def git(*args):
         return checked(['git', *args], cwd=root)
 
@@ -495,8 +511,18 @@ def publish(root, paths, captured, repository, config_update=None):
 
     if current_remote() != captured:
         raise ValueError('远端 main 已更新，请重新运行；拒绝覆盖新提交')
+    dedicated_token = os.environ.get('WORKFLOW_WRITE_TOKEN', '')
     if paths:
-        deb_paths = [p for p in paths if p != 'upstreams.json']
+        deb_paths = [p for p in paths if p not in ('upstreams.json', WORKFLOW)]
+        if WORKFLOW in paths:
+            if (root / WORKFLOW).is_symlink():
+                raise ValueError('工作流选项文件不能是符号链接')
+            if not dedicated_token:
+                raise ValueError('维护插件下拉选项需要 WORKFLOW_WRITE_TOKEN')
+            baseline = subprocess.check_output(['git', 'show', f'{captured}:{WORKFLOW}'], cwd=root)
+            expected = render(baseline, catalog(root))
+            if workflow_update != expected or (root / WORKFLOW).read_bytes() != expected:
+                raise ValueError('工作流变更不等于本次登记生成的选项，停止提交')
         if 'upstreams.json' in paths:
             if config_update is None or (root / 'upstreams.json').read_bytes() != config_update:
                 raise ValueError('配置与本次已验证的变更不一致，停止提交')
@@ -515,7 +541,14 @@ def publish(root, paths, captured, repository, config_update=None):
         git('commit', '-m', '同步上游插件更新（已校验，保留旧版本）')
         if current_remote() != captured:
             raise ValueError('提交期间远端 main 已更新，拒绝推送')
-        git('push', 'origin', 'HEAD:refs/heads/main')
+        token = dedicated_token or os.environ.get('GH_TOKEN', '')
+        if token:
+            push_changes(root, token)
+        else:
+            git('push', 'origin', 'HEAD:refs/heads/main')
+        if dedicated_token:
+            print('已推送验证后的变更；专用令牌推送触发原索引发布，不重复 dispatch')
+            return
     # Token pushes do not trigger on:push. Also retry publishing after a prior dispatch failure.
     checked(['gh', 'workflow', 'run', 'refresh.yml', '--repo', repository, '--ref', 'main'], cwd=root)
     print('已请求原有 Publish APT repository 工作流；请查看该工作流的发布结果')

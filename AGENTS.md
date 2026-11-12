@@ -58,8 +58,8 @@ It is manual-only; do not create a workflow per repository or package. Keep
 `.github/workflows/refresh.yml` as the only Pages publisher. The obsolete
 single-package workflow has been removed; GitHub may retain its historical runs.
 
-The Run workflow form has operation, scope, source_type, repo, packages and
-section. Keep the three Chinese usage comments directly above the repo,
+The Run workflow form has operation, scope, source_type, saved_package, repo,
+packages and section. Keep the three Chinese usage comments directly above the repo,
 packages and section inputs; do not require comments on every YAML line.
 Pass inputs through environment variables, never shell interpolation.
 The default operation is read-only list. Operations:
@@ -100,6 +100,21 @@ upstreams just to identify a selection. Updating all continues by Package even
 if the author changes the display name. Summary shows names, versions,
 architectures and confirmation codes; source addresses remain configurable.
 
+`saved_package` is a generated single-choice list of active registrations,
+displaying Name plus real Package ID. Use it only for update/stop; ignore the
+default all scope when a valid dropdown item is chosen, and reject simultaneous
+manual package/source/Section inputs. Validate the ID against current registrations
+so old forms cannot revive stopped entries. Keep comma-separated manual selection.
+`saved_packages.py` changes only the marked options block of sync-upstream.yml;
+never grant a generic workflow-file write allowance. Recompute the exact allowed
+bytes from the captured Git baseline and current validated registration before push.
+`manage_saved.py prepare` downloads/audits/builds without the dedicated write token,
+then records exact file hashes and expected bytes in RUNNER_TEMP. The separate
+publish step receives WORKFLOW_WRITE_TOKEN (fine-grained PAT, target repository
+only, Contents and Workflows write). No token in Git URLs/config/logs; checkout
+uses persist-credentials:false. Missing write authorization blocks list changes
+before any remote commit. Read-only list/search do not update choices or publish.
+
 GitHub sources read the latest formal Release, parse real deb metadata, and
 require asset SHA256 and size. APT sources support public HTTPS flat indexes
 Packages.xz/bz2/gz/plain, with bounded downloads/decompression. Pick the highest
@@ -129,7 +144,9 @@ Use Chinese commit messages, stale-main guards and non-force push.
 
 GITHUB_TOKEN pushes do not trigger on:push. Explicitly dispatch refresh.yml
 following a successful import/config change, or successful no-change update
-for retry recovery. A sync result means publication was requested, not finished.
+for retry recovery. A successful dedicated-PAT push triggers on:push itself;
+skip explicit dispatch only in that case to avoid duplicate publication.
+A sync result means publication was requested, not finished.
 Keep the upstream-sync lock separate from pages; do not wait for Pages while
 holding its lock. No real import without user authorization. Use fixture debs,
 controlled HTTP responses and local bare Git remotes for tests; distinguish

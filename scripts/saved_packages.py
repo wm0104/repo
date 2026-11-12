@@ -1,0 +1,55 @@
+"""Maintain only the generated saved-package choices in the existing workflow."""
+import json
+import re
+
+WORKFLOW = '.github/workflows/sync-upstream.yml'
+NONE = '未选择（使用范围或手动输入）'
+BEGIN = b'        # BEGIN SAVED PACKAGE OPTIONS\n'
+END = b'        # END SAVED PACKAGE OPTIONS\n'
+
+
+def render(original, catalog):
+    newline = b'\r\n' if b'\r\n' in original else b'\n'
+    begin, end = (marker.replace(b'\n', newline) for marker in (BEGIN, END))
+    if original.count(begin) != 1 or original.count(end) != 1:
+        raise ValueError('工作流缺少唯一的已登记插件选项标记')
+    before, rest = original.split(begin)
+    _, after = rest.split(end)
+    labels = [NONE]
+    for item in sorted(catalog, key=lambda item: (item['name'].casefold(), item['package'])):
+        name = ' '.join(item['name'].split()).replace('${{', '＄{{')
+        labels.append(f'{name} [{item["package"]}]')
+    options = ''.join('          - ' + json.dumps(label, ensure_ascii=False) + '\n' for label in labels)
+    return before + begin + options.encode('utf-8').replace(b'\n', newline) + end + after
+
+
+def select(data, action, scope, repo, packages, section, label):
+    if not label or label == NONE:
+        return scope, packages
+    if action not in ('update', 'remove') or repo or packages or section or scope == 'repo':
+        raise ValueError('下拉选择仅用于更新或停止同步；仓库、手动插件和分组留空，范围不要选指定仓库')
+    match = re.search(r' \[([A-Za-z0-9][A-Za-z0-9+.-]+)\]$', label)
+    known = {package for source in data['sources'] for package in source['packages']}
+    if not match or match[1] not in known:
+        raise ValueError('下拉选项已失效或插件已停止同步，请刷新表单后重新选择')
+    return 'packages', match[1]
+
+
+def catalog(root):
+    from sync_upstream import saved_candidates, registrations
+    data = json.loads((root / 'upstreams.json').read_bytes())
+    known = registrations(data)
+    return [item for item in saved_candidates(root, data) if item['package'] in known]
+
+
+def refresh(root, result, token_available):
+    workflow = root / WORKFLOW
+    original = workflow.read_bytes()
+    updated = render(original, catalog(root))
+    if original == updated:
+        return
+    if not token_available:
+        raise ValueError('需要配置仓库 Actions Secret WORKFLOW_WRITE_TOKEN（仅本仓库 Contents 和 Workflows 写权限），才能自动维护插件下拉选项；尚未提交或发布')
+    workflow.write_bytes(updated)
+    result['paths'].append(WORKFLOW)
+    result['workflow_update'] = updated

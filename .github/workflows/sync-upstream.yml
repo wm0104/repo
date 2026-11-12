@@ -32,6 +32,29 @@ on:
         options:
           - GitHub发行版
           - APT软件源
+      saved_package:
+        description: '已登记插件：更新/停止时直接选择；会自动限定这一个，仓库/手填插件/分组留空'
+        required: false
+        type: choice
+        default: 未选择（使用范围或手动输入）
+        options:
+        # BEGIN SAVED PACKAGE OPTIONS
+          - "未选择（使用范围或手动输入）"
+          - "Apelin [wiki.qaq.apelin]"
+          - "Apelin App Development [wiki.qaq.apelin.dev.app]"
+          - "Apelin Assembler [wiki.qaq.apelin.agent-tools.assembler]"
+          - "Apelin Command-Line Tool Development [wiki.qaq.apelin.dev.cli]"
+          - "Apelin Disassembler [wiki.qaq.apelin.agent-tools.disassembler]"
+          - "Apelin Preference Bundle Development [wiki.qaq.apelin.dev.preferences]"
+          - "Apelin Tweak Development [wiki.qaq.apelin.dev.tweak]"
+          - "Hello 120Hz [cn.zqbb.fix120hz]"
+          - "Hello App [cn.zqbb.disupdateapp]"
+          - "Hello CPU [cn.zqbb.holdcpu]"
+          - "HelloJailPort [cn.zqbb.hello.jailport]"
+          - "HelloKeyboardPort [cn.zqbb.hello.keyboardport]"
+          - "微信去广告 FuckWeChatAds [com.susu.fuckwechatadss]"
+          - "电话助手iOS16-正式版(Roothide) [com.xybp888.callassist16.dopamine.roothide]"
+        # END SAVED PACKAGE OPTIONS
       # 来源地址：查找/添加/修改时填；GitHub 填 作者/仓库名，APT 填完整 HTTPS 地址；不固定任何源。
       repo:
         description: '仓库：GitHub 填作者/仓库名；APT 填完整 HTTPS 源地址'
@@ -65,11 +88,13 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           ref: main
+          persist-credentials: false
       - name: Install repository tools
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends dpkg-dev bzip2 xz-utils zstd
       - name: Test synchronization and existing repository behavior
         run: python3 -m unittest discover -s testsuite -v
-      - name: Manage selected upstream packages and request existing publisher
+      - name: Prepare selected packages and saved choices without write credentials
+        id: prepare
         env:
           GH_TOKEN: ${{ github.token }}
           UPSTREAM_OPERATION: ${{ inputs.operation }}
@@ -78,4 +103,12 @@ jobs:
           UPSTREAM_REPO: ${{ inputs.repo }}
           UPSTREAM_PACKAGES: ${{ inputs.packages }}
           UPSTREAM_SECTION: ${{ inputs.section }}
-        run: python3 scripts/sync_upstream.py
+          UPSTREAM_SAVED_PACKAGE: ${{ inputs.saved_package }}
+          WORKFLOW_WRITE_CONFIGURED: ${{ secrets.WORKFLOW_WRITE_TOKEN != '' }}
+        run: python3 scripts/manage_saved.py prepare
+      - name: Commit verified changes and request existing publisher
+        if: steps.prepare.outputs.publish == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          WORKFLOW_WRITE_TOKEN: ${{ secrets.WORKFLOW_WRITE_TOKEN }}
+        run: python3 scripts/manage_saved.py publish

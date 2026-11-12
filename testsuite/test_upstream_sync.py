@@ -371,7 +371,8 @@ class WorkflowTest(unittest.TestCase):
         self.assertNotIn('deploy-pages', text)
         self.assertIn('actions: write', text)
         self.assertIn('group: upstream-sync', text)
-        self.assertIn('run: python3 scripts/sync_upstream.py', text)
+        self.assertIn('run: python3 scripts/manage_saved.py prepare', text)
+        self.assertIn('run: python3 scripts/manage_saved.py publish', text)
         lines = text.splitlines()
         for field, comment in (
                 ('repo', '# 来源地址：'),
