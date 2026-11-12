@@ -43,7 +43,7 @@ on:
         type: string
       # 插件分组：填写在自己源中显示的分类，例如 乌龙、工具、美化。
       section:
-        description: '分组：添加/修改时填写，例如 乌龙、工具、美化'
+        description: '分组：添加/修改时填写，例如 、工具、美化'
         required: false
         type: string
 
