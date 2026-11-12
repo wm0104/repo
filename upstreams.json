@@ -11,6 +11,13 @@
         "wiki.qaq.apelin.dev.preferences": "乌龙",
         "wiki.qaq.apelin.dev.tweak": "乌龙"
       }
+    },
+    {
+      "repo": "https://trollstorex.github.io/repo/",
+      "packages": {
+        "com.susu.fuckwechatadss": "微信插件"
+      },
+      "type": "apt"
     }
   ]
 }
