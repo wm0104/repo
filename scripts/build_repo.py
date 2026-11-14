@@ -200,10 +200,19 @@ def build(output):
                 '\n'.join(f'- {item.strip()}' for item in changes.split('；') if item.strip())})
         if not views:
             views.append({'class': 'DepictionLabelView', 'text': '无法查看此软件包的更新日志。'})
+        detail_views = [{'class': 'DepictionMarkdownView',
+                         'markdown': history[versions[0]][2], 'useSpacing': True}]
+        # RepoPocket owns this introduction; the update tab still comes from package metadata.
+        custom = ROOT / 'depictions/com.wm0104.repopocket/description.json'
+        if package_id == 'com.wm0104.repopocket' and custom.is_file():
+            detail_views = json.loads(custom.read_text(encoding='utf-8'))
+            if not isinstance(detail_views, list) or not detail_views or any(
+                    not isinstance(view, dict) or not isinstance(view.get('class'), str)
+                    for view in detail_views):
+                raise ValueError('RepoPocket description.json must be a non-empty view list')
         depiction.write_text(json.dumps({
             'class': 'DepictionTabView', 'minVersion': '0.4', 'tabs': [
-                {'class': 'DepictionStackView', 'tabname': '插件详细', 'views': [
-                    {'class': 'DepictionMarkdownView', 'markdown': history[versions[0]][2], 'useSpacing': True}]},
+                {'class': 'DepictionStackView', 'tabname': '插件详细', 'views': detail_views},
                 {'class': 'DepictionStackView', 'tabname': '更新', 'views': views},
             ]}, ensure_ascii=False, indent=2) + '\n')
     result = subprocess.run(['dpkg-scanpackages', '--multiversion', 'debs', '/dev/null'], cwd=output, capture_output=True, text=True, check=True)
@@ -224,6 +233,10 @@ def build(output):
         if record['Version'] in releases.get(record['Package'], {}):
             lines = [line for line in lines if not line.lower().startswith('sileodepiction:')]
             lines.append(f'SileoDepiction: https://wm0104.github.io/repo/depictions/{record["Package"]}/depiction.json')
+            if record['Package'] == 'com.wm0104.repopocket' and (
+                    ROOT / 'depictions/com.wm0104.repopocket/icon.png').is_file():
+                lines = [line for line in lines if not line.lower().startswith('icon:')]
+                lines.append('Icon: https://wm0104.github.io/repo/depictions/com.wm0104.repopocket/icon.png')
         section = sections.get(record['Package'])
         if section is not None and record.get('Section') != section:
             lines = [line for line in lines if not line.lower().startswith('section:')]
