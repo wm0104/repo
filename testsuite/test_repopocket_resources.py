@@ -73,13 +73,58 @@ class RepoPocketResourcesTest(unittest.TestCase):
         other = 'org.example.unrelated'
         original = self.package(other).read_bytes()
         resources = self.copy_resources()
-        # The package ID is fixed, not taken from resource metadata or a relative path.
+        # A different package's directory must not supply this package's introduction.
         (resources / 'description.json').write_text('{}')
         output = self.build()
         result = json.loads((output / 'depictions' / other / 'depiction.json').read_text())
         self.assertEqual(result['tabs'][0]['views'][0]['markdown'], '原始简介')
         self.assertIn('Icon: https://example.org/original.png', (output / 'Packages').read_text())
         self.assertEqual((output / 'debs' / (other + '.deb')).read_bytes(), original)
+
+    def test_each_package_uses_its_own_intro_icon_and_screenshot_count(self):
+        self.package(PACKAGE)
+        first = self.copy_resources()
+        other = 'org.example.second'
+        original = self.package(other, '2.0').read_bytes()
+        second = self.root / 'depictions' / other
+        (second / 'screenshots').mkdir(parents=True)
+        shutil.copyfile(first / 'icon.png', second / 'icon.png')
+        screenshots = []
+        for n in range(1, 3):
+            shutil.copyfile(first / f'screenshots/{n:02}.png', second / f'screenshots/{n:02}.png')
+            screenshots.append({'url': f'https://wm0104.github.io/repo/depictions/{other}/screenshots/{n:02}.png',
+                                'accessibilityText': f'第二个插件截图{n}'})
+        views = [{'class': 'DepictionMarkdownView', 'markdown': '第二个插件介绍'},
+                 {'class': 'DepictionScreenshotsView', 'itemSize': '{160, 320}',
+                  'itemCornerRadius': 8, 'screenshots': screenshots}]
+        (second / 'description.json').write_text(json.dumps(views))
+        output = self.build()
+        for package, expected in [(PACKAGE, json.loads((first / 'description.json').read_text())), (other, views)]:
+            result = json.loads((output / 'depictions' / package / 'depiction.json').read_text())
+            self.assertEqual(result['tabs'][0]['views'], expected)
+            self.assertEqual(result['tabs'][1]['views'][1]['markdown'], '- 保留更新\n- 第二条')
+        index = (output / 'Packages').read_text()
+        self.assertIn(f'Icon: https://wm0104.github.io/repo/depictions/{other}/icon.png', index)
+        self.assertEqual((output / 'debs' / (other + '.deb')).read_bytes(), original)
+
+    def test_directory_config_works_without_package_changelog(self):
+        other = 'org.example.no-log'
+        package = self.package(other)
+        control = self.root / 'staging' / other / 'DEBIAN/control'
+        control.write_text('\n'.join(line for line in control.read_text().splitlines()
+                                    if not line.startswith('X-WM0104-Changelog:')) + '\n')
+        subprocess.run(['dpkg-deb', '--build', '--root-owner-group', str(control.parents[1]), str(package)],
+                       check=True, capture_output=True)
+        resources = self.root / 'depictions' / other
+        resources.mkdir(parents=True)
+        views = [{'class': 'DepictionMarkdownView', 'markdown': '无日志插件介绍'}]
+        (resources / 'description.json').write_text(json.dumps(views))
+        output = self.build()
+        depiction = json.loads((output / 'depictions' / other / 'depiction.json').read_text())
+        self.assertEqual(depiction['tabs'][0]['views'], views)
+        self.assertEqual(depiction['tabs'][1]['views'][0]['text'], '无法查看此软件包的更新日志。')
+        self.assertIn(f'SileoDepiction: https://wm0104.github.io/repo/depictions/{other}/depiction.json',
+                      (output / 'Packages').read_text())
 
     def test_screenshot_urls_dimensions_and_inline_star(self):
         directory = ROOT / 'depictions' / PACKAGE

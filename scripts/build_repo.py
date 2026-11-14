@@ -155,7 +155,9 @@ def build(output):
         field = 'X-WM0104-Changelog'
         if field not in fields and fields['Package'] == 'com.wm0104.repopocket':
             field = 'X-RepoPocket-Changelog'
-        if release_date is not None or field in fields:
+        has_custom_details = re.fullmatch(r'[a-z0-9][a-z0-9+.-]+', fields['Package']) and (
+            ROOT / 'depictions' / fields['Package'] / 'description.json').is_file()
+        if release_date is not None or field in fields or has_custom_details:
             if not re.fullmatch(r'[a-z0-9][a-z0-9+.-]+', fields['Package']):
                 raise ValueError(f'{package.name}: invalid Package')
             date, changes = release_date, ''
@@ -202,14 +204,14 @@ def build(output):
             views.append({'class': 'DepictionLabelView', 'text': '无法查看此软件包的更新日志。'})
         detail_views = [{'class': 'DepictionMarkdownView',
                          'markdown': history[versions[0]][2], 'useSpacing': True}]
-        # RepoPocket owns this introduction; the update tab still comes from package metadata.
-        custom = ROOT / 'depictions/com.wm0104.repopocket/description.json'
-        if package_id == 'com.wm0104.repopocket' and custom.is_file():
+        # Each opted-in package owns its introduction; updates still come from package metadata.
+        custom = ROOT / 'depictions' / package_id / 'description.json'
+        if custom.is_file():
             detail_views = json.loads(custom.read_text(encoding='utf-8'))
             if not isinstance(detail_views, list) or not detail_views or any(
                     not isinstance(view, dict) or not isinstance(view.get('class'), str)
                     for view in detail_views):
-                raise ValueError('RepoPocket description.json must be a non-empty view list')
+                raise ValueError(f'{package_id} description.json must be a non-empty view list')
         depiction.write_text(json.dumps({
             'class': 'DepictionTabView', 'minVersion': '0.4', 'tabs': [
                 {'class': 'DepictionStackView', 'tabname': '插件详细', 'views': detail_views},
@@ -233,10 +235,10 @@ def build(output):
         if record['Version'] in releases.get(record['Package'], {}):
             lines = [line for line in lines if not line.lower().startswith('sileodepiction:')]
             lines.append(f'SileoDepiction: https://wm0104.github.io/repo/depictions/{record["Package"]}/depiction.json')
-            if record['Package'] == 'com.wm0104.repopocket' and (
-                    ROOT / 'depictions/com.wm0104.repopocket/icon.png').is_file():
+            assets = ROOT / 'depictions' / record['Package']
+            if (assets / 'description.json').is_file() and (assets / 'icon.png').is_file():
                 lines = [line for line in lines if not line.lower().startswith('icon:')]
-                lines.append('Icon: https://wm0104.github.io/repo/depictions/com.wm0104.repopocket/icon.png')
+                lines.append(f'Icon: https://wm0104.github.io/repo/depictions/{record["Package"]}/icon.png')
         section = sections.get(record['Package'])
         if section is not None and record.get('Section') != section:
             lines = [line for line in lines if not line.lower().startswith('section:')]
