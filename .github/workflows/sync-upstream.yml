@@ -23,6 +23,7 @@ on:
           - "Hello CPU [cn.zqbb.holdcpu]"
           - "HelloJailPort [cn.zqbb.hello.jailport]"
           - "HelloKeyboardPort [cn.zqbb.hello.keyboardport]"
+          - "iGhostVT [wiki.qaq.ighostvt]"
           - "微信去广告 FuckWeChatAds [com.susu.fuckwechatadss]"
           - "电话助手iOS16-正式版(Roothide) [com.xybp888.callassist16.dopamine.roothide]"
         # END SAVED PACKAGE OPTIONS

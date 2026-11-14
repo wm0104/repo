@@ -36,6 +36,12 @@
         "cn.zqbb.hello.jailport": "zqbb"
       },
       "type": "apt"
+    },
+    {
+      "repo": "owngoal-dev/iGhostVT",
+      "packages": {
+        "wiki.qaq.ighostvt": "乌龙"
+      }
     }
   ],
   "names": {
@@ -45,6 +51,7 @@
     "cn.zqbb.holdcpu": "Hello CPU",
     "cn.zqbb.fix120hz": "Hello 120Hz",
     "cn.zqbb.hello.jailport": "HelloJailPort",
-    "wiki.qaq.apelin": "Apelin"
+    "wiki.qaq.apelin": "Apelin",
+    "wiki.qaq.ighostvt": "iGhostVT"
   }
 }
