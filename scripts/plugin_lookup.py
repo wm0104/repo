@@ -36,11 +36,15 @@ def search(catalog, text):
         word in item['name'].casefold() or word in item['package'].casefold() or word == item['code'] for word in words)]
 
 
-def resolve(catalog, text):
+def resolve(catalog, text, keywords=False):
     selected = []
     for word in selectors(text):
         matches = [item for item in catalog if item['code'] == word] if word.startswith('@') else [
             item for item in catalog if item['package'] == word or item['name'].casefold() == word.casefold()]
+        if not matches and keywords:
+            matches = search(catalog, word) if not word.startswith('@') else []
+            if not matches and not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9+.-]*\.[A-Za-z0-9+.-]+', word):
+                raise ChoiceRequired(f'没有匹配插件: {word}；请修改关键词或重新查找候选码', [])
         if not matches:
             suggestions = search(catalog, word)
             if suggestions or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9+.-]+', word):

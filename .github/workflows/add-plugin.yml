@@ -1,0 +1,68 @@
+name: 添加插件
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_type:
+        description: '来源类型：GitHub 正式发行版 / 公开 HTTPS 平铺 APT 源'
+        required: true
+        type: choice
+        default: GitHub发行版
+        options:
+          - GitHub发行版
+          - APT软件源
+      # 来源地址：GitHub 填作者/仓库或 HTTPS 仓库/releases/tag 链接；APT 填公开 HTTPS 目录。
+      repo:
+        description: '来源地址（必填）：版本链接仍取最新正式版'
+        required: true
+        type: string
+      # 要下载的插件：可填名称关键词、PackageID 或含 @ 的候选码；留空只列候选，绝不全部添加。
+      packages:
+        description: '插件名称关键词 / PackageID / 候选码（可选，唯一匹配才添加；多匹配列码停止）'
+        required: false
+        type: string
+      # 插件分组：自己源中显示的分类，例如 工具、美化；添加必填，修改留空保留。
+      section:
+        description: '分类（添加必填；名称留空只查找时分类也留空）'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: upstream-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Install repository tools
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends dpkg-dev bzip2 xz-utils zstd
+      - name: Test synchronization and existing repository behavior
+        run: python3 -m unittest discover -s testsuite -v
+      - name: Prepare selected packages and saved choices without write credentials
+        id: prepare
+        env:
+          GH_TOKEN: ${{ github.token }}
+          UPSTREAM_ENTRY: add
+          UPSTREAM_TYPE: ${{ inputs.source_type }}
+          UPSTREAM_REPO: ${{ inputs.repo }}
+          UPSTREAM_PACKAGES: ${{ inputs.packages }}
+          UPSTREAM_SECTION: ${{ inputs.section }}
+          WORKFLOW_WRITE_CONFIGURED: ${{ secrets.WORKFLOW_WRITE_TOKEN != '' }}
+        run: python3 scripts/manage_saved.py prepare
+      - name: Commit verified changes and request existing publisher
+        if: steps.prepare.outputs.publish == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          WORKFLOW_WRITE_TOKEN: ${{ secrets.WORKFLOW_WRITE_TOKEN }}
+        run: python3 scripts/manage_saved.py publish

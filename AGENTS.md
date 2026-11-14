@@ -53,29 +53,29 @@ and the changelog tab; HTML fallback also needs a browser rendering check.
 
 ## Unified upstream management
 
-Only `.github/workflows/sync-upstream.yml` is a sync entry ("同步插件").
-It is manual-only; do not create a workflow per repository or package. Keep
-`.github/workflows/refresh.yml` as the only Pages publisher. The obsolete
-single-package workflow has been removed; GitHub may retain its historical runs.
+The manual sync entries share the same engine and `upstream-sync` lock:
+- `.github/workflows/add-plugin.yml` (添加插件): choose GitHub/APT, provide a source,
+  optional name keyword/PackageID/candidate code, and a Section when adding.
+  Blank selection only lists candidates; leave Section blank too. A unique keyword
+  match may be added; multiple matches list real candidate codes and stop.
+- `.github/workflows/sync-upstream.yml` (更新插件): one generated choice selects all
+  active registrations or one package. No scope, source or manual Package fields.
+- `.github/workflows/manage-sync.yml` (管理同步): view, modify or stop. Modify/stop
+  selects one active registration. View leaves selection/source/Section blank.
+  Modify requires a new source and/or Section; blank values retain existing ones,
+  including source type. A replacement source must contain the same real PackageID.
+  Stop preserves all debs and the Section in `manual_sections`.
+Keep `.github/workflows/refresh.yml` as the only Pages publisher. Do not create a
+workflow per repository/package. Inputs go through environment variables, never
+shell interpolation; reject conflicting/unrelated fields rather than ignoring them.
 
-The Run workflow form has operation, scope, source_type, saved_package, repo,
-packages and section. Keep the three Chinese usage comments directly above the repo,
-packages and section inputs; do not require comments on every YAML line.
-Pass inputs through environment variables, never shell interpolation.
-The default operation is read-only list. Operations:
-- List: show saved repositories, names, Package IDs, Sections, and stopped entries in
-  the run summary. Do not download, commit, or dispatch publication.
-- Add and sync: provide one source and comma-separated names/codes/Package IDs sharing a
-  Section. Save each successful registration automatically to `sources`.
-  Repeating the same registration is idempotent; differing ownership/Section
-  requires explicit modify, not silent replacement.
-- Update: all saved entries, one saved source, or selected saved Package IDs.
-  Use the actual debs in this checkout, never Sileo/device state or online
-  indexes as a substitute for this repository's own versions.
-- Modify: explicitly move registered Package IDs to another source or Section;
-  validate the new upstream selection before saving each successful change.
-- Stop: resolve saved names/codes/Package IDs, remove their sync registrations but retain
-  all debs and save their Sections in `manual_sections`; never delete packages.
+GitHub addresses accept `owner/repo`, `https://github.com/owner/repo`, a `/releases`
+list or `/releases/tag/version` URL, normalized to `owner/repo`. Version links do
+not pin a release: the run explicitly notes that it still reads the latest formal
+release. Addition keeps an explicit source_type choice so public HTTPS APT sources
+are not confused with GitHub links. Management infers a supplied replacement from
+these explicit address forms: owner/repo or github.com links for GitHub, other
+public HTTPS directory addresses for APT. A blank replacement preserves the type.
 
 `upstreams.json.sources` supports multiple sources. Original entries without
 `type` mean github; APT entries use `type: apt` and an HTTPS directory in `repo`.
@@ -89,8 +89,8 @@ matching-architecture candidates). APT discovery reads only the index. GitHub
 discovery temporarily downloads and verifies assets to read control Name;
 do not infer Name from filenames. Cache those temporary downloads within the
 same run for add/modify, then clean them. Neither search nor list publishes.
-Complete names may resolve only uniquely; partial words only suggest choices.
-Duplicate names require a candidate code, never selecting the first result.
+Unique complete names and unique partial keywords can add; ambiguous selections
+require a candidate code, never selecting the first result.
 Codes bind source type/address, real Package, Version and Architecture, not
 result order; expired/cross-source codes fail closed. Missing Name falls back
 to Package for display with the same code-selection path. Keep exact Package
@@ -100,20 +100,22 @@ upstreams just to identify a selection. Updating all continues by Package even
 if the author changes the display name. Summary shows names, versions,
 architectures and confirmation codes; source addresses remain configurable.
 
-`saved_package` is a generated single-choice list of active registrations,
-displaying Name plus real Package ID. Use it only for update/stop; ignore the
-default all scope when a valid dropdown item is chosen, and reject simultaneous
-manual package/source/Section inputs. Validate the ID against current registrations
-so old forms cannot revive stopped entries. Keep comma-separated manual selection.
-`saved_packages.py` changes only the marked options block of sync-upstream.yml;
-never grant a generic workflow-file write allowance. Recompute the exact allowed
-bytes from the captured Git baseline and current validated registration before push.
+`saved_package` is generated in both update and management workflows, displaying
+Name plus real PackageID. Update has an all-registered option; management has a
+no-selection placeholder for read-only view. Validate IDs against current active
+registrations so stale forms cannot revive stopped entries. Internal scripts keep
+legacy comma-separated selection compatibility; it is not exposed by these forms.
+`saved_packages.py` changes only the marked options blocks of those two exact
+workflow paths; never grant a generic workflow-file write allowance. Recompute the
+exact allowed bytes of every affected workflow from the captured Git baseline and
+current validated registration before push; reject omissions and non-choice edits.
 `manage_saved.py prepare` downloads/audits/builds without the dedicated write token,
 then records exact file hashes and expected bytes in RUNNER_TEMP. The separate
 publish step receives WORKFLOW_WRITE_TOKEN (fine-grained PAT, target repository
 only, Contents and Workflows write). No token in Git URLs/config/logs; checkout
-uses persist-credentials:false. Missing write authorization blocks list changes
-before any remote commit. Read-only list/search do not update choices or publish.
+uses persist-credentials:false. All three new forms fail before mutation/download
+when a write operation lacks WORKFLOW_WRITE_TOKEN; read-only list/search need no
+dedicated token and do not update choices or publish.
 
 GitHub sources read the latest formal Release, parse real deb metadata, and
 require asset SHA256 and size. APT sources support public HTTPS flat indexes

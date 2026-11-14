@@ -83,13 +83,13 @@ class PluginNamesTest(unittest.TestCase):
             self.assertFalse(result['errors'])
             self.assertTrue((self.root / 'debs' / item.name).exists())
 
-    def test_partial_keyword_never_imports_even_when_only_one_candidate(self):
+    def test_partial_keyword_imports_only_when_unique(self):
         item = self.package('org.example.app', extra='Name: 测试插件完整版')
         self.release('new/repo', [item])
         result = self.run_sync(action='add', repo='new/repo', packages='测试插件', section='工具')
-        self.assertTrue(result['errors'])
-        self.assertEqual(result['paths'], [])
-        self.assertEqual(result['rows'][0]['name'], '测试插件完整版')
+        self.assertFalse(result['errors'])
+        self.assertIn('debs/' + item.name, result['paths'])
+        self.assertEqual(self.config_now()['sources'][1]['packages'], {'org.example.app': '工具'})
 
     def test_name_colliding_with_another_package_id_requires_confirmation(self):
         first = self.package('org.example.one', extra='Name: 第一个插件')

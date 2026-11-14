@@ -3,7 +3,9 @@ import json
 import re
 
 WORKFLOW = '.github/workflows/sync-upstream.yml'
-NONE = '未选择（使用范围或手动输入）'
+NONE = '请选择已登记插件'
+ALL = '全部已登记插件'
+WORKFLOWS = (WORKFLOW, '.github/workflows/manage-sync.yml')
 BEGIN = b'        # BEGIN SAVED PACKAGE OPTIONS\n'
 END = b'        # END SAVED PACKAGE OPTIONS\n'
 
@@ -15,7 +17,7 @@ def render(original, catalog):
         raise ValueError('工作流缺少唯一的已登记插件选项标记')
     before, rest = original.split(begin)
     _, after = rest.split(end)
-    labels = [NONE]
+    labels = [ALL if ('default: ' + ALL).encode('utf-8') in original else NONE]
     for item in sorted(catalog, key=lambda item: (item['name'].casefold(), item['package'])):
         name = ' '.join(item['name'].split()).replace('${{', '＄{{')
         labels.append(f'{name} [{item["package"]}]')
@@ -43,13 +45,16 @@ def catalog(root):
 
 
 def refresh(root, result, token_available):
-    workflow = root / WORKFLOW
-    original = workflow.read_bytes()
-    updated = render(original, catalog(root))
-    if original == updated:
+    choices = catalog(root)
+    updates = {path: render((root / path).read_bytes(), choices) for path in WORKFLOWS}
+    updates = {path: updated for path, updated in updates.items() if (root / path).read_bytes() != updated}
+    if not updates:
         return
     if not token_available:
         raise ValueError('需要配置仓库 Actions Secret WORKFLOW_WRITE_TOKEN（仅本仓库 Contents 和 Workflows 写权限），才能自动维护插件下拉选项；尚未提交或发布')
-    workflow.write_bytes(updated)
-    result['paths'].append(WORKFLOW)
-    result['workflow_update'] = updated
+    for path, updated in updates.items():
+        if (root / path).is_symlink():
+            raise ValueError('工作流选项文件不能是符号链接')
+        (root / path).write_bytes(updated)
+        result['paths'].append(path)
+    result['workflow_update'] = updates

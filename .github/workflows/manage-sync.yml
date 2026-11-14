@@ -1,0 +1,87 @@
+name: 管理同步
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: '查看不改动；修改至少填一项；停止保留安装包和分类'
+        required: true
+        type: choice
+        default: 查看清单
+        options:
+          - 查看清单
+          - 修改登记
+          - 停止同步
+      saved_package:
+        description: '已登记插件（修改/停止必选；查看清单保持未选择）'
+        required: true
+        type: choice
+        default: 请选择已登记插件
+        options:
+        # BEGIN SAVED PACKAGE OPTIONS
+          - "请选择已登记插件"
+          - "Apelin [wiki.qaq.apelin]"
+          - "Apelin App Development [wiki.qaq.apelin.dev.app]"
+          - "Apelin Assembler [wiki.qaq.apelin.agent-tools.assembler]"
+          - "Apelin Command-Line Tool Development [wiki.qaq.apelin.dev.cli]"
+          - "Apelin Disassembler [wiki.qaq.apelin.agent-tools.disassembler]"
+          - "Apelin Preference Bundle Development [wiki.qaq.apelin.dev.preferences]"
+          - "Apelin Tweak Development [wiki.qaq.apelin.dev.tweak]"
+          - "Hello 120Hz [cn.zqbb.fix120hz]"
+          - "Hello App [cn.zqbb.disupdateapp]"
+          - "Hello CPU [cn.zqbb.holdcpu]"
+          - "HelloJailPort [cn.zqbb.hello.jailport]"
+          - "HelloKeyboardPort [cn.zqbb.hello.keyboardport]"
+          - "微信去广告 FuckWeChatAds [com.susu.fuckwechatadss]"
+          - "电话助手iOS16-正式版(Roothide) [com.xybp888.callassist16.dopamine.roothide]"
+        # END SAVED PACKAGE OPTIONS
+      # 来源地址：GitHub 填作者/仓库或 HTTPS 仓库/releases/tag 链接；APT 填公开 HTTPS 目录。
+      repo:
+        description: '新来源（可选）：留空保留；作者/仓库或 GitHub 链接 / APT HTTPS 目录，必须同 PackageID'
+        required: false
+        type: string
+      # 插件分组：自己源中显示的分类，例如 工具、美化；添加必填，修改留空保留。
+      section:
+        description: '新分类（可选）：留空保留；修改至少填写来源或分类之一'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: upstream-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Install repository tools
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends dpkg-dev bzip2 xz-utils zstd
+      - name: Test synchronization and existing repository behavior
+        run: python3 -m unittest discover -s testsuite -v
+      - name: Prepare selected packages and saved choices without write credentials
+        id: prepare
+        env:
+          GH_TOKEN: ${{ github.token }}
+          UPSTREAM_ENTRY: manage
+          UPSTREAM_OPERATION: ${{ inputs.operation }}
+          UPSTREAM_SAVED_PACKAGE: ${{ inputs.saved_package }}
+          UPSTREAM_REPO: ${{ inputs.repo }}
+          UPSTREAM_SECTION: ${{ inputs.section }}
+          WORKFLOW_WRITE_CONFIGURED: ${{ secrets.WORKFLOW_WRITE_TOKEN != '' }}
+        run: python3 scripts/manage_saved.py prepare
+      - name: Commit verified changes and request existing publisher
+        if: steps.prepare.outputs.publish == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          WORKFLOW_WRITE_TOKEN: ${{ secrets.WORKFLOW_WRITE_TOKEN }}
+        run: python3 scripts/manage_saved.py publish

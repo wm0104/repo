@@ -64,9 +64,10 @@ class SavedIntegrationTest(unittest.TestCase):
     snapshot = fixtures.UpstreamSyncTest.snapshot
     def setUp(self):
         fixtures.UpstreamSyncTest.setUp(self)
-        workflow = self.root / saved_packages.WORKFLOW
-        workflow.parent.mkdir(parents=True)
-        shutil.copyfile(ROOT / saved_packages.WORKFLOW, workflow)
+        for path in saved_packages.WORKFLOWS:
+            workflow = self.root / path
+            workflow.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / path, workflow)
 
     def test_add_remove_refreshes_options_without_changing_debs(self):
         self.package('org.example.first', '1.0', self.root / 'debs', extra='Name: 显示名称\n')
@@ -103,7 +104,7 @@ class SavedIntegrationTest(unittest.TestCase):
         output = self.root / 'output'
         env = {'PATH': os.environ['PATH'], 'PERL5LIB': os.environ.get('PERL5LIB', ''),
                'RUNNER_TEMP': str(self.root), 'GITHUB_OUTPUT': str(output),
-               'UPSTREAM_OPERATION': '停止同步', 'UPSTREAM_SCOPE': '全部',
+               'UPSTREAM_ENTRY': 'manage', 'UPSTREAM_OPERATION': '停止同步',
                'UPSTREAM_SAVED_PACKAGE': '旧名称 [org.example.first]',
                'WORKFLOW_WRITE_CONFIGURED': 'true', 'GITHUB_REPOSITORY': 'owner/repo'}
         with patch.dict(os.environ, env, clear=True), patch('sync_upstream.checked', side_effect=prepared_commands):
@@ -118,7 +119,7 @@ class SavedIntegrationTest(unittest.TestCase):
         self.assertEqual(publish.call_args.args[1], state['result']['paths'])
 
     def test_read_only_list_does_not_write_state_or_request_publication(self):
-        env = {'RUNNER_TEMP': str(self.root), 'UPSTREAM_OPERATION': '查看清单'}
+        env = {'RUNNER_TEMP': str(self.root), 'UPSTREAM_ENTRY': 'manage', 'UPSTREAM_OPERATION': '查看清单'}
         before = (self.root / saved_packages.WORKFLOW).read_bytes()
         with patch.dict(os.environ, env, clear=True), patch('sync_upstream.checked', side_effect=prepared_commands), \
                 patch('sync_upstream.write_summary'):
@@ -126,10 +127,39 @@ class SavedIntegrationTest(unittest.TestCase):
             self.assertFalse(manage_saved.state_path().exists())
         self.assertEqual(before, (self.root / saved_packages.WORKFLOW).read_bytes())
 
+    def test_add_blank_only_lists_candidates_without_secret_or_publish(self):
+        env = {'RUNNER_TEMP': str(self.root), 'UPSTREAM_ENTRY': 'add', 'UPSTREAM_TYPE': 'APT软件源',
+               'UPSTREAM_REPO': 'https://example.org/repo'}
+        record = {'Name': '候选', 'Package': 'org.example.candidate', 'Version': '1.0',
+                  'Architecture': 'iphoneos-arm64e'}
+        before = (self.root / 'upstreams.json').read_bytes()
+        workflows = {path: (self.root / path).read_bytes() for path in saved_packages.WORKFLOWS}
+        with patch.dict(os.environ, env, clear=True), patch('sync_upstream.checked', side_effect=prepared_commands), \
+                patch('sync_upstream.latest_assets', return_value={'assets': [{'name': 'candidate.deb', 'record': record}]}), \
+                patch('sync_upstream.download_verified') as download, patch('sync_upstream.preflight') as preflight, \
+                patch('sync_upstream.write_summary') as summary:
+            manage_saved.prepare(self.root)
+            self.assertFalse(manage_saved.state_path().exists())
+        self.assertEqual(summary.call_args.args[0]['rows'][0]['package'], 'org.example.candidate')
+        download.assert_not_called()
+        preflight.assert_not_called()
+        self.assertEqual((self.root / 'upstreams.json').read_bytes(), before)
+        self.assertEqual({path: (self.root / path).read_bytes() for path in workflows}, workflows)
+
+    def test_missing_secret_fails_before_any_sync_or_summary_leaks(self):
+        env = {'RUNNER_TEMP': str(self.root), 'UPSTREAM_ENTRY': 'update',
+               'UPSTREAM_SAVED_PACKAGE': saved_packages.ALL}
+        with patch.dict(os.environ, env, clear=True), patch('sync_upstream.checked', side_effect=prepared_commands), \
+                patch('sync_upstream.sync') as sync, patch('sync_upstream.write_summary') as summary:
+            with self.assertRaisesRegex(ValueError, 'WORKFLOW_WRITE_TOKEN'):
+                manage_saved.prepare(self.root)
+        sync.assert_not_called()
+        self.assertIn('尚未下载', summary.call_args.args[0]['errors'][0])
+
     def test_selected_update_uses_confirmation_code_so_names_cannot_shadow_id(self):
         self.package('org.example.first', '1.0', self.root / 'debs')
         env = {'RUNNER_TEMP': str(self.root), 'GITHUB_OUTPUT': str(self.root / 'out'),
-               'UPSTREAM_OPERATION': '更新插件', 'UPSTREAM_SAVED_PACKAGE': '名称 [org.example.first]',
+               'UPSTREAM_ENTRY': 'update', 'UPSTREAM_SAVED_PACKAGE': '名称 [org.example.first]',
                'WORKFLOW_WRITE_CONFIGURED': 'true'}
         result = {'paths': [], 'config_update': None, 'errors': [], 'rows': []}
         with patch.dict(os.environ, env, clear=True), patch('sync_upstream.checked', side_effect=prepared_commands), \
@@ -153,39 +183,63 @@ class SavedPublishTest(unittest.TestCase):
     def setUp(self):
         fixtures.PublishTest.setUp(self)
         (self.root / 'debs/new.deb').unlink()
-        workflow = self.root / saved_packages.WORKFLOW
-        workflow.parent.mkdir(parents=True)
-        shutil.copyfile(ROOT / saved_packages.WORKFLOW, workflow)
+        for path in saved_packages.WORKFLOWS:
+            workflow = self.root / path
+            workflow.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / path, workflow)
         (self.root / 'upstreams.json').write_text('{"sources": []}')
-        workflow.write_bytes(saved_packages.render(workflow.read_bytes(), [{'name': '已移除', 'package': 'org.example.removed'}]))
-        self.git('add', saved_packages.WORKFLOW, 'upstreams.json')
+        for path in saved_packages.WORKFLOWS:
+            workflow = self.root / path
+            workflow.write_bytes(saved_packages.render(workflow.read_bytes(), [{'name': '已移除', 'package': 'org.example.removed'}]))
+        self.git('add', *saved_packages.WORKFLOWS, 'upstreams.json')
         self.git('commit', '-m', '登记工作流测试基线')
         self.git('push', 'origin', 'main')
         self.captured = self.git('rev-parse', 'HEAD')
 
+    def render_updates(self):
+        updates = {}
+        for path in saved_packages.WORKFLOWS:
+            workflow = self.root / path
+            updates[path] = saved_packages.render(workflow.read_bytes(), [])
+            workflow.write_bytes(updates[path])
+        return updates
+
     def test_only_exact_generated_workflow_is_allowed_and_pat_push_does_not_dispatch(self):
-        workflow = self.root / saved_packages.WORKFLOW
-        rendered = saved_packages.render(workflow.read_bytes(), [])
-        workflow.write_bytes(rendered)
+        updates = self.render_updates()
         with patch.dict(os.environ, {'WORKFLOW_WRITE_TOKEN': 'fixture-token'}), \
                 patch('sync_upstream.push_changes', side_effect=lambda root, token: self.git('push', 'origin', 'HEAD:refs/heads/main')), \
                 patch('sync_upstream.checked', wraps=sync_upstream.checked) as command:
-            sync_upstream.publish(self.root, [saved_packages.WORKFLOW], self.captured, 'owner/repo', workflow_update=rendered)
+            sync_upstream.publish(self.root, list(updates), self.captured, 'owner/repo', workflow_update=updates)
         self.assertFalse(any(call.args[0][0] == 'gh' for call in command.call_args_list))
 
     def test_non_option_workflow_change_is_rejected_even_if_manifest_matches(self):
-        workflow = self.root / saved_packages.WORKFLOW
-        rendered = saved_packages.render(workflow.read_bytes(), []).replace(b'timeout-minutes: 90', b'timeout-minutes: 91')
-        workflow.write_bytes(rendered)
-        with patch.dict(os.environ, {'WORKFLOW_WRITE_TOKEN': 'fixture-token'}), self.assertRaisesRegex(ValueError, '选项'):
-            sync_upstream.publish(self.root, [saved_packages.WORKFLOW], self.captured, 'owner/repo', workflow_update=rendered)
+        for path in saved_packages.WORKFLOWS:
+            with self.subTest(path=path):
+                updates = self.render_updates()
+                updates[path] = updates[path].replace(b'timeout-minutes: 90', b'timeout-minutes: 91')
+                (self.root / path).write_bytes(updates[path])
+                with patch.dict(os.environ, {'WORKFLOW_WRITE_TOKEN': 'fixture-token'}), self.assertRaisesRegex(ValueError, '选项'):
+                    sync_upstream.publish(self.root, list(updates), self.captured, 'owner/repo', workflow_update=updates)
 
     def test_workflow_write_requires_dedicated_token(self):
-        workflow = self.root / saved_packages.WORKFLOW
-        rendered = saved_packages.render(workflow.read_bytes(), [])
-        workflow.write_bytes(rendered)
+        updates = self.render_updates()
         with patch.dict(os.environ, {}, clear=True), self.assertRaisesRegex(ValueError, 'WORKFLOW_WRITE_TOKEN'):
-            sync_upstream.publish(self.root, [saved_packages.WORKFLOW], self.captured, 'owner/repo', workflow_update=rendered)
+            sync_upstream.publish(self.root, list(updates), self.captured, 'owner/repo', workflow_update=updates)
+
+    def test_other_workflow_path_and_manifest_mismatch_are_rejected(self):
+        updates = self.render_updates()
+        with patch.dict(os.environ, {'WORKFLOW_WRITE_TOKEN': 'fixture-token'}):
+            with self.assertRaisesRegex(ValueError, '路径'):
+                sync_upstream.publish(self.root, list(updates) + ['.github/workflows/refresh.yml'],
+                                      self.captured, 'owner/repo', workflow_update=updates)
+            with self.assertRaisesRegex(ValueError, '清单'):
+                sync_upstream.publish(self.root, list(updates), self.captured, 'owner/repo', workflow_update={})
+
+    def test_missing_related_workflow_update_is_rejected(self):
+        updates = self.render_updates()
+        updates.pop(saved_packages.WORKFLOWS[1])
+        with patch.dict(os.environ, {'WORKFLOW_WRITE_TOKEN': 'fixture-token'}), self.assertRaisesRegex(ValueError, '选项'):
+            sync_upstream.publish(self.root, list(updates), self.captured, 'owner/repo', workflow_update=updates)
 
     def test_no_change_with_pat_still_dispatches_for_recovery(self):
         with patch.dict(os.environ, {'WORKFLOW_WRITE_TOKEN': 'fixture-token'}), \
@@ -209,12 +263,15 @@ class SavedPublishTest(unittest.TestCase):
 
 class SavedWorkflowTest(unittest.TestCase):
     def test_dedicated_secret_is_only_in_publish_step(self):
-        text = (ROOT / saved_packages.WORKFLOW).read_text()
-        prepare, publish = text.split('      - name: Commit verified changes')
-        self.assertIn('persist-credentials: false', prepare)
-        self.assertNotIn('WORKFLOW_WRITE_TOKEN: ${{', prepare)
-        self.assertIn('WORKFLOW_WRITE_TOKEN: ${{ secrets.WORKFLOW_WRITE_TOKEN }}', publish)
-        self.assertIn("if: steps.prepare.outputs.publish == 'true'", publish)
+        for filename in ('add-plugin.yml', 'sync-upstream.yml', 'manage-sync.yml'):
+            with self.subTest(filename=filename):
+                text = (ROOT / '.github/workflows' / filename).read_text()
+                prepare, publish = text.split('      - name: Commit verified changes')
+                self.assertIn('persist-credentials: false', prepare)
+                self.assertNotIn('WORKFLOW_WRITE_TOKEN: ${{', prepare)
+                self.assertIn("WORKFLOW_WRITE_CONFIGURED: ${{ secrets.WORKFLOW_WRITE_TOKEN != '' }}", prepare)
+                self.assertIn('WORKFLOW_WRITE_TOKEN: ${{ secrets.WORKFLOW_WRITE_TOKEN }}', publish)
+                self.assertIn("if: steps.prepare.outputs.publish == 'true'", publish)
 
 
 if __name__ == '__main__':

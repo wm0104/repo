@@ -1,45 +1,16 @@
-name: 同步插件
+name: 更新插件
 
 on:
   workflow_dispatch:
     inputs:
-      operation:
-        description: '操作：查找按名称列候选；添加会记住来源；修改需已登记；停止不删包'
-        required: true
-        type: choice
-        default: 查看清单
-        options:
-          - 查看清单
-          - 查找插件
-          - 更新插件
-          - 添加并同步
-          - 修改登记
-          - 停止同步
-      scope:
-        description: '更新范围：全部留空仓库/插件；指定仓库只填地址；指定插件可填名称、旧Package或候选码'
-        required: true
-        type: choice
-        default: 全部
-        options:
-          - 全部
-          - 指定仓库
-          - 指定插件
-      source_type:
-        description: '来源类型（查找/添加/修改时填写）：GitHub 发行版或公开 HTTPS 平铺 APT 源'
-        required: true
-        type: choice
-        default: GitHub发行版
-        options:
-          - GitHub发行版
-          - APT软件源
       saved_package:
-        description: '已登记插件：更新/停止时直接选择；会自动限定这一个，仓库/手填插件/分组留空'
-        required: false
+        description: '选择全部已登记插件或某个插件（不读取设备状态）'
+        required: true
         type: choice
-        default: 未选择（使用范围或手动输入）
+        default: 全部已登记插件
         options:
         # BEGIN SAVED PACKAGE OPTIONS
-          - "未选择（使用范围或手动输入）"
+          - "全部已登记插件"
           - "Apelin [wiki.qaq.apelin]"
           - "Apelin App Development [wiki.qaq.apelin.dev.app]"
           - "Apelin Assembler [wiki.qaq.apelin.agent-tools.assembler]"
@@ -55,21 +26,6 @@ on:
           - "微信去广告 FuckWeChatAds [com.susu.fuckwechatadss]"
           - "电话助手iOS16-正式版(Roothide) [com.xybp888.callassist16.dopamine.roothide]"
         # END SAVED PACKAGE OPTIONS
-      # 来源地址：查找/添加/修改时填；GitHub 填 作者/仓库名，APT 填完整 HTTPS 地址；不固定任何源。
-      repo:
-        description: '仓库：GitHub 填作者/仓库名；APT 填完整 HTTPS 源地址'
-        required: false
-        type: string
-      # 要下载的插件：填完整显示名称或候选码（含@），兼容旧Package；查找可用关键词，多个用英文逗号分隔。
-      packages:
-        description: '插件名称/候选码：添加用完整名称或@候选码；查找可用关键词或留空列出全部；兼容旧Package'
-        required: false
-        type: string
-      # 插件分组：填写在自己源中显示的分类，例如 乌龙、工具、美化。
-      section:
-        description: '分组：添加/修改时填写，例如 、工具、美化'
-        required: false
-        type: string
 
 permissions:
   contents: write
@@ -97,12 +53,7 @@ jobs:
         id: prepare
         env:
           GH_TOKEN: ${{ github.token }}
-          UPSTREAM_OPERATION: ${{ inputs.operation }}
-          UPSTREAM_SCOPE: ${{ inputs.scope }}
-          UPSTREAM_TYPE: ${{ inputs.source_type }}
-          UPSTREAM_REPO: ${{ inputs.repo }}
-          UPSTREAM_PACKAGES: ${{ inputs.packages }}
-          UPSTREAM_SECTION: ${{ inputs.section }}
+          UPSTREAM_ENTRY: update
           UPSTREAM_SAVED_PACKAGE: ${{ inputs.saved_package }}
           WORKFLOW_WRITE_CONFIGURED: ${{ secrets.WORKFLOW_WRITE_TOKEN != '' }}
         run: python3 scripts/manage_saved.py prepare

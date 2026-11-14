@@ -360,29 +360,42 @@ class PublishTest(unittest.TestCase):
 
 
 class WorkflowTest(unittest.TestCase):
-    def test_only_one_manual_sync_entry_with_documented_env_inputs(self):
+    def test_three_manual_entries_with_documented_env_inputs(self):
         self.assertFalse((ROOT / '.github/workflows/sync-single-upstream.yml').exists())
-        text = (ROOT / '.github/workflows/sync-upstream.yml').read_text(encoding='utf-8')
-        self.assertIn('workflow_dispatch:', text)
-        for field in ('operation', 'scope', 'source_type', 'repo', 'packages', 'section'):
-            self.assertIn(f'{field}:', text)
-            self.assertIn(chr(36) + '{{ inputs.' + field + ' }}', text)
-        self.assertNotIn('schedule:', text)
-        self.assertNotIn('deploy-pages', text)
-        self.assertIn('actions: write', text)
-        self.assertIn('group: upstream-sync', text)
-        self.assertIn('run: python3 scripts/manage_saved.py prepare', text)
-        self.assertIn('run: python3 scripts/manage_saved.py publish', text)
-        lines = text.splitlines()
-        for field, comment in (
-                ('repo', '# 来源地址：'),
-                ('packages', '# 要下载的插件：'),
-                ('section', '# 插件分组：')):
-            index = lines.index(f'      {field}:')
-            self.assertTrue(lines[index - 1].strip().startswith(comment), field)
-        for line in lines:
-            if 'run:' in line:
-                self.assertNotIn(chr(36) + '{{', line)
+        forms = {'add-plugin.yml': ('add', ('source_type', 'repo', 'packages', 'section')),
+                 'sync-upstream.yml': ('update', ('saved_package',)),
+                 'manage-sync.yml': ('manage', ('operation', 'saved_package', 'repo', 'section'))}
+        self.assertEqual({path.name for path in (ROOT / '.github/workflows').glob('*.yml')},
+                         set(forms) | {'refresh.yml'})
+        for filename, (entry, fields) in forms.items():
+            with self.subTest(filename=filename):
+                text = (ROOT / '.github/workflows' / filename).read_text(encoding='utf-8')
+                self.assertIn('workflow_dispatch:', text)
+                actual = tuple(line.strip()[:-1] for line in text.splitlines()
+                               if line.startswith('      ') and not line.startswith('       ') and line.endswith(':'))
+                self.assertEqual(actual, fields)
+                for field in fields:
+                    self.assertIn(chr(36) + '{{ inputs.' + field + ' }}', text)
+                self.assertIn('UPSTREAM_ENTRY: ' + entry, text)
+                for forbidden in ('schedule:', 'deploy-pages', 'UPSTREAM_SCOPE:'):
+                    self.assertNotIn(forbidden, text)
+                for expected in ('actions: write', 'group: upstream-sync',
+                                 'run: python3 scripts/manage_saved.py prepare',
+                                 'run: python3 scripts/manage_saved.py publish'):
+                    self.assertIn(expected, text)
+                for field, comment in (('repo', '# 来源地址：'), ('packages', '# 要下载的插件：'), ('section', '# 插件分组：')):
+                    if field in fields:
+                        lines = text.splitlines()
+                        self.assertTrue(lines[lines.index(f'      {field}:') - 1].strip().startswith(comment))
+                for line in text.splitlines():
+                    if 'run:' in line:
+                        self.assertNotIn(chr(36) + '{{', line)
+        update = (ROOT / '.github/workflows/sync-upstream.yml').read_text()
+        self.assertIn('type: choice', update)
+        self.assertIn('default: 全部已登记插件', update)
+        management = (ROOT / '.github/workflows/manage-sync.yml').read_text()
+        for operation in ('查看清单', '修改登记', '停止同步'):
+            self.assertIn('          - ' + operation, management)
 
     def test_main_lists_without_publish_and_reports_partial_failure_after_publish(self):
         base = {'GITHUB_ACTIONS': 'true', 'GITHUB_REF': 'refs/heads/main', 'GITHUB_REPOSITORY': 'owner/repo'}

@@ -32,6 +32,30 @@ def checked(args, cwd=None):
     return result.stdout.strip()
 
 
+def normalize_source(address, source_type):
+    if source_type == 'apt':
+        return validate_apt_url(address)
+    if source_type != 'github' or any(c.isspace() or ord(c) < 32 for c in address) or '\\' in address:
+        raise ValueError('来源类型或 GitHub 地址无效')
+    value = address
+    if '://' in address:
+        url = urllib.parse.urlsplit(address)
+        if url.scheme != 'https' or url.netloc != 'github.com' or url.query or url.fragment:
+            raise ValueError('GitHub 地址必须是 https://github.com/作者/仓库，不含账号或参数')
+        parts = url.path.strip('/').split('/')
+        suffix = parts[2:]
+        if suffix not in ([], ['releases']) and not (
+                len(suffix) == 3 and suffix[:2] == ['releases', 'tag']
+                and re.fullmatch(r'[A-Za-z0-9_.+-]+', suffix[2]) and suffix[2] not in ('.', '..')):
+            raise ValueError('只支持 GitHub 仓库、releases 列表或 releases/tag/版本 地址')
+        if suffix and suffix[0] == 'releases' and len(suffix) > 1:
+            print('版本链接仅用于识别仓库，仍读取最新正式版，不固定该版本。')
+        value = '/'.join(parts[:2])
+    if not re.fullmatch(r'[A-Za-z0-9-]+/[A-Za-z0-9_.-]+', value) or value.split('/')[-1] in ('.', '..'):
+        raise ValueError('GitHub 地址应为作者/仓库或受支持的 HTTPS 仓库链接')
+    return value
+
+
 def latest_release(repo):
     headers = {'Accept': 'application/vnd.github+json', 'User-Agent': 'wm0104-repo-sync'}
     if os.environ.get('GH_TOKEN'):
@@ -274,8 +298,10 @@ def sync_selected(root, lookup_workspace, action='update', scope='all', repo='',
     config_path = root / 'upstreams.json'
     original_config = config_path.read_bytes() if config_path.exists() else None
     data = json.loads(original_config) if original_config is not None else {'sources': []}
-    if (source_type == 'apt' and repo) or repo.startswith('https://'):
-        repo = validate_apt_url(repo)
+    if repo:
+        registered_source = next((item for item in data['sources'] if item['repo'] == repo), None)
+        address_type = registered_source.get('type', 'github') if action == 'update' and registered_source else source_type
+        repo = normalize_source(repo, address_type)
     prepared_release = None
     prepared_errors = []
     local_catalog = saved_candidates(root, data)
@@ -297,7 +323,14 @@ def sync_selected(root, lookup_workspace, action='update', scope='all', repo='',
             result['errors'] = prepared_errors
             return result
         try:
-            packages = resolve(catalog, packages)
+            if action == 'modify' and all(value in registrations(data) for value in values):
+                missing = [value for value in values if not any(item['package'] == value for item in catalog)]
+                if missing:
+                    raise ChoiceRequired('更换来源必须提供相同 PackageID: ' + ', '.join(missing), catalog)
+                # Registered identity must never be resolved as another package's display name.
+                packages = ','.join(values)
+            else:
+                packages = resolve(catalog, packages, keywords=action == 'add')
         except ChoiceRequired as exc:
             result['rows'] = exc.candidates
             result['errors'] = [str(exc), *prepared_errors]
@@ -501,7 +534,7 @@ def push_changes(root, token):
 
 
 def publish(root, paths, captured, repository, config_update=None, workflow_update=None):
-    from saved_packages import WORKFLOW, render, catalog
+    from saved_packages import WORKFLOWS, render, catalog
 
     def git(*args):
         return checked(['git', *args], cwd=root)
@@ -513,16 +546,27 @@ def publish(root, paths, captured, repository, config_update=None, workflow_upda
         raise ValueError('远端 main 已更新，请重新运行；拒绝覆盖新提交')
     dedicated_token = os.environ.get('WORKFLOW_WRITE_TOKEN', '')
     if paths:
-        deb_paths = [p for p in paths if p not in ('upstreams.json', WORKFLOW)]
-        if WORKFLOW in paths:
-            if (root / WORKFLOW).is_symlink():
+        deb_paths = [p for p in paths if p != 'upstreams.json' and p not in WORKFLOWS]
+        changed_workflows = set(paths) & set(WORKFLOWS)
+        if set(workflow_update or {}) != changed_workflows:
+            raise ValueError('工作流选项变更清单与提交路径不一致')
+        for workflow in changed_workflows:
+            if (root / workflow).is_symlink():
                 raise ValueError('工作流选项文件不能是符号链接')
             if not dedicated_token:
                 raise ValueError('维护插件下拉选项需要 WORKFLOW_WRITE_TOKEN')
-            baseline = subprocess.check_output(['git', 'show', f'{captured}:{WORKFLOW}'], cwd=root)
+            baseline = subprocess.check_output(['git', 'show', f'{captured}:{workflow}'], cwd=root)
             expected = render(baseline, catalog(root))
-            if workflow_update != expected or (root / WORKFLOW).read_bytes() != expected:
+            if workflow_update[workflow] != expected or (root / workflow).read_bytes() != expected:
                 raise ValueError('工作流变更不等于本次登记生成的选项，停止提交')
+        if changed_workflows:
+            choices = catalog(root)
+            for workflow in WORKFLOWS:
+                baseline = subprocess.check_output(['git', 'show', f'{captured}:{workflow}'], cwd=root)
+                expected = render(baseline, choices)
+                if ((expected != baseline and workflow not in changed_workflows)
+                        or (root / workflow).read_bytes() != expected):
+                    raise ValueError('相应工作流选项未完整维护或含非选项改动，停止提交')
         if 'upstreams.json' in paths:
             if config_update is None or (root / 'upstreams.json').read_bytes() != config_update:
                 raise ValueError('配置与本次已验证的变更不一致，停止提交')
