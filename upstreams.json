@@ -42,6 +42,12 @@
       "packages": {
         "wiki.qaq.ighostvt": "乌龙"
       }
+    },
+    {
+      "repo": "wm0104/RepoPocket",
+      "packages": {
+        "com.wm0104.repopocket": "Codex"
+      }
     }
   ],
   "names": {
@@ -52,6 +58,7 @@
     "cn.zqbb.fix120hz": "Hello 120Hz",
     "cn.zqbb.hello.jailport": "HelloJailPort",
     "wiki.qaq.apelin": "Apelin",
-    "wiki.qaq.ighostvt": "iGhostVT"
+    "wiki.qaq.ighostvt": "iGhostVT",
+    "com.wm0104.repopocket": "RepoPocket"
   }
 }
