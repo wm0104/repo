@@ -1,7 +1,7 @@
 [
   {
     "class": "DepictionMarkdownView",
-    "markdown": "RepoPocket 是一款 iOS GitHub 客户端，支持仓库浏览、代码编辑、文件上传、发行版与 Actions 管理，以及多账号切换和本地 Git 管理。",
+    "markdown": "RepoPocket 是一款借助Codex辅助开发的 iOS GitHub 客户端，支持仓库浏览、代码编辑、文件上传、发行版与 Actions 管理，以及多账号切换和本地 Git 管理。",
     "useSpacing": true
   },
   {
