@@ -49,6 +49,13 @@
       "packages": {
         "com.wm0104.repopocket": "Codex"
       }
+    },
+    {
+      "repo": "https://xiangfeidexiaohuo.github.io/",
+      "packages": {
+        "com.dao.prefnest": "工具"
+      },
+      "type": "apt"
     }
   ],
   "names": {
@@ -61,6 +68,7 @@
     "wiki.qaq.apelin": "Apelin",
     "wiki.qaq.ighostvt": "iGhostVT",
     "com.wm0104.repopocket": "RepoPocket",
-    "com.25mao.wcplugins.rootlesss": "微信插件管理"
+    "com.25mao.wcplugins.rootlesss": "微信插件管理",
+    "com.dao.prefnest": "PrefNest(RootHide)"
   }
 }

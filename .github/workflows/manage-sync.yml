@@ -33,6 +33,7 @@ on:
           - "HelloJailPort [cn.zqbb.hello.jailport]"
           - "HelloKeyboardPort [cn.zqbb.hello.keyboardport]"
           - "iGhostVT [wiki.qaq.ighostvt]"
+          - "PrefNest(RootHide) [com.dao.prefnest]"
           - "RepoPocket [com.wm0104.repopocket]"
           - "微信去广告 FuckWeChatAds [com.susu.fuckwechatadss]"
           - "微信插件管理 [com.25mao.wcplugins.rootlesss]"
