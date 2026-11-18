@@ -35,6 +35,7 @@ on:
           - "iGhostVT [wiki.qaq.ighostvt]"
           - "RepoPocket [com.wm0104.repopocket]"
           - "微信去广告 FuckWeChatAds [com.susu.fuckwechatadss]"
+          - "微信插件管理 [com.25mao.wcplugins.rootlesss]"
           - "电话助手iOS16-正式版(Roothide) [com.xybp888.callassist16.dopamine.roothide]"
         # END SAVED PACKAGE OPTIONS
       # 来源地址：GitHub 填作者/仓库或 HTTPS 仓库/releases/tag 链接；APT 填公开 HTTPS 目录。

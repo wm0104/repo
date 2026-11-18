@@ -15,7 +15,8 @@
     {
       "repo": "https://trollstorex.github.io/repo/",
       "packages": {
-        "com.susu.fuckwechatadss": "微信插件"
+        "com.susu.fuckwechatadss": "微信插件",
+        "com.25mao.wcplugins.rootlesss": "微信插件"
       },
       "type": "apt"
     },
@@ -59,6 +60,7 @@
     "cn.zqbb.hello.jailport": "HelloJailPort",
     "wiki.qaq.apelin": "Apelin",
     "wiki.qaq.ighostvt": "iGhostVT",
-    "com.wm0104.repopocket": "RepoPocket"
+    "com.wm0104.repopocket": "RepoPocket",
+    "com.25mao.wcplugins.rootlesss": "微信插件管理"
   }
 }
