@@ -445,6 +445,15 @@ def sync_selected(root, lookup_workspace, action='update', scope='all', repo='',
                             detail = ('同版本异文件，保留仓库原包' if sha != original[history[latest].name]
                                       else '无需更新') + f': {version}'
                     if comparison > 0:
+                        if re.fullmatch(r'[a-fA-F0-9]{64}\.deb', name):
+                            name = f'{display_name}-{version}.deb'
+                            if (not display_name or display_name in ('.', '..')
+                                    or any(c in '/\\:' or ord(c) < 32 or 127 <= ord(c) < 160 for c in name)
+                                    or len(name.encode('utf-8')) > 255):
+                                name = f'{package}-{version.replace(":", "_")}.deb'
+                            if (any(c in '/\\:' or ord(c) < 32 or 127 <= ord(c) < 160 for c in name)
+                                    or len(name.encode('utf-8')) > 255):
+                                raise ValueError('包身份生成的文件名不安全或过长，拒绝入库')
                         if (root / 'debs' / name).exists() or name in {p[1] for p in plans}:
                             raise ValueError(f'文件名冲突，拒绝覆盖: {name}')
                         validate_candidate(root, workspace, candidate)

@@ -157,6 +157,132 @@ class UpstreamSyncTest(unittest.TestCase):
         self.assertTrue(any('文件名冲突' in error for error in self.last_result['errors']))
         self.assertEqual(self.snapshot(), {**before, second.name: second.read_bytes()})
 
+    def test_apt_hash_update_uses_downloaded_name_and_preserves_old_debs(self):
+        display_name = '电话助手 iOS16-正式版(Roothide)'
+        old = self.package('org.example.first', '3.5.4', self.root / 'debs', extra='Name: Old')
+        old.rename(old.with_name('a' * 64 + '.deb'))
+        before = self.snapshot()
+        self.config = {'sources': [{'type': 'apt', 'repo': 'https://example.org/repo/',
+                                   'packages': {'org.example.first': '工具'}}],
+                       'names': {'org.example.first': 'Stale cached name'}}
+        self.write_config()
+        item = self.package('org.example.first', '3.5.5', self.root / 'upstream', extra=f'Name: {display_name}')
+        data = item.read_bytes()
+        record = (f'Package: org.example.first\nVersion: 3.5.5\nArchitecture: iphoneos-arm64e\n'
+                  f'Name: Untrusted index name\nFilename: debs/{"B" * 64}.deb\n'
+                  f'Size: {len(data)}\nSHA256: {hashlib.sha256(data).hexdigest()}\n')
+        with patch('upstream_apt.read_index', return_value=record), \
+                patch('sync_upstream.urllib.request.urlopen', side_effect=lambda *args, **kwargs: Response(data)):
+            result = sync_upstream.sync(self.root)
+        name = f'{display_name}-3.5.5.deb'
+        self.assertFalse(result['errors'])
+        self.assertIn(f'debs/{name}', result['paths'])
+        self.assertEqual(self.snapshot(), {**before, name: data})
+        self.assertEqual(sync_upstream.package_info(self.root / 'debs' / name)['Name'], display_name)
+        same_version = self.package('org.example.first', '3.5.5', self.root / 'changed', extra='Name: Changed')
+        with patch('upstream_apt.read_index', return_value=record), \
+                patch('sync_upstream.urllib.request.urlopen', side_effect=lambda *args, **kwargs: Response(data)):
+            self.assertEqual(sync_upstream.sync(self.root)['paths'], [])
+        changed = same_version.read_bytes()
+        changed_record = record.replace(str(len(data)), str(len(changed))).replace(
+            hashlib.sha256(data).hexdigest(), hashlib.sha256(changed).hexdigest())
+        with patch('upstream_apt.read_index', return_value=changed_record), \
+                patch('sync_upstream.urllib.request.urlopen', side_effect=lambda *args, **kwargs: Response(changed)):
+            result = sync_upstream.sync(self.root)
+        self.assertEqual(result['paths'], [])
+        self.assertIn('同版本异文件', result['rows'][0]['detail'])
+        self.assertEqual(self.snapshot(), {**before, name: data})
+
+    def test_github_hash_add_keeps_archive_bytes_and_control_name(self):
+        display_name = '电话助手iOS16-正式版(Roothide)'
+        item = self.package('org.example.new', '3.5.5', self.root / 'upstream', extra=f'Name: {display_name}')
+        item = item.rename(item.with_name('f' * 64 + '.deb'))
+        data = item.read_bytes()
+        self.release('new/plugin', [item])
+        with patch('sync_upstream.latest_release', return_value=self.releases['new/plugin']), \
+                patch('sync_upstream.urllib.request.urlopen', side_effect=lambda *args, **kwargs: Response(data)):
+            result = sync_upstream.sync(self.root, action='add', repo='new/plugin',
+                                        packages='org.example.new', section='工具')
+        name = f'{display_name}-3.5.5.deb'
+        self.assertFalse(result['errors'])
+        self.assertEqual(self.snapshot(), {name: data})
+        self.assertEqual(sync_upstream.package_info(self.root / 'debs' / name)['Name'], display_name)
+
+    def test_hash_name_missing_or_unsafe_uses_package_identity(self):
+        for display_name in ['', '../escape', '/absolute', 'a/b', 'a\\b', 'a:b', '.', '..',
+                             'bad\tname', 'bad\x7fname', 'bad\x80name', '长' * 100]:
+            with self.subTest(name=display_name):
+                item = self.package('org.example.first', '1.1', self.root / 'upstream',
+                                    extra=f'Name: {display_name}' if display_name else '')
+                item = item.rename(item.with_name('d' * 64 + '.deb'))
+                self.release('owner/first', [item])
+                self.release('other/second', [])
+                before = item.read_bytes()
+                self.assertEqual([path for path in self.sync() if path.endswith('.deb')],
+                                 ['debs/org.example.first-1.1.deb'])
+                target = self.root / 'debs/org.example.first-1.1.deb'
+                self.assertEqual(target.read_bytes(), before)
+                self.assertEqual(sync_upstream.package_info(target).get('Name', ''), display_name)
+                target.unlink()
+
+    def test_hash_unsafe_version_is_isolated_from_valid_update(self):
+        for version in ['1\tbad', '1/bad', '1\\bad']:
+            with self.subTest(version=version):
+                item = self.package('org.example.first', '1.0', self.root / 'upstream', extra='Name: Valid Name')
+                control = self.root / 'fixtures/upstream_org.example.first_1.0/DEBIAN/control'
+                control.write_text(control.read_text().replace('Version: 1.0\n', f'Version: {version}\n'))
+                item = item.with_name('e' * 64 + '.deb')
+                subprocess.run(['dpkg-deb', '--build', '--nocheck', '--root-owner-group',
+                                str(control.parents[1]), str(item)], capture_output=True, check=True)
+                valid = self.package('org.example.second', '2.0', self.root / 'upstream')
+                self.release('owner/first', [item])
+                self.release('other/second', [valid])
+                self.assertEqual(self.sync(), [f'debs/{valid.name}'])
+                self.assertEqual(self.snapshot(), {valid.name: valid.read_bytes()})
+                self.assertTrue(any('文件名不安全' in error for error in self.last_result['errors']))
+                (self.root / 'debs' / valid.name).unlink()
+
+    def test_hash_name_with_unicode_line_break_still_fails_archive_audit(self):
+        item = self.package('org.example.first', '1.1', self.root / 'upstream', extra='Name: bad\x85name')
+        item = item.rename(item.with_name('d' * 64 + '.deb'))
+        self.release('owner/first', [item])
+        self.release('other/second', [])
+        self.assertEqual(self.sync(), [])
+        self.assertEqual(self.snapshot(), {})
+        self.assertTrue(any('duplicate/invalid field' in error for error in self.last_result['errors']))
+        self.assertEqual(sync_upstream.package_info(item)['Name'], 'bad\x85name')
+
+    def test_only_exact_hash_basenames_are_changed(self):
+        for name in ['a' * 63 + '.deb', 'g' * 64 + '.deb', 'prefix-' + 'a' * 64 + '.deb',
+                     '普通名称 (Roothide)-1.1.deb']:
+            with self.subTest(name=name):
+                item = self.package('org.example.first', '1.1', self.root / 'upstream', extra='Name: Different')
+                item = item.rename(item.with_name(name))
+                self.release('owner/first', [item])
+                self.release('other/second', [])
+                self.assertEqual([path for path in self.sync() if path.endswith('.deb')], [f'debs/{name}'])
+                self.assertEqual((self.root / 'debs' / name).read_bytes(), item.read_bytes())
+                (self.root / 'debs' / name).unlink()
+
+    def test_hash_new_name_collision_never_overwrites_existing_or_planned_deb(self):
+        for existing in [True, False]:
+            with self.subTest(existing=existing):
+                first = self.package('org.example.first', '1.1', self.root / 'upstream', extra='Name: Shared')
+                first = first.rename(first.with_name('a' * 64 + '.deb'))
+                second = self.package('org.example.second', '1.1', self.root / 'upstream', extra='Name: Shared')
+                second = second.rename(second.with_name('b' * 64 + '.deb'))
+                self.release('owner/first', [first])
+                self.release('other/second', [second])
+                if existing:
+                    unrelated = self.package('org.example.unrelated', '1.0', self.root / 'other')
+                    (self.root / 'debs/Shared-1.1.deb').write_bytes(unrelated.read_bytes())
+                before = self.snapshot()
+                paths = [path for path in self.sync() if path.endswith('.deb')]
+                self.assertEqual(paths, [] if existing else ['debs/Shared-1.1.deb'])
+                self.assertEqual(self.snapshot(), before if existing else {'Shared-1.1.deb': first.read_bytes()})
+                self.assertTrue(any('文件名冲突' in error for error in self.last_result['errors']))
+                (self.root / 'debs/Shared-1.1.deb').unlink()
+
     def test_preflight_rejects_package_that_requires_permission_repair(self):
         first = self.package('org.example.first', '1.1', self.root / 'upstream')
         second = self.package('org.example.second', '2.0', self.root / 'upstream')
