@@ -55,6 +55,12 @@
         "com.dao.prefnest": "工具"
       },
       "type": "apt"
+    },
+    {
+      "repo": "wm0104/Apelin",
+      "packages": {
+        "wiki.qaq.apelin": "乌龙"
+      }
     }
   ],
   "names": {
@@ -70,7 +76,5 @@
     "com.25mao.wcplugins.rootlesss": "微信插件管理",
     "com.dao.prefnest": "PrefNest(RootHide)"
   },
-  "manual_sections": {
-    "wiki.qaq.apelin": "乌龙"
-  }
+  "manual_sections": {}
 }
