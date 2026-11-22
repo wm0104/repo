@@ -3,7 +3,6 @@
     {
       "repo": "owngoal-dev/Apelin",
       "packages": {
-        "wiki.qaq.apelin": "乌龙",
         "wiki.qaq.apelin.agent-tools.assembler": "乌龙",
         "wiki.qaq.apelin.agent-tools.disassembler": "乌龙",
         "wiki.qaq.apelin.dev.app": "乌龙",
@@ -70,5 +69,8 @@
     "com.wm0104.repopocket": "RepoPocket",
     "com.25mao.wcplugins.rootlesss": "微信插件管理",
     "com.dao.prefnest": "PrefNest(RootHide)"
+  },
+  "manual_sections": {
+    "wiki.qaq.apelin": "乌龙"
   }
 }

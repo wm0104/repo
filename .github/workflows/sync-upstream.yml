@@ -11,7 +11,6 @@ on:
         options:
         # BEGIN SAVED PACKAGE OPTIONS
           - "全部已登记插件"
-          - "Apelin [wiki.qaq.apelin]"
           - "Apelin App Development [wiki.qaq.apelin.dev.app]"
           - "Apelin Assembler [wiki.qaq.apelin.agent-tools.assembler]"
           - "Apelin Command-Line Tool Development [wiki.qaq.apelin.dev.cli]"
