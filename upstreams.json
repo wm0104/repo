@@ -61,6 +61,12 @@
       "packages": {
         "wiki.qaq.apelin": "乌龙"
       }
+    },
+    {
+      "repo": "wm0104/Sileo-roothide",
+      "packages": {
+        "org.coolstar.sileo": "包管理器"
+      }
     }
   ],
   "names": {
@@ -74,7 +80,8 @@
     "wiki.qaq.ighostvt": "iGhostVT",
     "com.wm0104.repopocket": "RepoPocket",
     "com.25mao.wcplugins.rootlesss": "微信插件管理",
-    "com.dao.prefnest": "PrefNest(RootHide)"
+    "com.dao.prefnest": "PrefNest(RootHide)",
+    "org.coolstar.sileo": "Sileo"
   },
   "manual_sections": {}
 }
