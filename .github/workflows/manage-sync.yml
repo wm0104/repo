@@ -33,6 +33,7 @@ on:
           - "HelloJailPort [cn.zqbb.hello.jailport]"
           - "HelloKeyboardPort [cn.zqbb.hello.keyboardport]"
           - "iGhostVT [wiki.qaq.ighostvt]"
+          - "Irisin [wiki.qaq.irisin]"
           - "PrefNest(RootHide) [com.dao.prefnest]"
           - "RepoPocket [com.wm0104.repopocket]"
           - "Sileo [org.coolstar.sileo]"
